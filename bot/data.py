@@ -100,26 +100,29 @@ def fetch_pools(addresses):
     return out
 
 
-def pools_now(addresses):
-    """Τρέχουσα τιμή/ρευστότητα για τα ανοιχτά trades."""
+def pools_now(positions):
+    """Τρέχουσα τιμή/ρευστότητα για τα ανοιχτά trades.
+    Δέχεται μόνο τιμές όπου το token του pool είναι πράγματι το δικό μας (όχι ανάποδο ζευγάρι)."""
     res = {}
-    if not addresses:
+    if not positions:
         return res
-    addrs = list(addresses)[:30]
+    mint_of = {p["pool"]: p["mint"] for p in positions}
+    addrs = list(mint_of)[:30]
     d = _get(f"{GT}/networks/solana/pools/multi/{','.join(addrs)}")
     if d:
         for p in d.get("data", []):
             q = parse_gt_pool(p)
-            if q["pool"] and q["price"] > 0:
-                res[q["pool"]] = {"price": q["price"], "liquidity": q["liquidity"]}
+            if q["pool"] in mint_of and q["base_mint"] == mint_of[q["pool"]] and q["price"] > 0:
+                res[q["pool"]] = {"price": q["price"], "liquidity": q["liquidity"], "src": "gt"}
     missing = [a for a in addrs if a not in res]
-    if missing:  # εφεδρικά: DexScreener
+    if missing:  # εφεδρικά: DexScreener (μόνο τιμή — η ρευστότητά του μετριέται αλλιώς)
         d = _get(f"{DS}/pairs/solana/{','.join(missing)}")
         for p in (d or {}).get("pairs", []) or []:
             addr = p.get("pairAddress")
+            base = (p.get("baseToken") or {}).get("address")
             price = _f(p.get("priceUsd"))
-            if addr and price > 0:
-                res[addr] = {"price": price, "liquidity": _f((p.get("liquidity") or {}).get("usd"))}
+            if addr in mint_of and base == mint_of[addr] and price > 0:
+                res[addr] = {"price": price, "liquidity": 0.0, "src": "ds"}
     return res
 
 

@@ -134,3 +134,49 @@ def test_reevaluation_and_unique_reject_counts():
     assert len(s["positions"]) == 1
     engine.scan_and_enter(s, [pool(now)], now + timedelta(minutes=7))  # δεν ξαναγοράζει
     assert len(s["positions"]) == 1
+
+
+def test_price_spike_needs_confirmation():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    # λάθος τιμή 100.000x — αγνοείται
+    engine.manage_positions(s, {"POOL1": {"price": 100.0, "liquidity": 40_000, "src": "gt"}}, now + timedelta(minutes=1))
+    assert s["positions"] and not s["closed"]
+    # επόμενη μέτρηση κανονική — η ύποπτη ξεχνιέται
+    engine.manage_positions(s, {"POOL1": {"price": 0.00105, "liquidity": 40_000, "src": "gt"}}, now + timedelta(minutes=2))
+    assert s["positions"] and "suspect_price" not in s["positions"][0]
+    # πραγματικό rug: -95% δύο φορές στη σειρά → κλείνει
+    q = {"POOL1": {"price": 0.00005, "liquidity": 40_000, "src": "gt"}}
+    engine.manage_positions(s, q, now + timedelta(minutes=3))
+    assert s["positions"]
+    engine.manage_positions(s, q, now + timedelta(minutes=4))
+    assert s["closed"] and s["closed"][0]["pnl"] < -9
+
+
+def test_no_double_buy_same_token():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now, pool="A"), pool(now, pool="B")], now)
+    assert len(s["positions"]) == 1
+
+
+def test_dexscreener_liquidity_ignored():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.001, "liquidity": 0.0, "src": "ds"}}
+    for i in range(3):
+        engine.manage_positions(s, q, now + timedelta(minutes=i + 1))
+    assert s["positions"]
+
+
+def test_liquidity_exit_needs_two_readings():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.001, "liquidity": 5_000, "src": "gt"}}
+    engine.manage_positions(s, q, now + timedelta(minutes=1))
+    assert s["positions"]
+    engine.manage_positions(s, q, now + timedelta(minutes=2))
+    assert s["closed"][0]["reason"] == "έπεσε η ρευστότητα"

@@ -53,7 +53,7 @@ def one_cycle(state):
     now = engine.now_utc()
     engine.roll_day(state, now)
     if state["positions"]:
-        quotes = data.pools_now([p["pool"] for p in state["positions"]])
+        quotes = data.pools_now(state["positions"])
         engine.manage_positions(state, quotes, engine.now_utc())
     fresh = data.new_pools(C.NEW_POOL_PAGES)
     now = engine.now_utc()

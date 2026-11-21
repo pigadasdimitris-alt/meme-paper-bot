@@ -161,6 +161,18 @@ def close_position(state, pos, price, now, reason):
     return closed
 
 
+def _liquidity_gone(pos, q):
+    """Χρειάζονται 2 συνεχόμενες μετρήσεις (ίδιας πηγής) κάτω από το όριο — μία μόνη μπορεί να είναι λάθος του API."""
+    liq = q.get("liquidity", 0)
+    if q.get("src", "gt") != "gt" or liq <= 0 or pos["liq_entry"] <= 0:
+        return False
+    if liq < pos["liq_entry"] * C.LIQUIDITY_DROP_EXIT:
+        pos["liq_low"] = pos.get("liq_low", 0) + 1
+    else:
+        pos["liq_low"] = 0
+    return pos["liq_low"] >= 2
+
+
 def manage_positions(state, quotes, now):
     """Ελέγχει stop / take profit / χρόνο / rug για κάθε ανοιχτό trade."""
     for pos in list(state["positions"]):
@@ -172,6 +184,17 @@ def manage_positions(state, quotes, now):
                 close_position(state, pos, 0.0, now, "χάθηκε η τιμή (rug;)")
             continue
         price = q["price"]
+        # Προστασία από λάθος τιμές: απότομη αλλαγή >4x (πάνω ή κάτω) μέσα σε έναν γύρο
+        # γίνεται δεκτή μόνο αν επιβεβαιωθεί και στον επόμενο γύρο.
+        ref = pos.get("last_price") or pos["entry_market"]
+        ratio = price / ref if ref > 0 else 1.0
+        if ratio > C.MAX_JUMP or ratio < 1 / C.MAX_JUMP:
+            sus = pos.get("suspect_price")
+            if not sus or not (0.7 < price / sus < 1.3):
+                pos["suspect_price"] = price
+                log(state, now, f"#{pos['id']} {pos['name']}: ύποπτη τιμή ({ratio:.3g}x) — περιμένει επιβεβαίωση")
+                continue
+        pos.pop("suspect_price", None)
         pct = 100 * (price / pos["entry_market"] - 1)
         pos["last_price"] = price
         pos["last_pct"] = round(pct, 2)
@@ -183,7 +206,7 @@ def manage_positions(state, quotes, now):
             close_position(state, pos, price, now, "take profit")
         elif pct <= pos["stop_pct"]:
             close_position(state, pos, price, now, "stop loss" if pos["stop_pct"] < 0 else "stop στο 0")
-        elif pos["liq_entry"] > 0 and q.get("liquidity", 0) > 0 and q["liquidity"] < pos["liq_entry"] * C.LIQUIDITY_DROP_EXIT:
+        elif _liquidity_gone(pos, q):
             close_position(state, pos, price, now, "έπεσε η ρευστότητα")
         elif hold >= C.MAX_HOLD_MIN:
             close_position(state, pos, price, now, "λήξη χρόνου")
@@ -219,9 +242,11 @@ def scan_and_enter(state, pools, now, flags_fn=None):
     state["stats"]["scans"] += 1
     reasons = state.setdefault("reasons", {})
     held = {p["pool"] for p in state["positions"]}
+    held_mints = {p["mint"] for p in state["positions"]}
     candidates, done = [], set()
     for p in pools:
-        if not p["pool"] or p["pool"] in done or p["pool"] in held or p["pool"] in state["seen"]:
+        if not p["pool"] or p["pool"] in done or p["pool"] in held or p["pool"] in state["seen"] \
+                or p["base_mint"] in held_mints:
             continue
         done.add(p["pool"])
         state["stats"]["pools_checked"] += 1
@@ -245,9 +270,12 @@ def scan_and_enter(state, pools, now, flags_fn=None):
                 state["seen"][p["pool"]] = iso(now)
                 reasons[p["pool"]] = ["ύποπτο contract", iso(now)]
                 continue
+        if p["base_mint"] in held_mints:
+            continue
         state["seen"][p["pool"]] = iso(now)
         reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now)]
         open_position(state, p, now)
+        held_mints.add(p["base_mint"])
 
     # κρατάμε τα αρχεία μικρά (τελευταίες ~6 ώρες)
     cutoff = now.timestamp() - 6 * 3600
