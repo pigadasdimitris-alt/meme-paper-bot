@@ -189,21 +189,45 @@ def manage_positions(state, quotes, now):
             close_position(state, pos, price, now, "λήξη χρόνου")
 
 
-def scan_and_enter(state, pools, now, flags_fn=None):
-    """Σαρώνει νέα pools και ανοίγει εικονικές θέσεις στα καλύτερα."""
-    state["stats"]["scans"] += 1
-    held = {p["pool"] for p in state["positions"]}
-    candidates = []
-    for p in pools:
-        if not p["pool"] or p["pool"] in held or p["pool"] in state["seen"]:
+def update_watchlist(state, fresh_pools, now):
+    """Τα πολύ καινούργια coins μπαίνουν σε λίστα παρακολούθησης για να ξαναελεγχθούν στα 10′+."""
+    w = state.setdefault("watch", {})
+    for p in fresh_pools:
+        if not p["pool"] or p["base_mint"] in C.QUOTE_MINTS or not p["created_at"]:
             continue
+        if p["liquidity"] >= C.MIN_LIQUIDITY_USD * C.WATCH_MIN_LIQ_FRACTION:
+            w[p["pool"]] = p["created_at"]
+    # καθάρισμα: ό,τι πέρασε το μέγιστο όριο ηλικίας
+    state["watch"] = {k: v for k, v in w.items()
+                      if parse_time(v) and (now - parse_time(v)).total_seconds() / 60 <= C.MAX_AGE_MIN}
+
+
+def watch_due(state, now):
+    """Pools της λίστας παρακολούθησης που έχουν πια την ηλικία που θέλουμε (πιο φρέσκα πρώτα)."""
+    due = []
+    for k, v in state.get("watch", {}).items():
+        age = (now - parse_time(v)).total_seconds() / 60
+        if C.MIN_AGE_MIN <= age <= C.MAX_AGE_MIN and k not in state["seen"]:
+            due.append((age, k))
+    due.sort()
+    return [k for _, k in due[:C.WATCH_MAX_FETCH]]
+
+
+def scan_and_enter(state, pools, now, flags_fn=None):
+    """Αξιολογεί pools σε κάθε γύρο και ανοίγει εικονικές θέσεις στα καλύτερα.
+    Κάθε coin ξαναελέγχεται σε κάθε γύρο (μπορεί να "ωριμάσει"), αλλά αγοράζεται το πολύ μία φορά."""
+    state["stats"]["scans"] += 1
+    reasons = state.setdefault("reasons", {})
+    held = {p["pool"] for p in state["positions"]}
+    candidates, done = [], set()
+    for p in pools:
+        if not p["pool"] or p["pool"] in done or p["pool"] in held or p["pool"] in state["seen"]:
+            continue
+        done.add(p["pool"])
         state["stats"]["pools_checked"] += 1
         why = reject_reason(p, now)
         if why:
-            # τα "πολύ καινούργια" τα ξαναβλέπουμε σε επόμενο γύρο
-            if why != "πολύ καινούργιο":
-                state["seen"][p["pool"]] = iso(now)
-            count_reject(state, why)
+            reasons[p["pool"]] = [why, iso(now)]
             continue
         candidates.append(p)
 
@@ -213,18 +237,28 @@ def scan_and_enter(state, pools, now, flags_fn=None):
         blocked = can_open(state)
         if blocked:
             count_reject(state, blocked)
-            break
-        state["seen"][p["pool"]] = iso(now)
+            reasons[p["pool"]] = [blocked, iso(now)]
+            continue
         if flags_fn:
             f = flags_fn(p["base_mint"])
             if f.get("mint_authority") or f.get("freeze_authority"):
-                count_reject(state, "ύποπτο contract")
+                state["seen"][p["pool"]] = iso(now)
+                reasons[p["pool"]] = ["ύποπτο contract", iso(now)]
                 continue
+        state["seen"][p["pool"]] = iso(now)
+        reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now)]
         open_position(state, p, now)
 
-    # κρατάμε το "seen" μικρό (μόνο τελευταίες ~6 ώρες)
+    # κρατάμε τα αρχεία μικρά (τελευταίες ~6 ώρες)
     cutoff = now.timestamp() - 6 * 3600
     state["seen"] = {k: v for k, v in state["seen"].items() if parse_time(v).timestamp() > cutoff}
+    state["reasons"] = {k: v for k, v in reasons.items() if parse_time(v[1]).timestamp() > cutoff}
+    # σύνοψη λόγων απόρριψης ανά μοναδικό coin (τελευταίος λόγος του καθενός)
+    summary = {}
+    for why, _ in state["reasons"].values():
+        if why != "ΑΓΟΡΑ":
+            summary[why] = summary.get(why, 0) + 1
+    state["stats"]["rejects"] = summary
 
 
 def equity(state):

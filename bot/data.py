@@ -83,6 +83,23 @@ def new_pools(pages):
     return out
 
 
+def trending_pools(duration, page):
+    d = _get(f"{GT}/networks/solana/trending_pools?duration={duration}&page={page}")
+    time.sleep(1.5)
+    return [parse_gt_pool(p) for p in (d or {}).get("data", [])]
+
+
+def fetch_pools(addresses):
+    """Πλήρη στοιχεία για συγκεκριμένα pools (έως 30 ανά κλήση)."""
+    out = []
+    addrs = list(addresses)
+    for i in range(0, len(addrs), 30):
+        d = _get(f"{GT}/networks/solana/pools/multi/{','.join(addrs[i:i + 30])}")
+        out += [parse_gt_pool(p) for p in (d or {}).get("data", [])]
+        time.sleep(1.5)
+    return out
+
+
 def pools_now(addresses):
     """Τρέχουσα τιμή/ρευστότητα για τα ανοιχτά trades."""
     res = {}

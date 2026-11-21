@@ -107,3 +107,30 @@ def test_readme_renders(tmp_path: Path):
     out = tmp_path / "README.md"
     write_readme(s, out)
     assert "stop loss" in out.read_text()
+
+
+def test_watchlist_matures():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    young = pool(now, pool="Y1", created_at=engine.iso(now - timedelta(minutes=2)), liquidity=10_000)
+    tiny = pool(now, pool="Y2", base_mint="M2", created_at=engine.iso(now - timedelta(minutes=2)), liquidity=500)
+    engine.update_watchlist(s, [young, tiny], now)
+    assert set(s["watch"]) == {"Y1"}
+    assert engine.watch_due(s, now) == []
+    later = now + timedelta(minutes=12)
+    assert engine.watch_due(s, later) == ["Y1"]
+    engine.update_watchlist(s, [], now + timedelta(minutes=200))
+    assert s["watch"] == {}
+
+
+def test_reevaluation_and_unique_reject_counts():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    weak = pool(now, pc_m5=0.5)
+    for i in range(5):
+        engine.scan_and_enter(s, [weak], now + timedelta(minutes=i))
+    assert s["stats"]["rejects"] == {"χωρίς ορμή": 1} and not s["positions"]
+    engine.scan_and_enter(s, [pool(now)], now + timedelta(minutes=6))  # τώρα έχει ορμή → αγορά
+    assert len(s["positions"]) == 1
+    engine.scan_and_enter(s, [pool(now)], now + timedelta(minutes=7))  # δεν ξαναγοράζει
+    assert len(s["positions"]) == 1

@@ -55,9 +55,14 @@ def one_cycle(state):
     if state["positions"]:
         quotes = data.pools_now([p["pool"] for p in state["positions"]])
         engine.manage_positions(state, quotes, engine.now_utc())
-    pools = data.new_pools(C.NEW_POOL_PAGES)
+    fresh = data.new_pools(C.NEW_POOL_PAGES)
     now = engine.now_utc()
-    if not pools:
+    engine.update_watchlist(state, fresh, now)
+    pools = data.fetch_pools(engine.watch_due(state, now))
+    for duration, page in C.TRENDING_SOURCES:
+        pools += data.trending_pools(duration, page)
+    now = engine.now_utc()
+    if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")
     engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags)
     engine.snapshot(state, engine.now_utc())
@@ -74,7 +79,8 @@ def main():
         t0 = time.time()
         try:
             n = one_cycle(state)
-            print(f"[{engine.iso(engine.now_utc())}] pools={n} open={len(state['positions'])} "
+            print(f"[{engine.iso(engine.now_utc())}] evaluated={n} watch={len(state.get('watch', {}))} "
+                  f"open={len(state['positions'])} "
                   f"closed={len(state['closed'])} equity=${engine.equity(state):.2f}", flush=True)
         except Exception as e:  # ένας κακός γύρος δεν σταματά το bot
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")

@@ -33,7 +33,10 @@ LIQUIDITY_DROP_EXIT = 0.5       # αν η ρευστότητα πέσει κάτ
 
 # --- Λειτουργία ---
 POLL_SECONDS = 60
-NEW_POOL_PAGES = 3
+NEW_POOL_PAGES = 2
+TRENDING_SOURCES = [("5m", 1), ("5m", 2), ("1h", 1)]
+WATCH_MIN_LIQ_FRACTION = 0.4    # μπαίνει στη λίστα παρακολούθησης αν έχει ήδη ≥40% της ελάχιστης ρευστότητας
+WATCH_MAX_FETCH = 60            # πόσα από τη λίστα ξαναελέγχονται ανά γύρο
 TIMEZONE = "Europe/Athens"
 
 SOL_MINT = "So11111111111111111111111111111111111111112"
