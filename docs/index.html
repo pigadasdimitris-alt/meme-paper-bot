@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meme Paper Bot</title>
+<style>
+  :root{
+    --bg:#0b0d10; --panel:#13161b; --line:#232830; --text:#e8eaed; --muted:#8b93a1;
+    --up:#2fbf71; --down:#e5534b; --accent:#d9a441;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       padding:max(16px,env(safe-area-inset-top)) 14px 40px}
+  .wrap{max-width:720px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+  h1{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:600}
+  .tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid #4a3c1c;padding:3px 7px;border-radius:4px}
+  .hero{padding:4px 0 14px}
+  .eq{font:600 44px/1 var(--mono);letter-spacing:-.02em}
+  .delta{font:500 15px var(--mono);margin-top:6px}
+  .up{color:var(--up)} .down{color:var(--down)} .muted{color:var(--muted)}
+  .chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 8px 4px;margin-bottom:14px}
+  .chart svg{display:block;width:100%;height:150px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .kpi b{display:block;font:600 18px var(--mono)}
+  .kpi span{font-size:12px;color:var(--muted)}
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;font-weight:600;
+     display:flex;align-items:center;gap:7px}
+  h2 svg{width:14px;height:14px;stroke:var(--muted)}
+  .list{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .row{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid var(--line)}
+  .row:first-child{border-top:0}
+  .row .l{min-width:0}
+  .row .name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .sub{font-size:12px;color:var(--muted)}
+  .row .r{text-align:right;font-family:var(--mono);white-space:nowrap}
+  .empty{padding:14px 12px;color:var(--muted);font-size:14px}
+  .bar{height:6px;background:#1d222a;border-radius:3px;margin-top:5px;overflow:hidden}
+  .bar i{display:block;height:100%;background:#3a4250}
+  .log{font:12px/1.5 var(--mono);color:var(--muted);padding:10px 12px;max-height:260px;overflow:auto}
+  footer{margin-top:22px;font-size:12px;color:var(--muted)}
+  .stale{color:var(--down)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Meme Paper Bot</h1>
+    <span class="tag">Εικονικά χρήματα</span>
+  </header>
+
+  <div class="hero">
+    <div class="eq" id="eq">—</div>
+    <div class="delta" id="delta">Φόρτωση…</div>
+  </div>
+
+  <div class="chart"><svg id="chart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg></div>
+
+  <div class="grid" id="kpis"></div>
+
+  <h2><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ανοιχτά</h2>
+  <div class="list" id="open"></div>
+
+  <h2><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Κλειστά trades</h2>
+  <div class="list" id="closed"></div>
+
+  <h2><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg>Γιατί απορρίφθηκαν coins</h2>
+  <div class="list" id="rejects"></div>
+
+  <h2><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h3"/></svg>Ημερολόγιο</h2>
+  <div class="list"><div class="log" id="log"></div></div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const tz = "Europe/Athens";
+const fmtT = s => s ? new Date(s).toLocaleString("el-GR",{timeZone:tz,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}) : "—";
+const usd = (v,sign) => (sign && v>0?"+":"") + (v<0?"−":"") + "$" + Math.abs(v).toFixed(2);
+const pct = v => (v>0?"+":"") + v.toFixed(1) + "%";
+const cls = v => v>0 ? "up" : v<0 ? "down" : "muted";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function equity(st){
+  return st.balance + st.positions.reduce((a,p)=>a+Math.max(p.qty*p.last_price*(1-0.025)-0.03,0),0);
+}
+
+function drawChart(hist, start){
+  const svg = $("chart");
+  if(!hist.length){ svg.innerHTML = ""; return; }
+  const ys = hist.map(h=>h[1]).concat([start]);
+  let lo = Math.min(...ys), hi = Math.max(...ys);
+  if(hi-lo < 1){ hi += .5; lo -= .5; }
+  const W=600,H=150,pad=8;
+  const x = i => hist.length===1 ? W/2 : i*(W/(hist.length-1));
+  const y = v => H-pad - (v-lo)/(hi-lo)*(H-2*pad);
+  const d = hist.map((h,i)=>(i?"L":"M")+x(i).toFixed(1)+","+y(h[1]).toFixed(1)).join("");
+  const last = hist[hist.length-1][1];
+  const col = last>=start ? "var(--up)" : "var(--down)";
+  svg.innerHTML =
+    `<line x1="0" x2="${W}" y1="${y(start)}" y2="${y(start)}" stroke="#3a4250" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>`+
+    `<path d="${d} L${W},${H} L0,${H}Z" fill="${col}" opacity=".08"/>`+
+    `<path d="${d}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
+}
+
+function render(st){
+  const eq = equity(st), start = st.start_balance, pnl = eq-start;
+  $("eq").textContent = "$" + eq.toFixed(2);
+  $("delta").innerHTML = `<span class="${cls(pnl)}">${usd(pnl,true)} · ${pct(100*pnl/start)}</span> <span class="muted">από $${start.toFixed(0)}</span>`;
+  drawChart(st.equity_history, start);
+
+  const c = st.closed, wins = c.filter(t=>t.pnl>0), losses = c.filter(t=>t.pnl<=0);
+  const avg = a => a.length ? a.reduce((s,t)=>s+t.pnl,0)/a.length : 0;
+  const k = [
+    ["Trades", c.length],
+    ["Επιτυχία", c.length ? Math.round(100*wins.length/c.length)+"%" : "—"],
+    ["Μέσο κέρδος", `<span class="up">${usd(avg(wins),true)}</span>`],
+    ["Μέση ζημιά", `<span class="down">${usd(avg(losses),true)}</span>`],
+    ["Σήμερα", `<span class="${cls(st.daily.realized)}">${usd(st.daily.realized,true)}</span>`],
+    ["Coins ελέγχθηκαν", st.stats.pools_checked.toLocaleString("el-GR")],
+  ];
+  $("kpis").innerHTML = k.map(([l,v])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+
+  $("open").innerHTML = st.positions.length ? st.positions.map(p=>`
+    <div class="row"><div class="l"><div class="name">${esc(p.name)}</div>
+    <div class="sub">#${p.id} · ${fmtT(p.entry_time)} · κορυφή ${pct(p.peak_pct)} · stop ${pct(p.stop_pct)}</div></div>
+    <div class="r ${cls(p.last_pct)}">${pct(p.last_pct)}</div></div>`).join("")
+    : `<div class="empty">Καμία ανοιχτή θέση.</div>`;
+
+  $("closed").innerHTML = c.length ? c.slice(-40).reverse().map(t=>`
+    <div class="row"><div class="l"><div class="name">${esc(t.name)}</div>
+    <div class="sub">#${t.id} · ${fmtT(t.exit_time)} · ${Math.round(t.hold_min)}′ · ${esc(t.reason)}</div></div>
+    <div class="r"><div class="${cls(t.pnl)}">${usd(t.pnl,true)}</div><div class="sub">${pct(t.pnl_pct)}</div></div></div>`).join("")
+    : `<div class="empty">Δεν έχει κλείσει κανένα trade ακόμα.</div>`;
+
+  const rj = Object.entries(st.stats.rejects).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const mx = rj.length ? rj[0][1] : 1;
+  $("rejects").innerHTML = rj.length ? rj.map(([r,n])=>`
+    <div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><span>${esc(r)}</span><span class="muted" style="font-family:var(--mono)">${n}</span></div>
+    <div class="bar"><i style="width:${(100*n/mx).toFixed(0)}%"></i></div></div>`).join("")
+    : `<div class="empty">—</div>`;
+
+  $("log").innerHTML = st.log.slice(-60).reverse().map(l=>`${fmtT(l.t)}  ${esc(l.msg)}`).join("<br>") || "—";
+
+  const age = (Date.now() - new Date(st.last_run))/60000;
+  $("foot").innerHTML = `Τελευταίος έλεγχος: ${fmtT(st.last_run)}` +
+    (age > 90 ? ` <span class="stale">· το bot δεν έχει τρέξει για ${Math.round(age)}′</span>` : "") +
+    `<br>Ξεκίνησε ${fmtT(st.started_at)} · ${st.stats.scans} σαρώσεις · <a href="trades.csv" style="color:var(--muted)">trades.csv</a>`;
+}
+
+async function load(){
+  try{
+    const r = await fetch("state.json?t="+Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    render(await r.json());
+  }catch(e){
+    $("delta").textContent = "Δεν υπάρχουν ακόμα δεδομένα — το bot δεν έχει ολοκληρώσει τον πρώτο γύρο.";
+  }
+}
+load(); setInterval(load, 60000);
+</script>
+</body>
+</html>
