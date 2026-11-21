@@ -126,6 +126,16 @@ def pools_now(positions):
     return res
 
 
+def ds_price(pool, mint):
+    """Τιμή από δεύτερη, ανεξάρτητη πηγή (DexScreener). None αν δεν υπάρχει."""
+    d = _get(f"{DS}/pairs/solana/{pool}", retries=2)
+    for p in (d or {}).get("pairs", []) or []:
+        if p.get("pairAddress") == pool and (p.get("baseToken") or {}).get("address") == mint:
+            price = _f(p.get("priceUsd"))
+            return price if price > 0 else None
+    return None
+
+
 def token_flags(mint):
     """Έλεγχος απάτης όσο γίνεται χωρίς RPC: mint/freeze authority αν τα δίνει το API."""
     d = _get(f"{GT}/networks/solana/tokens/{mint}/info")

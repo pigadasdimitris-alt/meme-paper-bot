@@ -54,7 +54,10 @@ def one_cycle(state):
     engine.roll_day(state, now)
     if state["positions"]:
         quotes = data.pools_now(state["positions"])
-        engine.manage_positions(state, quotes, engine.now_utc())
+        # δεύτερη πηγή για επιβεβαίωση απότομων αλλαγών (μόνο όταν η πρώτη ήταν GeckoTerminal)
+        confirm = lambda pos: (data.ds_price(pos["pool"], pos["mint"])
+                               if quotes.get(pos["pool"], {}).get("src") == "gt" else None)
+        engine.manage_positions(state, quotes, engine.now_utc(), confirm_fn=confirm)
     fresh = data.new_pools(C.NEW_POOL_PAGES)
     now = engine.now_utc()
     engine.update_watchlist(state, fresh, now)
@@ -64,7 +67,8 @@ def one_cycle(state):
     now = engine.now_utc()
     if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")
-    engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags)
+    engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags,
+                         verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
     engine.snapshot(state, engine.now_utc())
     return len(pools)
 

@@ -180,3 +180,38 @@ def test_liquidity_exit_needs_two_readings():
     assert s["positions"]
     engine.manage_positions(s, q, now + timedelta(minutes=2))
     assert s["closed"][0]["reason"] == "έπεσε η ρευστότητα"
+
+
+def _open_one(now):
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    return s
+
+
+def test_bad_price_needs_second_source():
+    now = engine.now_utc()
+    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
+    s = _open_one(now)
+    for i in range(5):  # ακόμα κι αν το API επιμένει, η δεύτερη πηγή διαφωνεί → ποτέ πώληση
+        engine.manage_positions(s, bad, now + timedelta(minutes=i + 1), confirm_fn=lambda p: 0.0011)
+    assert s["positions"] and not s["closed"]
+    assert s["positions"][0]["last_price"] == 0.001
+
+
+def test_real_jump_accepted_when_sources_agree():
+    now = engine.now_utc()
+    s = _open_one(now)
+    q = {"POOL1": {"price": 0.005, "liquidity": 40_000, "src": "gt"}}
+    engine.manage_positions(s, q, now + timedelta(minutes=1), confirm_fn=lambda p: 0.0049)
+    assert s["positions"]  # πρώτη μέτρηση: αναμονή
+    engine.manage_positions(s, q, now + timedelta(minutes=2), confirm_fn=lambda p: 0.0049)
+    assert s["closed"][0]["reason"] == "take profit"
+
+
+def test_entry_rejected_on_price_disagreement():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now, verify_fn=lambda p: 0.01)
+    assert not s["positions"] and s["reasons"]["POOL1"][0] == "ασυμφωνία τιμών"
+    engine.scan_and_enter(s, [pool(now)], now, verify_fn=lambda p: None)  # χωρίς 2η πηγή → επιτρέπεται
+    assert s["positions"]

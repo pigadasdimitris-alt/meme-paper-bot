@@ -173,7 +173,32 @@ def _liquidity_gone(pos, q):
     return pos["liq_low"] >= 2
 
 
-def manage_positions(state, quotes, now):
+def agrees(a, b, tol=C.SOURCE_TOLERANCE):
+    return a > 0 and b > 0 and (1 - tol) < a / b < (1 + tol)
+
+
+def _accept_jump(state, pos, price, ratio, now, confirm_fn):
+    """Απότομη αλλαγή >4x: γίνεται δεκτή μόνο αν (α) επιβεβαιωθεί στον επόμενο γύρο ΚΑΙ
+    (β) συμφωνεί και η δεύτερη, ανεξάρτητη πηγή (DexScreener). Αν η δεύτερη πηγή λείπει,
+    χρειάζονται 3 συνεχόμενες ίδιες μετρήσεις για άνοδο (κέρδος) και 2 για πτώση."""
+    sus = pos.get("suspect_price")
+    if sus and agrees(price, sus):
+        pos["suspect_count"] = pos.get("suspect_count", 1) + 1
+    else:
+        pos["suspect_price"], pos["suspect_count"] = price, 1
+        log(state, now, f"#{pos['id']} {pos['name']}: ύποπτη τιμή ({ratio:.3g}x) — περιμένει επιβεβαίωση")
+        return False
+    second = confirm_fn(pos) if confirm_fn else None
+    if second is not None:
+        if agrees(price, second):
+            return True
+        log(state, now, f"#{pos['id']} {pos['name']}: οι δύο πηγές διαφωνούν — η τιμή αγνοείται")
+        pos["suspect_price"], pos["suspect_count"] = None, 0
+        return False
+    return pos["suspect_count"] >= (3 if ratio > 1 else 2)
+
+
+def manage_positions(state, quotes, now, confirm_fn=None):
     """Ελέγχει stop / take profit / χρόνο / rug για κάθε ανοιχτό trade."""
     for pos in list(state["positions"]):
         q = quotes.get(pos["pool"])
@@ -189,12 +214,10 @@ def manage_positions(state, quotes, now):
         ref = pos.get("last_price") or pos["entry_market"]
         ratio = price / ref if ref > 0 else 1.0
         if ratio > C.MAX_JUMP or ratio < 1 / C.MAX_JUMP:
-            sus = pos.get("suspect_price")
-            if not sus or not (0.7 < price / sus < 1.3):
-                pos["suspect_price"] = price
-                log(state, now, f"#{pos['id']} {pos['name']}: ύποπτη τιμή ({ratio:.3g}x) — περιμένει επιβεβαίωση")
+            if not _accept_jump(state, pos, price, ratio, now, confirm_fn):
                 continue
         pos.pop("suspect_price", None)
+        pos.pop("suspect_count", None)
         pct = 100 * (price / pos["entry_market"] - 1)
         pos["last_price"] = price
         pos["last_pct"] = round(pct, 2)
@@ -236,7 +259,7 @@ def watch_due(state, now):
     return [k for _, k in due[:C.WATCH_MAX_FETCH]]
 
 
-def scan_and_enter(state, pools, now, flags_fn=None):
+def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
     """Αξιολογεί pools σε κάθε γύρο και ανοίγει εικονικές θέσεις στα καλύτερα.
     Κάθε coin ξαναελέγχεται σε κάθε γύρο (μπορεί να "ωριμάσει"), αλλά αγοράζεται το πολύ μία φορά."""
     state["stats"]["scans"] += 1
@@ -272,6 +295,11 @@ def scan_and_enter(state, pools, now, flags_fn=None):
                 continue
         if p["base_mint"] in held_mints:
             continue
+        if verify_fn:  # η τιμή αγοράς πρέπει να συμφωνεί και με δεύτερη πηγή
+            second = verify_fn(p)
+            if second is not None and not agrees(p["price"], second):
+                reasons[p["pool"]] = ["ασυμφωνία τιμών", iso(now)]
+                continue
         state["seen"][p["pool"]] = iso(now)
         reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now)]
         open_position(state, p, now)
