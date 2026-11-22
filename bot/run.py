@@ -149,6 +149,13 @@ def live_cycle(lst, pools):
         if lst["control"] == "on":
             engine.scan_and_enter(lst, pools, engine.now_utc(), flags_fn=data.token_flags,
                                  verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
+        # επιστροφή ενοικίου από άδειους λογαριασμούς token (όσων πουλήθηκαν)
+        try:
+            n = live.close_empty_accounts()
+            if n:
+                engine.log(lst, engine.now_utc(), f"Κλείσιμο {n} άδειων λογαριασμών token — επιστροφή SOL")
+        except Exception as e:
+            print("close accounts:", str(e)[:150], file=sys.stderr, flush=True)
         # το υπόλοιπο σε SOL ξαναμετριέται από το blockchain μετά από αγορές/πωλήσεις
         if lst["positions"] or lst["closed"]:
             lst["balance"] = live.wallet_snapshot()["sol_usd"]

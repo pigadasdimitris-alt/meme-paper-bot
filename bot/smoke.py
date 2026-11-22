@@ -22,6 +22,11 @@ try:
     s = live.swap(live.USDC_MINT, live.SOL_MINT, raw)
     out["steps"].append(f"sell USDC ok sig={s['signature']} got={s['out']/live.LAMPORTS:.6f} SOL")
     time.sleep(3)
+    try:
+        out["steps"].append(f"closed empty token accounts: {live.close_empty_accounts()}")
+        time.sleep(4)
+    except Exception as e:
+        out["steps"].append(f"close accounts error: {str(e)[:200]}")
     out["after"] = live.wallet_snapshot()
     out["cost_usd"] = round(out["before"]["sol_usd"] - out["after"]["sol_usd"], 4)
     out["ok"] = True

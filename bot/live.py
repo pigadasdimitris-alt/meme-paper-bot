@@ -204,6 +204,44 @@ def swap(input_mint, output_mint, amount_raw):
     }
 
 
+# ---------------- Επιστροφή "ενοικίου" από άδειους λογαριασμούς token ----------------
+# Κάθε νέο token ανοίγει έναν λογαριασμό που "κλειδώνει" ~0,002 SOL. Όταν αδειάσει, τον κλείνουμε
+# και τα SOL επιστρέφουν στο πορτοφόλι (αλλιώς θα κόστιζε ~3% σε κάθε trade των 4$).
+TOKEN_PROGRAMS = ["TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA", "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"]
+
+
+def empty_token_accounts():
+    out = []
+    for prog in TOKEN_PROGRAMS:
+        res = rpc("getTokenAccountsByOwner", [owner(), {"programId": prog}, {"encoding": "jsonParsed", "commitment": "confirmed"}])
+        for acc in res.get("value", []):
+            info = acc["account"]["data"]["parsed"]["info"]
+            if int(info["tokenAmount"]["amount"]) == 0 and info.get("mint") != SOL_MINT:
+                out.append((acc["pubkey"], prog))
+    return out
+
+
+def close_empty_accounts(limit=8):
+    """Κλείνει άδειους λογαριασμούς token (σε μία συναλλαγή). Επιστρέφει πόσους έκλεισε."""
+    from solders.hash import Hash
+    from solders.instruction import AccountMeta, Instruction
+    from solders.message import MessageV0
+    from solders.pubkey import Pubkey
+    from solders.transaction import VersionedTransaction
+    accs = empty_token_accounts()[:limit]
+    if not accs:
+        return 0
+    me = keypair().pubkey()
+    ixs = [Instruction(Pubkey.from_string(prog), bytes([9]),  # 9 = CloseAccount
+                       [AccountMeta(Pubkey.from_string(a), False, True), AccountMeta(me, False, True), AccountMeta(me, True, False)])
+           for a, prog in accs]
+    bh = rpc("getLatestBlockhash", [{"commitment": "confirmed"}])["value"]["blockhash"]
+    msg = MessageV0.try_compile(me, ixs, [], Hash.from_string(bh))
+    tx = VersionedTransaction(msg, [keypair()])
+    rpc("sendTransaction", [base64.b64encode(bytes(tx)).decode(), {"encoding": "base64", "preflightCommitment": "confirmed"}])
+    return len(accs)
+
+
 # ---------------- Hooks για το engine ----------------
 
 def buy(p, size_usd):

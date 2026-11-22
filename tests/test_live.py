@@ -113,3 +113,24 @@ def test_numbered_copy_is_cleaned(monkeypatch):
     monkeypatch.setenv("SOLANA_PRIVATE_KEY", "\n".join(f"{i+1}. {w}" for i, w in enumerate(words)))
     monkeypatch.setattr(live, "_kp", None)
     assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
+
+
+def test_close_empty_accounts_builds_signed_tx(wallet, monkeypatch):
+    sent = {}
+    def fake_rpc(method, params):
+        if method == "getTokenAccountsByOwner":
+            if params[1]["programId"].startswith("Tokenkeg"):
+                return {"value": [
+                    {"pubkey": str(Keypair().pubkey()), "account": {"data": {"parsed": {"info": {"mint": "M1", "tokenAmount": {"amount": "0"}}}}}},
+                    {"pubkey": str(Keypair().pubkey()), "account": {"data": {"parsed": {"info": {"mint": "M2", "tokenAmount": {"amount": "5"}}}}}},
+                ]}
+            return {"value": []}
+        if method == "getLatestBlockhash":
+            return {"value": {"blockhash": str(Hash.default())}}
+        if method == "sendTransaction":
+            sent["tx"] = params[0]
+            return "SIG"
+    monkeypatch.setattr(live, "rpc", fake_rpc)
+    assert live.close_empty_accounts() == 1
+    tx = VersionedTransaction.from_bytes(base64.b64decode(sent["tx"]))
+    assert tx.verify_with_results() == [True] and len(tx.message.instructions) == 1
