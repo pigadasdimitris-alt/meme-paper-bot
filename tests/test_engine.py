@@ -304,3 +304,38 @@ def test_payout_rule():
     assert engine.payout_due(s, now, 60.0) == 0.0          # λιγότερο από 12 ώρες από την προηγούμενη
     s["payouts"] = [{"t": engine.iso(now - timedelta(hours=13)), "usd": 20}]
     assert engine.payout_due(s, now, 60.0) == 30.0
+
+
+def test_paper_rug_exit_pays_nothing():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.0011, "liquidity": 300.0, "src": "gt"}}   # τιμή "ψηλά" αλλά το pool άδειασε
+    engine.manage_positions(s, q, now + timedelta(minutes=2))
+    engine.manage_positions(s, q, now + timedelta(minutes=3))
+    t = s["closed"][0]
+    assert t["proceeds"] == 0 and t["reason"].endswith("(rug)") and t["exit_liq"] == 300
+
+
+def test_paper_normal_liquidity_drop_still_sells():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.0011, "liquidity": 15000.0, "src": "gt"}}  # έπεσε κάτω από 50% αλλά υπάρχει ρευστότητα
+    engine.manage_positions(s, q, now + timedelta(minutes=2))
+    engine.manage_positions(s, q, now + timedelta(minutes=3))
+    assert s["closed"][0]["proceeds"] > 9
+
+
+def test_live_unsellable_is_written_off_after_retries(monkeypatch):
+    now = engine.now_utc()
+    s = _live_state(now)
+    def no_route(pos):
+        raise RuntimeError('HTTP 400 {"error":"No routes found"}')
+    monkeypatch.setattr(engine, "LIVE_HOOKS", {"buy": lambda p, size: {"qty": 4000.0, "cost_usd": 4.0}, "sell": no_route})
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.0008, "liquidity": 40_000, "src": "gt"}}
+    for i in range(engine.NO_ROUTE_GIVE_UP):
+        engine.manage_positions(s, q, now + timedelta(minutes=2 + i))
+    assert not s["positions"] and s["closed"][0]["pnl"] == -4.0 and s["zombies"][0]["mint"] == "MINT1"
+    assert s["daily"]["realized"] == -4.0

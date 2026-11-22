@@ -167,18 +167,42 @@ def open_position(state, p, now):
     return pos
 
 
-def close_position(state, pos, price, now, reason):
+NO_ROUTE_MARKERS = ("No routes", "NO_ROUTE", "Failed to get quotes")
+NO_ROUTE_GIVE_UP = 4   # ~6 λεπτά χωρίς καμία διαδρομή πώλησης = το pool άδειασε (rug)
+
+
+def is_rug_liquidity(pos, exit_liq):
+    return exit_liq is not None and exit_liq < max(1000.0, 0.05 * pos.get("liq_entry", 0))
+
+
+def close_position(state, pos, price, now, reason, exit_liq=None):
     sell_sig = None
     if state.get("mode") == "live":
         try:
             r = LIVE_HOOKS["sell"](pos)
         except Exception as e:
+            msg = str(e)
             pos["sell_fail"] = pos.get("sell_fail", 0) + 1
-            log(state, now, f"ΑΠΟΤΥΧΙΑ ΠΩΛΗΣΗΣ #{pos['id']} {pos['name']} ({reason}): {str(e)[:160]} — ξαναδοκιμάζει")
-            return None
+            if any(m in msg for m in NO_ROUTE_MARKERS):
+                pos["no_route"] = pos.get("no_route", 0) + 1
+            if pos.get("no_route", 0) >= NO_ROUTE_GIVE_UP:
+                # Δεν υπάρχει πια αγοραστής: καταγράφουμε τη ζημιά (ώστε να μετρήσει στο όριο ημέρας)
+                # και ελευθερώνουμε τη θέση. Το token μένει στο πορτοφόλι για μελλοντική απόπειρα.
+                state.setdefault("zombies", []).append({"id": pos["id"], "mint": pos["mint"], "pool": pos["pool"],
+                                                        "name": pos["name"], "since": iso(now)})
+                log(state, now, f"#{pos['id']} {pos['name']}: δεν πουλιέται (το pool άδειασε) — καταγραφή ως ζημιά")
+                r = {"proceeds_usd": 0.0, "sig": None}
+                reason = "rug — δεν πουλιέται"
+            else:
+                log(state, now, f"ΑΠΟΤΥΧΙΑ ΠΩΛΗΣΗΣ #{pos['id']} {pos['name']} ({reason}): {msg[:160]} — ξαναδοκιμάζει")
+                return None
         proceeds, sell_sig = r["proceeds_usd"], r.get("sig")
     else:
         proceeds = pos["qty"] * price * (1 - C.SLIPPAGE_PER_SIDE) - C.FEE_USD_PER_TX
+        if is_rug_liquidity(pos, exit_liq):
+            # Paper: αν το pool έχει αδειάσει, στην πραγματικότητα δεν θα πουλούσαμε τίποτα.
+            proceeds = 0.0
+            reason = reason + " (rug)"
     proceeds = max(proceeds, 0.0)
     pnl = proceeds - pos["cost"]
     state["balance"] += proceeds
@@ -193,6 +217,7 @@ def close_position(state, pos, price, now, reason):
         "pnl_pct": round(100 * pnl / pos["cost"], 2),
         "reason": reason,
         "hold_min": round(hold, 1),
+        "exit_liq": round(exit_liq) if exit_liq is not None else None,
     })
     if sell_sig:
         closed["sell_sig"] = sell_sig
@@ -205,7 +230,7 @@ def close_position(state, pos, price, now, reason):
 def _liquidity_gone(pos, q):
     """Χρειάζονται 2 συνεχόμενες μετρήσεις (ίδιας πηγής) κάτω από το όριο — μία μόνη μπορεί να είναι λάθος του API."""
     liq = q.get("liquidity", 0)
-    if q.get("src", "gt") != "gt" or liq <= 0 or pos["liq_entry"] <= 0:
+    if q.get("src", "gt") != "gt" or "liquidity" not in q or pos["liq_entry"] <= 0:
         return False
     if liq < pos["liq_entry"] * C.LIQUIDITY_DROP_EXIT:
         pos["liq_low"] = pos.get("liq_low", 0) + 1
@@ -277,14 +302,15 @@ def manage_positions(state, quotes, now, confirm_fn=None):
         if pos["peak_pct"] >= C.BREAKEVEN_TRIGGER_PCT:
             pos["stop_pct"] = max(pos["stop_pct"], 0.0)
 
+        liq = q.get("liquidity") if q.get("src", "gt") == "gt" and "liquidity" in q else None
         if pct >= C.TAKE_PROFIT_PCT:
-            close_position(state, pos, price, now, "take profit")
+            close_position(state, pos, price, now, "take profit", liq)
         elif pct <= pos["stop_pct"]:
-            close_position(state, pos, price, now, "stop loss" if pos["stop_pct"] < 0 else "stop στο 0")
+            close_position(state, pos, price, now, "stop loss" if pos["stop_pct"] < 0 else "stop στο 0", liq)
         elif _liquidity_gone(pos, q):
-            close_position(state, pos, price, now, "έπεσε η ρευστότητα")
+            close_position(state, pos, price, now, "έπεσε η ρευστότητα", liq)
         elif hold >= C.MAX_HOLD_MIN:
-            close_position(state, pos, price, now, "λήξη χρόνου")
+            close_position(state, pos, price, now, "λήξη χρόνου", liq)
 
 
 def update_watchlist(state, fresh_pools, now):
