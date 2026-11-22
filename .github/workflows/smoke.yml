@@ -16,11 +16,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q solders
+      - run: pip install -q solders mnemonic
       - name: Smoke test
         env:
           SOLANA_PRIVATE_KEY: ${{ secrets.SOLANA_PRIVATE_KEY }}
           JUPITER_API_KEY: ${{ secrets.JUPITER_API_KEY }}
+          SOLANA_ADDRESS_HINT: "6zAx…gyjn"
         run: python -m bot.smoke
       - name: Save result
         if: always()

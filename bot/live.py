@@ -31,6 +31,44 @@ def configured():
 
 _kp = None
 
+# Η διεύθυνση του Phantom (δημόσια πληροφορία) για να επιλεγεί σωστά το κλειδί από τις 12 λέξεις.
+ADDRESS_HINT = os.environ.get("SOLANA_ADDRESS_HINT", "")  # π.χ. "6zAx…gyjn"
+PATHS = ["m/44'/501'/0'/0'", "m/44'/501'/0'", "m/44'/501'/0'/0'/0'", "m/44'/501'/1'/0'"]
+
+
+def _hint_ok(addr):
+    if not ADDRESS_HINT:
+        return True
+    pre, _, suf = ADDRESS_HINT.replace("...", "…").partition("…")
+    return addr.startswith(pre) and addr.endswith(suf)
+
+
+def mnemonic_report():
+    """Διαγνωστικά ΧΩΡΙΣ να αποκαλύπτουν τις λέξεις: πλήθος, εγκυρότητα, ποιες λέξεις δεν υπάρχουν στη λίστα BIP39."""
+    raw = os.environ.get("SOLANA_PRIVATE_KEY", "").strip()
+    words = raw.split()
+    rep = {"words": len(words)}
+    if len(words) in (12, 24):
+        try:
+            from mnemonic import Mnemonic
+            m = Mnemonic("english")
+            norm = " ".join(w.lower() for w in words)
+            rep["checksum_ok"] = m.check(norm)
+            rep["unknown_word_positions"] = [i + 1 for i, w in enumerate(norm.split()) if w not in m.wordlist]
+        except ImportError:
+            pass
+        rep["candidates"] = [str(k.pubkey())[:4] + "…" + str(k.pubkey())[-4:] for _, k in _from_words(words)]
+    return rep
+
+
+def _from_words(words):
+    import hashlib
+    from solders.keypair import Keypair
+    seed = hashlib.pbkdf2_hmac("sha512", " ".join(w.lower() for w in words).encode(), b"mnemonic", 2048)
+    out = [(p, Keypair.from_seed_and_derivation_path(seed, p)) for p in PATHS]
+    out.append(("seed32", Keypair.from_seed(seed[:32])))
+    return out
+
 
 def keypair():
     global _kp
@@ -39,14 +77,17 @@ def keypair():
         raw = os.environ["SOLANA_PRIVATE_KEY"].strip()
         try:
             words = raw.split()
-            if len(words) in (12, 24):  # 12/24 λέξεις του Phantom → ίδιο κλειδί με τον Account 1
-                import hashlib
-                seed = hashlib.pbkdf2_hmac("sha512", " ".join(w.lower() for w in words).encode(), b"mnemonic", 2048)
-                _kp = Keypair.from_seed_and_derivation_path(seed, "m/44'/501'/0'/0'")
+            if len(words) in (12, 24):  # 12/24 λέξεις του Phantom
+                match = [k for _, k in _from_words(words) if _hint_ok(str(k.pubkey()))]
+                if not match:
+                    raise LiveError("Οι λέξεις δεν δίνουν τη διεύθυνση του Phantom")
+                _kp = match[0]
             elif raw.startswith("["):  # μορφή πίνακα αριθμών
                 _kp = Keypair.from_bytes(bytes(json.loads(raw)))
-            else:                     # μορφή base58 (Phantom)
+            else:                     # μορφή base58
                 _kp = Keypair.from_base58_string(raw)
+        except LiveError:
+            raise
         except Exception:
             raise LiveError("Μη έγκυρο SOLANA_PRIVATE_KEY") from None  # χωρίς λεπτομέρειες για να μη διαρρεύσει
     return _kp

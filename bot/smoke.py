@@ -8,6 +8,7 @@ from . import live
 out = {"t": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "ok": False, "steps": []}
 try:
     out["configured"] = live.configured()
+    out["key_check"] = live.mnemonic_report()
     out["wallet"] = live.owner()
     w = live.wallet_snapshot()
     out["before"] = w

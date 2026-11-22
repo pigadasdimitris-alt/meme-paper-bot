@@ -87,3 +87,17 @@ def test_recovery_phrase_matches_phantom_account_1(monkeypatch):
     monkeypatch.setenv("SOLANA_PRIVATE_KEY", m)
     monkeypatch.setattr(live, "_kp", None)
     assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
+
+
+def test_hint_selects_right_key_or_refuses(monkeypatch):
+    m = "abandon " * 11 + "about"
+    monkeypatch.setenv("SOLANA_PRIVATE_KEY", m)
+    monkeypatch.setattr(live, "_kp", None)
+    monkeypatch.setattr(live, "ADDRESS_HINT", "HAgk…Kpqk")
+    assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
+    monkeypatch.setattr(live, "_kp", None)
+    monkeypatch.setattr(live, "ADDRESS_HINT", "6zAx…gyjn")
+    with pytest.raises(live.LiveError):
+        live.keypair()
+    rep = live.mnemonic_report()
+    assert rep["words"] == 12 and rep.get("checksum_ok", True) and "abandon" not in str(rep)

@@ -31,13 +31,14 @@ jobs:
 
       - name: Tests
         run: |
-          pip install -q pytest solders
+          pip install -q pytest solders mnemonic
           python -m pytest -q
 
       - name: Run bot (paper only)
         env:
           SOLANA_PRIVATE_KEY: ${{ secrets.SOLANA_PRIVATE_KEY }}
           JUPITER_API_KEY: ${{ secrets.JUPITER_API_KEY }}
+          SOLANA_ADDRESS_HINT: "6zAx…gyjn"
           GITHUB_TOKEN: ${{ github.token }}
           RUN_MINUTES: "330"
           COMMIT_EVERY: "2"
