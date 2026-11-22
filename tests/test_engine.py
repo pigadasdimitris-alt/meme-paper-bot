@@ -192,10 +192,10 @@ def test_bad_price_needs_second_source():
     now = engine.now_utc()
     bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
     s = _open_one(now)
-    for i in range(5):  # ακόμα κι αν το API επιμένει, η δεύτερη πηγή διαφωνεί → ποτέ πώληση
+    for i in range(5):  # η κύρια πηγή επιμένει σε λάθος τιμή → χρησιμοποιείται η δεύτερη, ποτέ ψεύτικο κέρδος
         engine.manage_positions(s, bad, now + timedelta(minutes=i + 1), confirm_fn=lambda p: 0.0011)
     assert s["positions"] and not s["closed"]
-    assert s["positions"][0]["last_price"] == 0.001
+    assert s["positions"][0]["last_price"] == 0.0011
 
 
 def test_real_jump_accepted_when_sources_agree():
@@ -222,3 +222,20 @@ def test_coin_image_is_kept():
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now, flags_fn=lambda m: {"image": "https://x/y.png"})
     assert s["positions"][0]["image"] == "https://x/y.png"
+
+
+def test_stuck_position_closes_by_time():
+    now = engine.now_utc()
+    s = _open_one(now)
+    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
+    engine.manage_positions(s, bad, now + timedelta(minutes=95), confirm_fn=lambda p: 50.0)  # και οι δύο τρελές
+    assert s["closed"] and s["closed"][0]["reason"] == "λήξη χρόνου (αβέβαιη τιμή)"
+    assert abs(s["closed"][0]["exit_market"] - 0.001) < 1e-12
+
+
+def test_glitchy_primary_still_hits_time_exit():
+    now = engine.now_utc()
+    s = _open_one(now)
+    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
+    engine.manage_positions(s, bad, now + timedelta(minutes=61), confirm_fn=lambda p: 0.00102)
+    assert s["closed"] and s["closed"][0]["reason"] == "λήξη χρόνου"

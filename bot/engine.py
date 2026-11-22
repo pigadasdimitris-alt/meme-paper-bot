@@ -178,25 +178,31 @@ def agrees(a, b, tol=C.SOURCE_TOLERANCE):
     return a > 0 and b > 0 and (1 - tol) < a / b < (1 + tol)
 
 
-def _accept_jump(state, pos, price, ratio, now, confirm_fn):
-    """Απότομη αλλαγή >4x: γίνεται δεκτή μόνο αν (α) επιβεβαιωθεί στον επόμενο γύρο ΚΑΙ
-    (β) συμφωνεί και η δεύτερη, ανεξάρτητη πηγή (DexScreener). Αν η δεύτερη πηγή λείπει,
-    χρειάζονται 3 συνεχόμενες ίδιες μετρήσεις για άνοδο (κέρδος) και 2 για πτώση."""
+def _resolve_price(state, pos, price, ratio, now, confirm_fn):
+    """Απότομη αλλαγή >4x από την κύρια πηγή. Επιστρέφει αξιόπιστη τιμή ή None.
+    - Αν η δεύτερη, ανεξάρτητη πηγή διαφωνεί αλλά συμφωνεί με την προηγούμενη αξιόπιστη τιμή,
+      η κύρια πηγή έκανε λάθος → χρησιμοποιούμε τη δεύτερη (έτσι η θέση δεν "κολλάει").
+    - Αν συμφωνούν και οι δύο, η αλλαγή γίνεται δεκτή αφού επιβεβαιωθεί και στον επόμενο γύρο.
+    - Χωρίς δεύτερη πηγή: 3 συνεχόμενες ίδιες μετρήσεις για άνοδο, 2 για πτώση."""
+    ref = pos.get("last_price") or pos["entry_market"]
+    second = confirm_fn(pos) if confirm_fn else None
+    if second is not None and not agrees(price, second):
+        pos["suspect_price"], pos["suspect_count"] = None, 0
+        if ref > 0 and 1 / C.MAX_JUMP < second / ref < C.MAX_JUMP:
+            if not pos.get("glitch_logged"):
+                log(state, now, f"#{pos['id']} {pos['name']}: λάθος τιμή από την κύρια πηγή — χρήση δεύτερης πηγής")
+                pos["glitch_logged"] = True
+            return second
+        log(state, now, f"#{pos['id']} {pos['name']}: οι δύο πηγές διαφωνούν — η τιμή αγνοείται")
+        return None
     sus = pos.get("suspect_price")
     if sus and agrees(price, sus):
         pos["suspect_count"] = pos.get("suspect_count", 1) + 1
     else:
         pos["suspect_price"], pos["suspect_count"] = price, 1
         log(state, now, f"#{pos['id']} {pos['name']}: ύποπτη τιμή ({ratio:.3g}x) — περιμένει επιβεβαίωση")
-        return False
-    second = confirm_fn(pos) if confirm_fn else None
-    if second is not None:
-        if agrees(price, second):
-            return True
-        log(state, now, f"#{pos['id']} {pos['name']}: οι δύο πηγές διαφωνούν — η τιμή αγνοείται")
-        pos["suspect_price"], pos["suspect_count"] = None, 0
-        return False
-    return pos["suspect_count"] >= (3 if ratio > 1 else 2)
+    need = 2 if second is not None else (3 if ratio > 1 else 2)
+    return price if pos["suspect_count"] >= need else None
 
 
 def manage_positions(state, quotes, now, confirm_fn=None):
@@ -215,8 +221,13 @@ def manage_positions(state, quotes, now, confirm_fn=None):
         ref = pos.get("last_price") or pos["entry_market"]
         ratio = price / ref if ref > 0 else 1.0
         if ratio > C.MAX_JUMP or ratio < 1 / C.MAX_JUMP:
-            if not _accept_jump(state, pos, price, ratio, now, confirm_fn):
+            trusted = _resolve_price(state, pos, price, ratio, now, confirm_fn)
+            if trusted is None:
+                # καμία αξιόπιστη τιμή: η θέση δεν μένει ανοιχτή για πάντα
+                if hold >= C.MAX_HOLD_MIN + 30:
+                    close_position(state, pos, pos["last_price"], now, "λήξη χρόνου (αβέβαιη τιμή)")
                 continue
+            price = trusted
         pos.pop("suspect_price", None)
         pos.pop("suspect_count", None)
         pct = 100 * (price / pos["entry_market"] - 1)
