@@ -33,6 +33,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;background:rep
 .wrap{max-width:760px;margin:0 auto}
 .bar{display:flex;justify-content:space-between;align-items:center;color:var(--blue);padding:2px 2px 6px;font-weight:500}
 .bar .mid{color:var(--dim)}
+.modes{display:inline-flex;gap:3px;margin-left:4px;vertical-align:1px}
+.modes button{all:unset;cursor:pointer;font:700 10.5px var(--mono);padding:1px 7px;border:1px solid var(--faint);border-radius:3px;color:var(--dim)}
+.modes button.on[data-m=paper]{color:var(--violet);border-color:var(--violet)}
+.modes button.on[data-m=live]{color:#06210f;background:var(--mint);border-color:var(--mint)}
+.wallet{color:var(--dim);font-size:10.5px;margin-top:2px}
 .bar .mid i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:5px;vertical-align:1px;box-shadow:0 0 8px var(--mint)}
 fieldset{border:1.5px solid var(--c,#3b4a7a);border-radius:6px;margin:0 0 8px;padding:6px 9px 9px;background:var(--pane);min-width:0;position:relative}
 legend{padding:0 5px;font-weight:700;color:var(--ink);white-space:nowrap;max-width:100%;overflow:hidden}
@@ -134,11 +139,11 @@ legend span{color:var(--dim);font-weight:400}
 </head>
 <body>
 <div class="wrap">
-  <div class="bar"><span>meme-desk <span class="dim">v1.0</span> <span class="violet">paper</span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="bar"><span>meme-desk <span class="modes" id="modes"><button data-m="paper" class="on">paper</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
 
-  <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span>— paper:$70</span></legend><span class="tag live">live</span>
-    <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div></div><div class="mult" id="mult">x—</div></div>
+  <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper:$70</span></legend><span class="tag live">live</span>
+    <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div><div class="wallet" id="wallet"></div></div><div class="mult" id="mult">x—</div></div>
     <div class="chart" id="chartbox"><svg id="dots"></svg></div>
   </fieldset>
 
@@ -177,10 +182,12 @@ legend span{color:var(--dim);font-weight:400}
 <script>
 {
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
-const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/state.json?ref=main`;
-const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/state.json`;
-const LOCAL=location.hash==="#local";
-const SLIP=0.025, FEE=0.03, TP=30, POLL=75000, tz="Europe/Athens";
+let MODE = location.hash.includes("live") ? "live" : "paper";
+const FILE = () => MODE==="live" ? "live.json" : "state.json";
+const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;
+const RAW = () => `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${FILE()}`;
+const LOCAL=location.hash.includes("local");
+let SLIP=0.025, FEE=0.03; const TP=30, POLL=75000, tz="Europe/Athens";
 const $=id=>document.getElementById(id);
 const T=s=>new Date(s).getTime();
 const fH=s=>new Date(s).toLocaleTimeString("el-GR",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false});
@@ -273,7 +280,7 @@ function drawLanes(){
 
 /* 3: positions */
 function renderPositions(st){
-  $("slots").textContent=`${st.positions.length}/4`;
+  $("slots").textContent=`${st.positions.length}/${MODE==="live"?3:4}`;
   $("positions").innerHTML=st.positions.length?st.positions.map(p=>{
     const lo=Math.min(p.stop_pct,-15), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
     const l=Math.min(zero,cur), w=Math.abs(cur-zero);
@@ -347,7 +354,7 @@ function renderHistory(){
   $("hsum").innerHTML=
     `<div><b class="${p10>=0?"mint":"coral"}">${usd(p10)}</b><span>τελευταία 10 · ${w10}/${l10.length} κέρδη</span></div>`+
     `<div><b class="${pt>=0?"mint":"coral"}">${usd(pt)}</b><span>σήμερα · ${today.length} trades</span></div>`+
-    `<div><b class="${kind?"mint":"coral"}">${run} ${kind?"κέρδη":"ζημιές"}</b><span>σερί τώρα</span></div>`;
+    (c.length?`<div><b class="${kind?"mint":"coral"}">${run} ${kind?"κέρδη":"ζημιές"}</b><span>σερί τώρα</span></div>`:`<div><b class="dim">—</b><span>σερί τώρα</span></div>`);
   const list=c.slice().reverse().filter(t=>hFilt==="all"||(hFilt==="w"?t.pnl>0:t.pnl<=0));
   const show=hAll?list:list.slice(0,15);
   $("hist").innerHTML=show.map(t=>{ const w=t.pnl>0;
@@ -363,6 +370,9 @@ $("hf").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) 
 
 function render(st){
   ST=st;
+  if(st.start_balance==null) st.start_balance = st.balance || 1;
+  $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : "— paper:$70";
+  $("wallet").innerHTML = MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}` : "";
   const eq=equity(st), pnl=eq-st.start_balance, mult=eq/st.start_balance;
   countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
   $("chg").innerHTML=`<span class="${pnl>=0?"mint":"coral"}">${usd(pnl)} (${pct(100*pnl/st.start_balance)})</span>`;
@@ -373,14 +383,24 @@ function render(st){
 }
 
 async function fetchState(){
-  if(LOCAL){ const r=await fetch("state.json?t="+Date.now()); return r.json(); }
-  try{ const r=await fetch(API,{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); }catch(e){}
-  const r=await fetch(RAW+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json();
+  if(LOCAL){ const r=await fetch(FILE()+"?t="+Date.now()); if(!r.ok) throw new Error(r.status); return r.json(); }
+  try{ const r=await fetch(API(),{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); if(r.status===404) throw new Error("404"); }catch(e){ if(e.message==="404") throw e; }
+  const r=await fetch(RAW()+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json();
 }
 async function load(){
   try{ const st=await fetchState(); if(first||st.last_run!==lastRun){ lastRun=st.last_run; render(st); } else drawLanes(); $("err").style.display="none"; }
-  catch(e){ $("err").style.display="block"; $("err").textContent=ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα"; }
+  catch(e){ $("err").style.display="block";
+    $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα"; }
 }
+function setMode(m){
+  MODE=m; SLIP = m==="live" ? 0.01 : 0.025; FEE = m==="live" ? 0 : 0.03;
+  for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m===m);
+  ST=null; PREV=null; first=true; lastRun=null; shownEq=null;
+  try{ history.replaceState(null,"", m==="live"?"#live":"#"); }catch(e){}
+  load();
+}
+$("modes").addEventListener("click",e=>{const b=e.target.closest("button"); if(b && b.dataset.m!==MODE) setMode(b.dataset.m);});
+if(MODE==="live"){ SLIP=0.01; FEE=0; for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m==="live"); }
 const ro=new ResizeObserver(()=>{drawDots();drawLanes();}); ro.observe($("dots")); ro.observe($("lanes"));
 load(); setInterval(load,POLL);
 document.addEventListener("visibilitychange",()=>{ if(!document.hidden) load(); });
