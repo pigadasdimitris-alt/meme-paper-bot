@@ -52,7 +52,7 @@ LIVE_OVERRIDES = {
     "POSITION_SIZE_USD": 4.0,
     "MAX_OPEN_POSITIONS": 3,
     "MAX_DAILY_LOSS_USD": 8.0,
-    "MAX_ENTRIES_PER_DAY": 40,
+    "MAX_ENTRIES_PER_DAY": 80,
     "SLIPPAGE_PER_SIDE": 0.01,   # μόνο για την εκτίμηση αξίας ανοιχτών θέσεων· τα πραγματικά ποσά έρχονται από το blockchain
     "FEE_USD_PER_TX": 0.0,
 }
