@@ -1,24 +1,27 @@
 name: paper-bot
 
+# Το bot τρέχει συνεχόμενα: κάθε γύρος διαρκεί ~5,5 ώρες και στο τέλος ξεκινά μόνος του τον επόμενο.
+# Το cron είναι απλώς εφεδρικό (το GitHub συχνά καθυστερεί ή παραλείπει προγραμματισμένα runs).
 on:
   schedule:
-    - cron: "*/15 * * * *"     # κάθε 15′· αν τρέχει ήδη γύρος, ο επόμενος περιμένει στη σειρά και ξεκινά αμέσως μετά (χωρίς κενά)
-  workflow_dispatch: {}          # χειροκίνητη εκκίνηση από το κινητό (Actions → Run workflow)
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
   push:
     branches: [main]
     paths: ["bot/**", ".github/workflows/**", "tests/**"]
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: paper-bot
-  cancel-in-progress: false      # ποτέ δύο bots ταυτόχρονα
+  cancel-in-progress: false      # ποτέ δύο bots ταυτόχρονα· ο επόμενος περιμένει στη σειρά
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 62
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
 
@@ -33,9 +36,15 @@ jobs:
 
       - name: Run bot (paper only)
         env:
-          RUN_MINUTES: "55"
+          RUN_MINUTES: "330"
           COMMIT_EVERY: "4"
         run: |
           git config user.name "paper-bot"
           git config user.email "paper-bot@users.noreply.github.com"
           python -m bot.run
+
+      - name: Start next round
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run bot.yml --ref main
