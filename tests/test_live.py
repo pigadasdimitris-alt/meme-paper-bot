@@ -134,3 +134,9 @@ def test_close_empty_accounts_builds_signed_tx(wallet, monkeypatch):
     assert live.close_empty_accounts() == 1
     tx = VersionedTransaction.from_bytes(base64.b64decode(sent["tx"]))
     assert tx.verify_with_results() == [True] and len(tx.message.instructions) == 1
+
+
+def test_send_sol_refuses_other_addresses(wallet, monkeypatch):
+    monkeypatch.setattr(live, "sol_balance", lambda: 1.0)
+    with pytest.raises(live.LiveError):
+        live.send_sol(str(Keypair().pubkey()), 0.1, "83q2aSN1mSkdDpq68P54uGHuYXWeK9zq1Lm5c4HHym6i")

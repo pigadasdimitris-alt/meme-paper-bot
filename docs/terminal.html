@@ -372,8 +372,8 @@ function render(st){
   ST=st;
   if(st.start_balance==null) st.start_balance = st.balance || 1;
   $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : "— paper:$70";
-  $("wallet").innerHTML = MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}` : "";
-  const eq=equity(st), pnl=eq-st.start_balance, mult=eq/st.start_balance;
+  $("wallet").innerHTML = MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}${(st.withdrawn_usd||0)>0?` · <span class="mint">στο Revolut $${(+st.withdrawn_usd).toFixed(2)}</span>`:""}` : "";
+  const eq=equity(st), WD=(st.withdrawn_usd||0), pnl=eq+WD-st.start_balance, mult=(eq+WD)/st.start_balance;
   countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
   $("chg").innerHTML=`<span class="${pnl>=0?"mint":"coral"}">${usd(pnl)} (${pct(100*pnl/st.start_balance)})</span>`;
   $("mult").textContent="x"+mult.toFixed(2); $("mult").className="mult"+(mult<1?" neg":"");

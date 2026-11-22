@@ -159,6 +159,20 @@ def live_cycle(lst, pools):
         # το υπόλοιπο σε SOL ξαναμετριέται από το blockchain μετά από αγορές/πωλήσεις
         if lst["positions"] or lst["closed"]:
             lst["balance"] = live.wallet_snapshot()["sol_usd"]
+        # αυτόματη μεταφορά κερδών στο Revolut
+        due = engine.payout_due(lst, engine.now_utc(), engine.equity(lst))
+        if due > 0:
+            w = live.wallet_snapshot()
+            send_usd = min(due, w["sol_usd"] - live.SOL_RESERVE * w["sol_price"] - 0.5)
+            if send_usd >= 5:
+                try:
+                    sig = live.send_sol(C.PAYOUT_ADDRESS, round(send_usd / w["sol_price"], 6), C.PAYOUT_ADDRESS)
+                    lst.setdefault("payouts", []).append({"t": engine.iso(engine.now_utc()), "usd": round(send_usd, 2), "sig": sig})
+                    lst["withdrawn_usd"] = round(lst.get("withdrawn_usd", 0.0) + send_usd, 2)
+                    lst["balance"] = live.wallet_snapshot()["sol_usd"]
+                    engine.log(lst, engine.now_utc(), f"ΜΕΤΑΦΟΡΑ ${send_usd:.2f} στο Revolut")
+                except Exception as e:
+                    engine.log(lst, engine.now_utc(), f"Αποτυχία μεταφοράς κερδών: {str(e)[:150]}")
         engine.snapshot(lst, engine.now_utc())
 
 

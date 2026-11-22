@@ -293,3 +293,14 @@ def test_live_failed_sell_keeps_position_and_retries(monkeypatch):
     assert s["positions"] and s["positions"][0]["sell_fail"] == 1
     engine.manage_positions(s, q, now + timedelta(minutes=3))
     assert not s["positions"] and s["closed"][0]["sell_sig"] == "S2"
+
+
+def test_payout_rule():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    assert engine.payout_due(s, now, 49.0) == 0.0
+    assert engine.payout_due(s, now, 52.4) == 22.4
+    s["payouts"] = [{"t": engine.iso(now - timedelta(hours=3)), "usd": 20}]
+    assert engine.payout_due(s, now, 60.0) == 0.0          # λιγότερο από 12 ώρες από την προηγούμενη
+    s["payouts"] = [{"t": engine.iso(now - timedelta(hours=13)), "usd": 20}]
+    assert engine.payout_due(s, now, 60.0) == 30.0

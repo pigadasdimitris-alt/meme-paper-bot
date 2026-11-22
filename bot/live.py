@@ -242,6 +242,35 @@ def close_empty_accounts(limit=8):
     return len(accs)
 
 
+# ---------------- Μεταφορά SOL (μόνο προς τη διεύθυνση πληρωμής) ----------------
+
+def send_sol(to_address, sol_amount, allowed):
+    """Στέλνει SOL. Αρνείται οποιαδήποτε διεύθυνση εκτός από την επιτρεπόμενη."""
+    from solders.hash import Hash
+    from solders.message import MessageV0
+    from solders.pubkey import Pubkey
+    from solders.system_program import TransferParams, transfer
+    from solders.transaction import VersionedTransaction
+    if to_address != allowed:
+        raise LiveError("Άρνηση: η διεύθυνση δεν είναι η εγκεκριμένη")
+    lamports = int(sol_amount * LAMPORTS)
+    if lamports <= 0 or sol_balance() - SOL_RESERVE < sol_amount:
+        raise LiveError("Δεν φτάνει το SOL για μεταφορά")
+    me = keypair().pubkey()
+    ix = transfer(TransferParams(from_pubkey=me, to_pubkey=Pubkey.from_string(to_address), lamports=lamports))
+    bh = rpc("getLatestBlockhash", [{"commitment": "confirmed"}])["value"]["blockhash"]
+    tx = VersionedTransaction(MessageV0.try_compile(me, [ix], [], Hash.from_string(bh)), [keypair()])
+    sig = rpc("sendTransaction", [base64.b64encode(bytes(tx)).decode(), {"encoding": "base64", "preflightCommitment": "confirmed"}])
+    for _ in range(15):  # περιμένουμε επιβεβαίωση
+        time.sleep(2)
+        st = rpc("getSignatureStatuses", [[sig]])["value"][0]
+        if st and st.get("err"):
+            raise LiveError(f"Η μεταφορά απέτυχε: {st['err']}")
+        if st and st.get("confirmationStatus") in ("confirmed", "finalized"):
+            return sig
+    raise LiveError(f"Η μεταφορά δεν επιβεβαιώθηκε ακόμα (sig {sig})")
+
+
 # ---------------- Hooks για το engine ----------------
 
 def buy(p, size_usd):

@@ -56,3 +56,9 @@ LIVE_OVERRIDES = {
     "SLIPPAGE_PER_SIDE": 0.01,   # μόνο για την εκτίμηση αξίας ανοιχτών θέσεων· τα πραγματικά ποσά έρχονται από το blockchain
     "FEE_USD_PER_TX": 0.0,
 }
+
+# --- Αυτόματη μεταφορά κερδών στο Revolut ---
+PAYOUT_ADDRESS = "83q2aSN1mSkdDpq68P54uGHuYXWeK9zq1Lm5c4HHym6i"   # διεύθυνση SOL του Revolut (μόνο εδώ στέλνει)
+PAYOUT_KEEP_USD = 30.0          # τόσα μένουν πάντα στο bot
+PAYOUT_TRIGGER_USD = 20.0       # μεταφορά όταν το κέρδος πάνω από τα 30$ φτάσει τα 20$
+PAYOUT_MIN_HOURS = 12           # το πολύ μία μεταφορά ανά 12 ώρες

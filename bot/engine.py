@@ -93,6 +93,16 @@ def reject_reason(p, now):
     return None
 
 
+def payout_due(state, now, equity_now):
+    """Πόσα USD πρέπει να μεταφερθούν τώρα (0 αν όχι)."""
+    if equity_now < C.PAYOUT_KEEP_USD + C.PAYOUT_TRIGGER_USD:
+        return 0.0
+    last = (state.get("payouts") or [{}])[-1].get("t")
+    if last and (now - parse_time(last)).total_seconds() < C.PAYOUT_MIN_HOURS * 3600:
+        return 0.0
+    return round(equity_now - C.PAYOUT_KEEP_USD, 2)
+
+
 def can_open(state):
     if len(state["positions"]) >= C.MAX_OPEN_POSITIONS:
         return "max ανοιχτά"
@@ -370,6 +380,7 @@ def equity(state):
 
 
 def snapshot(state, now):
-    state["equity_history"].append([iso(now), round(equity(state), 4)])
+    # τα χρήματα που μεταφέρθηκαν στο Revolut μετράνε ως κέρδος (δεν χάθηκαν)
+    state["equity_history"].append([iso(now), round(equity(state) + state.get("withdrawn_usd", 0.0), 4)])
     state["equity_history"] = state["equity_history"][-5000:]
     state["last_run"] = iso(now)
