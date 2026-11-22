@@ -38,7 +38,12 @@ def keypair():
         from solders.keypair import Keypair
         raw = os.environ["SOLANA_PRIVATE_KEY"].strip()
         try:
-            if raw.startswith("["):  # μορφή πίνακα αριθμών
+            words = raw.split()
+            if len(words) in (12, 24):  # 12/24 λέξεις του Phantom → ίδιο κλειδί με τον Account 1
+                import hashlib
+                seed = hashlib.pbkdf2_hmac("sha512", " ".join(w.lower() for w in words).encode(), b"mnemonic", 2048)
+                _kp = Keypair.from_seed_and_derivation_path(seed, "m/44'/501'/0'/0'")
+            elif raw.startswith("["):  # μορφή πίνακα αριθμών
                 _kp = Keypair.from_bytes(bytes(json.loads(raw)))
             else:                     # μορφή base58 (Phantom)
                 _kp = Keypair.from_base58_string(raw)

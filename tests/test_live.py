@@ -79,3 +79,11 @@ def test_bad_key_does_not_leak(monkeypatch):
     with pytest.raises(live.LiveError) as e:
         live.keypair()
     assert "not-a-real-secret" not in str(e.value)
+
+
+def test_recovery_phrase_matches_phantom_account_1(monkeypatch):
+    # Δημόσιο δοκιμαστικό mnemonic (BIP39 test vector) → γνωστή διεύθυνση Phantom "Account 1"
+    m = "abandon " * 11 + "about"
+    monkeypatch.setenv("SOLANA_PRIVATE_KEY", m)
+    monkeypatch.setattr(live, "_kp", None)
+    assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
