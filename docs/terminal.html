@@ -55,7 +55,29 @@ legend span{color:var(--dim);font-weight:400}
 .flag small{color:var(--dim);font-weight:400}
 @keyframes pop{from{opacity:0;transform:translate(-50%,-80%)}to{opacity:1;transform:translate(-50%,-100%)}}
 
-/* 2 lanes */
+
+/* 2 trades history */
+.streak{display:flex;gap:3px;flex-wrap:wrap;margin:2px 0 8px}
+.streak i{width:13px;height:13px;border-radius:2px;display:block}
+.streak i.w{background:var(--mint);box-shadow:0 0 6px rgba(74,222,128,.5)} .streak i.l{background:var(--coral);box-shadow:0 0 6px rgba(251,113,133,.45)}
+.hsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:8px}
+.hsum div{border:1px dashed var(--faint);border-radius:4px;padding:5px 7px}
+.hsum b{display:block;font-size:15px}
+.hsum span{color:var(--dim);font-size:10.5px}
+.hf{display:flex;gap:6px;margin-bottom:6px}
+.hf button{all:unset;cursor:pointer;padding:3px 9px;border:1px solid var(--faint);border-radius:3px;color:var(--dim);font:500 11px var(--mono)}
+.hf button.on{border-color:var(--ink);color:var(--ink)}
+.hf button:focus-visible{outline:1px solid var(--mint)}
+.trow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--faint)}
+.trow:first-child{border-top:0}
+.trow .k{font-weight:800;font-size:10.5px;padding:1px 5px;border-radius:2px}
+.trow .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow .sb{color:var(--dim);font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow .r{text-align:right;font-weight:800;font-size:13px;white-space:nowrap}
+.trow .r small{display:block;font-weight:400;font-size:10.5px;color:var(--dim)}
+.hmore{all:unset;cursor:pointer;display:block;width:100%;text-align:center;color:var(--blue);padding:7px 0 0;font:500 11.5px var(--mono)}
+
+/* 3 lanes */
 .lanes{position:relative;height:96px}
 .lanes svg{position:absolute;inset:0;width:100%;height:100%}
 
@@ -116,24 +138,32 @@ legend span{color:var(--dim);font-weight:400}
     <div class="chart" id="chartbox"><svg id="dots"></svg></div>
   </fieldset>
 
-  <fieldset style="--c:#a78bfa"><legend><sup>2</sup>lanes <span>— τελευταίες 9 ώρες</span></legend><span class="tag" id="fills">0 fills</span>
+
+  <fieldset style="--c:#facc15"><legend><sup>2</sup>trades <span>— ιστορικό</span></legend><span class="tag" id="hcount">0</span>
+    <div class="dim" style="font-size:10.5px">τελευταία 20 · παλιότερο → νεότερο</div>
+    <div class="streak" id="streak"></div>
+    <div class="hsum" id="hsum"></div>
+    <div class="hf" id="hf"><button data-f="all" class="on">όλα</button><button data-f="w">κέρδη</button><button data-f="l">ζημιές</button></div>
+    <div id="hist"></div>
+  </fieldset>
+  <fieldset style="--c:#a78bfa"><legend><sup>3</sup>lanes <span>— τελευταίες 9 ώρες</span></legend><span class="tag" id="fills">0 fills</span>
     <div class="lanes"><svg id="lanes"></svg></div>
   </fieldset>
 
   <div class="split">
-    <fieldset style="--c:#f472b6"><legend><sup>3</sup>positions</legend><span class="tag" id="slots">0/4</span>
+    <fieldset style="--c:#f472b6"><legend><sup>4</sup>positions</legend><span class="tag" id="slots">0/4</span>
       <div id="positions"></div>
     </fieldset>
-    <fieldset style="--c:#64748b"><legend><sup>4</sup>analyst</legend><span class="tag" id="armed">armed</span>
+    <fieldset style="--c:#64748b"><legend><sup>5</sup>analyst</legend><span class="tag" id="armed">armed</span>
       <div id="analyst"></div>
     </fieldset>
   </div>
 
-  <fieldset style="--c:#60a5fa"><legend><sup>5</sup>proc <span>— agents</span></legend><span class="tag" id="load">load —</span>
+  <fieldset style="--c:#60a5fa"><legend><sup>6</sup>proc <span>— agents</span></legend><span class="tag" id="load">load —</span>
     <table class="proc"><thead><tr><th>PID</th><th>PROCESS</th><th class="hide">CPU</th><th>STATUS</th></tr></thead><tbody id="proc"></tbody></table>
   </fieldset>
 
-  <fieldset style="--c:#3b82f6"><legend><sup>6</sup>log <span>— tail -f desk.log</span></legend><span class="tag" id="kills">0 skip</span>
+  <fieldset style="--c:#3b82f6"><legend><sup>7</sup>log <span>— tail -f desk.log</span></legend><span class="tag" id="kills">0 skip</span>
     <div class="log" id="log"></div>
   </fieldset>
 
@@ -287,13 +317,42 @@ function renderLog(st){
   $("kills").textContent=`${Object.values(st.stats.rejects||{}).reduce((a,n)=>a+n,0)} skip`;
 }
 
+
+/* 2: trade history */
+let hFilt="all", hAll=false;
+function renderHistory(){
+  const st=ST, c=st.closed;
+  $("hcount").textContent=`${c.length} κλειστά`;
+  const last=c.slice(-20);
+  $("streak").innerHTML=last.map(t=>`<i class="${t.pnl>0?"w":"l"}" title="${esc(short(t.name))} ${usd(t.pnl)}"></i>`).join("")||'<span class="dim">—</span>';
+  const l10=c.slice(-10), w10=l10.filter(t=>t.pnl>0).length, p10=l10.reduce((a,t)=>a+t.pnl,0);
+  const dkey=d=>new Date(d).toLocaleDateString("en-CA",{timeZone:tz}), now=dkey(Date.now());
+  const today=c.filter(t=>dkey(t.exit_time)===now), pt=today.reduce((a,t)=>a+t.pnl,0);
+  let run=0, kind=null; for(let i=c.length-1;i>=0;i--){ const w=c[i].pnl>0; if(kind===null) kind=w; if(w!==kind) break; run++; }
+  $("hsum").innerHTML=
+    `<div><b class="${p10>=0?"mint":"coral"}">${usd(p10)}</b><span>τελευταία 10 · ${w10}/${l10.length} κέρδη</span></div>`+
+    `<div><b class="${pt>=0?"mint":"coral"}">${usd(pt)}</b><span>σήμερα · ${today.length} trades</span></div>`+
+    `<div><b class="${kind?"mint":"coral"}">${run} ${kind?"κέρδη":"ζημιές"}</b><span>σερί τώρα</span></div>`;
+  const list=c.slice().reverse().filter(t=>hFilt==="all"||(hFilt==="w"?t.pnl>0:t.pnl<=0));
+  const show=hAll?list:list.slice(0,15);
+  $("hist").innerHTML=show.map(t=>{ const w=t.pnl>0;
+    return `<div class="trow"><span class="k ${w?"win":"loss"}">${w?"WIN":"LOSS"}</span>
+      <div><div class="nm">${esc(short(t.name))}</div><div class="sb">${fH(t.exit_time)} · ${Math.round(t.hold_min)}m · ${esc(t.reason)}</div></div>
+      <div class="r ${w?"mint":"coral"}">${usd(t.pnl)}<small>${pct(t.pnl_pct)}</small></div></div>`; }).join("")
+    +(list.length>15?`<button class="hmore" id="hmore">${hAll?"λιγότερα":"όλα ("+list.length+")"}</button>`:"")
+    ||'<div class="note">δεν έχει κλείσει trade ακόμα</div>';
+  const b=$("hmore"); if(b) b.onclick=()=>{hAll=!hAll; renderHistory();};
+}
+$("hf").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) return; hFilt=b.dataset.f; hAll=false;
+  for(const x of $("hf").children) x.classList.toggle("on",x===b); if(ST) renderHistory();});
+
 function render(st){
   ST=st;
   const eq=equity(st), pnl=eq-st.start_balance, mult=eq/st.start_balance;
   countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
   $("chg").innerHTML=`<span class="${pnl>=0?"mint":"coral"}">${usd(pnl)} (${pct(100*pnl/st.start_balance)})</span>`;
   $("mult").textContent="x"+mult.toFixed(2); $("mult").className="mult"+(mult<1?" neg":"");
-  drawDots(); drawLanes(); renderPositions(st); renderAnalyst(st); renderProc(st); renderLog(st);
+  drawDots(); renderHistory(); drawLanes(); renderPositions(st); renderAnalyst(st); renderProc(st); renderLog(st);
   $("foot").innerHTML=`εικονικό κεφάλαιο · ${st.closed.length} κλειστά trades · ξεκίνησε ${new Date(st.started_at).toLocaleDateString("el-GR",{timeZone:tz})}<br><a href="index.html">κλασικό dashboard</a> · <a href="https://github.com/${OWNER}/${REPO}">repo</a>`;
   PREV=st; first=false;
 }
