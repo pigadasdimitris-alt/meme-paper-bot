@@ -2,37 +2,8 @@
  "version": 1,
  "started_at": "2026-11-22T16:11:10Z",
  "start_balance": 70.0,
- "balance": 21.55393383270558,
- "positions": [
-  {
-   "id": 11,
-   "pool": "5EFm4Xw3tfYVoPDBKYygFNx9gJR5AxfksftzHo7tVNJc",
-   "name": "OpenIndex / SOL",
-   "mint": "KcARGYt5ygAxbBQCb1CGFVsRNiPYhCtjEieHQvEW1QT",
-   "dex": "pumpswap",
-   "image": "https://assets.geckoterminal.com/afbuiblyco9aqi8xnhrom0yeazwa",
-   "entry_time": "2026-11-22T22:27:11Z",
-   "entry_market": 7.081002205450509e-07,
-   "entry_fill": 7.258027260586771e-07,
-   "qty": 13777848.499278791,
-   "cost": 10.03,
-   "liq_entry": 105970.517,
-   "peak_pct": 21.367359337530644,
-   "stop_pct": 0.0,
-   "last_price": 8.478572451596425e-07,
-   "last_pct": 19.74,
-   "entry_signals": {
-    "liquidity": 105970.517,
-    "fdv": 71448.74609,
-    "vol_m5": 113367.622051783,
-    "pc_m5": 2.73,
-    "buyers_m5": 89,
-    "buys_h1": 2262,
-    "sells_h1": 1336
-   },
-   "liq_low": 0
-  }
- ],
+ "balance": 32.91354128871038,
+ "positions": [],
  "closed": [
   {
    "id": 2,
@@ -392,6 +363,42 @@
    "reason": "λήξη χρόνου",
    "hold_min": 60.1,
    "exit_liq": 113944
+  },
+  {
+   "id": 11,
+   "pool": "5EFm4Xw3tfYVoPDBKYygFNx9gJR5AxfksftzHo7tVNJc",
+   "name": "OpenIndex / SOL",
+   "mint": "KcARGYt5ygAxbBQCb1CGFVsRNiPYhCtjEieHQvEW1QT",
+   "dex": "pumpswap",
+   "image": "https://assets.geckoterminal.com/afbuiblyco9aqi8xnhrom0yeazwa",
+   "entry_time": "2026-11-22T22:27:11Z",
+   "entry_market": 7.081002205450509e-07,
+   "entry_fill": 7.258027260586771e-07,
+   "qty": 13777848.499278791,
+   "cost": 10.03,
+   "liq_entry": 105970.517,
+   "peak_pct": 21.367359337530644,
+   "stop_pct": 0.0,
+   "last_price": 8.478572451596425e-07,
+   "last_pct": 19.74,
+   "entry_signals": {
+    "liquidity": 105970.517,
+    "fdv": 71448.74609,
+    "vol_m5": 113367.622051783,
+    "pc_m5": 2.73,
+    "buyers_m5": 89,
+    "buys_h1": 2262,
+    "sells_h1": 1336
+   },
+   "liq_low": 0,
+   "exit_time": "2026-11-22T23:27:44Z",
+   "exit_market": 8.478572451596425e-07,
+   "proceeds": 11.3596,
+   "pnl": 1.3296,
+   "pnl_pct": 13.26,
+   "reason": "λήξη χρόνου",
+   "hold_min": 60.6,
+   "exit_liq": 127630
   }
  ],
  "seen": {
@@ -404,24 +411,25 @@
  },
  "daily": {
   "date": "2026-11-23",
-  "realized": -21.502753393959814,
+  "realized": -20.17314593795502,
   "entries": 6,
   "halted": true
  },
  "stats": {
-  "scans": 290,
-  "pools_checked": 29994,
+  "scans": 292,
+  "pools_checked": 30203,
   "rejects": {
-   "πολύ παλιό": 242,
-   "χαμηλή ρευστότητα": 1114,
+   "πολύ παλιό": 241,
+   "χαμηλή ρευστότητα": 1111,
    "λίγοι αγοραστές": 1,
-   "χωρίς ορμή": 28,
-   "χαμηλός όγκος 5'": 73,
+   "χωρίς ορμή": 26,
+   "χαμηλός όγκος 5'": 72,
    "FDV εκτός ορίων": 151,
-   "πολλές πωλήσεις": 21,
-   "πολύ καινούργιο": 134,
-   "όριο ημερήσιας ζημιάς": 5,
-   "ήδη εκτοξευμένο": 9
+   "πολλές πωλήσεις": 20,
+   "πολύ καινούργιο": 135,
+   "όριο ημερήσιας ζημιάς": 7,
+   "ήδη εκτοξευμένο": 11,
+   "όνομα που έκανε rug": 1
   }
  },
  "equity_history": [
@@ -1584,6 +1592,14 @@
   [
    "2026-11-22T23:27:32Z",
    32.9135
+  ],
+  [
+   "2026-11-22T23:29:06Z",
+   32.9135
+  ],
+  [
+   "2026-11-22T23:30:29Z",
+   32.9135
   ]
  ],
  "log": [
@@ -1678,29 +1694,18 @@
   {
    "t": "2026-11-22T23:04:32Z",
    "msg": "ΠΩΛΗΣΗ #10 Wojak / SOL — λήξη χρόνου — -0.05$"
+  },
+  {
+   "t": "2026-11-22T23:27:44Z",
+   "msg": "ΠΩΛΗΣΗ #11 OpenIndex / SOL — λήξη χρόνου — +1.33$"
   }
  ],
- "last_run": "2026-11-22T23:27:32Z",
+ "last_run": "2026-11-22T23:30:29Z",
  "next_id": 12,
  "epoch": "2026-11-22-honest-rugs",
  "watch": {
-  "HqX2BCaoxeYGjmjzBT77K7vrrbPhDjeSZ3Vo4e8QPDHP": "2026-11-22T21:26:53Z",
-  "qtmnnkhZh5oaZ3qQx3aGMD4N75BEbZnYepvR2gHXiuk": "2026-11-22T21:26:51Z",
-  "HtPBpmPK7WB486SLhZD28XvWaSho2PSeTK7BotmotpMp": "2026-11-22T21:26:50Z",
-  "tAVpGeGEtoc88Gxkb9GfpusRdjGRb9vdtNURnaRCT6k": "2026-11-22T21:28:05Z",
-  "AffSiSihMdqzNYPJGj26KgWceGp8XcFfUedCGGMrCTeK": "2026-11-22T21:27:38Z",
-  "BtfsNTioWNARxhq8FTuo2HsZs7ukWzkcF65NYgjcF74U": "2026-11-22T21:27:32Z",
-  "7r8ezLP3oc8FFU6ziRHGHsRJSY9QA3WnFvq6CnkCkGRo": "2026-11-22T21:27:26Z",
   "3SuLggJveQE6fbh9XsBrFd2MhW38CKj2uJyaLHRuFuE4": "2026-11-22T21:29:54Z",
   "PTL7tT5T34K5YG31c7T17Ncqt9hyK2NNrcsri9wT6d3": "2026-11-22T21:29:45Z",
-  "Ee4JPh3mRgpcS6n6JHLtTv2QQsKNf9kY2M7XwksLpbSL": "2026-11-22T21:29:11Z",
-  "7YMnUJARQVCrDcpVJb1bz8bVNYFBi9Qsnr4PptzJ2eip": "2026-11-22T21:29:10Z",
-  "72ecg4A6Cg21ey4yNxGbB2vv4GkkyUXCd4iDBsqs7Zqv": "2026-11-22T21:29:07Z",
-  "H5f6PWkEVAydXix6LSNZQLwvNFfqxvNYY5Ej3qGNGAMa": "2026-11-22T21:29:03Z",
-  "GU8r1ucZnF7k9ukpj5LsEjpwZ3iocVod983tsdmzPVND": "2026-11-22T21:28:58Z",
-  "9cN9GHLBuhu9ECcD4Bbbv9tQCYhujDC3qoz326NyPREi": "2026-11-22T21:28:58Z",
-  "7zyApChRNLcWDVvZa3QdkxhgfnnBckCaSFkSG1v6gPT5": "2026-11-22T21:28:56Z",
-  "AUfC18HjxE4d6jiAh1ZM5ypTe4ZqnLom698b3YFbAxE": "2026-11-22T21:28:52Z",
   "42mVPGVZGUgZY25oRtNQy5mKhXL2ffqYEzx3GVGoL9ni": "2026-11-22T21:30:26Z",
   "7yJDP2VmgazVEa6usbXM61uSk5AT3J4dZFaJQvq2LnfZ": "2026-11-22T21:30:22Z",
   "7LwzKYLwUb21CE18NvsLvZPGcmCqyhm8jxzx1tzW3541": "2026-11-22T21:30:16Z",
@@ -1987,7 +1992,17 @@
   "DFrWuNnvqAgdC3SmLc4VRKdKc7gBbyz81SdoXWRA4yuK": "2026-11-22T23:22:57Z",
   "DSY3WcG85dkzDq12h6LeTuaquKoVeSFCcnjMGgnT6SMA": "2026-11-22T23:24:17Z",
   "Ftgq7NnEFdDxgD5h4GpJvDKWmhraYpTPttWuQaCpEAeu": "2026-11-22T23:24:03Z",
-  "H9spT1wRm46gFggofzSPY4bJWizuGAri1rtBBPQ5kfjV": "2026-11-22T23:23:13Z"
+  "H9spT1wRm46gFggofzSPY4bJWizuGAri1rtBBPQ5kfjV": "2026-11-22T23:23:13Z",
+  "6DXNBdsHUmgG2EtWmEarZA71nQJXH5MsRjxxMQrSUd7o": "2026-11-22T23:27:05Z",
+  "ELhLF7rDPRuHdrZmE5FtViv8YFPFLGkz6cEcbzCmgvjV": "2026-11-22T23:27:04Z",
+  "J8XVrawiYDVZBv9CUzHwDD9AMvwoH1QgfrMbYHBSJWfB": "2026-11-22T23:26:42Z",
+  "FiJN3Uu8VP49nd11tp3dsBr3i8dav9C6hRT3N8xTa3s8": "2026-11-22T23:28:28Z",
+  "HDYBi5AcG4GLD4raDmK9spyhEKwAHCiZy6ttcyzdNeG1": "2026-11-22T23:28:10Z",
+  "G2zaWa9DkP2qqoAcjdWypp1va6BB9Cf99mRxdT765oXD": "2026-11-22T23:27:59Z",
+  "4kLFqTXunH4FXsoh8rt7GQuCgKogmoNkUEtTQxNq9Ydz": "2026-11-22T23:27:40Z",
+  "BrSaj2iHGuM19tc4RAn73xDUUvfZZ12Ve1CuEhg6c1kU": "2026-11-22T23:27:37Z",
+  "9Cxruzh55psUccXLfsHdvmQFCyZpmR9bn8bW1njUampc": "2026-11-22T23:27:33Z",
+  "Cnu7qRdfneW1c6m5FHHwbLEtDc1pgSa3oCawyaLGSihN": "2026-11-22T23:27:19Z"
  },
  "reasons": {
   "BofA2ViUSudPBTUms2KRuG6AHNeMawjNfwqTJDgx5BKW": [
@@ -2010,15 +2025,15 @@
   ],
   "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "FIONA / SOL",
-   118600
+   119729
   ],
   "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "CLAUDIA / SOL",
-   462012
+   466170
   ],
   "45ssPkUQs1ssbeDqxD2mZrMdJYAXF7GyQyhS5xDXuWC5": [
    "πολύ παλιό",
@@ -2052,9 +2067,9 @@
   ],
   "2uF4Xh61rDwxnG9woyxsVQP7zuA6kLFpb3NvnRQeoiSd": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "PUMP / USDC",
-   18135951
+   18128483
   ],
   "GZ6zUqpbwrCdFbL9asPyaHdmYk3fNpv1aM719rYLMYZF": [
    "πολύ παλιό",
@@ -2106,9 +2121,9 @@
   ],
   "DChXQ4qFPpNPEDfZLNiwvPhrVuuFGfqEDLAAZbiZHUWf": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DCTY / TTWO",
-   232707
+   231998
   ],
   "2Snq2MMRBTUauieSqhDKjTTG7fWwaCoNrqJ3FuQCbRyp": [
    "πολύ παλιό",
@@ -2118,27 +2133,27 @@
   ],
   "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "mihao / SOL",
-   342411
+   341924
   ],
   "9m6cYJ8dd26Smzh35qDvFjkyqvMWYw1CwG5R5F7xWg9Q": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / SOL",
-   2821003
+   2823814
   ],
   "44mfbdBRUZQBaFW7PGRKyqGDroEHnp6eLvTCk1bCxbcC": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "MCAT / SOL",
-   7986
+   8007
   ],
   "51V5bAPGaz3vj4SiJeoLGNzAQNxGr4Vps8gSBKmSZx71": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / SOL",
-   62486
+   63087
   ],
   "58fzJMbX5PatnfJPqWWsqkVFPRKptkbb5r2vCw4Qq3z9": [
    "πολύ παλιό",
@@ -2160,9 +2175,9 @@
   ],
   "3mxDjdZ1gAe5HziC4dj4UnLdXJ5DBcC9jsSYq55mFyKg": [
    "πολύ παλιό",
-   "2026-11-22T23:25:59Z",
+   "2026-11-22T23:30:29Z",
    "DIGS / SOL",
-   51031
+   50685
   ],
   "2QDGj5BWMSNyEfmyDFx7eEvWWm4KujUPJ38Xdkntvxtd": [
    "πολύ παλιό",
@@ -2172,9 +2187,9 @@
   ],
   "4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "TROLL / SOL",
-   1841157
+   1843967
   ],
   "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza": [
    "πολύ παλιό",
@@ -2250,9 +2265,9 @@
   ],
   "Eoe22HdCa9rhtBwKL6nNZmZxfuzF35xkxobcvfaF1vWQ": [
    "πολύ παλιό",
-   "2026-11-22T20:37:10Z",
+   "2026-11-22T23:30:29Z",
    "Max / SOL",
-   92373
+   89869
   ],
   "5BQCndqT4ZHv4PDqVX4kXD2rZNLfDb64akKd1ATrVwsz": [
    "πολύ παλιό",
@@ -2310,9 +2325,9 @@
   ],
   "GTHKH8s82ZR8GTSFZ1dUu6wfdxhy59wpMShxzG5zjiPm": [
    "πολύ παλιό",
-   "2026-11-22T23:25:59Z",
+   "2026-11-22T23:30:29Z",
    "ZEC / USDC",
-   2789068
+   2791439
   ],
   "J9nukp72M3TG6TNjKqVy4zVoK5s9JsDB8AWc2Ncqdf5S": [
    "χαμηλή ρευστότητα",
@@ -2325,12 +2340,6 @@
    "2026-11-22T18:33:53Z",
    "Koop / SOL",
    222291
-  ],
-  "ENEetdzKzRKXcmR4M4x7nKom8hCiCDXi7owxKDhT2gN3": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "Star / SOL",
-   0
   ],
   "CW9iSt8pzkGT1G4N1GP1PAX4J7WFzAXvZywRF72ephiR": [
    "λίγοι αγοραστές",
@@ -2370,15 +2379,15 @@
   ],
   "CGYxcqLiJEoYapZrU7uVGBGfEE15pXDV4mB9AQ8Fsuff": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "tKalshi / USDC",
-   813755
+   812673
   ],
   "3ndjN1nJVUKGrJBc1hhVpER6kWTZKHdyDrPyCJyX3CXK": [
    "πολύ παλιό",
-   "2026-11-22T23:25:59Z",
+   "2026-11-22T23:30:29Z",
    "KMNO / USDC",
-   1422666
+   1422294
   ],
   "6oQ9wVex4mKZti2GsGCfD8FWTMMC9PLQkztRU5cd6MK8": [
    "πολύ παλιό",
@@ -2463,42 +2472,6 @@
    "2026-11-22T21:27:35Z",
    "攀豹豹 / SOL",
    29449
-  ],
-  "3whmnMZdBQct4CfFXCmmboARfUXYWcdedsMNfzvT2eck": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:29:31Z",
-   "CGT / SOL",
-   0
-  ],
-  "4XhkVAV3rVFJL2ryWPHzDBD1psdVJbs5iGTAp7Fpb8iF": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "CGT / SOL",
-   13450
-  ],
-  "3UjVc89a9PbgyjGiVTohd6e1Vkx7cvHBusUzQWseKVt6": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "CGT / SOL",
-   0
-  ],
-  "4X2fww7JpjUvzSG3n2nkJnqjKW91CcoiRh5kJdGjGTK8": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "ANTHROPIC / SOL",
-   0
-  ],
-  "5j1V9Qx7EtecFeHtXeTP1WhbF3PkFyGJztkcXTbXwpww": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "poorcat / SOL",
-   0
-  ],
-  "FV3kcwXz9CGvSKFUfGs1TxzgUajXrN7LMrPUQoprWXYW": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "Rockstar / SOL",
-   4
   ],
   "TrkR2KpXwUzLF28Q6xjiqYkH7bhSc9z59zg2U8Q1CrW": [
    "χαμηλή ρευστότητα",
@@ -2643,12 +2616,6 @@
    "2026-11-22T17:42:04Z",
    "SHMUBA / SOL",
    0
-  ],
-  "c9K4i27CTgo9rmjrrj9LmJgddTZYpJYZp79JRodJjrW": [
-   "FDV εκτός ορίων",
-   "2026-11-22T17:28:07Z",
-   "Cyberleek / SOL",
-   37272
   ],
   "2Qb26xWvhzQZDyEHuhjPHzDZu9EZFSaqUY1o1sFx2Kaa": [
    "χαμηλή ρευστότητα",
@@ -2860,12 +2827,6 @@
    "mimi / SOL",
    19459
   ],
-  "Co6mnFXr1N6LoHxsuS2VN4tXwMAYX6qK86ErWpx3DXAe": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "Cyberleek / SOL",
-   0
-  ],
   "4t4eGZzN94s4iCkaofxyRoqm48FZrtCTvHz69yjeoMAB": [
    "χαμηλή ρευστότητα",
    "2026-11-22T17:35:06Z",
@@ -2877,12 +2838,6 @@
    "2026-11-22T22:12:47Z",
    "Bonk / USDC",
    186958
-  ],
-  "3zFa6REAgyj3f4fVBzc5Y2C8FdP6rohfLPfMN2sJGLcg": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "Cyberleek / SOL",
-   0
   ],
   "EuXverf1Fa9G53gQcov42tS9eGJgrgjvqmKU8vwyKGDp": [
    "FDV εκτός ορίων",
@@ -2922,9 +2877,9 @@
   ],
   "9pqo6WVjKvYNnRgvPVaoTe1zZvnhtB248ChKnUmKfHH4": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "MCAT / SOL",
-   115710
+   120519
   ],
   "7gkB2D1SqhUYgKrSpDU5cma4tK9efijHouYituABdJcG": [
    "πολύ παλιό",
@@ -2968,12 +2923,6 @@
    "INUMORTAL / SOL",
    1656
   ],
-  "AJ5LtEuXKPTMc6SHQG8acVDdEPgRaipUpE44s8TaMWs": [
-   "πολύ παλιό",
-   "2026-11-22T17:28:07Z",
-   "RIEMANN / SOL",
-   87831
-  ],
   "4s4Sey5XWwEFocz6NRTXTbuwKhg2Jrs8AN6CNLbVxfhC": [
    "πολύ παλιό",
    "2026-11-22T17:39:17Z",
@@ -2986,23 +2935,11 @@
    "TREMP / SOL",
    0
   ],
-  "65mVnvLRSFVnUiTmRZqrhw4Jug5yn4ExogXYtkJX82XQ": [
-   "χαμηλή ρευστότητα",
-   "2026-11-22T17:28:07Z",
-   "1NU / SOL",
-   1
-  ],
   "EwDPVrKFketYsU48MBzFBeQw4ypjvkfMAfzih3gQiSLg": [
    "FDV εκτός ορίων",
    "2026-11-22T17:39:17Z",
    "MCAT / SOL",
    34408
-  ],
-  "2rvGfFMWVVyp2doAHFvHzpU6riZqEUtAcEktKBw8XVNq": [
-   "πολύ παλιό",
-   "2026-11-22T17:28:07Z",
-   "LLY / USDC",
-   8263
   ],
   "KksmWd9NZjsp7Mk3kiaWMRA1yEEmogthqvsCY5L6B5m": [
    "πολύ παλιό",
@@ -3063,12 +3000,6 @@
    "2026-11-22T17:30:54Z",
    "LUKE / SOL",
    0
-  ],
-  "AaRreBnhtMRbSFRRQ16nTDA8EhayppxmD612MSQR2geF": [
-   "πολύ καινούργιο",
-   "2026-11-22T17:29:31Z",
-   "MCAT / SOL",
-   35567
   ],
   "HcwRfpyPirjkZgwCgrRvZqZJUaANYNRj28oQgLRr1EU": [
    "χαμηλή ρευστότητα",
@@ -3828,9 +3759,9 @@
   ],
   "4X1SAtTgzqfyRDu237HxJLtSfTosMHe9EuXNPvRfFbjc": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "OpenIndex / SOL",
-   36570
+   36898
   ],
   "CZPiRjkLNgcd9enqTEqg2LQFKX9xqanZomWRb57dToRV": [
    "χαμηλή ρευστότητα",
@@ -4182,9 +4113,9 @@
   ],
   "B4VFURUHHzyt8YzBGBV9jiarBvjh1EbMAbRNBnNqaxUD": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "SI / NVDAx",
-   296374
+   296435
   ],
   "Doi8csSttYdjW6eCfJLvtLALqxGkHyitfTLTxbjwEJHk": [
    "χαμηλή ρευστότητα",
@@ -9252,9 +9183,9 @@
   ],
   "3peugE6Fm4fpaVvrV2KBFN3nvLbCGEhGoUXDDxAHuscR": [
    "πολύ παλιό",
-   "2026-11-22T23:19:14Z",
+   "2026-11-22T23:30:29Z",
    "SIDOOR / SOL",
-   33500
+   37425
   ],
   "CgDMsMgLRCW9fCpU9AcKu2UqzxoSUsiLGJPR7zpqquNX": [
    "χαμηλή ρευστότητα",
@@ -9947,10 +9878,10 @@
    0
   ],
   "7yJDP2VmgazVEa6usbXM61uSk5AT3J4dZFaJQvq2LnfZ": [
-   "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "πολύ παλιό",
+   "2026-11-22T23:30:29Z",
    "MINELIUS / SOL",
-   204694
+   197569
   ],
   "42mVPGVZGUgZY25oRtNQy5mKhXL2ffqYEzx3GVGoL9ni": [
    "χαμηλή ρευστότητα",
@@ -10307,10 +10238,10 @@
    0
   ],
   "DXVpx5PnefCiLVMucmUxrX2x7MgSDMTggmQgiRA2zV6W": [
-   "χαμηλός όγκος 5'",
-   "2026-11-22T23:27:32Z",
+   "χωρίς ορμή",
+   "2026-11-22T23:30:29Z",
    "FSDV15 / SOL",
-   106832
+   107784
   ],
   "AY3jWDnUV4q5LDmLR7bAKcSpXBNsctT4jDbVXWg9Px4E": [
    "χαμηλή ρευστότητα",
@@ -11526,9 +11457,9 @@
   ],
   "GoqdZQCt24c3WHLeuiz1dD1Lh38fzWLuZmdyxVk5i1a3": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / ZOL",
-   42781
+   40556
   ],
   "7iFfueo39dekV2tUTV5jYQvkSCQafYcrWzCGadArgRi": [
    "FDV εκτός ορίων",
@@ -11562,9 +11493,9 @@
   ],
   "2YhArf6uVwnaLaMYLKhDmwe77sh6UaXitQSqeUY44oTf": [
    "χωρίς ορμή",
-   "2026-11-22T23:01:22Z",
+   "2026-11-22T23:30:29Z",
    "XMAS / SOL",
-   20228
+   20914
   ],
   "3L9adH19SrTbxPnBKnFHVbCWdaCtnVHiwHfaRLS9avEC": [
    "χαμηλή ρευστότητα",
@@ -11616,9 +11547,9 @@
   ],
   "HNEiXeGESQuBU3yGPBnpv4RoDoGWWAHJEq7zZvBi8z7G": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / JupSOL",
-   12708
+   12892
   ],
   "2XQdy6ASEh9jyQv4VwHwNJiHDw61Qx5G8a3NEbbXuWnF": [
    "χαμηλή ρευστότητα",
@@ -11700,9 +11631,9 @@
   ],
   "58nMz19coFNTJWghuemQhTq84PE5xbVDZmBFdArmXrsU": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   18701
+   20682
   ],
   "Aq5Cf6v14pvD1vnCeW2jirXfUoWh3ZSNhVKUeMczLPwT": [
    "πολύ παλιό",
@@ -11754,9 +11685,9 @@
   ],
   "6a7EnjAoiRBbminKkWPdytMFFf5ogjLutqwpvAVyZ89j": [
    "πολύ παλιό",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / SOL",
-   5075
+   5106
   ],
   "9RwEncifGSQLGUvBv1Sm2CBnEVf4yLsu9PTd9h5EZqQn": [
    "πολύ καινούργιο",
@@ -11976,9 +11907,9 @@
   ],
   "CX8km6AYJwvzfnjHwYVxc51V8LGvJc1kiXefiLK1UYXd": [
    "πολλές πωλήσεις",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / hSOL",
-   36612
+   19787
   ],
   "21BTgDU68MnLTGJFg4zsnxAYFYBu1yfyXfYZhK7a7M8m": [
    "χαμηλός όγκος 5'",
@@ -12000,9 +11931,9 @@
   ],
   "Gmgsg54H5Hd77UwrszGwqo5J1V3Hq5mxiRPELq3fgn1o": [
    "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   115969
+   118162
   ],
   "BCksdqVorAgbVYKvVtpFtcdLRhVgo935RWt2tNY49DgT": [
    "FDV εκτός ορίων",
@@ -12060,9 +11991,9 @@
   ],
   "BE5ZWBk2yMaDb1BEQ4AcX55vKatgazbngNULGxGrSnen": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Inucrypted / SOL",
-   21150
+   21137
   ],
   "5etUfxxRELpUk64W44qfHzXZGnvDgQaNqzKrgQNURE79": [
    "χαμηλή ρευστότητα",
@@ -12102,15 +12033,15 @@
   ],
   "F6FqJqMBi11pNZHNH4GctbY5Awyg8muCb6yhVJoftLLQ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "5Lu6kYtNFZJ96UtbT8CpT6JmpEJrnZrZMaxviuS6xH7j": [
-   "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "όριο ημερήσιας ζημιάς",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   116072
+   122457
   ],
   "D22JCENefLxvauFJxrWhYyg8K1m9DpMizjkJZFfsiwk": [
    "FDV εκτός ορίων",
@@ -12120,9 +12051,9 @@
   ],
   "Cw6igNMWHuRqEbCUC936WnCPD6nY4uDdL2ag196ne61j": [
    "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "HELLO / SOL",
-   181591
+   183617
   ],
   "65krxMhzp1tCjszDzB3dsDxQUJdizpqrDjt8qwLQYKwU": [
    "χαμηλή ρευστότητα",
@@ -12138,19 +12069,19 @@
   ],
   "3vZAxzUzxQLgPH3ALUkViCGkZWTz4VbPRgVfnP8Ki3av": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "OFFICIAL / SOL",
    0
   ],
   "9wQkPThcL6uSLDEW2byKUzgXhow7ERE6jJR65h7uNgUb": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZCAT / SOL",
-   40279
+   40255
   ],
   "ChgTvrTPRpaxSsPxhDKp7PGgzhbLCQL1LsySSgt4xo1X": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
@@ -12162,19 +12093,19 @@
   ],
   "Dq8zFbaxX5rGdGW4LvssR7xkQc8EPXoAmz2ZCXqDdMFP": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "SAKURA / SOL",
-   37303
+   37291
   ],
   "8oi6FZk2xBETdcKuMbg3XJmCYBUgE6xhahL5pnUKfsdJ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "OpenIndex / SOL",
    6
   ],
   "7Qrbu8xwvwxghoLjcGDPoLmqgRvmvzHdJEzN7GUE4Yui": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:29:06Z",
    "Cocat / SOL",
    6828
   ],
@@ -12192,13 +12123,13 @@
   ],
   "BtyqNHXmfGp6qJmDjcUzjLCLtPNheAfukECdwkR9rkDR": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "zCAT / SOL",
    0
   ],
   "9WzXfFFjWLzmLhQ78CtwhBkUuyj5U1XuRibBmuXicTs2": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "HI / SOL",
    0
   ],
@@ -12228,37 +12159,37 @@
   ],
   "2Qj9bcbx7sNCFoW4LDBfZrCfDXVjG7HtVrn7CFjZ8XCn": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ADYTUM / SOL",
-   47537
+   39769
   ],
   "8Y3f6V5seYBK3m8gokUPXgttZy3FVsTw61RG4fxFJFU": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZCAT / SOL",
    0
   ],
   "CjCs87gNKQYPdzEyE99RfZ6jeJ6py7oQpCyhSJzis8y5": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / ZOL",
-   5884
+   5596
   ],
   "Fg9oUbAMN7fewJHVx9PpTqAgVUWmxAC68Brytq48MpXH": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZCAT / SOL",
    0
   ],
   "95n6TD9AAW9A1iApa7dmy2LcsT13qyUEQxyJY3tUft1q": [
-   "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "όριο ημερήσιας ζημιάς",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   100280
+   103136
   ],
   "FGtfoATNai6B8hcex4hV7AJSaryaVMTMbFM2cRGjd6eQ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZCAT / SOL",
    0
   ],
@@ -12306,45 +12237,45 @@
   ],
   "9SE6bBwvsDqjsphfgvrDuCZrExLMEpmyQiyqJTAoaWQD": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZI / SOL",
    0
   ],
   "E5D8eJF7v8eXeLV3aiQ6dseRSpvHnepLvyQsFLWmA5qF": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   14317
+   14312
   ],
   "Cp2qW3b655XZu5DnCcRRLfSdeHXRx83emZojVGwfzeVd": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "COCKROACH / SOL",
    0
   ],
   "BfcphF5x5NB35aJ61zoBZZ61djonvz7K6dwuVrX21oPU": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "PCAT / SOL",
    0
   ],
   "5Bk4U4ECsNkbpnm8fsnBEW37BYL4tQvDTTaNL2FKiGwo": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "BAYOU / SOL",
-   13813
+   13804
   ],
   "6HxnWZ7tjsBxmkSi2xaQCX2xhgWun4BDunxcECuviJKE": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "JDi3ery3K2r3QAWD3v4cziQVorA86zYKxPWbvsNB7gZJ": [
    "χαμηλός όγκος 5'",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   16146
+   17380
   ],
   "5NKwZv54t5Vj2T4CAykzQaDFpQhRAKpQBwrnpbkVz1gp": [
    "χαμηλή ρευστότητα",
@@ -12360,9 +12291,9 @@
   ],
   "HYhVu2ExfFFXmfc3jTbFERZ2RrKFfdhusPtUhqWX9ndX": [
    "χαμηλός όγκος 5'",
-   "2026-11-22T23:25:59Z",
+   "2026-11-22T23:30:29Z",
    "Rockstar / SOL",
-   15656
+   16308
   ],
   "9QBm4meypfBYUGTHYZpHcGXWn13pNGq3TeDMfwSAt18t": [
    "πολλές πωλήσεις",
@@ -12372,13 +12303,13 @@
   ],
   "86pYLy43mXcZBvinJfsb1nCYhoBPb6XcSAYMbPkSxHQi": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ENCRYPT / SOL",
    0
   ],
   "J5FhBEcSY3E5xLdQs21SQzkQ6fK7AwVGdzfEnu9SWSNL": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "JTR / SOL",
    34
   ],
@@ -12390,27 +12321,27 @@
   ],
   "9BsDvcLxinKdkcQciHzCv17E7EVLitoXBZSd2Autxb1Y": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "7JTaYq15bYF4MQxHnnaU7ff1yEHRTBW3a3YpvtxsgvTB": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "‮LOZ / SOL",
    0
   ],
   "3DB1FERooQ5kCsQEQ8Tt3cFHAFq39vRXHt2JED7amz45": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "cCAT / hSOL",
    0
   ],
   "H9braykr5Qk96yDe7xGRPupZyyFWeNtyC8zybmPEtsYh": [
    "ήδη εκτοξευμένο",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   49383
+   56536
   ],
   "78QBVQz3EnpuzmY42LRcCkn7gSyuFEMmQn1m5bY1yHgw": [
    "πολύ παλιό",
@@ -12426,27 +12357,27 @@
   ],
   "BxcJcz9sY9BMo7HP2d91rY85pjwu7LigdLCz1K9oK3VC": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "AxiomCoin / SOL",
    0
   ],
   "C7LVprAwzNeZLHc2YawMfbnu56eAJMhFDLKexv1FVJcz": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "Ekvgsu4N2FiSr9kvxvFQewfWstFpPYmyQ3ZuuC7FTrf4": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   18964
+   18958
   ],
   "3jAXscrWSiqPp4hpSXiH1RvKPomVq4xgCeqE5XLYKWvy": [
-   "πολλές πωλήσεις",
-   "2026-11-22T23:27:32Z",
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
    "CCAT / SOL",
-   22194
+   0
   ],
   "7mbHMpgEjaYretVUd1xb5X4a41XqgmNq4y499oTUF9dU": [
    "χαμηλή ρευστότητα",
@@ -12456,63 +12387,63 @@
   ],
   "7KaMd3HDcFQrYRcSwBcFqRbd8CjjCAUaSf3z2MiQUt6o": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "PYTHON / SOL",
-   7946
+   7943
   ],
   "4Xma6ktxTmJDtskRwSxEsEAK9uJKd1tFTvRY4hk4mJmx": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / CCAT",
-   10471
+   10053
   ],
   "3xt2HWcPWonhTr3uVnsxSWzhQCEJBN3ydHUTrRUqsbhe": [
    "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "AxiomCoin / SOL",
-   65162
+   65711
   ],
   "J2UUhb2Yu6Y15GzFH6yLQKDQf5L5QBsWWegYYyhcPzVH": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
    0
   ],
   "96G1XPkhDtSS6rcCgECG5rysDkUULP34thNkxbJ1MzRh": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "8USiDXx11XK9hXenzeQcbrUzJHfhvVdWdPL4XSjQGhVJ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "GbmNLL988v5dbxfpjaoYjN9R7kvPPoSHxUHoFCAyzPVR": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "FOAM / SOL",
    0
   ],
   "Hsu6ricUzJwokqi7bCGrfqGmeeoiBfPrEUMunBtLuroT": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   21033
+   21021
   ],
   "2c57ZfEtUYxSWrz1mcShvJj1cmoA2U3FSW2Qf3vmXdVU": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   34855
+   34843
   ],
   "7pvomamUxf8fF2umozkxxARBpKebhkBUzuJ4oRGFMNuh": [
-   "πολύ καινούργιο",
-   "2026-11-22T23:22:42Z",
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:29:06Z",
    "DATALOOM / SOL",
-   29144
+   0
   ],
   "4s8CAbVgaDHoPkkbitjdQZ4TfqXKuczHWdfy8HLVUbdQ": [
    "πολύ παλιό",
@@ -12522,45 +12453,45 @@
   ],
   "Ca5AuU9APVnLCYMbM7ovZDffF3E73Qu9G31M9thyegQj": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Solar / hSOL",
-   3257
+   3009
   ],
   "Co5Xb4CKwVwkYhn6KzaTKcVBCRPhkgKmkTK9bUxKNJuJ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "PRIVI / SOL",
    0
   ],
   "E8MYQPaYrTF9PRb4A8G2Pc83Nn7YjKA6vYbtMS3cg4Lf": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Zolana / SOL",
-   6748
+   6745
   ],
   "ScdAkLwoHKKs5xvnv1KvqPXKhpcKqeT2hteNvQZLTfY": [
-   "πολύ καινούργιο",
-   "2026-11-22T23:24:15Z",
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   21925
+   0
   ],
   "4HRguGmPhnMGEjSQBeuJKJgWVMb9jjusYRAmYqcuiu4S": [
-   "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "FDV εκτός ορίων",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   41063
+   27794
   ],
   "2tUFCxmeUqWVafrcobF5FQH3WC8S3FrhqPa8ud641zxZ": [
    "πολλές πωλήσεις",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Rockstar / SOL",
-   16559
+   18716
   ],
   "6YprbWLvKC5jg4LVsLz1hUE6raor9jAQNHn8AWpJizrg": [
-   "πολύ καινούργιο",
-   "2026-11-22T23:27:32Z",
+   "ήδη εκτοξευμένο",
+   "2026-11-22T23:30:29Z",
    "LOAF / SOL",
-   75906
+   79336
   ],
   "zDJHTtZYomrSkvz6e1R7PqFBFG1DoVgWhpfsyQpjLz4": [
    "χαμηλή ρευστότητα",
@@ -12570,7 +12501,7 @@
   ],
   "HY72obN7FiLCrdtRAJbUMGLHcCbB8uf1bPgtRR4iwg3f": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "NEO / SOL",
    128
   ],
@@ -12582,81 +12513,81 @@
   ],
   "DHWQ5qFtppujWSbM3sZ8YAdD214qBY1L2yEqmnRzHsnJ": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:29:06Z",
    "PairRing / SOL",
    0
   ],
   "D6khfaqrBQF2zWS2zxJjEijqwhEnkCCVikami6XZ36H2": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   12978
+   13344
   ],
   "FLyFEkiycLkJFGTc2NizUMrayisCzqw7xWRLhufgHVyt": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "HEJAK / SOL",
    0
   ],
   "E1YX339sPbYpSaZhU7fX9nr8krN8ch7dCBniWaUzAXA1": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "BEARCAT / SOL",
-   13825
+   13819
   ],
   "2Z7P2ZsWuq2dFN9HMnEkhAY6ozXNbA7X6BvfNZxed9zt": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "SAKURA / SOL",
    0
   ],
   "1JpN1diTNtJZtjVMdp6vcQcDLDMuspg4sFP5EQpf6KB": [
-   "πολύ καινούργιο",
-   "2026-11-22T23:27:32Z",
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
    "DATALOOM / SOL",
-   38325
+   0
   ],
   "9npoy3JwheoGEXdYMgcyWukmDh9maCuA4ueuHnMUUKUi": [
-   "πολύ καινούργιο",
-   "2026-11-22T23:27:32Z",
+   "όνομα που έκανε rug",
+   "2026-11-22T23:30:29Z",
    "MCAT / SOL",
-   81476
+   87848
   ],
   "EUaJx1viQ7qFrJrbVW3hoDYTRXGa4UVkpQKbzZ6JARnu": [
    "χωρίς ορμή",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Rug / SOL",
-   31096
+   34425
   ],
   "FsAcXcHSJdBTjbRvEdM6ursPri9qdJ4jVAWZc3THEsTE": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "PORTKRAK / SOL",
    0
   ],
   "HV5oQvTsvwNfQMYJvQ1wjHoERZfDa1ZXJ4WqLoA8bzdW": [
    "FDV εκτός ορίων",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "HELIUM / hSOL",
-   19591
+   19572
   ],
   "2nW8SLD5KHD4NZTcsFbUPGKLidQFy4TeKRsmJZmPukLN": [
-   "χαμηλός όγκος 5'",
-   "2026-11-22T23:27:32Z",
+   "ήδη εκτοξευμένο",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
-   21511
+   25437
   ],
   "7i4ap3cJwNv3rSofLC18mvwFDiTfJqXDDuLLzuzBKWgg": [
    "χαμηλή ρευστότητα",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZOL / SOL",
    0
   ],
   "9epfEtguZBRWAQFY5K6J8G6cC7CPcQVNnfiZwZ6SKUaW": [
    "πολύ καινούργιο",
-   "2026-11-22T23:25:59Z",
+   "2026-11-22T23:30:29Z",
    "hSOL / RUG",
-   10660
+   7616
   ],
   "54GokRopuUWL3PHBX15horWMGqx2S9vqR8sGQHJb1c4Y": [
    "πολύ παλιό",
@@ -12672,9 +12603,9 @@
   ],
   "AnkAY8yTQns4VZuJyv894AVPAAhJt6pcDaJXdu86Dx5D": [
    "χαμηλός όγκος 5'",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "ZCat / SOL",
-   144138
+   157463
   ],
   "7DFVkReyQT52W1ocZ6Xuva1QSqa6KeGuk9boGALi9C4H": [
    "πολύ παλιό",
@@ -12684,15 +12615,87 @@
   ],
   "FVSugbVGcJzC3pXAg7qFkfYLfCix5eNe9ma6JnV6qj4w": [
    "πολύ καινούργιο",
-   "2026-11-22T23:27:32Z",
+   "2026-11-22T23:30:29Z",
    "Koop / SOL",
-   107135
+   109218
   ],
   "DSUvc5qf5LJHHV5e2tD184ixotSnCnwj7i4jJa4Xsrmt": [
    "πολύ παλιό",
    "2026-11-22T23:27:32Z",
    "BOME / SOL",
    9468218
+  ],
+  "52Fcjb9c7FnmWJF9BooMdWyyAhGrrBVaaYEPQKJSty3o": [
+   "FDV εκτός ορίων",
+   "2026-11-22T23:30:29Z",
+   "FSDV15 / SOL",
+   24960
+  ],
+  "E6YXAcWBUvSHnKsb5qtGZTeP7ScgrqEsV23drNDfhdtx": [
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
+   "BATHTUB / SOL",
+   13802
+  ],
+  "F2u9Aw8adKebvz4AefBXWogprXzfRxnGedprNM3r1BK4": [
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
+   "SAKURA / SOL",
+   0
+  ],
+  "Fumq6pJzgpvrZbGsqqLLiAz7H524noYDTN6cprcnQNoy": [
+   "χαμηλός όγκος 5'",
+   "2026-11-22T23:30:29Z",
+   "ZOL / SOL",
+   115421
+  ],
+  "D9gJANad8mWjthqppkdAU4SXGVzyYt27fNsAA6JEqPzV": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:29:06Z",
+   "Tribe / SOL",
+   20190
+  ],
+  "Bx3Pp6Tiu2wM7zSXJ3DqbLcrCPvM9n9MFtCiJpGriiMS": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "RUG / SOL",
+   0
+  ],
+  "6YuqWKPtuRrJMAC8MgpoYRjwpReLeRpvKZHFJzsQktNA": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "MUSICAL / SOL",
+   1768
+  ],
+  "HmzmVFytvpiNQ6ziwUnGzbwj8nM2AX6EaZdia1Cs5YZt": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "P / SOL",
+   4183
+  ],
+  "GzmyeUTQz2LfgJ1VED79XUAFx1uVpYSoxC4gDcHnjBPX": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "HELIUM / SOL",
+   24580
+  ],
+  "Ftgq7NnEFdDxgD5h4GpJvDKWmhraYpTPttWuQaCpEAeu": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "hSOL / HCAT",
+   8468
+  ],
+  "GAmUQUFq8RD2Fs2oLszr97JJhZWPgrpNxgjxG4ayVsHw": [
+   "χαμηλή ρευστότητα",
+   "2026-11-22T23:30:29Z",
+   "HCAT / hSOL",
+   0
+  ],
+  "8urTw8qTLXwCitdr7itit43RPBCGTxPYK5moFQpEPLZE": [
+   "πολύ καινούργιο",
+   "2026-11-22T23:30:29Z",
+   "GEORGE / SOL",
+   0
   ]
  },
  "rug_names": [
