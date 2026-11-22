@@ -5,7 +5,7 @@ START_BALANCE_USD = 70.0        # εικονικό αρχικό κεφάλαιο
 POSITION_SIZE_USD = 10.0        # πόσα "βάζει" σε κάθε trade
 MAX_OPEN_POSITIONS = 4
 MAX_DAILY_LOSS_USD = 15.0       # αν χάσει τόσα σε μία μέρα (ώρα Ελλάδας), σταματά νέες αγορές ως αύριο
-MAX_ENTRIES_PER_DAY = 60
+MAX_ENTRIES_PER_DAY = 150
 
 # --- Ρεαλιστικά κόστη (για να μην "κερδίζει" στα χαρτιά μόνο) ---
 SLIPPAGE_PER_SIDE = 0.025       # 2.5% χειρότερη τιμή σε κάθε αγορά/πώληση
