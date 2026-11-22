@@ -215,3 +215,10 @@ def test_entry_rejected_on_price_disagreement():
     assert not s["positions"] and s["reasons"]["POOL1"][0] == "ασυμφωνία τιμών"
     engine.scan_and_enter(s, [pool(now)], now, verify_fn=lambda p: None)  # χωρίς 2η πηγή → επιτρέπεται
     assert s["positions"]
+
+
+def test_coin_image_is_kept():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now, flags_fn=lambda m: {"image": "https://x/y.png"})
+    assert s["positions"][0]["image"] == "https://x/y.png"

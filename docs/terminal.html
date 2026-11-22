@@ -43,6 +43,10 @@ legend span{color:var(--dim);font-weight:400}
 @keyframes blink{50%{opacity:.15}}
 .mint{color:var(--mint)} .coral{color:var(--coral)} .dim{color:var(--dim)} .amber{color:var(--amber)} .violet{color:var(--violet)}
 
+.av{width:26px;height:26px;border-radius:50%;flex:none;display:inline-grid;place-items:center;font-weight:800;font-size:10px;overflow:hidden;color:#0b0f1a;position:relative;box-shadow:0 0 0 1.5px rgba(255,255,255,.08)}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.av.sm{width:20px;height:20px;font-size:8.5px}
+.av.lg{width:32px;height:32px;font-size:11px}
 /* 1 balance */
 .bal{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .big{font:800 clamp(40px,12vw,64px)/1 var(--mono);letter-spacing:-.04em;text-shadow:0 0 24px rgba(255,255,255,.08)}
@@ -68,7 +72,7 @@ legend span{color:var(--dim);font-weight:400}
 .hf button{all:unset;cursor:pointer;padding:3px 9px;border:1px solid var(--faint);border-radius:3px;color:var(--dim);font:500 11px var(--mono)}
 .hf button.on{border-color:var(--ink);color:var(--ink)}
 .hf button:focus-visible{outline:1px solid var(--mint)}
-.trow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--faint)}
+.trow{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--faint)}
 .trow:first-child{border-top:0}
 .trow .k{font-weight:800;font-size:10.5px;padding:1px 5px;border-radius:2px}
 .trow .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -185,6 +189,15 @@ const pct=v=>(v>0?"+":v<0?"-":"")+Math.abs(v).toFixed(1)+"%";
 const k$=v=>v>=1e6?"$"+(v/1e6).toFixed(1)+"M":v>=1e3?"$"+Math.round(v/1e3)+"K":"$"+Math.round(v);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const short=n=>String(n||"?").replace(/\s*\/\s*(SOL|USDC|USDT)$/i,"");
+
+/* coin avatar: real logo when the API gives one, otherwise coloured initials */
+const HUES=["#4ade80","#60a5fa","#f472b6","#facc15","#a78bfa","#22d3ee","#fb923c","#f87171"];
+function av(name,img,size=""){
+  const n=short(name), ini=n.replace(/[^\p{L}\p{N}]/gu,"").slice(0,2).toUpperCase()||"?";
+  let h=0; for(const ch of n) h=(h*31+ch.codePointAt(0))>>>0;
+  const bg=HUES[h%HUES.length];
+  return `<span class="av ${size}" style="background:${bg}">${esc(ini)}${img?`<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</span>`;
+}
 let ST=null, PREV=null, first=true, lastRun=null, shownEq=null;
 
 const posVal=p=>Math.max(p.qty*p.last_price*(1-SLIP)-FEE,0);
@@ -232,7 +245,9 @@ function drawDots(){
     const c=Math.round((T(lb.t)-t0)/Math.max(t1-t0,1)*(cols-1)), v=at(T(lb.t)), top=Math.round((v-lo)/(hi-lo)*rows);
     const m=lb.msg.match(/ΑΓΟΡΑ #\d+ (.+?) @/); const f=document.createElement("div"); f.className="flag";
     f.style.left=Math.min(Math.max(c*step,80),W-95)+"px"; f.style.top=Math.max(H-top*step-10,34)+"px";
-    f.innerHTML=`BUY ${esc(short(m?m[1]:"?"))} <span class="mint">$10.00</span> <small>${fH(lb.t)}</small>`;
+    const idm=lb.msg.match(/#(\d+)/), tr=idm?ST.positions.concat(ST.closed).find(x=>x.id==idm[1]):null;
+    f.style.display="flex"; f.style.alignItems="center"; f.style.gap="7px";
+    f.innerHTML=`${av(m?m[1]:"?",tr&&tr.image,"sm")}<span>BUY ${esc(short(m?m[1]:"?"))} <span class="mint">$10.00</span> <small>${fH(lb.t)}</small></span>`;
     $("chartbox").appendChild(f);
   }
 }
@@ -262,7 +277,7 @@ function renderPositions(st){
   $("positions").innerHTML=st.positions.length?st.positions.map(p=>{
     const lo=Math.min(p.stop_pct,-15), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
     const l=Math.min(zero,cur), w=Math.abs(cur-zero);
-    return `<div class="pos"><div class="pn"><b>${esc(short(p.name))}</b><span class="${p.last_pct>=0?"mint":"coral"}">${pct(p.last_pct)}</span></div>
+    return `<div class="pos"><div class="pn"><b style="display:flex;align-items:center;gap:6px;min-width:0">${av(p.name,p.image,"sm")}<span style="overflow:hidden;text-overflow:ellipsis">${esc(short(p.name))}</span></b><span class="${p.last_pct>=0?"mint":"coral"}">${pct(p.last_pct)}</span></div>
       <div class="pm">#${p.id} · ${k$(p.entry_signals?.liquidity||0)} liq · ${Math.round((Date.now()-T(p.entry_time))/60000)}m</div>
       <div class="prog"><u style="left:${zero}%"></u><i class="${p.last_pct<0?"neg":""}" style="left:${l}%;width:${Math.max(w,1.5)}%"></i></div>
       <div class="pm">stop ${pct(p.stop_pct)} · peak ${pct(p.peak_pct)}</div></div>`;
@@ -276,7 +291,7 @@ function renderAnalyst(st){
   const s=p.entry_signals;
   const rows=[["liq",s.liquidity,15000,k$],["vol 5m",s.vol_m5,4000,k$],["buyers",s.buyers_m5,15,v=>v],["b/s 1h",s.buys_h1/Math.max(s.sells_h1,1),1.25,v=>v.toFixed(2)],["mom 5m",s.pc_m5,2,v=>"+"+v.toFixed(1)+"%"]];
   const bars=(v,min)=>{const n=Math.max(1,Math.min(12,Math.round(Math.log2(Math.max(v/min,1))*4+3))); return "█".repeat(n)+`<span class="off">${"█".repeat(12-n)}</span>`;};
-  $("analyst").innerHTML=`<div class="pn"><b>${esc(short(p.name))}</b><span class="dim">${fH(p.entry_time)}</span></div>`+
+  $("analyst").innerHTML=`<div class="pn" style="align-items:center"><b style="display:flex;align-items:center;gap:7px;min-width:0">${av(p.name,p.image,"lg")}<span style="overflow:hidden;text-overflow:ellipsis">${esc(short(p.name))}</span></b><span class="dim">${fH(p.entry_time)}</span></div>`+
     rows.map(([k,v,min,f])=>`<div class="sig"><span class="dim">${k}</span><span class="blocks">${bars(v,min)}</span><span>${f(v)}</span></div>`).join("")+
     `<div class="note">πάνω από το ελάχιστο σε όλα → αγορά<br>έξοδος: +30% / stop -15%</div>`;
   $("armed").textContent = st.daily.realized<=-15 ? "paused" : "armed"; $("armed").className="tag"+(st.daily.realized<=-15?" coral":"");
@@ -336,7 +351,7 @@ function renderHistory(){
   const list=c.slice().reverse().filter(t=>hFilt==="all"||(hFilt==="w"?t.pnl>0:t.pnl<=0));
   const show=hAll?list:list.slice(0,15);
   $("hist").innerHTML=show.map(t=>{ const w=t.pnl>0;
-    return `<div class="trow"><span class="k ${w?"win":"loss"}">${w?"WIN":"LOSS"}</span>
+    return `<div class="trow"><span class="k ${w?"win":"loss"}">${w?"WIN":"LOSS"}</span>${av(t.name,t.image)}
       <div><div class="nm">${esc(short(t.name))}</div><div class="sb">${fH(t.exit_time)} · ${Math.round(t.hold_min)}m · ${esc(t.reason)}</div></div>
       <div class="r ${w?"mint":"coral"}">${usd(t.pnl)}<small>${pct(t.pnl_pct)}</small></div></div>`; }).join("")
     +(list.length>15?`<button class="hmore" id="hmore">${hAll?"λιγότερα":"όλα ("+list.length+")"}</button>`:"")

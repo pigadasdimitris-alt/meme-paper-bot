@@ -119,6 +119,7 @@ def open_position(state, p, now):
         "name": p["name"],
         "mint": p["base_mint"],
         "dex": p["dex"],
+        "image": p.get("image"),
         "entry_time": iso(now),
         "entry_market": p["price"],
         "entry_fill": fill,
@@ -289,6 +290,8 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
             continue
         if flags_fn:
             f = flags_fn(p["base_mint"])
+            if f.get("image"):
+                p = {**p, "image": f["image"]}
             if f.get("mint_authority") or f.get("freeze_authority"):
                 state["seen"][p["pool"]] = iso(now)
                 reasons[p["pool"]] = ["ύποπτο contract", iso(now), p["name"], round(p["liquidity"])]

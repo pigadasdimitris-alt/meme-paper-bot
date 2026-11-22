@@ -150,4 +150,5 @@ def token_flags(mint):
         "checked": True,
         "mint_authority": active(a.get("mint_authority")),
         "freeze_authority": active(a.get("freeze_authority")),
+        "image": a.get("image_url") if str(a.get("image_url") or "").startswith("https://") else None,
     }
