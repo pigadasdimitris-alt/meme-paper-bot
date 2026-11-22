@@ -127,6 +127,10 @@ def live_cycle(lst, pools):
         lst["control"] = read_control(prev)
         if lst["control"] != prev:
             engine.log(lst, now, f"LIVE {'ΕΝΕΡΓΟ' if lst['control'] == 'on' else 'ΣΤΑΜΑΤΗΜΕΝΟ'}")
+            if lst["control"] == "on" and prev == "off":
+                # επανεκκίνηση με απόφαση του χρήστη: το όριο ημερήσιας ζημιάς μετράει από τώρα
+                lst["daily"]["realized"] = 0.0
+                engine.log(lst, now, "Το όριο ημερήσιας ζημιάς μετράει ξανά από τώρα")
         if lst["control"] == "off" and not lst["positions"]:
             lst["last_run"] = engine.iso(now)
             return
