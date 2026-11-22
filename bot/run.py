@@ -22,10 +22,20 @@ LIVE_STATE = DOCS / "live.json"
 CONTROL = ROOT / "control.json"
 
 
+PAPER_EPOCH = "2026-11-22-honest-rugs"   # νέα αρχή του paper με ειλικρινή καταγραφή των rugs
+
+
 def load_state(now):
     if STATE.exists():
-        return json.loads(STATE.read_text())
-    return engine.new_state(now)
+        st = json.loads(STATE.read_text())
+        if st.get("epoch") == PAPER_EPOCH:
+            return st
+        archive = DOCS / f"state_before_{PAPER_EPOCH}.json"
+        if not archive.exists():
+            archive.write_text(json.dumps(st, ensure_ascii=False))
+    st = engine.new_state(now)
+    st["epoch"] = PAPER_EPOCH
+    return st
 
 
 def save(state):
