@@ -199,6 +199,10 @@ def main():
     lst = load_live(engine.now_utc()) if live_on else None
     if live_on:
         engine.LIVE_HOOKS.update({"buy": live.buy, "sell": live.sell})
+    # κοινή λίστα rugs: ό,τι έκανε rug στο paper δεν αγοράζεται στο live και αντίστροφα
+    engine.SHARED_RUGS.update(state.get("rug_names") or [])
+    if lst is not None:
+        engine.SHARED_RUGS.update(lst.get("rug_names") or [])
     cycle = 0
     while True:
         t0 = time.time()

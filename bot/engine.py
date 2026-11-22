@@ -106,7 +106,9 @@ def payout_due(state, now, equity_now):
 def can_open(state):
     if len(state["positions"]) >= C.MAX_OPEN_POSITIONS:
         return "max ανοιχτά"
-    if state["daily"]["realized"] <= -C.MAX_DAILY_LOSS_USD:
+    if state["daily"].get("halted") or state["daily"]["realized"] <= -C.MAX_DAILY_LOSS_USD:
+        # μόλις χτυπήσει το όριο, μένει σταματημένο ως τα μεσάνυχτα (ένα κέρδος μετά δεν το "ξεκλειδώνει")
+        state["daily"]["halted"] = True
         return "όριο ημερήσιας ζημιάς"
     if state["daily"]["entries"] >= C.MAX_ENTRIES_PER_DAY:
         return "max αγορές ημέρας"
@@ -174,10 +176,14 @@ def symbol(name):
     return str(name).split("/")[0].strip().upper()
 
 
+SHARED_RUGS = set()   # κοινή λίστα για paper και live (γεμίζει από το run.py)
+
+
 def mark_rug(state, name):
     names = set(state.get("rug_names") or []) | SEED_RUG_NAMES
     names.add(symbol(name))
     state["rug_names"] = sorted(names)
+    SHARED_RUGS.add(symbol(name))
 
 
 NO_ROUTE_MARKERS = ("No routes", "NO_ROUTE", "Failed to get quotes")
@@ -367,7 +373,7 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
         done.add(p["pool"])
         state["stats"]["pools_checked"] += 1
         why = reject_reason(p, now)
-        if not why and symbol(p["name"]) in (set(state.get("rug_names") or []) | SEED_RUG_NAMES):
+        if not why and symbol(p["name"]) in (set(state.get("rug_names") or []) | SEED_RUG_NAMES | SHARED_RUGS):
             why = "όνομα που έκανε rug"
         if why:
             reasons[p["pool"]] = [why, iso(now), p["name"], round(p["liquidity"])]

@@ -352,3 +352,23 @@ def test_rugged_name_is_never_bought_again():
     assert "ZZZ" in s["rug_names"]
     engine.scan_and_enter(s, [pool(now, pool="P3", base_mint="M3", name="zzz / SOL")], now + timedelta(minutes=4))
     assert not s["positions"]
+
+
+def test_daily_halt_is_sticky_until_midnight():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    s["daily"]["realized"] = -16.0
+    assert engine.can_open(s) == "όριο ημερήσιας ζημιάς"
+    s["daily"]["realized"] = -5.0          # ένα κέρδος μετά
+    assert engine.can_open(s) == "όριο ημερήσιας ζημιάς"
+
+
+def test_rug_in_one_book_blocks_the_other():
+    now = engine.now_utc()
+    engine.SHARED_RUGS.clear()
+    paper = engine.new_state(now)
+    engine.mark_rug(paper, "KOOP / SOL")
+    live_s = engine.new_state(now)
+    engine.scan_and_enter(live_s, [pool(now, name="Koop / SOL")], now)
+    assert not live_s["positions"]
+    engine.SHARED_RUGS.clear()
