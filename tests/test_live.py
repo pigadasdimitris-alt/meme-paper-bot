@@ -101,3 +101,15 @@ def test_hint_selects_right_key_or_refuses(monkeypatch):
         live.keypair()
     rep = live.mnemonic_report()
     assert rep["words"] == 12 and rep.get("checksum_ok", True) and "abandon" not in str(rep)
+
+
+def test_numbered_copy_is_cleaned(monkeypatch):
+    words = ["abandon"] * 11 + ["about"]
+    pasted = " ".join(f"{i+1} {w}" for i, w in enumerate(words))          # "1 abandon 2 abandon ..."
+    monkeypatch.setenv("SOLANA_PRIVATE_KEY", pasted)
+    monkeypatch.setattr(live, "_kp", None)
+    monkeypatch.setattr(live, "ADDRESS_HINT", "")
+    assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"
+    monkeypatch.setenv("SOLANA_PRIVATE_KEY", "\n".join(f"{i+1}. {w}" for i, w in enumerate(words)))
+    monkeypatch.setattr(live, "_kp", None)
+    assert live.owner() == "HAgk14JpMQLgt6rVgv7cBQFJWFto5Dqxi472uT3DKpqk"

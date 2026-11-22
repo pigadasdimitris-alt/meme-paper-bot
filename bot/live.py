@@ -36,6 +36,13 @@ ADDRESS_HINT = os.environ.get("SOLANA_ADDRESS_HINT", "")  # π.χ. "6zAx…gyjn"
 PATHS = ["m/44'/501'/0'/0'", "m/44'/501'/0'", "m/44'/501'/0'/0'/0'", "m/44'/501'/1'/0'"]
 
 
+def _words(raw):
+    """Κρατά μόνο τις λέξεις: αγνοεί αριθμούς ("1", "2." κ.λπ.), κόμματα και αλλαγές γραμμής από την αντιγραφή."""
+    import re
+    toks = [t.strip(".,;:()") for t in re.split(r"\s+", raw.strip())]
+    return [t.lower() for t in toks if t.isalpha()]
+
+
 def _hint_ok(addr):
     if not ADDRESS_HINT:
         return True
@@ -46,8 +53,8 @@ def _hint_ok(addr):
 def mnemonic_report():
     """Διαγνωστικά ΧΩΡΙΣ να αποκαλύπτουν τις λέξεις: πλήθος, εγκυρότητα, ποιες λέξεις δεν υπάρχουν στη λίστα BIP39."""
     raw = os.environ.get("SOLANA_PRIVATE_KEY", "").strip()
-    words = raw.split()
-    rep = {"words": len(words)}
+    words = _words(raw)
+    rep = {"words": len(words), "tokens": len(raw.split())}
     if len(words) in (12, 24):
         try:
             from mnemonic import Mnemonic
@@ -76,8 +83,8 @@ def keypair():
         from solders.keypair import Keypair
         raw = os.environ["SOLANA_PRIVATE_KEY"].strip()
         try:
-            words = raw.split()
-            if len(words) in (12, 24):  # 12/24 λέξεις του Phantom
+            words = _words(raw)
+            if len(words) in (12, 24) and len(words) >= len(raw.split()) / 2:  # 12/24 λέξεις του Phantom
                 match = [k for _, k in _from_words(words) if _hint_ok(str(k.pubkey()))]
                 if not match:
                     raise LiveError("Οι λέξεις δεν δίνουν τη διεύθυνση του Phantom")
