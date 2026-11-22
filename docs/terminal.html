@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paper Bot Terminal</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Paper Bot">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#090c16">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: an SSH session into the bot at night — dense, glowing, always ticking
+   IDEA: a terminal UI (htop / tmux) where each numbered pane is a part of the desk
+   PICTURE: big balance over a dotted area chart, a lanes timeline of fills, a process table with spinners
+   COLOUR: ink-navy ground, pane borders in blue / pink / violet / slate, mint for profit, coral for loss, amber for scores
+   TYPE: JetBrains Mono everywhere */
+:root{
+  --bg:#090c16; --pane:#0c1020; --ink:#e6e9f2; --dim:#7b8299; --faint:#3a4158;
+  --mint:#4ade80; --coral:#fb7185; --amber:#facc15; --violet:#a78bfa; --pink:#f472b6; --blue:#60a5fa; --cyan:#22d3ee;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:12px/1.45 var(--mono);overflow-x:clip;
+  padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) 30px max(8px,env(safe-area-inset-left))}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+.wrap{max-width:760px;margin:0 auto}
+.bar{display:flex;justify-content:space-between;align-items:center;color:var(--blue);padding:2px 2px 6px;font-weight:500}
+.bar .mid{color:var(--dim)}
+.bar .mid i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:5px;vertical-align:1px;box-shadow:0 0 8px var(--mint)}
+fieldset{border:1.5px solid var(--c,#3b4a7a);border-radius:6px;margin:0 0 8px;padding:6px 9px 9px;background:var(--pane);min-width:0;position:relative}
+legend{padding:0 5px;font-weight:700;color:var(--ink);white-space:nowrap;max-width:100%;overflow:hidden}
+legend sup{color:var(--c);font-size:9px;margin-right:3px}
+legend span{color:var(--dim);font-weight:400}
+.tag{position:absolute;right:10px;top:-9px;background:var(--bg);padding:0 5px;color:var(--dim);font-size:11px}
+.tag.live{color:var(--mint)} .tag.live::after{content:" ●";animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.mint{color:var(--mint)} .coral{color:var(--coral)} .dim{color:var(--dim)} .amber{color:var(--amber)} .violet{color:var(--violet)}
+
+/* 1 balance */
+.bal{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.big{font:800 clamp(40px,12vw,64px)/1 var(--mono);letter-spacing:-.04em;text-shadow:0 0 24px rgba(255,255,255,.08)}
+.chg{font-weight:700;font-size:13px;margin-top:4px}
+.mult{font-weight:800;font-size:17px;padding:3px 9px;border-radius:4px;color:#06210f;background:var(--mint);box-shadow:0 0 16px rgba(74,222,128,.35)}
+.mult.neg{background:var(--coral);color:#2a0710;box-shadow:0 0 16px rgba(251,113,133,.35)}
+.chart{position:relative;height:150px;margin-top:6px}
+.chart svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.flag{position:absolute;transform:translate(-50%,-100%);border:1.5px solid var(--blue);background:#0d1630;border-radius:5px;padding:3px 8px;font-weight:700;white-space:nowrap;font-size:11.5px;box-shadow:0 0 14px rgba(96,165,250,.3);animation:pop .5s ease-out}
+.flag small{color:var(--dim);font-weight:400}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-80%)}to{opacity:1;transform:translate(-50%,-100%)}}
+
+/* 2 lanes */
+.lanes{position:relative;height:96px}
+.lanes svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* 3/4 split */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+@media(max-width:360px){.split{grid-template-columns:minmax(0,1fr)}}
+.split fieldset{margin:0 0 8px}
+.pos{padding:5px 0;border-top:1px dashed var(--faint)}
+.pos:first-of-type{border-top:0}
+.pn{display:flex;justify-content:space-between;gap:6px;font-weight:700}
+.pn b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pm{color:var(--dim);font-size:10.5px}
+.prog{position:relative;height:7px;background:#1a2036;border-radius:2px;margin:5px 0 3px;overflow:hidden}
+.prog i{position:absolute;top:0;bottom:0;background:var(--mint);box-shadow:0 0 8px var(--mint);transition:all .8s}
+.prog i.neg{background:var(--coral);box-shadow:0 0 8px var(--coral)}
+.prog u{position:absolute;top:0;bottom:0;width:1px;background:var(--dim)}
+.sig{display:grid;grid-template-columns:4.6em minmax(0,1fr) auto;gap:6px;align-items:center;margin:3px 0;font-size:11px}
+.blocks{letter-spacing:-1px;color:var(--amber);overflow:hidden;white-space:nowrap}
+.blocks .off{color:#2a3047}
+.note{color:var(--dim);font-size:10.5px;margin-top:6px;line-height:1.5}
+
+/* 5 proc */
+.proc{width:100%;border-collapse:collapse;font-size:11.5px}
+.proc th{color:var(--dim);font-weight:400;text-align:left;padding:0 4px 3px 0}
+.proc td{padding:2px 4px 2px 0;white-space:nowrap}
+.proc td.st{white-space:normal;color:var(--amber)}
+.proc .pid{color:var(--dim)}
+.spin{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid var(--faint);border-top-color:var(--c);margin-right:6px;vertical-align:-1px;animation:rot .9s linear infinite}
+.spin.idle{animation:none;border-color:var(--faint)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.meter{color:var(--c)}
+@media(max-width:430px){.proc .hide{display:none}}
+
+/* 6 log */
+.log{height:300px;overflow:auto;font-size:11.5px}
+.ll{display:flex;gap:7px;white-space:nowrap;line-height:1.75}
+.ll .k{flex:none;font-weight:800;font-size:10.5px;padding:0 4px;border-radius:2px;line-height:1.5;align-self:center}
+.k.skip{background:#2a3047;color:#b6bdd3} .k.buy{background:var(--mint);color:#06210f} .k.win{background:#14532d;color:var(--mint)}
+.k.loss{background:#4c0519;color:var(--coral)} .k.warn{background:#422006;color:var(--amber)}
+.ll .t{color:var(--faint);flex:none}
+.ll .m{overflow:hidden;text-overflow:ellipsis}
+.ll.new{animation:type .5s steps(12) both}
+@keyframes type{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.cursor::after{content:"▌";color:var(--mint);animation:blink 1s steps(2) infinite}
+.foot{color:var(--dim);text-align:center;font-size:11px;margin-top:8px;line-height:1.7}
+.foot a{color:var(--blue);text-decoration:none}
+.err{color:var(--coral);border:1px solid var(--coral);border-radius:4px;padding:6px 8px;margin-bottom:8px;display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar"><span>meme-desk <span class="dim">v1.0</span> <span class="violet">paper</span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="err" id="err"></div>
+
+  <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span>— paper:$70</span></legend><span class="tag live">live</span>
+    <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div></div><div class="mult" id="mult">x—</div></div>
+    <div class="chart" id="chartbox"><svg id="dots"></svg></div>
+  </fieldset>
+
+  <fieldset style="--c:#a78bfa"><legend><sup>2</sup>lanes <span>— τελευταίες 9 ώρες</span></legend><span class="tag" id="fills">0 fills</span>
+    <div class="lanes"><svg id="lanes"></svg></div>
+  </fieldset>
+
+  <div class="split">
+    <fieldset style="--c:#f472b6"><legend><sup>3</sup>positions</legend><span class="tag" id="slots">0/4</span>
+      <div id="positions"></div>
+    </fieldset>
+    <fieldset style="--c:#64748b"><legend><sup>4</sup>analyst</legend><span class="tag" id="armed">armed</span>
+      <div id="analyst"></div>
+    </fieldset>
+  </div>
+
+  <fieldset style="--c:#60a5fa"><legend><sup>5</sup>proc <span>— agents</span></legend><span class="tag" id="load">load —</span>
+    <table class="proc"><thead><tr><th>PID</th><th>PROCESS</th><th class="hide">CPU</th><th>STATUS</th></tr></thead><tbody id="proc"></tbody></table>
+  </fieldset>
+
+  <fieldset style="--c:#3b82f6"><legend><sup>6</sup>log <span>— tail -f desk.log</span></legend><span class="tag" id="kills">0 skip</span>
+    <div class="log" id="log"></div>
+  </fieldset>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+{
+const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
+const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/state.json?ref=main`;
+const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/state.json`;
+const LOCAL=location.hash==="#local";
+const SLIP=0.025, FEE=0.03, TP=30, POLL=75000, tz="Europe/Athens";
+const $=id=>document.getElementById(id);
+const T=s=>new Date(s).getTime();
+const fH=s=>new Date(s).toLocaleTimeString("el-GR",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false});
+const usd=v=>(v>0?"+":v<0?"-":"")+"$"+Math.abs(v).toFixed(2);
+const pct=v=>(v>0?"+":v<0?"-":"")+Math.abs(v).toFixed(1)+"%";
+const k$=v=>v>=1e6?"$"+(v/1e6).toFixed(1)+"M":v>=1e3?"$"+Math.round(v/1e3)+"K":"$"+Math.round(v);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const short=n=>String(n||"?").replace(/\s*\/\s*(SOL|USDC|USDT)$/i,"");
+let ST=null, PREV=null, first=true, lastRun=null, shownEq=null;
+
+const posVal=p=>Math.max(p.qty*p.last_price*(1-SLIP)-FEE,0);
+const equity=st=>st.balance+st.positions.reduce((a,p)=>a+posVal(p),0);
+
+/* clock + sync age tick every second */
+setInterval(()=>{
+  $("clock").textContent=new Date().toLocaleTimeString("el-GR",{timeZone:tz,hour12:false});
+  if(ST){ const s=Math.round((Date.now()-T(ST.last_run))/1000);
+    $("sync").textContent = s<120 ? `sync · ${s}s` : `sync · ${Math.round(s/60)}m`;
+    $("sync").className = s>1200 ? "coral" : ""; }
+},1000);
+
+function countTo(el,from,to,fmt){
+  if(from==null||from===to){ el.textContent=fmt(to); return; }
+  const t0=performance.now();
+  const f=n=>{const k=Math.min(1,(n-t0)/1200),e=1-Math.pow(1-k,3); el.textContent=fmt(from+(to-from)*e); if(k<1) requestAnimationFrame(f);};
+  requestAnimationFrame(f);
+}
+
+/* 1: dotted area chart */
+function drawDots(){
+  const svg=$("dots"); if(!ST) return; const W=svg.clientWidth,H=svg.clientHeight; if(!W) return;
+  const h=ST.equity_history; if(h.length<2){ svg.innerHTML=""; return; }
+  const step=6, cols=Math.floor(W/step), rows=Math.floor(H/step);
+  const t0=T(h[0][0]), t1=T(h[h.length-1][0]);
+  const vals=h.map(x=>x[1]).concat([ST.start_balance]); let lo=Math.min(...vals), hi=Math.max(...vals); const pad=(hi-lo)*.1||1; lo-=pad; hi+=pad;
+  const at=t=>{ let i=0; while(i<h.length-1 && T(h[i+1][0])<=t) i++; return h[i][1]; };
+  let out="", lastTop=0;
+  for(let c=0;c<cols;c++){
+    const t=t0+(t1-t0)*c/Math.max(cols-1,1), v=at(t), top=Math.round((v-lo)/(hi-lo)*rows);
+    const col=v>=ST.start_balance?"#4ade80":"#fb7185";
+    for(let r=0;r<top;r++){ const op=r===top-1?1:.22+.5*(r/top); out+=`<circle cx="${c*step+3}" cy="${H-r*step-3}" r="1.35" fill="${r===top-1?"#e6e9f2":col}" opacity="${op.toFixed(2)}"/>`; }
+    lastTop=top;
+  }
+  const by=H-(ST.start_balance-lo)/(hi-lo)*rows*step;
+  out+=`<line x1="0" x2="${W}" y1="${by}" y2="${by}" stroke="#7b8299" stroke-dasharray="2 4" opacity=".6"/><text x="${W-2}" y="${by-4}" fill="#7b8299" font-size="10" text-anchor="end" font-family="JetBrains Mono,monospace">--- start $${ST.start_balance}</text>`;
+  const lx=(cols-1)*step+3, ly=H-(lastTop-1)*step-3;
+  out+=`<circle cx="${lx}" cy="${ly}" r="4" fill="#f472b6"><animate attributeName="r" values="3;7;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;.4;1" dur="1.6s" repeatCount="indefinite"/></circle>`;
+  svg.innerHTML=out;
+  // flag for the latest buy
+  const old=$("chartbox").querySelector(".flag"); if(old) old.remove();
+  const lb=[...ST.log].reverse().find(l=>l.msg.startsWith("ΑΓΟΡΑ"));
+  if(lb && T(lb.t)>=t0){
+    const c=Math.round((T(lb.t)-t0)/Math.max(t1-t0,1)*(cols-1)), v=at(T(lb.t)), top=Math.round((v-lo)/(hi-lo)*rows);
+    const m=lb.msg.match(/ΑΓΟΡΑ #\d+ (.+?) @/); const f=document.createElement("div"); f.className="flag";
+    f.style.left=Math.min(Math.max(c*step,80),W-95)+"px"; f.style.top=Math.max(H-top*step-10,34)+"px";
+    f.innerHTML=`BUY ${esc(short(m?m[1]:"?"))} <span class="mint">$10.00</span> <small>${fH(lb.t)}</small>`;
+    $("chartbox").appendChild(f);
+  }
+}
+
+/* 2: lanes timeline */
+function drawLanes(){
+  const svg=$("lanes"); if(!ST) return; const W=svg.clientWidth,H=svg.clientHeight; if(!W) return;
+  const now=Date.now(), span=9*3600e3, t0=now-span, L=52, R=W-4;
+  const x=t=>L+(t-t0)/span*(R-L);
+  let o="";
+  for(let i=0;i<=9;i++){ const t=t0+i*3600e3, xx=x(t); o+=`<line x1="${xx}" x2="${xx}" y1="16" y2="${H}" stroke="#1c2238"/>`;
+    if(W>420||i%2===0) o+=`<text x="${xx}" y="10" fill="#7b8299" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono,monospace">${fH(new Date(t).toISOString()).slice(0,2)}h</text>`; }
+  const lanes=[["BUY","#4ade80",36],["SELL","#fb7185",72]];
+  for(const [n,c,y] of lanes){ o+=`<text x="2" y="${y+4}" fill="${c}" font-size="11" font-weight="800" font-family="JetBrains Mono,monospace">${n}</text><line x1="${L}" x2="${R}" y1="${y}" y2="${y}" stroke="#2a3047" stroke-dasharray="1 4"/>`; }
+  let fills=0;
+  for(const t of ST.closed.concat(ST.positions)){
+    const e=T(t.entry_time); if(e>=t0){ fills++; o+=`<line x1="${x(e)}" x2="${x(e)}" y1="26" y2="46" stroke="#4ade80" stroke-width="2"/>`; }
+    if(t.exit_time){ const s=T(t.exit_time); if(s>=t0){ fills++; const c=t.pnl>0?"#4ade80":"#fb7185"; o+=`<line x1="${x(s)}" x2="${x(s)}" y1="62" y2="82" stroke="${c}" stroke-width="2"/><circle cx="${x(s)}" cy="${t.pnl>0?60:84}" r="1.8" fill="${c}"/>`; } }
+  }
+  o+=`<line x1="${x(now)}" x2="${x(now)}" y1="14" y2="${H}" stroke="#e6e9f2" stroke-width="1.5"/><polygon points="${x(now)-5},14 ${x(now)+5},14 ${x(now)},21" fill="#e6e9f2"/>`;
+  svg.innerHTML=o; $("fills").textContent=`${fills} fills`;
+}
+
+/* 3: positions */
+function renderPositions(st){
+  $("slots").textContent=`${st.positions.length}/4`;
+  $("positions").innerHTML=st.positions.length?st.positions.map(p=>{
+    const lo=Math.min(p.stop_pct,-15), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
+    const l=Math.min(zero,cur), w=Math.abs(cur-zero);
+    return `<div class="pos"><div class="pn"><b>${esc(short(p.name))}</b><span class="${p.last_pct>=0?"mint":"coral"}">${pct(p.last_pct)}</span></div>
+      <div class="pm">#${p.id} · ${k$(p.entry_signals?.liquidity||0)} liq · ${Math.round((Date.now()-T(p.entry_time))/60000)}m</div>
+      <div class="prog"><u style="left:${zero}%"></u><i class="${p.last_pct<0?"neg":""}" style="left:${l}%;width:${Math.max(w,1.5)}%"></i></div>
+      <div class="pm">stop ${pct(p.stop_pct)} · peak ${pct(p.peak_pct)}</div></div>`;
+  }).join(""):`<div class="note">καμία θέση · scanner σε αναζήτηση<span class="cursor"></span></div>`;
+}
+
+/* 4: analyst — real entry signals of the most recent buy vs the filter minimums */
+function renderAnalyst(st){
+  const all=st.positions.concat(st.closed).sort((a,b)=>T(b.entry_time)-T(a.entry_time)); const p=all[0];
+  if(!p||!p.entry_signals){ $("analyst").innerHTML=`<div class="note">αναμονή για πρώτο σήμα<span class="cursor"></span></div>`; return; }
+  const s=p.entry_signals;
+  const rows=[["liq",s.liquidity,15000,k$],["vol 5m",s.vol_m5,4000,k$],["buyers",s.buyers_m5,15,v=>v],["b/s 1h",s.buys_h1/Math.max(s.sells_h1,1),1.25,v=>v.toFixed(2)],["mom 5m",s.pc_m5,2,v=>"+"+v.toFixed(1)+"%"]];
+  const bars=(v,min)=>{const n=Math.max(1,Math.min(12,Math.round(Math.log2(Math.max(v/min,1))*4+3))); return "█".repeat(n)+`<span class="off">${"█".repeat(12-n)}</span>`;};
+  $("analyst").innerHTML=`<div class="pn"><b>${esc(short(p.name))}</b><span class="dim">${fH(p.entry_time)}</span></div>`+
+    rows.map(([k,v,min,f])=>`<div class="sig"><span class="dim">${k}</span><span class="blocks">${bars(v,min)}</span><span>${f(v)}</span></div>`).join("")+
+    `<div class="note">πάνω από το ελάχιστο σε όλα → αγορά<br>έξοδος: +30% / stop -15%</div>`;
+  $("armed").textContent = st.daily.realized<=-15 ? "paused" : "armed"; $("armed").className="tag"+(st.daily.realized<=-15?" coral":"");
+}
+
+/* 5: process table with live spinners */
+function renderProc(st){
+  const rej=Object.values(st.stats.rejects||{}).reduce((a,n)=>a+n,0), buys=st.closed.length+st.positions.length;
+  const stops=st.closed.filter(t=>/stop/.test(t.reason)).length;
+  const loss=Math.max(0,-st.daily.realized), lossPct=Math.min(1,loss/15);
+  const meter=(f,n=10)=>"["+"|".repeat(Math.round(f*n)).padEnd(n," ")+"]";
+  const changed=k=>PREV&&k(PREV)!==k(st);
+  const P=[
+    [4127,"scanner","#60a5fa",Math.min(1,(st.stats.scans%10+3)/10),`${st.stats.pools_checked.toLocaleString("el-GR")} pools ↻`,true],
+    [4131,"filter","#22d3ee",Math.min(1,rej/(rej+buys||1)),`${rej} skip · ${buys} pass`,changed(s=>Object.values(s.stats.rejects||{}).reduce((a,n)=>a+n,0))],
+    [4133,"analyst","#facc15",.4,`${Object.keys(st.watch||{}).length} σε αναμονή ωρίμανσης`,true],
+    [4135,"executor","#4ade80",st.positions.length/4,st.positions.length?`${st.positions.length} ανοιχτές · ${st.daily.entries} σήμερα`:`idle · ${st.daily.entries} σήμερα`,st.positions.length>0],
+    [4136,"risk","#f472b6",lossPct,`guard ${st.positions.length} open · stop -15% · ${stops} stops`,true],
+    [4140,"guard","#a78bfa",.2,`2 πηγές τιμής · contract check`,true],
+  ];
+  $("proc").innerHTML=P.map(([pid,n,c,f,s,on])=>`<tr style="--c:${c}"><td class="pid">${pid}</td><td><span class="spin${on?"":" idle"}"></span><span style="color:${c}">${n}</span></td><td class="hide meter">${meter(f)}</td><td class="st">${esc(s)}</td></tr>`).join("");
+  $("load").textContent=`load ${(st.positions.length/4*1.5+0.37).toFixed(2)}`;
+}
+
+/* 6: log tail — skips (with coin names) + buys/sells + warnings */
+function renderLog(st){
+  const lines=[];
+  for(const l of st.log){ const m=l.msg;
+    if(m.startsWith("ΑΓΟΡΑ")){ const x=m.match(/#\d+ (.+?) @ \$(\S+)/); lines.push([T(l.t),"buy","BUY",`${short(x?x[1]:"")} @ $${x?x[2]:""} · $10`]); }
+    else if(m.startsWith("ΠΩΛΗΣΗ")){ const x=m.match(/#\d+ (.+?) — (.+?) — (\S+)\$/); const v=x?parseFloat(x[3]):0; lines.push([T(l.t),v>0?"win":"loss",v>0?"WIN":"LOSS",`${short(x?x[1]:"")} ${x?x[3]:""}$ · ${x?x[2]:""}`]); }
+    else lines.push([T(l.t),"warn","WARN",m]);
+  }
+  for(const [why,t,name,liq] of Object.values(st.reasons||{})){ if(!name||why==="ΑΓΟΡΑ") continue; lines.push([T(t),"skip","SKIP",`${short(name)} ${liq!=null?"liq "+k$(liq):""} · ${why}`]); }
+  lines.sort((a,b)=>b[0]-a[0]);
+  const prevTop=PREV?$("log").dataset.top:null;
+  $("log").innerHTML=lines.slice(0,90).map(([t,k,lab,m],i)=>`<div class="ll${prevTop&&t>+prevTop?" new":""}" style="animation-delay:${i*0.06}s"><span class="k ${k}">${lab}</span><span class="t">${fH(new Date(t).toISOString())}</span><span class="m">${esc(m)}</span></div>`).join("")+`<div class="ll"><span class="cursor dim">$ </span></div>`;
+  $("log").dataset.top=lines.length?lines[0][0]:0;
+  $("kills").textContent=`${Object.values(st.stats.rejects||{}).reduce((a,n)=>a+n,0)} skip`;
+}
+
+function render(st){
+  ST=st;
+  const eq=equity(st), pnl=eq-st.start_balance, mult=eq/st.start_balance;
+  countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
+  $("chg").innerHTML=`<span class="${pnl>=0?"mint":"coral"}">${usd(pnl)} (${pct(100*pnl/st.start_balance)})</span>`;
+  $("mult").textContent="x"+mult.toFixed(2); $("mult").className="mult"+(mult<1?" neg":"");
+  drawDots(); drawLanes(); renderPositions(st); renderAnalyst(st); renderProc(st); renderLog(st);
+  $("foot").innerHTML=`εικονικό κεφάλαιο · ${st.closed.length} κλειστά trades · ξεκίνησε ${new Date(st.started_at).toLocaleDateString("el-GR",{timeZone:tz})}<br><a href="index.html">κλασικό dashboard</a> · <a href="https://github.com/${OWNER}/${REPO}">repo</a>`;
+  PREV=st; first=false;
+}
+
+async function fetchState(){
+  if(LOCAL){ const r=await fetch("state.json?t="+Date.now()); return r.json(); }
+  try{ const r=await fetch(API,{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); }catch(e){}
+  const r=await fetch(RAW+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json();
+}
+async function load(){
+  try{ const st=await fetchState(); if(first||st.last_run!==lastRun){ lastRun=st.last_run; render(st); } else drawLanes(); $("err").style.display="none"; }
+  catch(e){ $("err").style.display="block"; $("err").textContent=ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα"; }
+}
+const ro=new ResizeObserver(()=>{drawDots();drawLanes();}); ro.observe($("dots")); ro.observe($("lanes"));
+load(); setInterval(load,POLL);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) load(); });
+}
+</script>
+</body>
+</html>

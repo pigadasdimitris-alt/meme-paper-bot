@@ -275,7 +275,7 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
         state["stats"]["pools_checked"] += 1
         why = reject_reason(p, now)
         if why:
-            reasons[p["pool"]] = [why, iso(now)]
+            reasons[p["pool"]] = [why, iso(now), p["name"], round(p["liquidity"])]
             continue
         candidates.append(p)
 
@@ -285,23 +285,23 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
         blocked = can_open(state)
         if blocked:
             count_reject(state, blocked)
-            reasons[p["pool"]] = [blocked, iso(now)]
+            reasons[p["pool"]] = [blocked, iso(now), p["name"], round(p["liquidity"])]
             continue
         if flags_fn:
             f = flags_fn(p["base_mint"])
             if f.get("mint_authority") or f.get("freeze_authority"):
                 state["seen"][p["pool"]] = iso(now)
-                reasons[p["pool"]] = ["ύποπτο contract", iso(now)]
+                reasons[p["pool"]] = ["ύποπτο contract", iso(now), p["name"], round(p["liquidity"])]
                 continue
         if p["base_mint"] in held_mints:
             continue
         if verify_fn:  # η τιμή αγοράς πρέπει να συμφωνεί και με δεύτερη πηγή
             second = verify_fn(p)
             if second is not None and not agrees(p["price"], second):
-                reasons[p["pool"]] = ["ασυμφωνία τιμών", iso(now)]
+                reasons[p["pool"]] = ["ασυμφωνία τιμών", iso(now), p["name"], round(p["liquidity"])]
                 continue
         state["seen"][p["pool"]] = iso(now)
-        reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now)]
+        reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now), p["name"], round(p["liquidity"])]
         open_position(state, p, now)
         held_mints.add(p["base_mint"])
 
@@ -311,7 +311,7 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
     state["reasons"] = {k: v for k, v in reasons.items() if parse_time(v[1]).timestamp() > cutoff}
     # σύνοψη λόγων απόρριψης ανά μοναδικό coin (τελευταίος λόγος του καθενός)
     summary = {}
-    for why, _ in state["reasons"].values():
+    for why, *_ in state["reasons"].values():
         if why != "ΑΓΟΡΑ":
             summary[why] = summary.get(why, 0) + 1
     state["stats"]["rejects"] = summary
