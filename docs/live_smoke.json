@@ -1,22 +1,36 @@
 {
- "t": "2026-11-22T15:13:41Z",
- "ok": false,
- "steps": [],
+ "t": "2026-11-22T15:18:22Z",
+ "ok": true,
+ "steps": [
+  "wallet 0.4244 SOL ($29.80)",
+  "buy USDC ok sig=5myLGHoNWTZGRgkq2v1P4gU2C2NzwGRuW18RaknT5eqQSCkDdfMz2tdxUaKoP1ck6RaeS5dY2i6EvSfgyR1dUqDW got=0.9981 USDC",
+  "USDC balance 0.9981",
+  "sell USDC ok sig=5o8WntmTKTjzz3JDxqTgGKvw85rbLzuiKXPBSZQiqbKvvUBdnvxRX6zjqrvWkooSwyHEzAcmbRQ1BLzot2g2NdoL got=0.014237 SOL"
+ ],
  "configured": true,
  "key_check": {
-  "words": 12,
+  "words": 24,
   "tokens": 24,
-  "checksum_ok": false,
-  "unknown_word_positions": [
-   2
-  ],
+  "checksum_ok": true,
+  "unknown_word_positions": [],
   "candidates": [
-   "GrWP\u2026ZJPg",
-   "nFGm\u2026QEPg",
-   "Hjm7\u2026gb51",
-   "5DCP\u20268kMP",
-   "FFN8\u2026LiSB"
+   "6zAx\u2026gyjn",
+   "HpxU\u2026hJJT",
+   "F95y\u2026Reyr",
+   "CMf3\u2026rbLe",
+   "8oZm\u2026s4WQ"
   ]
  },
- "error": "\u039f\u03b9 \u03bb\u03ad\u03be\u03b5\u03b9\u03c2 \u03b4\u03b5\u03bd \u03b4\u03af\u03bd\u03bf\u03c5\u03bd \u03c4\u03b7 \u03b4\u03b9\u03b5\u03cd\u03b8\u03c5\u03bd\u03c3\u03b7 \u03c4\u03bf\u03c5 Phantom"
+ "wallet": "6zAx67amr7t4Qhp7VcPyMdGCtuVtqgGoyZ3S2hN7gyjn",
+ "before": {
+  "sol": 0.42443,
+  "sol_price": 70.21157893423157,
+  "sol_usd": 29.7999004470559
+ },
+ "after": {
+  "sol": 0.422916788,
+  "sol_price": 70.21157893423157,
+  "sol_usd": 29.693655443273677
+ },
+ "cost_usd": 0.1062
 }
