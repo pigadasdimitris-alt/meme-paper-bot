@@ -167,6 +167,19 @@ def open_position(state, p, now):
     return pos
 
 
+SEED_RUG_NAMES = {"MCAT", "CATME"}   # γνωστά rugs από το πρώτο live
+
+
+def symbol(name):
+    return str(name).split("/")[0].strip().upper()
+
+
+def mark_rug(state, name):
+    names = set(state.get("rug_names") or []) | SEED_RUG_NAMES
+    names.add(symbol(name))
+    state["rug_names"] = sorted(names)
+
+
 NO_ROUTE_MARKERS = ("No routes", "NO_ROUTE", "Failed to get quotes")
 NO_ROUTE_GIVE_UP = 4   # ~6 λεπτά χωρίς καμία διαδρομή πώλησης = το pool άδειασε (rug)
 
@@ -204,6 +217,8 @@ def close_position(state, pos, price, now, reason, exit_liq=None):
             proceeds = 0.0
             reason = reason + " (rug)"
     proceeds = max(proceeds, 0.0)
+    if "rug" in reason or (state.get("mode") == "live" and proceeds < 0.2 * pos["cost"]):
+        mark_rug(state, pos["name"])
     pnl = proceeds - pos["cost"]
     state["balance"] += proceeds
     state["daily"]["realized"] += pnl
@@ -352,6 +367,8 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
         done.add(p["pool"])
         state["stats"]["pools_checked"] += 1
         why = reject_reason(p, now)
+        if not why and symbol(p["name"]) in (set(state.get("rug_names") or []) | SEED_RUG_NAMES):
+            why = "όνομα που έκανε rug"
         if why:
             reasons[p["pool"]] = [why, iso(now), p["name"], round(p["liquidity"])]
             continue

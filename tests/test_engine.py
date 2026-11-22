@@ -339,3 +339,16 @@ def test_live_unsellable_is_written_off_after_retries(monkeypatch):
         engine.manage_positions(s, q, now + timedelta(minutes=2 + i))
     assert not s["positions"] and s["closed"][0]["pnl"] == -4.0 and s["zombies"][0]["mint"] == "MINT1"
     assert s["daily"]["realized"] == -4.0
+
+
+def test_rugged_name_is_never_bought_again():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now, name="MCAT / SOL")], now)
+    assert not s["positions"] and s["reasons"]["POOL1"][0] == "όνομα που έκανε rug"
+    engine.scan_and_enter(s, [pool(now, pool="P2", base_mint="M2", name="ZZZ / SOL")], now)
+    q = {"P2": {"price": 0.0011, "liquidity": 100.0, "src": "gt"}}
+    engine.manage_positions(s, q, now + timedelta(minutes=2)); engine.manage_positions(s, q, now + timedelta(minutes=3))
+    assert "ZZZ" in s["rug_names"]
+    engine.scan_and_enter(s, [pool(now, pool="P3", base_mint="M3", name="zzz / SOL")], now + timedelta(minutes=4))
+    assert not s["positions"]
