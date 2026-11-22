@@ -239,3 +239,57 @@ def test_glitchy_primary_still_hits_time_exit():
     bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
     engine.manage_positions(s, bad, now + timedelta(minutes=61), confirm_fn=lambda p: 0.00102)
     assert s["closed"] and s["closed"][0]["reason"] == "λήξη χρόνου"
+
+
+# ---------------- live (με ψεύτικα hooks, χωρίς δίκτυο) ----------------
+
+def _live_state(now):
+    s = engine.new_state(now)
+    s["mode"] = "live"
+    s["balance"] = 30.0
+    return s
+
+
+def test_live_buy_and_sell_use_real_amounts(monkeypatch):
+    now = engine.now_utc()
+    s = _live_state(now)
+    monkeypatch.setattr(engine, "LIVE_HOOKS", {
+        "buy": lambda p, size: {"qty": 3900.0, "raw": 3900_000000, "decimals": 6, "cost_usd": 3.98, "sig": "B"},
+        "sell": lambda pos: {"proceeds_usd": 5.10, "sig": "S"},
+    })
+    engine.scan_and_enter(s, [pool(now)], now)
+    pos = s["positions"][0]
+    assert pos["cost"] == 3.98 and pos["buy_sig"] == "B" and abs(s["balance"] - 26.02) < 1e-9
+    engine.manage_positions(s, {"POOL1": {"price": 0.00135, "liquidity": 40_000}}, now + timedelta(minutes=3))
+    t = s["closed"][0]
+    assert t["proceeds"] == 5.10 and abs(t["pnl"] - 1.12) < 1e-9 and t["sell_sig"] == "S"
+
+
+def test_live_failed_buy_records_nothing(monkeypatch):
+    now = engine.now_utc()
+    s = _live_state(now)
+    def boom(p, size):
+        raise RuntimeError("no route")
+    monkeypatch.setattr(engine, "LIVE_HOOKS", {"buy": boom, "sell": lambda pos: None})
+    engine.scan_and_enter(s, [pool(now)], now)
+    assert not s["positions"] and s["balance"] == 30.0
+    assert s["reasons"]["POOL1"][0] == "αποτυχία αγοράς"
+
+
+def test_live_failed_sell_keeps_position_and_retries(monkeypatch):
+    now = engine.now_utc()
+    s = _live_state(now)
+    calls = {"n": 0}
+    def flaky_sell(pos):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise RuntimeError("timeout")
+        return {"proceeds_usd": 3.0, "sig": "S2"}
+    monkeypatch.setattr(engine, "LIVE_HOOKS", {
+        "buy": lambda p, size: {"qty": 4000.0, "cost_usd": 4.0, "sig": "B"}, "sell": flaky_sell})
+    engine.scan_and_enter(s, [pool(now)], now)
+    q = {"POOL1": {"price": 0.0008, "liquidity": 40_000}}
+    engine.manage_positions(s, q, now + timedelta(minutes=2))
+    assert s["positions"] and s["positions"][0]["sell_fail"] == 1
+    engine.manage_positions(s, q, now + timedelta(minutes=3))
+    assert not s["positions"] and s["closed"][0]["sell_sig"] == "S2"

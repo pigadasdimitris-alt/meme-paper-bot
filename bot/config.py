@@ -45,3 +45,14 @@ SOL_MINT = "So11111111111111111111111111111111111111112"
 USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
 USDT_MINT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
 QUOTE_MINTS = {SOL_MINT, USDC_MINT, USDT_MINT}
+
+
+# --- Live (πραγματικά χρήματα): μικρότερα όρια, ενεργό μόνο όταν control.json λέει "on" ---
+LIVE_OVERRIDES = {
+    "POSITION_SIZE_USD": 4.0,
+    "MAX_OPEN_POSITIONS": 3,
+    "MAX_DAILY_LOSS_USD": 8.0,
+    "MAX_ENTRIES_PER_DAY": 40,
+    "SLIPPAGE_PER_SIDE": 0.01,   # μόνο για την εκτίμηση αξίας ανοιχτών θέσεων· τα πραγματικά ποσά έρχονται από το blockchain
+    "FEE_USD_PER_TX": 0.0,
+}

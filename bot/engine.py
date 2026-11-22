@@ -5,6 +5,10 @@ from zoneinfo import ZoneInfo
 from . import config as C
 
 
+# Για live λειτουργία: {"buy": fn(p, size_usd) -> dict, "sell": fn(pos) -> dict}. Κενό = μόνο paper.
+LIVE_HOOKS = {}
+
+
 def now_utc():
     return datetime.now(timezone.utc)
 
@@ -110,9 +114,21 @@ def count_reject(state, reason):
 
 def open_position(state, p, now):
     size = C.POSITION_SIZE_USD
-    fill = p["price"] * (1 + C.SLIPPAGE_PER_SIDE)
-    qty = size / fill
-    state["balance"] -= size + C.FEE_USD_PER_TX
+    live = state.get("mode") == "live"
+    if live:
+        try:
+            r = LIVE_HOOKS["buy"](p, size)
+        except Exception as e:
+            log(state, now, f"ΑΠΟΤΥΧΙΑ ΑΓΟΡΑΣ {p['name']}: {str(e)[:160]}")
+            return None
+        qty, cost = r["qty"], r["cost_usd"]
+        fill = cost / qty if qty else p["price"]
+        state["balance"] -= cost
+    else:
+        fill = p["price"] * (1 + C.SLIPPAGE_PER_SIDE)
+        qty = size / fill
+        cost = size + C.FEE_USD_PER_TX
+        state["balance"] -= cost
     pos = {
         "id": state["next_id"],
         "pool": p["pool"],
@@ -124,7 +140,7 @@ def open_position(state, p, now):
         "entry_market": p["price"],
         "entry_fill": fill,
         "qty": qty,
-        "cost": size + C.FEE_USD_PER_TX,
+        "cost": cost,
         "liq_entry": p["liquidity"],
         "peak_pct": 0.0,
         "stop_pct": C.STOP_LOSS_PCT,
@@ -132,15 +148,27 @@ def open_position(state, p, now):
         "last_pct": 0.0,
         "entry_signals": {k: p[k] for k in ("liquidity", "fdv", "vol_m5", "pc_m5", "buyers_m5", "buys_h1", "sells_h1")},
     }
+    if live:
+        pos.update({"raw": r.get("raw"), "decimals": r.get("decimals"), "buy_sig": r.get("sig")})
     state["next_id"] += 1
     state["positions"].append(pos)
     state["daily"]["entries"] += 1
-    log(state, now, f"ΑΓΟΡΑ #{pos['id']} {p['name']} @ ${p['price']:.8g} (${size:.2f})")
+    log(state, now, f"ΑΓΟΡΑ #{pos['id']} {p['name']} @ ${p['price']:.8g} (${cost:.2f})")
     return pos
 
 
 def close_position(state, pos, price, now, reason):
-    proceeds = pos["qty"] * price * (1 - C.SLIPPAGE_PER_SIDE) - C.FEE_USD_PER_TX
+    sell_sig = None
+    if state.get("mode") == "live":
+        try:
+            r = LIVE_HOOKS["sell"](pos)
+        except Exception as e:
+            pos["sell_fail"] = pos.get("sell_fail", 0) + 1
+            log(state, now, f"ΑΠΟΤΥΧΙΑ ΠΩΛΗΣΗΣ #{pos['id']} {pos['name']} ({reason}): {str(e)[:160]} — ξαναδοκιμάζει")
+            return None
+        proceeds, sell_sig = r["proceeds_usd"], r.get("sig")
+    else:
+        proceeds = pos["qty"] * price * (1 - C.SLIPPAGE_PER_SIDE) - C.FEE_USD_PER_TX
     proceeds = max(proceeds, 0.0)
     pnl = proceeds - pos["cost"]
     state["balance"] += proceeds
@@ -156,6 +184,8 @@ def close_position(state, pos, price, now, reason):
         "reason": reason,
         "hold_min": round(hold, 1),
     })
+    if sell_sig:
+        closed["sell_sig"] = sell_sig
     state["positions"] = [x for x in state["positions"] if x["id"] != pos["id"]]
     state["closed"].append(closed)
     log(state, now, f"ΠΩΛΗΣΗ #{pos['id']} {pos['name']} — {reason} — {pnl:+.2f}$")
@@ -315,8 +345,10 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
                 reasons[p["pool"]] = ["ασυμφωνία τιμών", iso(now), p["name"], round(p["liquidity"])]
                 continue
         state["seen"][p["pool"]] = iso(now)
+        if open_position(state, p, now) is None:
+            reasons[p["pool"]] = ["αποτυχία αγοράς", iso(now), p["name"], round(p["liquidity"])]
+            continue
         reasons[p["pool"]] = ["ΑΓΟΡΑ", iso(now), p["name"], round(p["liquidity"])]
-        open_position(state, p, now)
         held_mints.add(p["base_mint"])
 
     # κρατάμε τα αρχεία μικρά (τελευταίες ~6 ώρες)
