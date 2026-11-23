@@ -17,7 +17,7 @@ from . import config as C
 from . import data, engine
 
 RPC_URL = os.environ.get("SOLANA_RPC_URL") or "https://api.mainnet-beta.solana.com"
-COPY_EPOCH = "2026-11-23-copy-100"
+COPY_EPOCH = "2026-11-23-copy-100-v2"
 
 MAX_WALLETS = 25            # πόσα πορτοφόλια παρακολουθούμε
 MIN_WALLET_SCORE = 1
@@ -115,8 +115,14 @@ def early_winners(trades, base_mint, price_now):
 
 def discover(st, pools, now):
     gain = lambda p: max(p.get("pc_h1", 0), p.get("pc_h6", 0), p.get("pc_h24", 0))
-    hot = [p for p in pools if gain(p) >= 50 and p.get("liquidity", 0) >= 10_000
-           and p.get("base_mint") not in STABLE and p.get("quote_mint") in STABLE]
+    def old_enough(p):
+        try:
+            return (now - engine.parse_time(p["created_at"])).total_seconds() >= 6 * 3600
+        except Exception:
+            return False
+    # μόνο coins που αντέχουν (ρευστότητα + ηλικία 6+ ωρών), για να βρούμε traders και όχι snipers μικρών coins
+    hot = [p for p in pools if gain(p) >= 50 and p.get("liquidity", 0) >= 2 * C.MIN_LIQUIDITY_USD
+           and old_enough(p) and p.get("base_mint") not in STABLE and p.get("quote_mint") in STABLE]
     hot.sort(key=gain, reverse=True)
     done = set(st.setdefault("discovered_pools", {}))
     wallets = st["wallets"]
