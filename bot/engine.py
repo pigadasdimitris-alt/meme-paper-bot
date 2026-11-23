@@ -415,7 +415,7 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
         held_mints.add(p["base_mint"])
 
     # κρατάμε τα αρχεία μικρά (τελευταίες ~6 ώρες)
-    cutoff = now.timestamp() - 6 * 3600
+    cutoff = now.timestamp() - getattr(C, "REENTRY_HOURS", 6) * 3600
     state["seen"] = {k: v for k, v in state["seen"].items() if parse_time(v).timestamp() > cutoff}
     state["reasons"] = {k: v for k, v in reasons.items() if parse_time(v[1]).timestamp() > cutoff}
     # σύνοψη λόγων απόρριψης ανά μοναδικό coin (τελευταίος λόγος του καθενός)

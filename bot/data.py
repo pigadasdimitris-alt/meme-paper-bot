@@ -89,8 +89,8 @@ def trending_pools(duration, page):
     return [parse_gt_pool(p) for p in (d or {}).get("data", [])]
 
 
-def top_volume_pools(page):
-    d = _get(f"{GT}/networks/solana/pools?page={page}&sort=h24_volume_usd_desc")
+def top_volume_pools(page, sort="h24_volume_usd_desc"):
+    d = _get(f"{GT}/networks/solana/pools?page={page}&sort={sort}")
     time.sleep(1.5)
     return [parse_gt_pool(p) for p in (d or {}).get("data", [])]
 
