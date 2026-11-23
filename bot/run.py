@@ -79,10 +79,14 @@ def one_cycle(state):
     pools = data.fetch_pools(engine.watch_due(state, now))
     for duration, page in C.TRENDING_SOURCES:
         pools += data.trending_pools(duration, page)
-    for page in range(1, getattr(C, "TOP_VOLUME_PAGES", 0) + 1):
-        pools += data.top_volume_pools(page)
-    for page in range(1, getattr(C, "TOP_TX_PAGES", 0) + 1):
-        pools += data.top_volume_pools(page, sort="h24_tx_count_desc")
+    # οι σελίδες των καθιερωμένων coins ελέγχονται εκ περιτροπής (3 ανά γύρο), για να μη μας "φρενάρει" το API
+    pages = [("h24_volume_usd_desc", p) for p in range(1, getattr(C, "TOP_VOLUME_PAGES", 0) + 1)] + \
+            [("h24_tx_count_desc", p) for p in range(1, getattr(C, "TOP_TX_PAGES", 0) + 1)]
+    if pages:
+        k = state["stats"].get("scans", 0) * 3
+        for i in range(3):
+            sort, page = pages[(k + i) % len(pages)]
+            pools += data.top_volume_pools(page, sort=sort)
     now = engine.now_utc()
     if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")
