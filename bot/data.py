@@ -199,10 +199,17 @@ def parse_rugcheck(rep, pool):
 
 
 def rugcheck(mint, pool):
-    rep = _get(RUGCHECK_API.format(mint), retries=2)
-    if not rep or not isinstance(rep, dict):
-        return {"ok": False}
-    try:
-        return parse_rugcheck(rep, pool)
-    except Exception:
-        return {"ok": False}
+    rep = _get(RUGCHECK_API.format(mint), retries=3)
+    if rep and isinstance(rep, dict):
+        try:
+            return parse_rugcheck(rep, pool)
+        except Exception:
+            pass
+    # εφεδρικά: η σύντομη αναφορά (πιο ελαφριά). Τα top-10 εκεί ελέγχονται μέσω των "danger" ρίσκων.
+    summ = _get(RUGCHECK_API.format(mint) + "/summary", retries=2)
+    if summ and isinstance(summ, dict) and "risks" in summ:
+        danger = [r.get("name") for r in summ.get("risks") or [] if str(r.get("level")).lower() == "danger"]
+        lp = summ.get("lpLockedPct")
+        return {"ok": True, "top10": 0.0, "lp_locked": _f(lp, None) if lp is not None else None,
+                "danger": danger, "rugged": bool(summ.get("rugged"))}
+    return {"ok": False}

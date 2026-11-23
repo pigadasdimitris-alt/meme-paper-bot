@@ -27,7 +27,7 @@ COPY_MIN_BUY_USD = 150      # αγνοούμε "ψίχουλα"
 COPY_MIN_AGE_MIN = 60       # όχι coins μικρότερα της 1 ώρας
 COPY_MAX_PC_M5 = 30.0       # όχι κυνήγι: αν ήδη +30% στα 5', το αφήνουμε
 DISCOVER_EVERY = 10         # κάθε πόσους γύρους ψάχνουμε νέα πορτοφόλια
-DISCOVER_POOLS = 3
+DISCOVER_POOLS = 6
 EARLY_GAIN = 1.3            # αγόρασε σε τιμή που μετά ανέβηκε τουλάχιστον +30%
 ROUND_TRIP_GAIN = 1.15
 BOT_TRADES = 25             # πορτοφόλια με τόσα trades στο ίδιο pool είναι bots/arbitrage
@@ -322,7 +322,7 @@ def cycle(st, pools):
         engine.manage_positions(st, quotes, engine.now_utc(), confirm_fn=confirm)
     learn(st, before)
     st["stats"]["scans"] += 1
-    if st["stats"]["scans"] % DISCOVER_EVERY == 1 or not st["wallets"]:
+    if st["stats"]["scans"] % DISCOVER_EVERY == 1 or len(tracked(st)) < 15:
         discover(st, pools, now)
     watch(st, engine.now_utc())
     now = engine.now_utc()
