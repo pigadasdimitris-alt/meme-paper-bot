@@ -22,7 +22,7 @@ LIVE_STATE = DOCS / "live.json"
 CONTROL = ROOT / "control.json"
 
 
-PAPER_EPOCH = "2026-11-22-honest-rugs"   # νέα αρχή του paper με ειλικρινή καταγραφή των rugs
+PAPER_EPOCH = "2026-11-23-established-100"   # νέα αρχή του paper με ειλικρινή καταγραφή των rugs
 
 
 def load_state(now):
@@ -79,6 +79,8 @@ def one_cycle(state):
     pools = data.fetch_pools(engine.watch_due(state, now))
     for duration, page in C.TRENDING_SOURCES:
         pools += data.trending_pools(duration, page)
+    for page in range(1, getattr(C, "TOP_VOLUME_PAGES", 0) + 1):
+        pools += data.top_volume_pools(page)
     now = engine.now_utc()
     if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")

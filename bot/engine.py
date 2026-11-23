@@ -88,6 +88,8 @@ def reject_reason(p, now):
         return "πολλές πωλήσεις"
     if p["pc_m5"] < C.MIN_PRICE_CHANGE_M5:
         return "χωρίς ορμή"
+    if p["pc_h1"] < getattr(C, "MIN_PRICE_CHANGE_H1", -1e9):
+        return "πτωτική ώρα"
     if p["pc_m5"] > C.MAX_PRICE_CHANGE_M5 or p["pc_h1"] > C.MAX_PRICE_CHANGE_H1:
         return "ήδη εκτοξευμένο"
     return None

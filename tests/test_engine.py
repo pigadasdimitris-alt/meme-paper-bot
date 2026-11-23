@@ -9,8 +9,8 @@ from bot.report import write_readme
 def pool(now, **kw):
     p = {
         "pool": "POOL1", "name": "TEST / SOL", "base_mint": "MINT1", "quote_mint": C.SOL_MINT, "dex": "raydium",
-        "price": 0.001, "created_at": engine.iso(now - timedelta(minutes=30)), "fdv": 300_000, "liquidity": 40_000,
-        "vol_m5": 10_000, "vol_h1": 80_000, "pc_m5": 8.0, "pc_h1": 60.0, "buys_m5": 80, "sells_m5": 40,
+        "price": 0.001, "created_at": engine.iso(now - timedelta(days=3)), "fdv": 3_000_000, "liquidity": 150_000,
+        "vol_m5": 10_000, "vol_h1": 80_000, "pc_m5": 3.0, "pc_h1": 12.0, "buys_m5": 80, "sells_m5": 40,
         "buyers_m5": 50, "buys_h1": 600, "sells_h1": 300,
     }
     p.update(kw)
@@ -36,8 +36,8 @@ def test_take_profit_with_costs():
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now)
     assert len(s["positions"]) == 1
-    assert abs(s["balance"] - (70 - 10 - C.FEE_USD_PER_TX)) < 1e-9
-    engine.manage_positions(s, {"POOL1": {"price": 0.00135, "liquidity": 40_000}}, now + timedelta(minutes=5))
+    assert abs(s["balance"] - (C.START_BALANCE_USD - 10 - C.FEE_USD_PER_TX)) < 1e-9
+    engine.manage_positions(s, {"POOL1": {"price": 0.00135, "liquidity": 150_000}}, now + timedelta(minutes=5))
     assert not s["positions"]
     t = s["closed"][0]
     assert t["reason"] == "take profit"
@@ -49,14 +49,15 @@ def test_stop_and_breakeven():
     now = engine.now_utc()
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now)
-    engine.manage_positions(s, {"POOL1": {"price": 0.00118, "liquidity": 40_000}}, now + timedelta(minutes=2))
+    engine.manage_positions(s, {"POOL1": {"price": 0.00118, "liquidity": 150_000}}, now + timedelta(minutes=2))
     assert s["positions"][0]["stop_pct"] == 0.0
-    engine.manage_positions(s, {"POOL1": {"price": 0.00099, "liquidity": 40_000}}, now + timedelta(minutes=4))
+    engine.manage_positions(s, {"POOL1": {"price": 0.00099, "liquidity": 150_000}}, now + timedelta(minutes=4))
     assert s["closed"][0]["reason"] == "stop στο 0"
     assert s["closed"][0]["pnl"] < 0  # ακόμα και στο 0 χάνει λόγω κόστους — ρεαλιστικό
 
 
-def test_rug_exit_and_daily_limit():
+def test_rug_exit_and_daily_limit(monkeypatch):
+    monkeypatch.setattr(C, "MAX_DAILY_LOSS_USD", 15.0)
     now = engine.now_utc()
     s = engine.new_state(now)
     pools = [pool(now, pool=f"P{i}", base_mint=f"M{i}") for i in range(6)]
@@ -65,7 +66,7 @@ def test_rug_exit_and_daily_limit():
     quotes = {p["pool"]: {"price": 0.0003, "liquidity": 5_000} for p in s["positions"]}
     engine.manage_positions(s, quotes, now + timedelta(minutes=3))
     assert len(s["closed"]) == 4 and s["daily"]["realized"] < -C.MAX_DAILY_LOSS_USD
-    more = [pool(now, pool=f"Q{i}", base_mint=f"N{i}") for i in range(3)]
+    more = [pool(now, pool=f"Q{i}", base_mint=f"N{i}", name=f"Q{i} / SOL") for i in range(3)]
     engine.scan_and_enter(s, more, now + timedelta(minutes=4))
     assert not s["positions"]
     assert s["stats"]["rejects"].get("όριο ημερήσιας ζημιάς")
@@ -102,7 +103,7 @@ def test_readme_renders(tmp_path: Path):
     now = engine.now_utc()
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now)
-    engine.manage_positions(s, {"POOL1": {"price": 0.0008, "liquidity": 40_000}}, now + timedelta(minutes=1))
+    engine.manage_positions(s, {"POOL1": {"price": 0.0008, "liquidity": 150_000}}, now + timedelta(minutes=1))
     engine.snapshot(s, now)
     out = tmp_path / "README.md"
     write_readme(s, out)
@@ -112,14 +113,14 @@ def test_readme_renders(tmp_path: Path):
 def test_watchlist_matures():
     now = engine.now_utc()
     s = engine.new_state(now)
-    young = pool(now, pool="Y1", created_at=engine.iso(now - timedelta(minutes=2)), liquidity=10_000)
+    young = pool(now, pool="Y1", created_at=engine.iso(now - timedelta(minutes=2)), liquidity=C.MIN_LIQUIDITY_USD)
     tiny = pool(now, pool="Y2", base_mint="M2", created_at=engine.iso(now - timedelta(minutes=2)), liquidity=500)
     engine.update_watchlist(s, [young, tiny], now)
     assert set(s["watch"]) == {"Y1"}
     assert engine.watch_due(s, now) == []
-    later = now + timedelta(minutes=12)
+    later = now + timedelta(minutes=C.MIN_AGE_MIN + 2)
     assert engine.watch_due(s, later) == ["Y1"]
-    engine.update_watchlist(s, [], now + timedelta(minutes=200))
+    engine.update_watchlist(s, [], now + timedelta(minutes=C.MAX_AGE_MIN + 10))
     assert s["watch"] == {}
 
 
@@ -141,13 +142,13 @@ def test_price_spike_needs_confirmation():
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now)
     # λάθος τιμή 100.000x — αγνοείται
-    engine.manage_positions(s, {"POOL1": {"price": 100.0, "liquidity": 40_000, "src": "gt"}}, now + timedelta(minutes=1))
+    engine.manage_positions(s, {"POOL1": {"price": 100.0, "liquidity": 150_000, "src": "gt"}}, now + timedelta(minutes=1))
     assert s["positions"] and not s["closed"]
     # επόμενη μέτρηση κανονική — η ύποπτη ξεχνιέται
-    engine.manage_positions(s, {"POOL1": {"price": 0.00105, "liquidity": 40_000, "src": "gt"}}, now + timedelta(minutes=2))
+    engine.manage_positions(s, {"POOL1": {"price": 0.00105, "liquidity": 150_000, "src": "gt"}}, now + timedelta(minutes=2))
     assert s["positions"] and "suspect_price" not in s["positions"][0]
     # πραγματικό rug: -95% δύο φορές στη σειρά → κλείνει
-    q = {"POOL1": {"price": 0.00005, "liquidity": 40_000, "src": "gt"}}
+    q = {"POOL1": {"price": 0.00005, "liquidity": 150_000, "src": "gt"}}
     engine.manage_positions(s, q, now + timedelta(minutes=3))
     assert s["positions"]
     engine.manage_positions(s, q, now + timedelta(minutes=4))
@@ -175,7 +176,7 @@ def test_liquidity_exit_needs_two_readings():
     now = engine.now_utc()
     s = engine.new_state(now)
     engine.scan_and_enter(s, [pool(now)], now)
-    q = {"POOL1": {"price": 0.001, "liquidity": 5_000, "src": "gt"}}
+    q = {"POOL1": {"price": 0.001, "liquidity": 50_000, "src": "gt"}}
     engine.manage_positions(s, q, now + timedelta(minutes=1))
     assert s["positions"]
     engine.manage_positions(s, q, now + timedelta(minutes=2))
@@ -190,7 +191,7 @@ def _open_one(now):
 
 def test_bad_price_needs_second_source():
     now = engine.now_utc()
-    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
+    bad = {"POOL1": {"price": 120.0, "liquidity": 150_000, "src": "gt"}}
     s = _open_one(now)
     for i in range(5):  # η κύρια πηγή επιμένει σε λάθος τιμή → χρησιμοποιείται η δεύτερη, ποτέ ψεύτικο κέρδος
         engine.manage_positions(s, bad, now + timedelta(minutes=i + 1), confirm_fn=lambda p: 0.0011)
@@ -201,7 +202,7 @@ def test_bad_price_needs_second_source():
 def test_real_jump_accepted_when_sources_agree():
     now = engine.now_utc()
     s = _open_one(now)
-    q = {"POOL1": {"price": 0.005, "liquidity": 40_000, "src": "gt"}}
+    q = {"POOL1": {"price": 0.005, "liquidity": 150_000, "src": "gt"}}
     engine.manage_positions(s, q, now + timedelta(minutes=1), confirm_fn=lambda p: 0.0049)
     assert s["positions"]  # πρώτη μέτρηση: αναμονή
     engine.manage_positions(s, q, now + timedelta(minutes=2), confirm_fn=lambda p: 0.0049)
@@ -227,8 +228,8 @@ def test_coin_image_is_kept():
 def test_stuck_position_closes_by_time():
     now = engine.now_utc()
     s = _open_one(now)
-    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
-    engine.manage_positions(s, bad, now + timedelta(minutes=95), confirm_fn=lambda p: 50.0)  # και οι δύο τρελές
+    bad = {"POOL1": {"price": 120.0, "liquidity": 150_000, "src": "gt"}}
+    engine.manage_positions(s, bad, now + timedelta(minutes=C.MAX_HOLD_MIN + 35), confirm_fn=lambda p: 50.0)  # και οι δύο τρελές
     assert s["closed"] and s["closed"][0]["reason"] == "λήξη χρόνου (αβέβαιη τιμή)"
     assert abs(s["closed"][0]["exit_market"] - 0.001) < 1e-12
 
@@ -236,8 +237,8 @@ def test_stuck_position_closes_by_time():
 def test_glitchy_primary_still_hits_time_exit():
     now = engine.now_utc()
     s = _open_one(now)
-    bad = {"POOL1": {"price": 120.0, "liquidity": 40_000, "src": "gt"}}
-    engine.manage_positions(s, bad, now + timedelta(minutes=61), confirm_fn=lambda p: 0.00102)
+    bad = {"POOL1": {"price": 120.0, "liquidity": 150_000, "src": "gt"}}
+    engine.manage_positions(s, bad, now + timedelta(minutes=C.MAX_HOLD_MIN + 1), confirm_fn=lambda p: 0.00102)
     assert s["closed"] and s["closed"][0]["reason"] == "λήξη χρόνου"
 
 
@@ -260,7 +261,7 @@ def test_live_buy_and_sell_use_real_amounts(monkeypatch):
     engine.scan_and_enter(s, [pool(now)], now)
     pos = s["positions"][0]
     assert pos["cost"] == 3.98 and pos["buy_sig"] == "B" and abs(s["balance"] - 26.02) < 1e-9
-    engine.manage_positions(s, {"POOL1": {"price": 0.00135, "liquidity": 40_000}}, now + timedelta(minutes=3))
+    engine.manage_positions(s, {"POOL1": {"price": 0.00135, "liquidity": 150_000}}, now + timedelta(minutes=3))
     t = s["closed"][0]
     assert t["proceeds"] == 5.10 and abs(t["pnl"] - 1.12) < 1e-9 and t["sell_sig"] == "S"
 
@@ -288,7 +289,7 @@ def test_live_failed_sell_keeps_position_and_retries(monkeypatch):
     monkeypatch.setattr(engine, "LIVE_HOOKS", {
         "buy": lambda p, size: {"qty": 4000.0, "cost_usd": 4.0, "sig": "B"}, "sell": flaky_sell})
     engine.scan_and_enter(s, [pool(now)], now)
-    q = {"POOL1": {"price": 0.0008, "liquidity": 40_000}}
+    q = {"POOL1": {"price": 0.0008, "liquidity": 150_000}}
     engine.manage_positions(s, q, now + timedelta(minutes=2))
     assert s["positions"] and s["positions"][0]["sell_fail"] == 1
     engine.manage_positions(s, q, now + timedelta(minutes=3))
@@ -334,7 +335,7 @@ def test_live_unsellable_is_written_off_after_retries(monkeypatch):
         raise RuntimeError('HTTP 400 {"error":"No routes found"}')
     monkeypatch.setattr(engine, "LIVE_HOOKS", {"buy": lambda p, size: {"qty": 4000.0, "cost_usd": 4.0}, "sell": no_route})
     engine.scan_and_enter(s, [pool(now)], now)
-    q = {"POOL1": {"price": 0.0008, "liquidity": 40_000, "src": "gt"}}
+    q = {"POOL1": {"price": 0.0008, "liquidity": 150_000, "src": "gt"}}
     for i in range(engine.NO_ROUTE_GIVE_UP):
         engine.manage_positions(s, q, now + timedelta(minutes=2 + i))
     assert not s["positions"] and s["closed"][0]["pnl"] == -4.0 and s["zombies"][0]["mint"] == "MINT1"
@@ -354,7 +355,8 @@ def test_rugged_name_is_never_bought_again():
     assert not s["positions"]
 
 
-def test_daily_halt_is_sticky_until_midnight():
+def test_daily_halt_is_sticky_until_midnight(monkeypatch):
+    monkeypatch.setattr(C, "MAX_DAILY_LOSS_USD", 15.0)
     now = engine.now_utc()
     s = engine.new_state(now)
     s["daily"]["realized"] = -16.0
