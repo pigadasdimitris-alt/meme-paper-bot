@@ -67,6 +67,8 @@ def reject_reason(p, now):
         return "όχι meme token"
     if p["price"] <= 0:
         return "χωρίς τιμή"
+    if p.get("quote_mint") and p["quote_mint"] not in C.QUOTE_MINTS:
+        return "όχι ζεύγος SOL/USDC"
     created = parse_time(p["created_at"])
     if not created:
         return "χωρίς ηλικία"

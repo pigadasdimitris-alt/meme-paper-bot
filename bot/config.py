@@ -14,8 +14,8 @@ FEE_USD_PER_TX = 0.03           # network/priority fee ανά συναλλαγή
 # --- Φίλτρα εισόδου: ΚΑΘΙΕΡΩΜΕΝΑ meme coins (>1 μέρα) με ορμή — τα φρέσκα coins κάνουν τα περισσότερα rugs ---
 MIN_AGE_MIN = 24 * 60           # τουλάχιστον 1 μέρα ζωής
 MAX_AGE_MIN = 365 * 24 * 60     # έως 1 χρόνο
-MIN_LIQUIDITY_USD = 100_000
-MIN_VOLUME_M5_USD = 5_000
+MIN_LIQUIDITY_USD = 50_000
+MIN_VOLUME_M5_USD = 2_000
 MIN_FDV_USD = 500_000
 MAX_FDV_USD = 300_000_000
 MIN_BUYERS_M5 = 20

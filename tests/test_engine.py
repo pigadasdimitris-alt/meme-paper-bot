@@ -374,3 +374,9 @@ def test_rug_in_one_book_blocks_the_other():
     engine.scan_and_enter(live_s, [pool(now, name="Koop / SOL")], now)
     assert not live_s["positions"]
     engine.SHARED_RUGS.clear()
+
+
+def test_only_sol_or_stable_pairs():
+    now = engine.now_utc()
+    assert engine.reject_reason(pool(now, quote_mint="XsNVDA"), now) == "όχι ζεύγος SOL/USDC"
+    assert engine.reject_reason(pool(now), now) is None
