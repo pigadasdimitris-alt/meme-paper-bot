@@ -29,6 +29,7 @@ COPY_MAX_PC_M5 = 30.0       # όχι κυνήγι: αν ήδη +30% στα 5', �
 DISCOVER_EVERY = 10         # κάθε πόσους γύρους ψάχνουμε νέα πορτοφόλια
 DISCOVER_POOLS = 3
 EARLY_GAIN = 1.3            # αγόρασε σε τιμή που μετά ανέβηκε τουλάχιστον +30%
+ROUND_TRIP_GAIN = 1.15
 BOT_TRADES = 25             # πορτοφόλια με τόσα trades στο ίδιο pool είναι bots/arbitrage
 MAX_TX_FETCH = 40           # όριο κλήσεων getTransaction ανά γύρο (δημόσιο RPC)
 STABLE = set(C.QUOTE_MINTS)
@@ -110,6 +111,20 @@ def early_winners(trades, base_mint, price_now):
         price = data._f(t.get("price_to_in_usd"))
         if price > 0 and data._f(t.get("volume_in_usd")) >= COPY_MIN_BUY_USD and price_now >= EARLY_GAIN * price:
             out.add(w)
+    # ή: αγόρασε και πούλησε με κέρδος +15% (πραγματοποιημένο κέρδος μέσα στο ίδιο διάστημα)
+    first_buy, best_sell = {}, {}
+    for t in sorted(trades, key=lambda t: str(t.get("block_timestamp"))):
+        w = t.get("tx_from_address")
+        if not w or count.get(w, 0) >= BOT_TRADES:
+            continue
+        if t.get("kind") == "buy" and t.get("to_token_address") == base_mint \
+                and data._f(t.get("volume_in_usd")) >= COPY_MIN_BUY_USD:
+            first_buy.setdefault(w, data._f(t.get("price_to_in_usd")))
+        elif t.get("kind") == "sell" and t.get("from_token_address") == base_mint and w in first_buy:
+            best_sell[w] = max(best_sell.get(w, 0.0), data._f(t.get("price_from_in_usd")))
+    for w, buy in first_buy.items():
+        if buy > 0 and best_sell.get(w, 0) >= ROUND_TRIP_GAIN * buy:
+            out.add(w)
     return out
 
 
@@ -142,7 +157,7 @@ def discover(st, pools, now):
         engine.log(st, now, f"Ανακάλυψη: {len(picked)} coins σε άνοδο ({', '.join(p['name'] for p in picked)}) "
                             f"→ {found} πορτοφόλια που αγόρασαν νωρίς")
     # κρατάμε μικρό το αρχείο
-    cutoff = now.timestamp() - 48 * 3600
+    cutoff = now.timestamp() - 3 * 3600
     st["discovered_pools"] = {k: v for k, v in st["discovered_pools"].items()
                               if engine.parse_time(v).timestamp() > cutoff}
     ranked = sorted(wallets.items(), key=lambda kv: (kv[1]["score"], kv[1]["added"]), reverse=True)

@@ -71,3 +71,11 @@ def test_follow_sells_and_learning():
     assert st["closed"][-1]["reason"] == "πούλησαν τα πορτοφόλια"
     copybot.learn(st, before)
     assert st["wallets"]["W1"]["score"] == 0
+
+
+def test_round_trip_winner():
+    trades = [{"tx_from_address": "RT", "kind": "buy", "to_token_address": "M", "price_to_in_usd": "1.0",
+               "volume_in_usd": "300", "block_timestamp": "2026-11-23T10:00:00Z"},
+              {"tx_from_address": "RT", "kind": "sell", "from_token_address": "M", "price_from_in_usd": "1.2",
+               "volume_in_usd": "350", "block_timestamp": "2026-11-23T10:20:00Z"}]
+    assert copybot.early_winners(trades, "M", 1.0) == {"RT"}
