@@ -142,7 +142,7 @@ legend span{color:var(--dim);font-weight:400}
   <div class="bar"><span>meme-desk <span class="modes" id="modes"><button data-m="paper" class="on">paper</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
 
-  <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper:$70</span></legend><span class="tag live">live</span>
+  <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper</span></legend><span class="tag live">live</span>
     <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div><div class="wallet" id="wallet"></div></div><div class="mult" id="mult">x—</div></div>
     <div class="chart" id="chartbox"><svg id="dots"></svg></div>
   </fieldset>
@@ -187,7 +187,7 @@ const FILE = () => MODE==="live" ? "live.json" : "state.json";
 const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;
 const RAW = () => `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${FILE()}`;
 const LOCAL=location.hash.includes("local");
-let SLIP=0.025, FEE=0.03; const TP=30, POLL=75000, tz="Europe/Athens";
+let SLIP=0.025, FEE=0.03; const TP=20, POLL=75000, tz="Europe/Athens";
 const $=id=>document.getElementById(id);
 const T=s=>new Date(s).getTime();
 const fH=s=>new Date(s).toLocaleTimeString("el-GR",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false});
@@ -282,7 +282,7 @@ function drawLanes(){
 function renderPositions(st){
   $("slots").textContent=`${st.positions.length}/${MODE==="live"?3:4}`;
   $("positions").innerHTML=st.positions.length?st.positions.map(p=>{
-    const lo=Math.min(p.stop_pct,-15), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
+    const lo=Math.min(p.stop_pct,-10), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
     const l=Math.min(zero,cur), w=Math.abs(cur-zero);
     return `<div class="pos"><div class="pn"><b style="display:flex;align-items:center;gap:6px;min-width:0">${av(p.name,p.image,"sm")}<span style="overflow:hidden;text-overflow:ellipsis">${esc(short(p.name))}</span></b><span class="${p.last_pct>=0?"mint":"coral"}">${pct(p.last_pct)}</span></div>
       <div class="pm">#${p.id} · ${k$(p.entry_signals?.liquidity||0)} liq · ${Math.round((Date.now()-T(p.entry_time))/60000)}m</div>
@@ -300,7 +300,7 @@ function renderAnalyst(st){
   const bars=(v,min)=>{const n=Math.max(1,Math.min(12,Math.round(Math.log2(Math.max(v/min,1))*4+3))); return "█".repeat(n)+`<span class="off">${"█".repeat(12-n)}</span>`;};
   $("analyst").innerHTML=`<div class="pn" style="align-items:center"><b style="display:flex;align-items:center;gap:7px;min-width:0">${av(p.name,p.image,"lg")}<span style="overflow:hidden;text-overflow:ellipsis">${esc(short(p.name))}</span></b><span class="dim">${fH(p.entry_time)}</span></div>`+
     rows.map(([k,v,min,f])=>`<div class="sig"><span class="dim">${k}</span><span class="blocks">${bars(v,min)}</span><span>${f(v)}</span></div>`).join("")+
-    `<div class="note">πάνω από το ελάχιστο σε όλα → αγορά<br>έξοδος: +30% / stop -15%</div>`;
+    `<div class="note">πάνω από το ελάχιστο σε όλα → αγορά<br>έξοδος: +20% / stop -10% / 2 ώρες</div>`;
   $("armed").textContent = st.daily.realized<=-15 ? "paused" : "armed"; $("armed").className="tag"+(st.daily.realized<=-15?" coral":"");
 }
 
@@ -371,7 +371,7 @@ $("hf").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) 
 function render(st){
   ST=st;
   if(st.start_balance==null) st.start_balance = st.balance || 1;
-  $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : "— paper:$70";
+  $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : `— paper:$${(+st.start_balance).toFixed(0)}`;
   $("wallet").innerHTML = MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}${(st.withdrawn_usd||0)>0?` · <span class="mint">στο Revolut $${(+st.withdrawn_usd).toFixed(2)}</span>`:""}` : "";
   const eq=equity(st), WD=(st.withdrawn_usd||0), pnl=eq+WD-st.start_balance, mult=(eq+WD)/st.start_balance;
   countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
