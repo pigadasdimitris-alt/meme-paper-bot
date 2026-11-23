@@ -64,6 +64,8 @@ def parse_gt_pool(p):
         "vol_h1": _f(vol.get("h1")),
         "pc_m5": _f(pc.get("m5")),
         "pc_h1": _f(pc.get("h1")),
+        "pc_h6": _f(pc.get("h6")),
+        "pc_h24": _f(pc.get("h24")),
         "buys_m5": int(_f(m5.get("buys"))),
         "sells_m5": int(_f(m5.get("sells"))),
         "buyers_m5": int(_f(m5.get("buyers"))),

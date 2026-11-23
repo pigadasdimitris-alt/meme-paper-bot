@@ -28,7 +28,7 @@ COPY_MIN_AGE_MIN = 60       # όχι coins μικρότερα της 1 ώρας
 COPY_MAX_PC_M5 = 30.0       # όχι κυνήγι: αν ήδη +30% στα 5', το αφήνουμε
 DISCOVER_EVERY = 10         # κάθε πόσους γύρους ψάχνουμε νέα πορτοφόλια
 DISCOVER_POOLS = 3
-EARLY_GAIN = 1.5            # αγόρασε σε τιμή που μετά ανέβηκε τουλάχιστον +50%
+EARLY_GAIN = 1.3            # αγόρασε σε τιμή που μετά ανέβηκε τουλάχιστον +30%
 BOT_TRADES = 25             # πορτοφόλια με τόσα trades στο ίδιο pool είναι bots/arbitrage
 MAX_TX_FETCH = 40           # όριο κλήσεων getTransaction ανά γύρο (δημόσιο RPC)
 STABLE = set(C.QUOTE_MINTS)
@@ -114,18 +114,27 @@ def early_winners(trades, base_mint, price_now):
 
 
 def discover(st, pools, now):
-    hot = [p for p in pools if p.get("pc_h1", 0) >= 50 and p.get("liquidity", 0) >= C.MIN_LIQUIDITY_USD
-           and p.get("base_mint") not in STABLE]
-    hot.sort(key=lambda p: p["pc_h1"], reverse=True)
+    gain = lambda p: max(p.get("pc_h1", 0), p.get("pc_h6", 0), p.get("pc_h24", 0))
+    hot = [p for p in pools if gain(p) >= 50 and p.get("liquidity", 0) >= 10_000
+           and p.get("base_mint") not in STABLE and p.get("quote_mint") in STABLE]
+    hot.sort(key=gain, reverse=True)
     done = set(st.setdefault("discovered_pools", {}))
     wallets = st["wallets"]
-    for p in [h for h in hot if h["pool"] not in done][:DISCOVER_POOLS]:
+    found = 0
+    picked = [h for h in hot if h["pool"] not in done][:DISCOVER_POOLS]
+    for p in picked:
         st["discovered_pools"][p["pool"]] = engine.iso(now)
-        for w in early_winners(pool_trades(p["pool"]), p["base_mint"], p["price"]):
+        trades = pool_trades(p["pool"])
+        winners = early_winners(trades, p["base_mint"], p["price"])
+        found += len(winners)
+        for w in winners:
             info = wallets.setdefault(w, {"score": 0, "coins": [], "added": engine.iso(now), "last_sig": None})
             if p["base_mint"] not in info["coins"]:
                 info["coins"] = (info["coins"] + [p["base_mint"]])[-20:]
                 info["score"] += 1
+    if picked:
+        engine.log(st, now, f"Ανακάλυψη: {len(picked)} coins σε άνοδο ({', '.join(p['name'] for p in picked)}) "
+                            f"→ {found} πορτοφόλια που αγόρασαν νωρίς")
     # κρατάμε μικρό το αρχείο
     cutoff = now.timestamp() - 48 * 3600
     st["discovered_pools"] = {k: v for k, v in st["discovered_pools"].items()
