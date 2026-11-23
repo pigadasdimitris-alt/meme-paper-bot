@@ -14,8 +14,8 @@ FEE_USD_PER_TX = 0.03           # network/priority fee ανά συναλλαγή
 # --- Φίλτρα εισόδου: ΚΑΘΙΕΡΩΜΕΝΑ meme coins (>1 μέρα) με ορμή — τα φρέσκα coins κάνουν τα περισσότερα rugs ---
 MIN_AGE_MIN = 24 * 60           # τουλάχιστον 1 μέρα ζωής
 MAX_AGE_MIN = 365 * 24 * 60     # έως 1 χρόνο
-MIN_LIQUIDITY_USD = 50_000
-MIN_VOLUME_M5_USD = 2_000
+MIN_LIQUIDITY_USD = 25_000
+MIN_VOLUME_M5_USD = 1_000
 MIN_FDV_USD = 500_000
 MAX_FDV_USD = 300_000_000
 MIN_BUYERS_M5 = 20
@@ -66,3 +66,8 @@ PAYOUT_ADDRESS = "83q2aSN1mSkdDpq68P54uGHuYXWeK9zq1Lm5c4HHym6i"   # διεύθυ
 PAYOUT_KEEP_USD = 30.0          # τόσα μένουν πάντα στο bot
 PAYOUT_TRIGGER_USD = 20.0       # μεταφορά όταν το κέρδος πάνω από τα 30$ φτάσει τα 20$
 PAYOUT_MIN_HOURS = 12           # το πολύ μία μεταφορά ανά 12 ώρες
+
+# Έλεγχος rug πριν από κάθε αγορά (RugCheck) — ίδιος σε paper και live
+RUGCHECK = True
+MAX_TOP10_PCT = 35.0       # οι 10 μεγαλύτεροι κάτοχοι (χωρίς pools/lockers) κάτω από 35%
+MIN_LP_LOCKED_PCT = 90.0   # η ρευστότητα του pool κλειδωμένη/καμένη τουλάχιστον 90%

@@ -380,3 +380,33 @@ def test_only_sol_or_stable_pairs():
     now = engine.now_utc()
     assert engine.reject_reason(pool(now, quote_mint="XsNVDA"), now) == "όχι ζεύγος SOL/USDC"
     assert engine.reject_reason(pool(now), now) is None
+
+
+def test_rugcheck_blocks_and_passes():
+    from bot import data
+    now = engine.now_utc()
+    good = lambda m, p: {"ok": True, "top10": 20.0, "lp_locked": 100.0, "danger": [], "rugged": False}
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now, rug_fn=good)
+    assert len(s["positions"]) == 1
+    for rc, why in [({"ok": False}, "rugcheck μη διαθέσιμο"),
+                    ({"ok": True, "top10": 60.0, "lp_locked": 100.0, "danger": []}, "top-10 κάτοχοι πολλά"),
+                    ({"ok": True, "top10": 10.0, "lp_locked": 5.0, "danger": []}, "LP ξεκλείδωτη"),
+                    ({"ok": True, "top10": 10.0, "lp_locked": 100.0, "danger": ["Freeze Authority"]}, "rugcheck: κίνδυνος")]:
+        s = engine.new_state(now)
+        engine.scan_and_enter(s, [pool(now)], now, rug_fn=lambda m, p, rc=rc: rc)
+        assert not s["positions"] and s["reasons"]["POOL1"][0] == why
+    # μη διαθέσιμο → ξαναδοκιμάζει στον επόμενο γύρο
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now, rug_fn=lambda m, p: {"ok": False})
+    assert "POOL1" not in s["seen"]
+
+
+def test_parse_rugcheck_skips_pool_accounts():
+    from bot import data
+    rep = {"knownAccounts": {"AMMOWNER": {"type": "AMM"}},
+           "markets": [{"pubkey": "POOL1", "lp": {"lpLockedPct": 100}}],
+           "topHolders": [{"owner": "AMMOWNER", "pct": 40}] + [{"owner": f"W{i}", "pct": 2} for i in range(12)],
+           "risks": [{"name": "Mutable metadata", "level": "warn"}]}
+    r = data.parse_rugcheck(rep, "POOL1")
+    assert r["top10"] == 20.0 and r["lp_locked"] == 100.0 and r["danger"] == []

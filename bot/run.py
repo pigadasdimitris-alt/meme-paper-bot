@@ -90,7 +90,7 @@ def one_cycle(state):
     now = engine.now_utc()
     if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")
-    engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags,
+    engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags, rug_fn=data.rugcheck,
                          verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
     engine.snapshot(state, engine.now_utc())
     return pools
@@ -169,7 +169,7 @@ def live_cycle(lst, pools):
             else:
                 engine.manage_positions(lst, quotes, engine.now_utc(), confirm_fn=confirm)
         if lst["control"] == "on":
-            engine.scan_and_enter(lst, pools, engine.now_utc(), flags_fn=data.token_flags,
+            engine.scan_and_enter(lst, pools, engine.now_utc(), flags_fn=data.token_flags, rug_fn=data.rugcheck,
                                  verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
         # επιστροφή ενοικίου από άδειους λογαριασμούς token (όσων πουλήθηκαν)
         try:

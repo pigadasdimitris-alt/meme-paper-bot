@@ -362,7 +362,21 @@ def watch_due(state, now):
     return [k for _, k in due[:C.WATCH_MAX_FETCH]]
 
 
-def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
+def rug_reason(rc):
+    """Κανόνες RugCheck. Αν δεν απαντήσει, δεν αγοράζουμε (ξαναδοκιμάζει στον επόμενο γύρο)."""
+    if not rc.get("ok"):
+        return "rugcheck μη διαθέσιμο"
+    if rc.get("rugged") or rc.get("danger"):
+        return "rugcheck: κίνδυνος"
+    if rc.get("top10", 0) > getattr(C, "MAX_TOP10_PCT", 35.0):
+        return "top-10 κάτοχοι πολλά"
+    lp = rc.get("lp_locked")
+    if lp is not None and lp < getattr(C, "MIN_LP_LOCKED_PCT", 90.0):
+        return "LP ξεκλείδωτη"
+    return None
+
+
+def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None, rug_fn=None):
     """Αξιολογεί pools σε κάθε γύρο και ανοίγει εικονικές θέσεις στα καλύτερα.
     Κάθε coin ξαναελέγχεται σε κάθε γύρο (μπορεί να "ωριμάσει"), αλλά αγοράζεται το πολύ μία φορά."""
     state["stats"]["scans"] += 1
@@ -402,6 +416,14 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None):
                 continue
         if p["base_mint"] in held_mints:
             continue
+        if rug_fn and getattr(C, "RUGCHECK", False):
+            rc = rug_fn(p["base_mint"], p["pool"])
+            why = rug_reason(rc)
+            if why:
+                if rc.get("ok"):  # σίγουρη απόρριψη: δεν ξαναελέγχεται για λίγες ώρες
+                    state["seen"][p["pool"]] = iso(now)
+                reasons[p["pool"]] = [why, iso(now), p["name"], round(p["liquidity"])]
+                continue
         if verify_fn:  # η τιμή αγοράς πρέπει να συμφωνεί και με δεύτερη πηγή
             second = verify_fn(p)
             if second is not None and not agrees(p["price"], second):

@@ -158,3 +158,49 @@ def token_flags(mint):
         "freeze_authority": active(a.get("freeze_authority")),
         "image": a.get("image_url") if str(a.get("image_url") or "").startswith("https://") else None,
     }
+
+
+RUGCHECK_API = "https://api.rugcheck.xyz/v1/tokens/{}/report"
+_RC_SKIP_TYPES = {"AMM", "LOCKER", "amm", "locker"}
+
+
+def parse_rugcheck(rep, pool):
+    """Μετατρέπει την αναφορά RugCheck σε απλά νούμερα: top10 %, LP κλειδωμένη %, επικίνδυνα ρίσκα."""
+    known = rep.get("knownAccounts") or {}
+    skip = {k for k, v in known.items() if isinstance(v, dict) and str(v.get("type", "")) in _RC_SKIP_TYPES}
+    markets = rep.get("markets") or []
+    for m in markets:
+        skip.add(m.get("pubkey"))
+        lp = m.get("lp") or {}
+        for key in ("baseVault", "quoteVault"):
+            if lp.get(key):
+                skip.add(lp.get(key))
+        for key in ("liquidityA", "liquidityB", "liquidityAAccount", "liquidityBAccount"):
+            if m.get(key):
+                skip.add(m.get(key))
+    top = 0.0
+    n = 0
+    for h in rep.get("topHolders") or []:
+        if h.get("owner") in skip or h.get("address") in skip:
+            continue
+        top += _f(h.get("pct"))
+        n += 1
+        if n == 10:
+            break
+    lp_locked = None
+    for m in markets:
+        if m.get("pubkey") == pool:
+            lp_locked = _f((m.get("lp") or {}).get("lpLockedPct"), None)
+    danger = [r.get("name") for r in rep.get("risks") or [] if str(r.get("level")).lower() == "danger"]
+    return {"ok": True, "top10": round(top, 1), "lp_locked": lp_locked, "danger": danger,
+            "rugged": bool(rep.get("rugged"))}
+
+
+def rugcheck(mint, pool):
+    rep = _get(RUGCHECK_API.format(mint), retries=2)
+    if not rep or not isinstance(rep, dict):
+        return {"ok": False}
+    try:
+        return parse_rugcheck(rep, pool)
+    except Exception:
+        return {"ok": False}
