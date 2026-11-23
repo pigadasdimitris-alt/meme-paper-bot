@@ -11,7 +11,7 @@ import contextlib
 import urllib.request
 
 from . import config as C
-from . import data, engine, live
+from . import copybot, data, engine, live
 from .report import write_readme
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -20,6 +20,8 @@ STATE = DOCS / "state.json"
 TRADES = DOCS / "trades.csv"
 LIVE_STATE = DOCS / "live.json"
 CONTROL = ROOT / "control.json"
+COPY_STATE = DOCS / "copy.json"
+COPY_TRADES = DOCS / "copy_trades.csv"
 
 
 PAPER_EPOCH = "2026-11-23-established-100"   # νέα αρχή του paper με ειλικρινή καταγραφή των rugs
@@ -36,6 +38,19 @@ def load_state(now):
     st = engine.new_state(now)
     st["epoch"] = PAPER_EPOCH
     return st
+
+
+TRADE_COLS = ["id", "name", "dex", "entry_time", "exit_time", "hold_min", "entry_market", "exit_market",
+              "cost", "proceeds", "pnl", "pnl_pct", "peak_pct", "reason", "pool", "mint"]
+
+
+def save_copy(cst):
+    COPY_STATE.write_text(json.dumps(cst, ensure_ascii=False, indent=1))
+    with COPY_TRADES.open("w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=TRADE_COLS, extrasaction="ignore")
+        w.writeheader()
+        for t in cst["closed"]:
+            w.writerow(t)
 
 
 def save(state):
@@ -211,6 +226,8 @@ def main():
     engine.SHARED_RUGS.update(state.get("rug_names") or [])
     if lst is not None:
         engine.SHARED_RUGS.update(lst.get("rug_names") or [])
+    cst = copybot.load(COPY_STATE, engine.now_utc())
+    engine.SHARED_RUGS.update(cst.get("rug_names") or [])
     cycle = 0
     while True:
         t0 = time.time()
@@ -224,6 +241,14 @@ def main():
         except Exception as e:  # ένας κακός γύρος δεν σταματά το bot
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")
             print("cycle error:", repr(e), file=sys.stderr, flush=True)
+        try:   # δεύτερο paper bot: αντιγραφή έξυπνων πορτοφολιών
+            copybot.cycle(cst, pools)
+            print(f"  copy: wallets={cst['stats'].get('tracked_wallets')} open={len(cst['positions'])} "
+                  f"closed={len(cst['closed'])} equity=${engine.equity(cst):.2f}", flush=True)
+        except Exception as e:
+            engine.log(cst, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
+            print("copy error:", str(e)[:200], file=sys.stderr, flush=True)
+        save_copy(cst)
         if lst is not None:
             try:
                 live_cycle(lst, pools)
@@ -241,6 +266,7 @@ def main():
             break
         time.sleep(max(1, C.POLL_SECONDS - (time.time() - t0)))
     save(state)
+    save_copy(cst)
     if lst is not None:
         LIVE_STATE.write_text(json.dumps(lst, ensure_ascii=False, indent=1))
     git_commit(f"bot: τέλος γύρου {engine.iso(engine.now_utc())}")

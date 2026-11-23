@@ -36,6 +36,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;background:rep
 .modes{display:inline-flex;gap:3px;margin-left:4px;vertical-align:1px}
 .modes button{all:unset;cursor:pointer;font:700 10.5px var(--mono);padding:1px 7px;border:1px solid var(--faint);border-radius:3px;color:var(--dim)}
 .modes button.on[data-m=paper]{color:var(--violet);border-color:var(--violet)}
+.modes button.on[data-m=copy]{color:var(--amber,#f5b942);border-color:var(--amber,#f5b942)}
 .modes button.on[data-m=live]{color:#06210f;background:var(--mint);border-color:var(--mint)}
 .wallet{color:var(--dim);font-size:10.5px;margin-top:2px}
 .bar .mid i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:5px;vertical-align:1px;box-shadow:0 0 8px var(--mint)}
@@ -139,7 +140,7 @@ legend span{color:var(--dim);font-weight:400}
 </head>
 <body>
 <div class="wrap">
-  <div class="bar"><span>meme-desk <span class="modes" id="modes"><button data-m="paper" class="on">paper</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="bar"><span>meme-desk <span class="modes" id="modes"><button data-m="paper" class="on">paper</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
 
   <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper</span></legend><span class="tag live">live</span>
@@ -182,8 +183,8 @@ legend span{color:var(--dim);font-weight:400}
 <script>
 {
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
-let MODE = location.hash.includes("live") ? "live" : "paper";
-const FILE = () => MODE==="live" ? "live.json" : "state.json";
+let MODE = location.hash.includes("live") ? "live" : location.hash.includes("copy") ? "copy" : "paper";
+const FILE = () => MODE==="live" ? "live.json" : MODE==="copy" ? "copy.json" : "state.json";
 const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;
 const RAW = () => `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${FILE()}`;
 const LOCAL=location.hash.includes("local");
@@ -371,8 +372,8 @@ $("hf").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) 
 function render(st){
   ST=st;
   if(st.start_balance==null) st.start_balance = st.balance || 1;
-  $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : `— paper:$${(+st.start_balance).toFixed(0)}`;
-  $("wallet").innerHTML = MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}${(st.withdrawn_usd||0)>0?` · <span class="mint">στο Revolut $${(+st.withdrawn_usd).toFixed(2)}</span>`:""}` : "";
+  $("balsub").textContent = MODE==="live" ? `— live:$${(+st.start_balance).toFixed(2)}` : `— ${MODE}:$${(+st.start_balance).toFixed(0)}`;
+  $("wallet").innerHTML = MODE==="copy" ? `παρακολουθεί ${st.stats.tracked_wallets||0} έξυπνα πορτοφόλια · σήμα όταν αγοράσουν 2+ το ίδιο coin` : MODE==="live" && st.wallet ? `wallet ${esc(st.wallet.address.slice(0,4))}…${esc(st.wallet.address.slice(-4))} · ${(+st.wallet.sol).toFixed(4)} SOL · ${st.control==="on"?'<span class="mint">ON</span>':'<span class="coral">STOP</span>'}${(st.withdrawn_usd||0)>0?` · <span class="mint">στο Revolut $${(+st.withdrawn_usd).toFixed(2)}</span>`:""}` : "";
   const eq=equity(st), WD=(st.withdrawn_usd||0), pnl=eq+WD-st.start_balance, mult=(eq+WD)/st.start_balance;
   countTo($("eq"),shownEq,eq,v=>"$"+v.toFixed(2)); shownEq=eq;
   $("chg").innerHTML=`<span class="${pnl>=0?"mint":"coral"}">${usd(pnl)} (${pct(100*pnl/st.start_balance)})</span>`;
@@ -390,17 +391,18 @@ async function fetchState(){
 async function load(){
   try{ const st=await fetchState(); if(first||st.last_run!==lastRun){ lastRun=st.last_run; render(st); } else drawLanes(); $("err").style.display="none"; }
   catch(e){ $("err").style.display="block";
-    $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα"; }
+    $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα" + (MODE==="copy"?" — το copy bot μόλις ξεκίνησε":""); }
 }
 function setMode(m){
   MODE=m; SLIP = m==="live" ? 0.01 : 0.025; FEE = m==="live" ? 0 : 0.03;
   for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m===m);
   ST=null; PREV=null; first=true; lastRun=null; shownEq=null;
-  try{ history.replaceState(null,"", m==="live"?"#live":"#"); }catch(e){}
+  try{ history.replaceState(null,"", m==="paper"?"#":"#"+m); }catch(e){}
   load();
 }
 $("modes").addEventListener("click",e=>{const b=e.target.closest("button"); if(b && b.dataset.m!==MODE) setMode(b.dataset.m);});
-if(MODE==="live"){ SLIP=0.01; FEE=0; for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m==="live"); }
+if(MODE==="live"){ SLIP=0.01; FEE=0; }
+for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m===MODE);
 const ro=new ResizeObserver(()=>{drawDots();drawLanes();}); ro.observe($("dots")); ro.observe($("lanes"));
 load(); setInterval(load,POLL);
 document.addEventListener("visibilitychange",()=>{ if(!document.hidden) load(); });
