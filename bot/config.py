@@ -13,11 +13,11 @@ FEE_USD_PER_TX = 0.03           # network/priority fee ανά συναλλαγή
 
 # --- Φίλτρα εισόδου: ΚΑΘΙΕΡΩΜΕΝΑ meme coins (>1 μέρα) με ορμή — τα φρέσκα coins κάνουν τα περισσότερα rugs ---
 MIN_AGE_MIN = 24 * 60           # τουλάχιστον 1 μέρα ζωής
-MAX_AGE_MIN = 60 * 24 * 60      # έως ~2 μήνες
+MAX_AGE_MIN = 365 * 24 * 60     # έως 1 χρόνο
 MIN_LIQUIDITY_USD = 100_000
 MIN_VOLUME_M5_USD = 5_000
 MIN_FDV_USD = 500_000
-MAX_FDV_USD = 50_000_000
+MAX_FDV_USD = 300_000_000
 MIN_BUYERS_M5 = 20
 MIN_BUY_SELL_RATIO_H1 = 1.1     # αγορές/πωλήσεις τελευταίας ώρας
 MIN_PRICE_CHANGE_M5 = 1.0       # % — θέλουμε άνοδο...
@@ -38,7 +38,7 @@ LIQUIDITY_DROP_EXIT = 0.5      # αν η ρευστότητα πέσει κάτ�
 POLL_SECONDS = 60
 NEW_POOL_PAGES = 0               # δεν χρειαζόμαστε πια τα ολοκαίνουργια pools
 TRENDING_SOURCES = [("5m", 1), ("5m", 2), ("5m", 3), ("1h", 1), ("1h", 2), ("6h", 1)]
-TOP_VOLUME_PAGES = 2            # + τα pools με τον μεγαλύτερο όγκο 24ώρου
+TOP_VOLUME_PAGES = 8            # + τα pools με τον μεγαλύτερο όγκο 24ώρου (~160 καθιερωμένα coins)
 WATCH_MIN_LIQ_FRACTION = 0.4    # μπαίνει στη λίστα παρακολούθησης αν έχει ήδη ≥40% της ελάχιστης ρευστότητας
 WATCH_MAX_FETCH = 60            # πόσα από τη λίστα ξαναελέγχονται ανά γύρο
 TIMEZONE = "Europe/Athens"
