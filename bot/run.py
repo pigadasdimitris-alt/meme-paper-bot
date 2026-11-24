@@ -31,6 +31,9 @@ def load_state(now):
     if STATE.exists():
         st = json.loads(STATE.read_text())
         if st.get("epoch") == PAPER_EPOCH:
+            if "losers" not in st:   # μία φορά: τα χαμένα trades του παρελθόντος μπαίνουν κι αυτά στην παύση 24ω
+                st["losers"] = {t["mint"]: t["exit_time"] for t in st["closed"]
+                                if t.get("pnl", 0) < 0 and ("stop" in t["reason"] or "rug" in t["reason"])}
             return st
         archive = DOCS / f"state_before_{PAPER_EPOCH}.json"
         if not archive.exists():
