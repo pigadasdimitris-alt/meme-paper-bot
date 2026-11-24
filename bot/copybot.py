@@ -271,7 +271,9 @@ def enter(st, now, flags_fn=data.token_flags, rug_fn=data.rugcheck, pool_fn=best
             elif f.get("image"):
                 p = {**p, "image": f["image"]}
         if not why and getattr(C, "RUGCHECK", False):
-            why = engine.rug_reason(rug_fn(mint, p["pool"]))
+            rc = dict(rug_fn(mint, p["pool"]))
+            rc["lp_locked"] = None   # χαλαρό copy: δεχόμαστε ξεκλείδωτη ρευστότητα (μένουν οι υπόλοιποι έλεγχοι)
+            why = engine.rug_reason(rc)
         name = p["name"] if p else mint[:6]
         if why:
             reasons[mint] = [why, engine.iso(now), name, len(ws)]
