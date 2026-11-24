@@ -422,3 +422,26 @@ def test_no_rebuy_after_stop_loss():
     later = now + timedelta(hours=3)
     engine.scan_and_enter(s, [pool(later)], later)
     assert not s["positions"] and s["reasons"]["POOL1"][0] == "έχασε πρόσφατα (24ω)"
+
+
+def test_trailing_stop_and_lab_overrides():
+    from bot import run
+    now = engine.now_utc()
+    with run.overrides(C.LAB["trail"]):
+        s = engine.new_state(now)
+        engine.scan_and_enter(s, [pool(now)], now)
+        pos = s["positions"][0]
+        e = pos["entry_market"]
+        engine.manage_positions(s, {"POOL1": {"price": e * 1.5, "liquidity": 150_000, "src": "gt"}}, now)
+        assert s["positions"]  # δεν υπάρχει σταθερό take profit
+        engine.manage_positions(s, {"POOL1": {"price": e * 1.40, "liquidity": 150_000, "src": "gt"}}, now)
+        assert s["closed"][-1]["reason"] == "trailing stop"
+    assert C.TAKE_PROFIT_PCT == 20.0 and getattr(C, "TRAIL_PCT", None) is None
+
+
+def test_dip_entry_filter():
+    from bot import run
+    now = engine.now_utc()
+    with run.overrides(C.LAB["dip"]):
+        assert engine.reject_reason(pool(now, pc_h1=-20, pc_m5=2, buys_m5=60, sells_m5=30), now) is None
+        assert engine.reject_reason(pool(now, pc_h1=12), now) == "ήδη εκτοξευμένο"

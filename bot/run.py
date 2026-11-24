@@ -22,6 +22,8 @@ LIVE_STATE = DOCS / "live.json"
 CONTROL = ROOT / "control.json"
 COPY_STATE = DOCS / "copy.json"
 COPY_TRADES = DOCS / "copy_trades.csv"
+LAB_DIR = DOCS / "lab"
+LAB_SUMMARY = DOCS / "lab.json"
 
 
 PAPER_EPOCH = "2026-11-23-established-100"   # νέα αρχή του paper με ειλικρινή καταγραφή των rugs
@@ -112,6 +114,68 @@ def one_cycle(state):
                          verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
     engine.snapshot(state, engine.now_utc())
     return pools
+
+
+# ---------------- ΕΡΓΑΣΤΗΡΙΟ ----------------
+
+@contextlib.contextmanager
+def overrides(params):
+    params = {k: v for k, v in params.items() if k != "label"}
+    old = {k: getattr(C, k, None) for k in params}
+    for k, v in params.items():
+        setattr(C, k, v)
+    try:
+        yield
+    finally:
+        for k, v in old.items():
+            setattr(C, k, v)
+
+
+def load_lab(now):
+    LAB_DIR.mkdir(parents=True, exist_ok=True)
+    out = {}
+    for name in C.LAB:
+        f = LAB_DIR / f"{name}.json"
+        st = json.loads(f.read_text()) if f.exists() else None
+        if not st or st.get("epoch") != C.LAB_EPOCH:
+            st = engine.new_state(now)
+            st.update({"epoch": C.LAB_EPOCH, "mode": name})
+        out[name] = st
+    return out
+
+
+def lab_cycle(st, pools):
+    now = engine.now_utc()
+    engine.roll_day(st, now)
+    if st["positions"]:
+        quotes = data.pools_now(st["positions"])
+        confirm = lambda pos: (data.ds_price(pos["pool"], pos["mint"])
+                               if quotes.get(pos["pool"], {}).get("src") == "gt" else None)
+        engine.manage_positions(st, quotes, engine.now_utc(), confirm_fn=confirm)
+    engine.scan_and_enter(st, pools, engine.now_utc(), flags_fn=data.token_flags, rug_fn=data.rugcheck,
+                         verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
+    engine.snapshot(st, engine.now_utc())
+
+
+def lab_row(key, label, st):
+    closed = st.get("closed") or []
+    wins = [t for t in closed if t.get("pnl", 0) > 0]
+    hist = st.get("equity_history") or []
+    eq = hist[-1][1] if hist else st.get("start_balance", 100.0)
+    return {"key": key, "label": label, "equity": round(eq, 2), "start": st.get("start_balance", 100.0),
+            "trades": len(closed), "wins": len(wins), "open": len(st.get("positions") or []),
+            "rugs": sum(1 for t in closed if "rug" in str(t.get("reason"))), "last_run": st.get("last_run")}
+
+
+def save_lab(lab, state, cst):
+    for name, st in lab.items():
+        (LAB_DIR / f"{name}.json").write_text(json.dumps(st, ensure_ascii=False, indent=1))
+    rows = [lab_row("paper", "Momentum", state)] + \
+           [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + \
+           [lab_row("copy", "Copy πορτοφολιών", cst)]
+    rows.sort(key=lambda r: r["equity"], reverse=True)
+    LAB_SUMMARY.write_text(json.dumps({"updated": engine.iso(engine.now_utc()), "since": "2026-11-24",
+                                       "rows": rows}, ensure_ascii=False, indent=1))
 
 
 # ---------------- LIVE ----------------
@@ -231,6 +295,9 @@ def main():
         engine.SHARED_RUGS.update(lst.get("rug_names") or [])
     cst = copybot.load(COPY_STATE, engine.now_utc())
     engine.SHARED_RUGS.update(cst.get("rug_names") or [])
+    lab = load_lab(engine.now_utc())
+    for st in lab.values():
+        engine.SHARED_RUGS.update(st.get("rug_names") or [])
     cycle = 0
     while True:
         t0 = time.time()
@@ -256,6 +323,15 @@ def main():
             engine.log(cst, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
             print("copy error:", str(e)[:200], file=sys.stderr, flush=True)
         save_copy(cst)
+        for name, st in lab.items():   # εργαστήριο: ίδια coins, άλλοι κανόνες
+            try:
+                with overrides(C.LAB[name]):
+                    lab_cycle(st, pools)
+            except Exception as e:
+                engine.log(st, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
+                print(f"lab {name} error:", str(e)[:200], file=sys.stderr, flush=True)
+        print("  lab: " + " ".join(f"{n}=${engine.equity(st):.2f}" for n, st in lab.items()), flush=True)
+        save_lab(lab, state, cst)
         if lst is not None:
             try:
                 live_cycle(lst, pools)
@@ -274,6 +350,7 @@ def main():
         time.sleep(max(1, C.POLL_SECONDS - (time.time() - t0)))
     save(state)
     save_copy(cst)
+    save_lab(lab, state, cst)
     if lst is not None:
         LIVE_STATE.write_text(json.dumps(lst, ensure_ascii=False, indent=1))
     git_commit(f"bot: τέλος γύρου {engine.iso(engine.now_utc())}")

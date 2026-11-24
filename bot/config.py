@@ -73,3 +73,17 @@ MAX_TOP10_PCT = 35.0       # οι 10 μεγαλύτεροι κάτοχοι (χω
 MIN_LP_LOCKED_PCT = 90.0   # η ρευστότητα του pool κλειδωμένη/καμένη τουλάχιστον 90%
 
 COPY_BOT = True   # 24/11: ξανά σε λειτουργία, χαλαρό (χωρίς απαίτηση κλειδωμένης LP), δοκιμή 1 εβδομάδας
+
+# ---------------- ΕΡΓΑΣΤΗΡΙΟ: στρατηγικές που τρέχουν παράλληλα (paper, 100$ η καθεμία) ----------------
+# Η "momentum" είναι το κύριο paper (docs/state.json). Οι υπόλοιπες αλλάζουν μόνο όσα γράφονται εδώ.
+LAB_EPOCH = "2026-11-24-lab"
+LAB = {
+    "scalp": {"label": "Γρήγορο scalp", "TAKE_PROFIT_PCT": 8.0, "STOP_LOSS_PCT": -5.0, "MAX_HOLD_MIN": 30,
+              "BREAKEVEN_TRIGGER_PCT": 4.0},
+    "trail": {"label": "Trailing", "TAKE_PROFIT_PCT": 1e9, "STOP_LOSS_PCT": -10.0, "TRAIL_PCT": 8.0,
+              "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 240},
+    "dip": {"label": "Αγορά στη βουτιά", "MIN_LIQUIDITY_USD": 50_000, "MIN_PRICE_CHANGE_H1": -30.0,
+            "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
+            "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
+            "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
+}

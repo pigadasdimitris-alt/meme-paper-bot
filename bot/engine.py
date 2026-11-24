@@ -88,6 +88,8 @@ def reject_reason(p, now):
     sells = max(p["sells_h1"], 1)
     if p["buys_h1"] / sells < C.MIN_BUY_SELL_RATIO_H1:
         return "πολλές πωλήσεις"
+    if p["buys_m5"] / max(p["sells_m5"], 1) < getattr(C, "MIN_BUY_SELL_RATIO_M5", 0.0):
+        return "πωλητές στα 5'"
     if p["pc_m5"] < C.MIN_PRICE_CHANGE_M5:
         return "χωρίς ορμή"
     if p["pc_h1"] < getattr(C, "MIN_PRICE_CHANGE_H1", -1e9):
@@ -329,12 +331,16 @@ def manage_positions(state, quotes, now, confirm_fn=None):
         pos["peak_pct"] = max(pos["peak_pct"], pct)
         if pos["peak_pct"] >= C.BREAKEVEN_TRIGGER_PCT:
             pos["stop_pct"] = max(pos["stop_pct"], 0.0)
+        trail = getattr(C, "TRAIL_PCT", None)
+        if trail and pos["peak_pct"] >= trail:
+            pos["stop_pct"] = max(pos["stop_pct"], pos["peak_pct"] - trail)
 
         liq = q.get("liquidity") if q.get("src", "gt") == "gt" and "liquidity" in q else None
         if pct >= C.TAKE_PROFIT_PCT:
             close_position(state, pos, price, now, "take profit", liq)
         elif pct <= pos["stop_pct"]:
-            close_position(state, pos, price, now, "stop loss" if pos["stop_pct"] < 0 else "stop στο 0", liq)
+            close_position(state, pos, price, now, "stop loss" if pos["stop_pct"] < 0 else
+                           ("trailing stop" if pos["stop_pct"] > 0 else "stop στο 0"), liq)
         elif _liquidity_gone(pos, q):
             close_position(state, pos, price, now, "έπεσε η ρευστότητα", liq)
         elif hold >= C.MAX_HOLD_MIN:

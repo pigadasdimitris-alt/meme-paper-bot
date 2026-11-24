@@ -144,7 +144,24 @@ def ds_price(pool, mint):
     return None
 
 
+_CACHE = {}
+
+
+def _cached(key, fn, ttl=1800):
+    hit = _CACHE.get(key)
+    if hit and time.time() - hit[0] < ttl:
+        return hit[1]
+    val = fn()
+    if not (isinstance(val, dict) and val.get("ok") is False):   # αποτυχίες δεν αποθηκεύονται
+        _CACHE[key] = (time.time(), val)
+    return val
+
+
 def token_flags(mint):
+    return _cached(("flags", mint), lambda: _token_flags(mint))
+
+
+def _token_flags(mint):
     """Έλεγχος απάτης όσο γίνεται χωρίς RPC: mint/freeze authority αν τα δίνει το API."""
     d = _get(f"{GT}/networks/solana/tokens/{mint}/info")
     if not d:
@@ -199,6 +216,10 @@ def parse_rugcheck(rep, pool):
 
 
 def rugcheck(mint, pool):
+    return _cached(("rc", mint, pool), lambda: _rugcheck(mint, pool))
+
+
+def _rugcheck(mint, pool):
     rep = _get(RUGCHECK_API.format(mint), retries=3)
     if rep and isinstance(rep, dict):
         try:

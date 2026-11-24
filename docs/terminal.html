@@ -39,6 +39,16 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;background:rep
 .modes button.on[data-m=copy]{color:var(--amber,#f5b942);border-color:var(--amber,#f5b942)}
 .modes button.on[data-m=live]{color:#06210f;background:var(--mint);border-color:var(--mint)}
 .wallet{color:var(--dim);font-size:10.5px;margin-top:2px}
+.lr{display:grid;grid-template-columns:18px 1fr auto auto;gap:8px;align-items:center;padding:5px 4px;border-radius:4px;cursor:pointer;border:1px solid transparent}
+.lr+.lr{border-top:1px dashed var(--faint)}
+.lr.sel{border:1px solid var(--amber,#f5b942);background:rgba(245,185,66,.06)}
+.lr .rk{color:var(--dim);font-weight:800}
+.lr .nm{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lr .st{color:var(--dim);font-size:10.5px}
+.lr .eqv{font-weight:800;text-align:right}
+.lr .pc{font-weight:700;text-align:right;min-width:56px}
+.livebtn{all:unset;cursor:pointer;margin-top:6px;font:700 10.5px var(--mono);padding:2px 8px;border:1px solid var(--faint);border-radius:3px;color:var(--dim)}
+.livebtn.on{color:#06210f;background:var(--mint);border-color:var(--mint)}
 .bar .mid i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:5px;vertical-align:1px;box-shadow:0 0 8px var(--mint)}
 fieldset{border:1.5px solid var(--c,#3b4a7a);border-radius:6px;margin:0 0 8px;padding:6px 9px 9px;background:var(--pane);min-width:0;position:relative}
 legend{padding:0 5px;font-weight:700;color:var(--ink);white-space:nowrap;max-width:100%;overflow:hidden}
@@ -140,8 +150,12 @@ legend span{color:var(--dim);font-weight:400}
 </head>
 <body>
 <div class="wrap">
-  <div class="bar"><span>meme-desk <span class="modes" id="modes"><button data-m="paper" class="on">paper</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="bar"><span>meme-desk <span class="modes" id="modes" style="display:none"><button data-m="paper" class="on">paper</button><button data-m="scalp">scalp</button><button data-m="trail">trail</button><button data-m="dip">dip</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
+
+  <fieldset style="--c:#f59e0b"><legend><sup>0</sup>lab <span>— κατάταξη στρατηγικών</span></legend><span class="tag" id="labsince">από 24/11</span>
+    <div id="lab"><div class="dim">φόρτωση…</div></div>
+  </fieldset>
 
   <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper</span></legend><span class="tag live">live</span>
     <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div><div class="wallet" id="wallet"></div></div><div class="mult" id="mult">x—</div></div>
@@ -183,8 +197,9 @@ legend span{color:var(--dim);font-weight:400}
 <script>
 {
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
-let MODE = location.hash.includes("live") ? "live" : location.hash.includes("copy") ? "copy" : "paper";
-const FILE = () => MODE==="live" ? "live.json" : MODE==="copy" ? "copy.json" : "state.json";
+const MODES=["paper","scalp","trail","dip","copy","live"];
+let MODE = MODES.find(m=>m!=="paper" && location.hash.includes(m)) || "paper";
+const FILE = () => ({paper:"state.json",copy:"copy.json",live:"live.json"})[MODE] || `lab/${MODE}.json`;
 const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;
 const RAW = () => `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${FILE()}`;
 const LOCAL=location.hash.includes("local");
@@ -388,10 +403,26 @@ async function fetchState(){
   try{ const r=await fetch(API(),{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); if(r.status===404) throw new Error("404"); }catch(e){ if(e.message==="404") throw e; }
   const r=await fetch(RAW()+"?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json();
 }
+let LAB=null;
+async function fetchFile(name){
+  try{ const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${name}?ref=main`,{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); }catch(e){}
+  const r=await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${name}?t=${Date.now()}`,{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json();
+}
+function drawLab(){
+  if(!LAB) return;
+  const rows=LAB.rows.map((r,i)=>{ const pc=100*(r.equity/r.start-1);
+    return `<div class="lr${r.key===MODE?" sel":""}" data-k="${esc(r.key)}"><span class="rk">${i+1}</span>`+
+      `<span><div class="nm">${esc(r.label)}</div><div class="st">${r.trades} trades · ${r.wins}Κ/${r.trades-r.wins}Ζ${r.open?` · ${r.open} ανοιχτά`:""}${r.rugs?` · <span class="coral">${r.rugs} rug</span>`:""}</div></span>`+
+      `<span class="eqv">$${(+r.equity).toFixed(2)}</span><span class="pc ${pc>=0?"mint":"coral"}">${pc>=0?"+":""}${pc.toFixed(1)}%</span></div>`; }).join("");
+  $("lab").innerHTML = rows + `<button class="livebtn${MODE==="live"?" on":""}" data-k="live">live (πραγματικά)</button>`;
+}
+async function loadLab(){ try{ LAB=await fetchFile("lab.json"); drawLab(); }catch(e){} }
+$("lab").addEventListener("click",e=>{ const r=e.target.closest("[data-k]"); if(r && r.dataset.k!==MODE){ setMode(r.dataset.k); drawLab(); } });
 async function load(){
+  loadLab();
   try{ const st=await fetchState(); if(first||st.last_run!==lastRun){ lastRun=st.last_run; render(st); } else drawLanes(); $("err").style.display="none"; }
   catch(e){ $("err").style.display="block";
-    $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα" + (MODE==="copy"?" — το copy bot μόλις ξεκίνησε":""); }
+    $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα — η στρατηγική μόλις ξεκίνησε"; }
 }
 function setMode(m){
   MODE=m; SLIP = m==="live" ? 0.01 : 0.025; FEE = m==="live" ? 0 : 0.03;
