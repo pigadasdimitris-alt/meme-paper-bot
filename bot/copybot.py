@@ -22,7 +22,7 @@ COPY_EPOCH = "2026-11-23-copy-100-v2"
 MAX_WALLETS = 25            # πόσα πορτοφόλια παρακολουθούμε
 MIN_WALLET_SCORE = 1
 COPY_MIN_WALLETS = 2        # πόσα διαφορετικά πορτοφόλια πρέπει να αγοράσουν το ίδιο coin
-COPY_WINDOW_MIN = 15
+COPY_WINDOW_MIN = 60
 COPY_MIN_BUY_USD = 150      # αγνοούμε "ψίχουλα"
 COPY_MIN_AGE_MIN = 60       # όχι coins μικρότερα της 1 ώρας
 COPY_MAX_PC_M5 = 30.0       # όχι κυνήγι: αν ήδη +30% στα 5', το αφήνουμε
@@ -256,7 +256,7 @@ def enter(st, now, flags_fn=data.token_flags, rug_fn=data.rugcheck, pool_fn=best
     reasons = st.setdefault("reasons", {})
     held = {p["mint"] for p in st["positions"]}
     for mint, ws in signals(st, now):
-        if mint in held or mint in st["seen"]:
+        if mint in held or mint in st["seen"] or engine.recent_loser(st, mint, now):
             continue
         blocked = engine.can_open(st)
         if blocked:

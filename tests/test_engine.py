@@ -410,3 +410,15 @@ def test_parse_rugcheck_skips_pool_accounts():
            "risks": [{"name": "Mutable metadata", "level": "warn"}]}
     r = data.parse_rugcheck(rep, "POOL1")
     assert r["top10"] == 20.0 and r["lp_locked"] == 100.0 and r["danger"] == []
+
+
+def test_no_rebuy_after_stop_loss():
+    now = engine.now_utc()
+    s = engine.new_state(now)
+    engine.scan_and_enter(s, [pool(now)], now)
+    pos = s["positions"][0]
+    engine.close_position(s, pos, pos["entry_market"] * 0.85, now, "stop loss")
+    s["seen"] = {}
+    later = now + timedelta(hours=3)
+    engine.scan_and_enter(s, [pool(later)], later)
+    assert not s["positions"] and s["reasons"]["POOL1"][0] == "έχασε πρόσφατα (24ω)"

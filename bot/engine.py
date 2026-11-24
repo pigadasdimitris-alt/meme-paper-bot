@@ -230,6 +230,9 @@ def close_position(state, pos, price, now, reason, exit_liq=None):
     if "rug" in reason or (state.get("mode") == "live" and proceeds < 0.2 * pos["cost"]):
         mark_rug(state, pos["name"])
     pnl = proceeds - pos["cost"]
+    if pnl < 0 and ("stop" in reason or "rug" in reason):
+        # μαθαίνει από τα λάθη: coin που μας έβγαλε με ζημιά δεν ξαναγοράζεται για 24 ώρες
+        state.setdefault("losers", {})[pos["mint"]] = iso(now)
     state["balance"] += proceeds
     state["daily"]["realized"] += pnl
     hold = (now - parse_time(pos["entry_time"])).total_seconds() / 60
@@ -362,6 +365,14 @@ def watch_due(state, now):
     return [k for _, k in due[:C.WATCH_MAX_FETCH]]
 
 
+LOSER_COOLDOWN_H = 24
+
+
+def recent_loser(state, mint, now):
+    t = (state.get("losers") or {}).get(mint)
+    return bool(t) and (now - parse_time(t)).total_seconds() < LOSER_COOLDOWN_H * 3600
+
+
 def rug_reason(rc):
     """Κανόνες RugCheck. Αν δεν απαντήσει, δεν αγοράζουμε (ξαναδοκιμάζει στον επόμενο γύρο)."""
     if not rc.get("ok"):
@@ -393,6 +404,8 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None, rug_fn=None
         why = reject_reason(p, now)
         if not why and symbol(p["name"]) in (set(state.get("rug_names") or []) | SEED_RUG_NAMES | SHARED_RUGS):
             why = "όνομα που έκανε rug"
+        if not why and recent_loser(state, p["base_mint"], now):
+            why = "έχασε πρόσφατα (24ω)"
         if why:
             reasons[p["pool"]] = [why, iso(now), p["name"], round(p["liquidity"])]
             continue
@@ -439,6 +452,7 @@ def scan_and_enter(state, pools, now, flags_fn=None, verify_fn=None, rug_fn=None
     # κρατάμε τα αρχεία μικρά (τελευταίες ~6 ώρες)
     cutoff = now.timestamp() - getattr(C, "REENTRY_HOURS", 6) * 3600
     state["seen"] = {k: v for k, v in state["seen"].items() if parse_time(v).timestamp() > cutoff}
+    state["losers"] = {k: v for k, v in (state.get("losers") or {}).items() if recent_loser(state, k, now)}
     state["reasons"] = {k: v for k, v in reasons.items() if parse_time(v[1]).timestamp() > cutoff}
     # σύνοψη λόγων απόρριψης ανά μοναδικό coin (τελευταίος λόγος του καθενός)
     summary = {}
