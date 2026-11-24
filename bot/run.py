@@ -244,10 +244,14 @@ def main():
         except Exception as e:  # ένας κακός γύρος δεν σταματά το bot
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")
             print("cycle error:", repr(e), file=sys.stderr, flush=True)
-        try:   # δεύτερο paper bot: αντιγραφή έξυπνων πορτοφολιών
+        try:   # δεύτερο paper bot: αντιγραφή έξυπνων πορτοφολιών (σταματημένο: δεν έβγαζε trades)
+            if not getattr(C, "COPY_BOT", False):
+                raise StopIteration
             copybot.cycle(cst, pools)
             print(f"  copy: wallets={cst['stats'].get('tracked_wallets')} open={len(cst['positions'])} "
                   f"closed={len(cst['closed'])} equity=${engine.equity(cst):.2f}", flush=True)
+        except StopIteration:
+            pass
         except Exception as e:
             engine.log(cst, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
             print("copy error:", str(e)[:200], file=sys.stderr, flush=True)

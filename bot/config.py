@@ -71,3 +71,5 @@ PAYOUT_MIN_HOURS = 12           # το πολύ μία μεταφορά ανά 1
 RUGCHECK = True
 MAX_TOP10_PCT = 35.0       # οι 10 μεγαλύτεροι κάτοχοι (χωρίς pools/lockers) κάτω από 35%
 MIN_LP_LOCKED_PCT = 90.0   # η ρευστότητα του pool κλειδωμένη/καμένη τουλάχιστον 90%
+
+COPY_BOT = False   # το copy bot σταμάτησε 24/11: 0 trades σε 19 ώρες (όλα τα σήματα ήταν επικίνδυνα coins)
