@@ -17,10 +17,10 @@
    "qty": 4065.618593764622,
    "cost": 10.03,
    "liq_entry": 17553263.0064,
-   "peak_pct": 0.0,
+   "peak_pct": 0.5584383398683057,
    "stop_pct": -10.0,
-   "last_price": 0.002396511058372867,
-   "last_pct": -0.13,
+   "last_price": 0.002413059445683713,
+   "last_pct": 0.56,
    "entry_signals": {
     "liquidity": 17553263.0064,
     "fdv": 1969451350.4381,
@@ -42,7 +42,8 @@
   "AMC1qwR9KhiyrQBRPrxnfo4JfMeMZqEBvt5tgTytNNoc": "2026-11-24T16:56:00Z",
   "WXMRyRZhsa19ety5erZhHg4N3xj3EVN92u94422teJp": "2026-11-24T16:56:00Z",
   "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn": "2026-11-24T17:00:04Z",
-  "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo": "2026-11-24T17:04:11Z"
+  "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo": "2026-11-24T17:04:11Z",
+  "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh": "2026-11-24T17:07:57Z"
  },
  "daily": {
   "date": "2026-11-24",
@@ -50,7 +51,7 @@
   "entries": 1
  },
  "stats": {
-  "scans": 549,
+  "scans": 551,
   "pools_checked": 0,
   "rejects": {},
   "tracked_wallets": 25,
@@ -2252,6 +2253,14 @@
   [
    "2026-11-24T17:04:15Z",
    99.4397
+  ],
+  [
+   "2026-11-24T17:07:59Z",
+   99.4459
+  ],
+  [
+   "2026-11-24T17:12:33Z",
+   99.5053
   ]
  ],
  "log": [
@@ -2450,9 +2459,13 @@
   {
    "t": "2026-11-24T17:00:04Z",
    "msg": "   ↳ σήμα από 2 πορτοφόλια"
+  },
+  {
+   "t": "2026-11-24T17:09:45Z",
+   "msg": "Ανακάλυψη: 1 coins σε άνοδο (WASTED / SOL) → 0 πορτοφόλια που αγόρασαν νωρίς"
   }
  ],
- "last_run": "2026-11-24T17:04:15Z",
+ "last_run": "2026-11-24T17:12:33Z",
  "next_id": 2,
  "epoch": "2026-11-23-copy-100-v2",
  "mode": "copy",
@@ -2465,7 +2478,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-23T21:45:30Z",
-   "last_sig": "2LoLi7gb5HiUwkJ2YFEUwqFy2J5EtjFEYZyPEqBWDzt3inQz8Vce6RuTsRQ3SpdqwoQ2ABRqjg6FBz1KwgqTbgNV"
+   "last_sig": "5w18bj133gWBgm7KbAqQFsgAMrtun25vAW3PCzUuEsmD18E4EVK4gGySeLSukrtpbtPSygMFdjWDQryEhrvQs5be"
   },
   "MriyaNN8TMp6qRWjfr723PK7xgQK7yCt7Kg2v2PQu7X": {
    "score": 2,
@@ -2474,7 +2487,7 @@
     "38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump"
    ],
    "added": "2026-11-24T04:30:40Z",
-   "last_sig": "2cVuUYKgK6sCPZLeLueXUrmMij9Vdc5pnXcfA5g2jRL29PD74kqTy2TFUq2wSBR1A7B2vMatZKCw15bbNTNvtRQ7"
+   "last_sig": "Tz5GKLEt248UybZrHmZpZ8Fksp51ika7usyeRxdHM9BLT5id7r7Sm7FDPmZu5uFY46ahVukeLRegf4atQvGX85k"
   },
   "DHerZLqSVj8bka1YQzsJSqws8SHJrJHCELJxS7ss4QYa": {
    "score": 1,
@@ -2498,7 +2511,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-24T09:50:34Z",
-   "last_sig": "5Tf6842U7Q74HitYTbhQmVEZBSAjLTFm3kgLa1D96BuoFmsbVw6eAogxUi4DWxFecpDzmvyxetjxFzY52sx5K7yK"
+   "last_sig": "MTBo17j1nQBKSe7WCv73j1M1PCTAeBJZbjjDV7NBp3GHp5pF7g7qHtTVu6UjYYhvgUGfHQewhGdtfmonSbVSWi9"
   },
   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": {
    "score": 1,
@@ -2506,7 +2519,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-24T09:50:34Z",
-   "last_sig": "ZDBEg7UnLfkXBMbfGz5ET7ZboaGFHyFkR3VWNrLk9L7qieNR6466YQyZSQoQgVvQoVAwRfqrXMY6jGTnvB4JQcC"
+   "last_sig": "4VutcDNWhw1NLCtfWz7qHhstmkcFvTp2UpUbD9chQChuByGZyav2P7c8Fh2ZbmSH3adsB9T3qfaCvgx4MoGzVTX"
   },
   "CxWRfadzmKT3vQtX76UXcHVqTd2GrMWuMMNi2jHAVrz4": {
    "score": 1,
@@ -2514,7 +2527,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-24T09:50:34Z",
-   "last_sig": "3gJHepyYkZcXWEAXcr2cfBQhnHbvGmUHdfqJ41Ryi1WeMCuFS5mUbXiuFbkrpnNifDZt1hL96qqpid8cMKuxBjAK"
+   "last_sig": "bdfGPRLohiLBAbymvxvynZyex9FKgpXUkgXfUVW3yh12CUmnXbRKR7CFb81SMT6csFSgGKzmVxWJKsmMpC9Be67"
   },
   "AjPeYkXjspCZfhkZncVdEnPSSpjZhxjXu2M8D8cRQdtS": {
    "score": 1,
@@ -2554,7 +2567,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-24T09:50:34Z",
-   "last_sig": "3BxzkR8EVL5qzGB3VaBi3zWz6YmiaUrqbqyr35eN5UVfsA1f7Bd8cJGkvU9cy5pPUVV3Kw1brDW6xQMtRnW8uUwD"
+   "last_sig": "rJ9ksHvsFHs54xYNCkLgwf4WyyNz4TEGdncKxZGMp9q1eAYSAFMh2o8Cz13NAu8ncNcEPjihTLJZBiuCczFn12C"
   },
   "5S9qzJhSooakBaA9qZT6vWtoSy8FvyfxJ4t1vXvEK9G7": {
    "score": 1,
@@ -2594,7 +2607,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "3XXrwCLQtyHAN499gSKCKEsKQj9RRiFYaXs4k69HuqBBmPdL83ZBbBGY1Dt9mKYZpWQgbfBv2BSNViSrRuAdNG4Q"
+   "last_sig": "2LYAoGJ1w1yZwS8kcmvWBUsEFcXTKRbTxpwApzVyawbaP3JqcbQs7KZTnq8hmh1eQRw5hJwHtn3uw5in3LbaeDis"
   },
   "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": {
    "score": 1,
@@ -2602,7 +2615,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "iFkcJmsVkxqFrtNPTvPw6BiXtvMWDWEM2jK9Qp3mAyg6QChhxbdreaUu5dwg6YnBbxQEppDz5z4RRS4vCzJTu8X"
+   "last_sig": "ZreBcAukPMNJytda3Z215161W9XT1D6VsPdF27M2LKdJbQeihSiMADsZYAJ6e7siSUXBfCQkczKuHUpprgKhCXm"
   },
   "3wwQzMnCDNp461WnquZL7gGNeZwGDx5cCm86NfrGJsxR": {
    "score": 1,
@@ -2610,7 +2623,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "3aaN4yPkbED72LC5jrWo7T7EfTvpC6q28KGkoV4a3ddYUUg85V1vTmK4dRR4pPp9oqTUNE6EoFePRLbsiDTvvU4p"
+   "last_sig": "4Uy3pePs2vzqX2sPh4bozg6XHGBfRMCzL6tutedVS3594oLCVq2mBTTNbMDi4L2DewGh7vK71Mdk6XVLcT23Rq4Z"
   },
   "aoSHne7LucwTSv5HDN2eqjXnPgZDTpqWQNMg8fDDKpX": {
    "score": 1,
@@ -2634,7 +2647,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "5wSAyRqtyGf7Eybw3REJrFwia3tMQ5jigp9d17e8jFDWEbWWviTLCuAqfPeJFeKhnSCyez8wh3JgbbuuKK8NZEd"
+   "last_sig": "5YKDrwYd1qU1eCKeiYM4pgKfBdDvhdFdprPHLgGcCXcKRCFZ8t9mLBqQno8pjVvJq2gsQHQq43iBk9v61J9NzL9F"
   },
   "CbL9sAfeW38Mj5Hj7TMxveya9rwzjEDb3WdzChmrmksq": {
    "score": 1,
@@ -2650,7 +2663,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "3d9T26CGxCEahaSwZ6MeLzGRiyyzgEadFgN7ev2d5Jv5JjwJUWcT5kx1ncxxHpxNv7236VDHoWx2pEw1xAbhoTCz"
+   "last_sig": "44ejo2mnTB4JWgpuFcJ8qyLBfPcEnfmVB99YnWDdaD2knNmoLncYWkvSK7KcwfNFqWZvBGWJi62wW9Bvvw9j4Vqf"
   },
   "GfPDSwxaV8vhH4Eae5jcDkDqwoy28qQqVHQkUyDWsPvW": {
    "score": 1,
@@ -2780,7 +2793,8 @@
    "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T13:35:45Z"
   },
   "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh": {
-   "GBf4Gzqb9qZWdD8v1PPqV5tdbeGzgo2J2cRrqVaoTnLM": "2026-11-24T16:52:41Z"
+   "GBf4Gzqb9qZWdD8v1PPqV5tdbeGzgo2J2cRrqVaoTnLM": "2026-11-24T16:52:41Z",
+   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T17:06:02Z"
   },
   "3vL8VTAgT3KrCs7b2j85UARxXMkEiBh9z5JZRCWTpump": {
    "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T16:54:46Z"
@@ -2792,8 +2806,15 @@
    "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T16:54:46Z"
   },
   "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo": {
-   "CxWRfadzmKT3vQtX76UXcHVqTd2GrMWuMMNi2jHAVrz4": "2026-11-24T17:02:15Z",
-   "8gV31ab8mT4N4wKdu4rWNA6GgfZtuJtimtvVJrMaH13U": "2026-11-24T17:02:15Z"
+   "CxWRfadzmKT3vQtX76UXcHVqTd2GrMWuMMNi2jHAVrz4": "2026-11-24T17:10:07Z",
+   "8gV31ab8mT4N4wKdu4rWNA6GgfZtuJtimtvVJrMaH13U": "2026-11-24T17:10:07Z",
+   "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-24T17:10:07Z"
+  },
+  "7kw3wJVAf5eaX1HjgFTNiruigtqwqrsPfYXQE8i8pump": {
+   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T17:10:07Z"
+  },
+  "GxcU9ncuQdgU4K91Y2sP6VJZCQ3Qr7GQbAWe5sULeuCs": {
+   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T17:06:02Z"
   }
  },
  "sells": {
@@ -2826,18 +2847,13 @@
   },
   "65iH8k736QNhuUHm1tt8X7yJXpJ517HPPq8BrVdwring": {
    "DB6ffeDRVQ1EvuN3e7UNM8b85mBdoM5AdbkqxpdqbuCa": "2026-11-24T17:02:15Z"
+  },
+  "GxcU9ncuQdgU4K91Y2sP6VJZCQ3Qr7GQbAWe5sULeuCs": {
+   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": "2026-11-24T17:06:02Z"
   }
  },
  "discovered_pools": {
-  "FnHWfV49ywCtGCDTyf34AVN8BiXxcgXUKqLctkrkP1gQ": "2026-11-24T11:16:59Z",
-  "DqpqkbBQr3wMTy5rYjoq3NZrrZWbh7H9x2GJ7oSN9mHH": "2026-11-24T11:16:59Z",
-  "oZi2HxiXj6KnAJ5dkitDb5L89UdqeQGUA3DC9e8UYn8": "2026-11-24T11:39:51Z",
-  "8rJw3DbbzfzKYF5tiNEsjqPyJtEPZg8dZ7dNb2SEbuPP": "2026-11-24T11:39:51Z",
-  "CpfB8pTVj8Uzu55nKj6sX4KmV6zVe7J2t3C22mLgCVGg": "2026-11-24T12:02:42Z",
-  "7v3yUnuNayZ6KwbAxJSd3TXnk2WT92q18zJiB677nNso": "2026-11-24T12:25:21Z",
-  "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB": "2026-11-24T12:25:21Z",
-  "31TTwVoj7jp3xdLySjTcfZSGoAuowwa25XFkgjWYJNnH": "2026-11-24T13:07:04Z",
-  "EkEXwkZqweA8rbv31KwjbYzSE3SoSgez1VrYkvu6uY2w": "2026-11-24T13:07:04Z"
+  "TT7DKs9YjJZj1fwMGoPmKBmDreZzyMAMrHoDCGdfwqN": "2026-11-24T17:09:45Z"
  },
  "reasons": {
   "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": [
@@ -2887,6 +2903,12 @@
    "2026-11-24T13:05:46Z",
    "MRVL / USDC",
    3
+  ],
+  "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh": [
+   "ύποπτο contract",
+   "2026-11-24T17:07:57Z",
+   "NVDAx / USDC",
+   2
   ]
  }
 }
