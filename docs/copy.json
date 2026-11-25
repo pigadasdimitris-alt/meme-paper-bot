@@ -2,41 +2,8 @@
  "version": 1,
  "started_at": "2026-11-23T19:17:47Z",
  "start_balance": 100.0,
- "balance": 89.46640716060237,
- "positions": [
-  {
-   "id": 2,
-   "pool": "2uF4Xh61rDwxnG9woyxsVQP7zuA6kLFpb3NvnRQeoiSd",
-   "name": "PUMP / USDC",
-   "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
-   "dex": "pumpswap",
-   "image": "https://coin-images.coingecko.com/coins/images/67164/large/pump.jpg?1751949376",
-   "entry_time": "2026-11-25T06:43:40Z",
-   "entry_market": 0.002411712416019964,
-   "entry_fill": 0.002472005226420463,
-   "qty": 4045.2988906015776,
-   "cost": 10.03,
-   "liq_entry": 17645625.5667,
-   "peak_pct": 0.7552206916311421,
-   "stop_pct": -10.0,
-   "last_price": 0.0023848306171359063,
-   "last_pct": -1.11,
-   "entry_signals": {
-    "liquidity": 17645625.5667,
-    "fdv": 1978994981.23826,
-    "vol_m5": 441.0853452035,
-    "pc_m5": -0.544,
-    "buyers_m5": 1,
-    "buys_h1": 100,
-    "sells_h1": 16
-   },
-   "wallets": [
-    "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn",
-    "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA"
-   ],
-   "liq_low": 0
-  }
- ],
+ "balance": 98.83997065656654,
+ "positions": [],
  "closed": [
   {
    "id": 1,
@@ -77,19 +44,58 @@
    "reason": "λήξη χρόνου",
    "hold_min": 124.9,
    "exit_liq": 17588513
+  },
+  {
+   "id": 2,
+   "pool": "2uF4Xh61rDwxnG9woyxsVQP7zuA6kLFpb3NvnRQeoiSd",
+   "name": "PUMP / USDC",
+   "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "dex": "pumpswap",
+   "image": "https://coin-images.coingecko.com/coins/images/67164/large/pump.jpg?1751949376",
+   "entry_time": "2026-11-25T06:43:40Z",
+   "entry_market": 0.002411712416019964,
+   "entry_fill": 0.002472005226420463,
+   "qty": 4045.2988906015776,
+   "cost": 10.03,
+   "liq_entry": 17645625.5667,
+   "peak_pct": 0.7552206916311421,
+   "stop_pct": -10.0,
+   "last_price": 0.0023841700624615465,
+   "last_pct": -1.14,
+   "entry_signals": {
+    "liquidity": 17645625.5667,
+    "fdv": 1978994981.23826,
+    "vol_m5": 441.0853452035,
+    "pc_m5": -0.544,
+    "buyers_m5": 1,
+    "buys_h1": 100,
+    "sells_h1": 16
+   },
+   "wallets": [
+    "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn",
+    "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA"
+   ],
+   "liq_low": 0,
+   "exit_time": "2026-11-25T08:45:31Z",
+   "exit_market": 0.0023841700624615465,
+   "proceeds": 9.3736,
+   "pnl": -0.6564,
+   "pnl_pct": -6.54,
+   "reason": "λήξη χρόνου",
+   "hold_min": 121.9,
+   "exit_liq": 17540009
   }
  ],
  "seen": {
-  "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn": "2026-11-25T06:43:40Z",
   "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs": "2026-11-25T06:48:48Z"
  },
  "daily": {
   "date": "2026-11-25",
-  "realized": 0.0,
+  "realized": -0.6564365040358418,
   "entries": 1
  },
  "stats": {
-  "scans": 868,
+  "scans": 870,
   "pools_checked": 0,
   "rejects": {},
   "tracked_wallets": 25,
@@ -3567,6 +3573,14 @@
   [
    "2026-11-25T08:41:04Z",
    98.8426
+  ],
+  [
+   "2026-11-25T08:43:56Z",
+   98.8941
+  ],
+  [
+   "2026-11-25T08:46:30Z",
+   98.84
   ]
  ],
  "log": [
@@ -3817,9 +3831,13 @@
   {
    "t": "2026-11-25T07:36:51Z",
    "msg": "Ανακάλυψη: 4 coins σε άνοδο (JIMMY / SOL, JIMMY / SOL, JIMMY / SOL, JIMMY / SOL) → 0 πορτοφόλια που αγόρασαν νωρίς"
+  },
+  {
+   "t": "2026-11-25T08:45:31Z",
+   "msg": "ΠΩΛΗΣΗ #2 PUMP / USDC — λήξη χρόνου — -0.66$"
   }
  ],
- "last_run": "2026-11-25T08:41:04Z",
+ "last_run": "2026-11-25T08:46:30Z",
  "next_id": 3,
  "epoch": "2026-11-23-copy-100-v2",
  "mode": "copy",
@@ -3832,7 +3850,7 @@
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-23T21:45:30Z",
-   "last_sig": "476vB1KiSWrbFxdqFA2LVk6YooorcDFdJdNjSCs4xsgVHvPQwzANyC5wuwXkqn7Kqx6ji2LWjNSM4Eb2FfQjhhxt"
+   "last_sig": "46XwZ4dPMzVzw8ML3KCffZQp6dxbCAdvUHkdfpf8QH9znyXmbB256B4F5EDxY28m5FH4RXtcvSMTRMouACqcEFac"
   },
   "MriyaNN8TMp6qRWjfr723PK7xgQK7yCt7Kg2v2PQu7X": {
    "score": 2,
@@ -3841,7 +3859,7 @@
     "38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump"
    ],
    "added": "2026-11-24T04:30:40Z",
-   "last_sig": "3eQz9vkDqWXE4yRSJCQyzrfWTKKJwVKXLJEQ8twj9zjRYb2cC2Zp3nzWeZVT8qkjUS241H5dTVrAXcQvLHniWaWT"
+   "last_sig": "3wNiBnuMaxNRkck8e5vU9TVnDrzz5MrADZsQnmfEyPk3HGT22uxjxLGNZzMBV3Tzbmka7Jk11VdehzhbambfrZpT"
   },
   "DHerZLqSVj8bka1YQzsJSqws8SHJrJHCELJxS7ss4QYa": {
    "score": 1,
@@ -3860,15 +3878,15 @@
    "last_sig": "2EwCa2y2fCjMtLA3Gi42eJ7Um8YayES2mtQrJyDbp7XkE59T7PLB42PQYTtA99KTYEok7oDLGJe8GsiAqjvuqNfK"
   },
   "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": {
-   "score": 1,
+   "score": 0,
    "coins": [
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
    "added": "2026-11-24T09:50:34Z",
-   "last_sig": "436QMcZrqnZnKyxf5VETUnetWM5eYQXzqt1TAWNazKTwvpRrR4K7fSeVagXvWYWYtfQDsme4nhioVUZV3ebkQz21"
+   "last_sig": "4L7uH8sYkBtsMNoqoxuEU185eBfTpmDFVf8B5T589eak4Pf1hqguXgDY8EX3r3yjmcea3TQsVtuGy8vdPi5qSJzP"
   },
   "BiTsy8M6CQKtiGUvuemNLymyGHzLjPo6ByQSajcXZnGn": {
-   "score": 1,
+   "score": 0,
    "coins": [
     "BzPyyYCTmQNq2BcfQ4ANAvCYk54rnmQEXMFvFT8RhWMi"
    ],
@@ -3953,7 +3971,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "5qxbk7LjZJjtkp1UEbkAvHv2frQT9yf6Wp7TWuCYnK4zsVuQLrThkvuGY68zDmDmeYEBuc92tjTdVVFCDpcs9eDT"
+   "last_sig": "34y6hxyfLkHKQgSR4rhMPYJVB9yWnRGNs4aHm2bfxMfUuQ8HA3b1j9rmQfGXpmCaZXtHMcRbWPT34CC9Hj34NvBH"
   },
   "3wwQzMnCDNp461WnquZL7gGNeZwGDx5cCm86NfrGJsxR": {
    "score": 1,
@@ -3985,7 +4003,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "5ZDRXtzeXHJBKf3chsRHEhbUcsWwXPdM1vACS5Xk77yAzt4payFjrf3BoAuxjo9Vo3jipWZWbF5mDbDAQ3n3sJMH"
+   "last_sig": "2oj5SxNUvtPnkFKDg1u1EdNVVkJ3jCHsn77qpfr34Hb9JHE5vvEu2CHmzMCVwpMKProL6HwbNwu32zbLpbei8NdW"
   },
   "CbL9sAfeW38Mj5Hj7TMxveya9rwzjEDb3WdzChmrmksq": {
    "score": 1,
@@ -4017,7 +4035,7 @@
     "CqpUBhhSxHsXbq6AGPKnbxDpWgECUXAVy3BCrwhGpump"
    ],
    "added": "2026-11-24T01:21:35Z",
-   "last_sig": "teTWUvrTwtyXhJTpnFQKrPXLGjyJLDU5QyMuKt88xra4BTDdu8peZMpX1g8wmGgMu7c1oFzor2gfgsgBiAwmE1T"
+   "last_sig": "fHJuCTdNX2qxzcZGQ5MuDzZ1krQJNzGsV1o58XBNHXdedTmMgtxUUs7QHz8pLD96f9mQthgGeiSeqZUFqpUtxQ9"
   },
   "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": {
    "score": 1,
@@ -4025,7 +4043,7 @@
     "488SaFq6wHF2z2k6NLSD3PtoSkXDNZaPkJwxze11pump"
    ],
    "added": "2026-11-23T21:45:30Z",
-   "last_sig": "2Q6VUDDnwFvzhyEuaAkWP1WbP28wwkAz9XFUVY8zyDs2gvBwrxZeEGEoApriQc8As4fCiW13znEgFuSZK2rUFJkn"
+   "last_sig": "YK7giXML1ApRx2QGZd3EadouFYxvzD9caKKP8cKgcSUG6QvEKHEpTR3yfSN9CGMS3UKwix7eDXkfiaH4iJcLZur"
   },
   "4rKj4Mpr3WD6GMCpbacfm4Kcj2r93XyjMqrekMFzh5DX": {
    "score": 1,
@@ -4033,7 +4051,7 @@
     "488SaFq6wHF2z2k6NLSD3PtoSkXDNZaPkJwxze11pump"
    ],
    "added": "2026-11-23T21:45:30Z",
-   "last_sig": "M2cwwbk2gUjm3LC9PbANM5iDf9Z7ycEQL1Afh1G549zZ4ki9SrideGJT62KEfzvQ8CHdhMyZzqacfyKi4iWgriD"
+   "last_sig": "72W6eXNHAQdVvTovRUzWQqLVCzjDebZCHus6rSY2Z1duFRQTBHVPjxWG5Gobv23TwR71ymom9MQui4RWERopqnZ"
   },
   "CcBBaQttBbcD29HK8tMmm9RbA33zu54y71rQuGuyvbnC": {
    "score": 1,
@@ -4041,7 +4059,7 @@
     "488SaFq6wHF2z2k6NLSD3PtoSkXDNZaPkJwxze11pump"
    ],
    "added": "2026-11-23T21:45:30Z",
-   "last_sig": "4Pw6yYQiPrFherCbPKZFZctGGj2CnsN3TX3zHnzsEbEeiMZ1et1YEZAGXprSAfDLFtK3jBVacR1CTtD4GRzvSpYK"
+   "last_sig": "wWWhtTAbfcvs9SAX63VT5YAv5sRhsSnmQNd1Trp25W7NAjf663ZcB78jZbWciUfkayUAGmarjtezUwfwFaY9pPW"
   },
   "887ymmBYn1NhDBJFFDAgNDWgtBDY8w6vSQqcTxysLVUr": {
    "score": 1,
@@ -4113,16 +4131,13 @@
    "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-25T08:15:08Z"
   },
   "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo": {
-   "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-25T08:38:07Z"
+   "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-25T08:43:01Z"
   },
   "LMT3i1BHgixFqPUgcyteJhnEz2dpy9i3cYy4pi9BoeV": {
    "ANJekY9fBgLVkfnpMvSWgp9FZ8U7XG6Xp4aPQHBbteno": "2026-11-25T06:42:55Z"
   },
   "CUg7AzWL5p8imZVqqdjEPgRhUsXAkBMW5JxkSJ9fpump": {
    "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-25T03:57:47Z"
-  },
-  "38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump": {
-   "Eq7kXPwxF5qZZjjgTZ3BaEAgH2uMFvZtYi9yeLRHafeA": "2026-11-25T02:43:29Z"
   },
   "DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump": {
    "ANJekY9fBgLVkfnpMvSWgp9FZ8U7XG6Xp4aPQHBbteno": "2026-11-25T02:52:54Z"
