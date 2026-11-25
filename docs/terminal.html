@@ -157,6 +157,10 @@ legend span{color:var(--dim);font-weight:400}
     <div id="lab"><div class="dim">φόρτωση…</div></div>
   </fieldset>
 
+  <fieldset style="--c:#22d3ee"><legend><sup>0b</sup>backtest <span>— ιστορικά δεδομένα</span></legend><span class="tag" id="btsince">—</span>
+    <div id="bt"><div class="dim">φόρτωση…</div></div>
+  </fieldset>
+
   <fieldset style="--c:#4ade80"><legend><sup>1</sup>balance <span id="balsub">— paper</span></legend><span class="tag live">live</span>
     <div class="bal"><div><div class="big" id="eq">$—</div><div class="chg" id="chg"></div><div class="wallet" id="wallet"></div></div><div class="mult" id="mult">x—</div></div>
     <div class="chart" id="chartbox"><svg id="dots"></svg></div>
@@ -417,9 +421,24 @@ function drawLab(){
   $("lab").innerHTML = rows;
 }
 async function loadLab(){ try{ LAB=await fetchFile("lab.json"); drawLab(); }catch(e){} }
+let BT=null, btAt=0;
+const BT_LABEL={scalp:"Γρήγορο scalp",trail:"Trailing",dip:"Αγορά στη βουτιά",spike:"Έκρηξη όγκου"};
+function drawBT(){
+  if(!BT||!BT.results) return;
+  const keys=Object.keys(BT_LABEL).filter(k=>BT.results[k]&&BT.results[k].trades);
+  keys.sort((a,b)=>BT.results[b].by_cost["1%"].avg_net_pct-BT.results[a].by_cost["1%"].avg_net_pct);
+  const rows=keys.map((k,i)=>{ const r=BT.results[k], c=r.by_cost["1%"], rnd=(BT.results[k+"_random"]||{}).by_cost, v=c.avg_net_pct;
+    const diff = rnd && rnd["1%"] ? v-rnd["1%"].avg_net_pct : null, beat = diff===null?null:diff>=0.5?1:diff<=-0.5?-1:0;
+    return `<div class="lr"><span class="rk">${i+1}</span>`+
+      `<span><div class="nm">${esc(BT_LABEL[k])}</div><div class="st">${r.trades} trades · ${Math.round(c.wins_pct)}% κερδισμένα${beat===null?"":beat===1?" · καλύτερο από τυχαίο":beat===0?" · <span class=\"coral\">ίδιο με τυχαίο</span>":" · <span class=\"coral\">χειρότερο από τυχαίο</span>"}</div></span>`+
+      `<span class="eqv">ανά trade</span><span class="pc ${v>=0?"mint":"coral"}">${v>=0?"+":""}${v.toFixed(1)}%</span></div>`; }).join("");
+  $("bt").innerHTML = rows + `<div class="dim" style="margin-top:6px">${BT.pools} meme coins · ${BT.days} μέρες · κόστος 1%/πλευρά · αισιόδοξο (λείπουν τα rugs)</div>`;
+  const d=new Date(BT.updated); $("btsince").textContent = d.toLocaleDateString("el-GR",{day:"numeric",month:"numeric"})+" "+d.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"});
+}
+async function loadBT(){ if(Date.now()-btAt<600000) return; btAt=Date.now(); try{ BT=await fetchFile("backtest.json"); drawBT(); }catch(e){ $("bt").innerHTML='<div class="dim">δεν υπάρχει ακόμα backtest</div>'; } }
 $("lab").addEventListener("click",e=>{ const r=e.target.closest("[data-k]"); if(r && r.dataset.k!==MODE){ setMode(r.dataset.k); drawLab(); } });
 async function load(){
-  loadLab();
+  loadLab(); loadBT();
   try{ const st=await fetchState(); if(first||st.last_run!==lastRun){ lastRun=st.last_run; render(st); } else drawLanes(); $("err").style.display="none"; }
   catch(e){ $("err").style.display="block";
     $("err").textContent = MODE==="live" && !ST ? "Το live δεν έχει ξεκινήσει ακόμα — μόλις γίνει η πρώτη πραγματική ενέργεια θα εμφανιστεί εδώ." : ST?"σύνδεση χάθηκε — δείχνω τα τελευταία δεδομένα":"δεν βρέθηκαν δεδομένα ακόμα — η στρατηγική μόλις ξεκίνησε"; }
