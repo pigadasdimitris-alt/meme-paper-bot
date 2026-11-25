@@ -31,14 +31,21 @@ def ts(s):
     return datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 
 
+RAW = {}
+
+
 def universe():
     pools = []
     for dur, page in C.TRENDING_SOURCES:
-        pools += data.trending_pools(dur, page)
+        got = data.trending_pools(dur, page); time.sleep(1)
+        RAW[f"trend_{dur}_{page}"] = len(got); pools += got
     for page in range(1, C.TOP_VOLUME_PAGES + 1):
-        pools += data.top_volume_pools(page)
+        got = data.top_volume_pools(page); time.sleep(1)
+        RAW[f"vol_{page}"] = len(got); pools += got
     for page in range(1, C.TOP_TX_PAGES + 1):
-        pools += data.top_volume_pools(page, sort="h24_tx_count_desc")
+        got = data.top_volume_pools(page, sort="h24_tx_count_desc"); time.sleep(1)
+        RAW[f"tx_{page}"] = len(got); pools += got
+    RAW["total"] = len(pools)
     out, seen_mint = [], set()
     for p in sorted(pools, key=lambda x: -x["liquidity"]):
         if not p["pool"] or p["base_mint"] in C.QUOTE_MINTS or p["base_mint"] in seen_mint:
@@ -219,12 +226,21 @@ def main():
         "costs_per_side": [f"{c * 100:g}%" for c in COSTS],
         "results": {},
     }
+    def vol(cs):
+        r = [cs[i][4] / cs[i - 1][4] - 1 for i in range(1, len(cs)) if cs[i - 1][4] > 0]
+        return round(100 * statistics.pstdev(r), 2) if len(r) > 2 else None
+    out["universe"] = [{"name": m["name"], "liq": round(m["liquidity"]), "fdv": round(m["fdv"]),
+                        "created": m["created_at"], "candles": len(c), "std5m_pct": vol(c)}
+                       for m, c in series.values()]
+    out["universe_raw"] = len(uni)
+    out["fetched_raw"] = RAW
     signal_counts = {}
     for key in ["scalp", "trail", "dip", "spike"]:
         P = params(key)
         tr = run_strategy(key, P, series)
         signal_counts[key] = len(tr)
         out["results"][key] = summarize(tr, t_mid)
+        out["results"][key]["sample"] = [{**t, "move": round(t["move"], 2)} for t in tr[:15]]
         print(key, json.dumps(out["results"][key], ensure_ascii=False), flush=True)
     # Βάση σύγκρισης: τυχαίες είσοδοι με τους ίδιους κανόνες εξόδου και περίπου ίδιο πλήθος trades
     total_slots = sum(len(c) for _, c in series.values()) or 1
