@@ -116,6 +116,40 @@ def one_cycle(state):
     return pools
 
 
+# ---------------- ΣΥΝΑΓΕΡΜΟΣ ----------------
+# Αν μια στρατηγική βγάζει σφάλμα 3 γύρους στη σειρά, ανοίγει GitHub issue -> ειδοποίηση στο κινητό.
+
+ERRORS = {}
+ALERTED = set()
+
+
+def alert(title, body):
+    repo, token = os.environ.get("GITHUB_REPOSITORY"), os.environ.get("GITHUB_TOKEN")
+    if not (repo and token) or title in ALERTED:
+        return
+    ALERTED.add(title)
+    try:
+        req = urllib.request.Request(
+            f"https://api.github.com/repos/{repo}/issues", method="POST",
+            data=json.dumps({"title": title, "body": body}).encode(),
+            headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json",
+                     "User-Agent": "meme-bot"})
+        urllib.request.urlopen(req, timeout=15).read()
+    except Exception as e:
+        print("alert failed:", repr(e)[:200], file=sys.stderr, flush=True)
+
+
+def health(name, err=None):
+    if err is None:
+        ERRORS[name] = 0
+        return
+    ERRORS[name] = ERRORS.get(name, 0) + 1
+    if ERRORS[name] == 3:
+        alert(f"ΠΡΟΒΛΗΜΑ: η στρατηγική {name} βγάζει σφάλμα",
+              f"3 γύροι στη σειρά με σφάλμα στις {engine.iso(engine.now_utc())}.\n\n`{str(err)[:500]}`\n\n"
+              "Πες στο Claude να το δει.")
+
+
 # ---------------- ΕΡΓΑΣΤΗΡΙΟ ----------------
 
 @contextlib.contextmanager
@@ -312,7 +346,9 @@ def main():
             print(f"[{engine.iso(engine.now_utc())}] evaluated={n} watch={len(state.get('watch', {}))} "
                   f"open={len(state['positions'])} "
                   f"closed={len(state['closed'])} equity=${engine.equity(state):.2f}", flush=True)
+            health("momentum")
         except Exception as e:  # ένας κακός γύρος δεν σταματά το bot
+            health("momentum", e)
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")
             print("cycle error:", repr(e), file=sys.stderr, flush=True)
         try:   # δεύτερο paper bot: αντιγραφή έξυπνων πορτοφολιών (σταματημένο: δεν έβγαζε trades)
@@ -321,9 +357,11 @@ def main():
             copybot.cycle(cst, pools)
             print(f"  copy: wallets={cst['stats'].get('tracked_wallets')} open={len(cst['positions'])} "
                   f"closed={len(cst['closed'])} equity=${engine.equity(cst):.2f}", flush=True)
+            health("copy")
         except StopIteration:
             pass
         except Exception as e:
+            health("copy", e)
             engine.log(cst, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
             print("copy error:", str(e)[:200], file=sys.stderr, flush=True)
         save_copy(cst)
@@ -331,7 +369,9 @@ def main():
             try:
                 with overrides(C.LAB[name]):
                     lab_cycle(st, pools)
+                health(name)
             except Exception as e:
+                health(name, e)
                 engine.log(st, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
                 print(f"lab {name} error:", str(e)[:200], file=sys.stderr, flush=True)
         print("  lab: " + " ".join(f"{n}=${engine.equity(st):.2f}" for n, st in lab.items()), flush=True)
