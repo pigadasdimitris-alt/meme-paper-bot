@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-25T21:00:12Z",
+ "updated": "2026-11-25T21:25:21Z",
  "days": 10,
- "pools": 33,
- "candles": 70924,
+ "pools": 38,
+ "candles": 82276,
  "notes": [
   "survivorship bias: τα rugs λείπουν → αισιόδοξο",
   "χωρίς φίλτρα αγοραστών/ratio (δεν υπάρχουν στα κεριά)",
@@ -15,292 +15,1114 @@
  ],
  "results": {
   "scalp": {
-   "trades": 249,
-   "win_rate_market": 37.8,
+   "trades": 300,
+   "win_rate_market": 39.7,
    "exits": {
-    "χρόνος": 232,
-    "tp": 3,
-    "stop": 10,
-    "stop 0": 4
+    "χρόνος": 250,
+    "tp": 11,
+    "stop": 28,
+    "stop 0": 11
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.77,
-     "median_net_pct": -5.79,
-     "wins_pct": 1.6,
-     "pnl_usd_10_per_trade": -143.8,
-     "avg_first_half": -5.73,
-     "avg_second_half": -5.81
+     "avg_net_pct": -5.65,
+     "median_net_pct": -5.73,
+     "wins_pct": 4.3,
+     "pnl_usd_10_per_trade": -169.5,
+     "avg_first_half": -5.67,
+     "avg_second_half": -5.63
     },
     "1%": {
-     "avg_net_pct": -2.9,
-     "median_net_pct": -2.91,
-     "wins_pct": 6.4,
-     "pnl_usd_10_per_trade": -72.09,
-     "avg_first_half": -2.85,
-     "avg_second_half": -2.93
+     "avg_net_pct": -2.77,
+     "median_net_pct": -2.85,
+     "wins_pct": 11.0,
+     "pnl_usd_10_per_trade": -83.0,
+     "avg_first_half": -2.79,
+     "avg_second_half": -2.75
     },
     "0.5%": {
-     "avg_net_pct": -1.92,
-     "median_net_pct": -1.93,
-     "wins_pct": 10.8,
-     "pnl_usd_10_per_trade": -47.72,
-     "avg_first_half": -1.87,
-     "avg_second_half": -1.95
+     "avg_net_pct": -1.79,
+     "median_net_pct": -1.87,
+     "wins_pct": 16.3,
+     "pnl_usd_10_per_trade": -53.59,
+     "avg_first_half": -1.81,
+     "avg_second_half": -1.77
     }
    },
-   "distinct_coins": 16
+   "distinct_coins": 20,
+   "sample": [
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794839700,
+     "move": -0.63,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794957300,
+     "move": -0.76,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795098900,
+     "move": -1.55,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795132200,
+     "move": -0.11,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795185600,
+     "move": -1.15,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795201200,
+     "move": -1.9,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795211100,
+     "move": 0.37,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795242900,
+     "move": 2.97,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795260900,
+     "move": -0.79,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795442400,
+     "move": 3.39,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795624200,
+     "move": 0.64,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795633800,
+     "move": -0.46,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794840000,
+     "move": -2.65,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794926100,
+     "move": 0.19,
+     "why": "χρόνος",
+     "hold": 30
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1795014900,
+     "move": -0.41,
+     "why": "χρόνος",
+     "hold": 30
+    }
+   ]
   },
   "trail": {
-   "trades": 176,
-   "win_rate_market": 38.6,
+   "trades": 223,
+   "win_rate_market": 43.0,
    "exits": {
-    "χρόνος": 160,
-    "trail": 7,
-    "stop": 9
+    "χρόνος": 169,
+    "trail": 30,
+    "stop": 24
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -6.34,
-     "median_net_pct": -6.36,
-     "wins_pct": 5.7,
-     "pnl_usd_10_per_trade": -111.53,
-     "avg_first_half": -6.83,
-     "avg_second_half": -5.92
+     "avg_net_pct": -6.19,
+     "median_net_pct": -5.95,
+     "wins_pct": 9.4,
+     "pnl_usd_10_per_trade": -138.01,
+     "avg_first_half": -6.71,
+     "avg_second_half": -5.71
     },
     "1%": {
-     "avg_net_pct": -3.47,
-     "median_net_pct": -3.49,
-     "wins_pct": 12.5,
-     "pnl_usd_10_per_trade": -61.15,
-     "avg_first_half": -3.99,
-     "avg_second_half": -3.05
+     "avg_net_pct": -3.32,
+     "median_net_pct": -3.07,
+     "wins_pct": 19.7,
+     "pnl_usd_10_per_trade": -74.08,
+     "avg_first_half": -3.86,
+     "avg_second_half": -2.83
     },
     "0.5%": {
-     "avg_net_pct": -2.5,
-     "median_net_pct": -2.52,
-     "wins_pct": 18.8,
-     "pnl_usd_10_per_trade": -44.02,
-     "avg_first_half": -3.02,
-     "avg_second_half": -2.07
+     "avg_net_pct": -2.35,
+     "median_net_pct": -2.09,
+     "wins_pct": 26.5,
+     "pnl_usd_10_per_trade": -52.34,
+     "avg_first_half": -2.89,
+     "avg_second_half": -1.85
     }
    },
-   "distinct_coins": 16
+   "distinct_coins": 20,
+   "sample": [
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794839700,
+     "move": -2.92,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794957300,
+     "move": -2.93,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795098900,
+     "move": -5.33,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795132200,
+     "move": -1.11,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795185600,
+     "move": -4.79,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795211100,
+     "move": 0.9,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795242900,
+     "move": 2.29,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795442400,
+     "move": -2.32,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795624200,
+     "move": 7.49,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794840000,
+     "move": -3.24,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794926100,
+     "move": -0.41,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1795014900,
+     "move": -0.79,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1795098900,
+     "move": -6.59,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1795185600,
+     "move": -1.77,
+     "why": "χρόνος",
+     "hold": 240
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1795257600,
+     "move": -0.21,
+     "why": "χρόνος",
+     "hold": 240
+    }
+   ]
   },
   "dip": {
-   "trades": 13,
-   "win_rate_market": 61.5,
+   "trades": 28,
+   "win_rate_market": 46.4,
    "exits": {
-    "stop 0": 1,
-    "tp": 8,
-    "stop": 4
+    "stop 0": 3,
+    "tp": 10,
+    "stop": 11,
+    "χρόνος": 4
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": 0.37,
-     "median_net_pct": 8.76,
-     "wins_pct": 61.5,
-     "pnl_usd_10_per_trade": 0.49,
-     "avg_first_half": -5.46,
-     "avg_second_half": 0.86
+     "avg_net_pct": -3.84,
+     "median_net_pct": -5.46,
+     "wins_pct": 39.3,
+     "pnl_usd_10_per_trade": -10.76,
+     "avg_first_half": -7.67,
+     "avg_second_half": -0.97
     },
     "1%": {
-     "avg_net_pct": 3.44,
-     "median_net_pct": 12.09,
-     "wins_pct": 61.5,
-     "pnl_usd_10_per_trade": 4.47,
-     "avg_first_half": -2.57,
-     "avg_second_half": 3.94
+     "avg_net_pct": -0.9,
+     "median_net_pct": -2.57,
+     "wins_pct": 39.3,
+     "pnl_usd_10_per_trade": -2.53,
+     "avg_first_half": -4.85,
+     "avg_second_half": 2.05
     },
     "0.5%": {
-     "avg_net_pct": 4.48,
-     "median_net_pct": 13.22,
-     "wins_pct": 61.5,
-     "pnl_usd_10_per_trade": 5.83,
-     "avg_first_half": -1.59,
-     "avg_second_half": 4.99
+     "avg_net_pct": 0.09,
+     "median_net_pct": -1.59,
+     "wins_pct": 42.9,
+     "pnl_usd_10_per_trade": 0.27,
+     "avg_first_half": -3.89,
+     "avg_second_half": 3.08
     }
    },
-   "distinct_coins": 3
+   "distinct_coins": 6,
+   "sample": [
+    {
+     "pool": "FnzKY6x7entQ1eR3D225dQyT7ybfka4PskBMQhb8L3CC",
+     "name": "ANSEM / SOL",
+     "t": 1795190400,
+     "move": 0.0,
+     "why": "stop 0",
+     "hold": 75
+    },
+    {
+     "pool": "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+     "name": "mihao / SOL",
+     "t": 1794978600,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 20
+    },
+    {
+     "pool": "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+     "name": "mihao / SOL",
+     "t": 1795019400,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 15
+    },
+    {
+     "pool": "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+     "name": "mihao / SOL",
+     "t": 1795112400,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 25
+    },
+    {
+     "pool": "Ho1aSG6WGH1FfXdEHrK2f4Ggt1Hoxo9s5jcLMDqeyeBz",
+     "name": "mihao / SOL",
+     "t": 1795511100,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 5
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795211100,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 20
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795227000,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 10
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795234800,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 35
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795247400,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 25
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795263000,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 55
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795274100,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 35
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795395300,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 5
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795482000,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 25
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795499700,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 30
+    },
+    {
+     "pool": "DjbLtX1HRGZZrJgJ7CwTX6SN3D7tBLiytkGwomBUwTVB",
+     "name": "FIONA / SOL",
+     "t": 1795514100,
+     "move": -10.0,
+     "why": "stop",
+     "hold": 10
+    }
+   ]
   },
   "spike": {
-   "trades": 284,
-   "win_rate_market": 40.8,
+   "trades": 277,
+   "win_rate_market": 41.2,
    "exits": {
-    "χρόνος": 277,
-    "tp": 2,
-    "stop 0": 2,
-    "stop": 3
+    "χρόνος": 252,
+    "tp": 5,
+    "stop 0": 6,
+    "stop": 14
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.61,
+     "avg_net_pct": -5.67,
      "median_net_pct": -5.74,
-     "wins_pct": 2.1,
-     "pnl_usd_10_per_trade": -159.28,
-     "avg_first_half": -5.91,
-     "avg_second_half": -5.35
+     "wins_pct": 3.6,
+     "pnl_usd_10_per_trade": -157.05,
+     "avg_first_half": -6.05,
+     "avg_second_half": -5.33
     },
     "1%": {
-     "avg_net_pct": -2.72,
+     "avg_net_pct": -2.79,
      "median_net_pct": -2.86,
-     "wins_pct": 6.7,
-     "pnl_usd_10_per_trade": -77.35,
-     "avg_first_half": -3.03,
-     "avg_second_half": -2.45
+     "wins_pct": 9.0,
+     "pnl_usd_10_per_trade": -77.2,
+     "avg_first_half": -3.18,
+     "avg_second_half": -2.44
     },
     "0.5%": {
-     "avg_net_pct": -1.74,
+     "avg_net_pct": -1.81,
      "median_net_pct": -1.88,
-     "wins_pct": 11.6,
-     "pnl_usd_10_per_trade": -49.5,
-     "avg_first_half": -2.06,
-     "avg_second_half": -1.47
+     "wins_pct": 14.4,
+     "pnl_usd_10_per_trade": -50.05,
+     "avg_first_half": -2.21,
+     "avg_second_half": -1.46
     }
    },
-   "distinct_coins": 15
+   "distinct_coins": 19,
+   "sample": [
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794783900,
+     "move": -1.2,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1794839700,
+     "move": -2.02,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795043400,
+     "move": 0.87,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795098600,
+     "move": -1.97,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795137000,
+     "move": -2.65,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795182600,
+     "move": 2.03,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795260900,
+     "move": -0.54,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795341600,
+     "move": 0.36,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795388700,
+     "move": 0.75,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795442400,
+     "move": -1.63,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795475100,
+     "move": -1.26,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
+     "name": "CRCLx / USDC",
+     "t": 1795553700,
+     "move": -0.56,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794791100,
+     "move": -0.56,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794828900,
+     "move": -1.53,
+     "why": "χρόνος",
+     "hold": 60
+    },
+    {
+     "pool": "FjuBy7jjf9DXj9d3R7cHpvcnoFW2iQxf7F7P3vqx4Jza",
+     "name": "SPCX / USDC",
+     "t": 1794840000,
+     "move": -2.48,
+     "why": "χρόνος",
+     "hold": 60
+    }
+   ]
   },
   "scalp_random": {
-   "trades": 118,
-   "win_rate_market": 50.0,
+   "trades": 153,
+   "win_rate_market": 54.2,
    "exits": {
-    "χρόνος": 112,
-    "tp": 2,
-    "stop": 3,
-    "stop 0": 1
+    "χρόνος": 136,
+    "stop": 10,
+    "stop 0": 3,
+    "tp": 4
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.47,
-     "median_net_pct": -5.46,
-     "wins_pct": 1.7,
-     "pnl_usd_10_per_trade": -64.57,
-     "avg_first_half": -5.52,
-     "avg_second_half": -5.42
+     "avg_net_pct": -5.35,
+     "median_net_pct": -5.4,
+     "wins_pct": 2.6,
+     "pnl_usd_10_per_trade": -81.88,
+     "avg_first_half": -5.26,
+     "avg_second_half": -5.44
     },
     "1%": {
-     "avg_net_pct": -2.58,
-     "median_net_pct": -2.57,
-     "wins_pct": 3.4,
-     "pnl_usd_10_per_trade": -30.48,
-     "avg_first_half": -2.63,
-     "avg_second_half": -2.53
+     "avg_net_pct": -2.46,
+     "median_net_pct": -2.51,
+     "wins_pct": 5.2,
+     "pnl_usd_10_per_trade": -37.63,
+     "avg_first_half": -2.36,
+     "avg_second_half": -2.55
     },
     "0.5%": {
-     "avg_net_pct": -1.6,
-     "median_net_pct": -1.59,
-     "wins_pct": 7.6,
-     "pnl_usd_10_per_trade": -18.89,
-     "avg_first_half": -1.65,
-     "avg_second_half": -1.55
+     "avg_net_pct": -1.48,
+     "median_net_pct": -1.53,
+     "wins_pct": 10.5,
+     "pnl_usd_10_per_trade": -22.58,
+     "avg_first_half": -1.38,
+     "avg_second_half": -1.57
     }
    },
-   "distinct_coins": 16
+   "distinct_coins": 21
   },
   "trail_random": {
-   "trades": 81,
-   "win_rate_market": 44.4,
+   "trades": 101,
+   "win_rate_market": 42.6,
    "exits": {
-    "χρόνος": 79,
-    "trail": 1,
-    "stop": 1
+    "χρόνος": 88,
+    "trail": 5,
+    "stop": 8
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.42,
-     "median_net_pct": -5.65,
-     "wins_pct": 3.7,
-     "pnl_usd_10_per_trade": -43.87,
-     "avg_first_half": -5.68,
-     "avg_second_half": -5.12
+     "avg_net_pct": -5.83,
+     "median_net_pct": -5.64,
+     "wins_pct": 5.9,
+     "pnl_usd_10_per_trade": -58.86,
+     "avg_first_half": -5.57,
+     "avg_second_half": -6.06
     },
     "1%": {
-     "avg_net_pct": -2.53,
-     "median_net_pct": -2.77,
-     "wins_pct": 9.9,
-     "pnl_usd_10_per_trade": -20.46,
-     "avg_first_half": -2.79,
-     "avg_second_half": -2.22
+     "avg_net_pct": -2.95,
+     "median_net_pct": -2.76,
+     "wins_pct": 11.9,
+     "pnl_usd_10_per_trade": -29.79,
+     "avg_first_half": -2.68,
+     "avg_second_half": -3.19
     },
     "0.5%": {
-     "avg_net_pct": -1.54,
-     "median_net_pct": -1.79,
-     "wins_pct": 12.3,
-     "pnl_usd_10_per_trade": -12.5,
-     "avg_first_half": -1.81,
-     "avg_second_half": -1.24
+     "avg_net_pct": -1.97,
+     "median_net_pct": -1.78,
+     "wins_pct": 22.8,
+     "pnl_usd_10_per_trade": -19.91,
+     "avg_first_half": -1.7,
+     "avg_second_half": -2.22
     }
    },
-   "distinct_coins": 15
+   "distinct_coins": 20
   },
   "dip_random": {
-   "trades": 14,
-   "win_rate_market": 42.9,
+   "trades": 16,
+   "win_rate_market": 31.2,
    "exits": {
-    "χρόνος": 14
+    "χρόνος": 16
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.54,
-     "median_net_pct": -5.65,
+     "avg_net_pct": -5.7,
+     "median_net_pct": -5.74,
      "wins_pct": 0.0,
-     "pnl_usd_10_per_trade": -7.75,
-     "avg_first_half": -5.23,
-     "avg_second_half": -5.84
+     "pnl_usd_10_per_trade": -9.12,
+     "avg_first_half": -6.12,
+     "avg_second_half": -5.28
     },
     "1%": {
-     "avg_net_pct": -2.65,
-     "median_net_pct": -2.76,
-     "wins_pct": 0.0,
-     "pnl_usd_10_per_trade": -3.71,
-     "avg_first_half": -2.34,
-     "avg_second_half": -2.96
+     "avg_net_pct": -2.82,
+     "median_net_pct": -2.86,
+     "wins_pct": 6.2,
+     "pnl_usd_10_per_trade": -4.51,
+     "avg_first_half": -3.25,
+     "avg_second_half": -2.38
     },
     "0.5%": {
-     "avg_net_pct": -1.67,
-     "median_net_pct": -1.78,
-     "wins_pct": 7.1,
-     "pnl_usd_10_per_trade": -2.34,
-     "avg_first_half": -1.35,
-     "avg_second_half": -1.98
+     "avg_net_pct": -1.84,
+     "median_net_pct": -1.88,
+     "wins_pct": 12.5,
+     "pnl_usd_10_per_trade": -2.94,
+     "avg_first_half": -2.28,
+     "avg_second_half": -1.4
     }
    },
    "distinct_coins": 9
   },
   "spike_random": {
-   "trades": 132,
-   "win_rate_market": 53.8,
+   "trades": 137,
+   "win_rate_market": 43.1,
    "exits": {
-    "χρόνος": 125,
-    "stop": 7
+    "χρόνος": 124,
+    "stop": 8,
+    "tp": 4,
+    "stop 0": 1
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.91,
-     "median_net_pct": -5.42,
-     "wins_pct": 0.8,
-     "pnl_usd_10_per_trade": -77.98,
-     "avg_first_half": -5.8,
-     "avg_second_half": -6.01
+     "avg_net_pct": -5.59,
+     "median_net_pct": -5.61,
+     "wins_pct": 3.6,
+     "pnl_usd_10_per_trade": -76.53,
+     "avg_first_half": -5.71,
+     "avg_second_half": -5.47
     },
     "1%": {
-     "avg_net_pct": -3.03,
-     "median_net_pct": -2.53,
-     "wins_pct": 0.8,
-     "pnl_usd_10_per_trade": -40.02,
-     "avg_first_half": -2.92,
-     "avg_second_half": -3.14
+     "avg_net_pct": -2.7,
+     "median_net_pct": -2.73,
+     "wins_pct": 8.0,
+     "pnl_usd_10_per_trade": -37.0,
+     "avg_first_half": -2.83,
+     "avg_second_half": -2.58
     },
     "0.5%": {
-     "avg_net_pct": -2.05,
-     "median_net_pct": -1.55,
-     "wins_pct": 3.0,
-     "pnl_usd_10_per_trade": -27.12,
-     "avg_first_half": -1.94,
-     "avg_second_half": -2.16
+     "avg_net_pct": -1.72,
+     "median_net_pct": -1.75,
+     "wins_pct": 9.5,
+     "pnl_usd_10_per_trade": -23.56,
+     "avg_first_half": -1.85,
+     "avg_second_half": -1.6
     }
    },
-   "distinct_coins": 16
+   "distinct_coins": 20
   }
+ },
+ "universe": [
+  {
+   "name": "ATX / USDC",
+   "liq": 20507262,
+   "fdv": 20453190,
+   "created": "2026-11-25T05:44:59Z",
+   "candles": 51,
+   "std5m_pct": 0.36
+  },
+  {
+   "name": "syrupUSDC / USDC",
+   "liq": 4980700,
+   "fdv": 68751343,
+   "created": "2025-05-28T13:21:28Z",
+   "candles": 1709,
+   "std5m_pct": 0.28
+  },
+  {
+   "name": "cbBTC / SOL",
+   "liq": 4643618,
+   "fdv": 189092158,
+   "created": "2024-11-07T17:30:08Z",
+   "candles": 1775,
+   "std5m_pct": 0.38
+  },
+  {
+   "name": "WETH / SOL",
+   "liq": 3827537,
+   "fdv": 79332947,
+   "created": "2023-07-05T14:33:04Z",
+   "candles": 2850,
+   "std5m_pct": 0.31
+  },
+  {
+   "name": "ONYC / USDC",
+   "liq": 3162238,
+   "fdv": 290470487,
+   "created": "2025-05-19T16:23:53Z",
+   "candles": 2848,
+   "std5m_pct": 0.24
+  },
+  {
+   "name": "ZEC / USDC",
+   "liq": 2908366,
+   "fdv": 83730357,
+   "created": "2025-10-24T00:47:07Z",
+   "candles": 2858,
+   "std5m_pct": 0.46
+  },
+  {
+   "name": "HYPE / SOL",
+   "liq": 2770065,
+   "fdv": 41336729,
+   "created": "2025-10-18T01:52:31Z",
+   "candles": 1716,
+   "std5m_pct": 0.52
+  },
+  {
+   "name": "CRCLx / USDC",
+   "liq": 2417041,
+   "fdv": 49767863,
+   "created": "2026-02-11T12:03:53Z",
+   "candles": 2706,
+   "std5m_pct": 0.41
+  },
+  {
+   "name": "SPCX / USDC",
+   "liq": 2346472,
+   "fdv": 13445461,
+   "created": "2026-06-12T15:57:12Z",
+   "candles": 2825,
+   "std5m_pct": 0.45
+  },
+  {
+   "name": "TSLAx / USDC",
+   "liq": 2292953,
+   "fdv": 87027861,
+   "created": "2026-02-11T11:43:11Z",
+   "candles": 2607,
+   "std5m_pct": 0.35
+  },
+  {
+   "name": "NVDAx / USDC",
+   "liq": 2288666,
+   "fdv": 79107703,
+   "created": "2025-07-02T01:46:00Z",
+   "candles": 2864,
+   "std5m_pct": 0.56
+  },
+  {
+   "name": "QQQx / USDC",
+   "liq": 2209942,
+   "fdv": 53578619,
+   "created": "2026-02-11T09:58:40Z",
+   "candles": 2223,
+   "std5m_pct": 0.3
+  },
+  {
+   "name": "MOODENG / SOL",
+   "liq": 1855944,
+   "fdv": 28253976,
+   "created": "2024-09-10T18:53:08Z",
+   "candles": 2023,
+   "std5m_pct": 0.62
+  },
+  {
+   "name": "BIRB / USDC",
+   "liq": 1472239,
+   "fdv": 53211659,
+   "created": "2026-01-27T23:28:53Z",
+   "candles": 2894,
+   "std5m_pct": 0.38
+  },
+  {
+   "name": "VINE / SOL",
+   "liq": 1465131,
+   "fdv": 9437139,
+   "created": "2025-01-23T00:22:43Z",
+   "candles": 2812,
+   "std5m_pct": 1.45
+  },
+  {
+   "name": "KMNO / USDC",
+   "liq": 1433479,
+   "fdv": 235937239,
+   "created": "2024-10-10T09:20:00Z",
+   "candles": 2894,
+   "std5m_pct": 0.31
+  },
+  {
+   "name": "WBTC / SOL",
+   "liq": 1332085,
+   "fdv": 141492357,
+   "created": "2023-11-13T16:23:03Z",
+   "candles": 2894,
+   "std5m_pct": 0.3
+  },
+  {
+   "name": "CATE / SOL",
+   "liq": 1281099,
+   "fdv": 16690089,
+   "created": "2026-07-26T16:32:43Z",
+   "candles": 2893,
+   "std5m_pct": 0.73
+  },
+  {
+   "name": "MET / USDC",
+   "liq": 960815,
+   "fdv": 211647818,
+   "created": "2026-11-10T18:52:47Z",
+   "candles": 1243,
+   "std5m_pct": 0.5
+  },
+  {
+   "name": "USAR / SOL",
+   "liq": 844507,
+   "fdv": 143432622,
+   "created": "2026-11-23T22:35:57Z",
+   "candles": 459,
+   "std5m_pct": 0.26
+  },
+  {
+   "name": "ANSEM / SOL",
+   "liq": 754712,
+   "fdv": 18595317,
+   "created": "2026-06-16T21:05:48Z",
+   "candles": 2839,
+   "std5m_pct": 1.6
+  },
+  {
+   "name": "jobcoin / SOL",
+   "liq": 509252,
+   "fdv": 12689878,
+   "created": "2025-04-14T22:15:18Z",
+   "candles": 1632,
+   "std5m_pct": 0.98
+  },
+  {
+   "name": "EURC / USDC",
+   "liq": 381461,
+   "fdv": 123844195,
+   "created": "2025-03-08T11:37:43Z",
+   "candles": 2892,
+   "std5m_pct": 0.22
+  },
+  {
+   "name": "NEURALINK / USDC",
+   "liq": 320043,
+   "fdv": 918833,
+   "created": "2026-10-16T10:15:02Z",
+   "candles": 1641,
+   "std5m_pct": 0.87
+  },
+  {
+   "name": "mihao / SOL",
+   "liq": 271047,
+   "fdv": 4531176,
+   "created": "2026-10-25T16:43:15Z",
+   "candles": 2895,
+   "std5m_pct": 2.08
+  },
+  {
+   "name": "SPYx / USDC",
+   "liq": 222462,
+   "fdv": 68870774,
+   "created": "2026-03-18T14:41:51Z",
+   "candles": 2883,
+   "std5m_pct": 0.29
+  },
+  {
+   "name": "FIONA / SOL",
+   "liq": 185977,
+   "fdv": 2836696,
+   "created": "2026-11-19T20:53:29Z",
+   "candles": 1734,
+   "std5m_pct": 6.91
+  },
+  {
+   "name": "POLYMARKET / USDC",
+   "liq": 159355,
+   "fdv": 595990,
+   "created": "2026-10-16T09:18:03Z",
+   "candles": 2103,
+   "std5m_pct": 1.23
+  },
+  {
+   "name": "JOB / SOL",
+   "liq": 137583,
+   "fdv": 1642571,
+   "created": "2026-10-27T19:13:28Z",
+   "candles": 2821,
+   "std5m_pct": 1.71
+  },
+  {
+   "name": "STONK / USDC",
+   "liq": 126041,
+   "fdv": 23373872,
+   "created": "2026-10-04T05:57:40Z",
+   "candles": 2896,
+   "std5m_pct": 0.56
+  },
+  {
+   "name": "BASKET / SOL",
+   "liq": 125483,
+   "fdv": 772487,
+   "created": "2026-11-25T04:43:02Z",
+   "candles": 201,
+   "std5m_pct": 13.69
+  },
+  {
+   "name": "GLDx / USDC",
+   "liq": 119752,
+   "fdv": 38002719,
+   "created": "2026-09-23T23:08:48Z",
+   "candles": 2893,
+   "std5m_pct": 0.34
+  },
+  {
+   "name": "hSOL / SOL",
+   "liq": 109787,
+   "fdv": 41535282,
+   "created": "2026-09-10T17:26:57Z",
+   "candles": 2574,
+   "std5m_pct": 0.33
+  },
+  {
+   "name": "JIMMY / SOL",
+   "liq": 85835,
+   "fdv": 890892,
+   "created": "2026-11-23T21:11:11Z",
+   "candles": 579,
+   "std5m_pct": 15.66
+  },
+  {
+   "name": "Jimmies / SOL",
+   "liq": 52101,
+   "fdv": 530300,
+   "created": "2026-11-24T23:17:15Z",
+   "candles": 262,
+   "std5m_pct": 8.55
+  },
+  {
+   "name": "TTWO / USDC",
+   "liq": 50826,
+   "fdv": 4272923,
+   "created": "2026-11-14T11:38:00Z",
+   "candles": 2896,
+   "std5m_pct": 0.36
+  },
+  {
+   "name": "LOOK / SOL",
+   "liq": 38672,
+   "fdv": 779112,
+   "created": "2025-09-03T22:10:27Z",
+   "candles": 644,
+   "std5m_pct": 5.7
+  },
+  {
+   "name": "GTA6 / SOL",
+   "liq": 26373,
+   "fdv": 1915082,
+   "created": "2026-08-27T19:16:41Z",
+   "candles": 2747,
+   "std5m_pct": 3.28
+  }
+ ],
+ "universe_raw": 44,
+ "fetched_raw": {
+  "trend_5m_1": 20,
+  "trend_5m_2": 20,
+  "trend_5m_3": 20,
+  "trend_1h_1": 20,
+  "trend_1h_2": 20,
+  "trend_6h_1": 0,
+  "vol_1": 20,
+  "vol_2": 20,
+  "vol_3": 20,
+  "vol_4": 20,
+  "vol_5": 20,
+  "vol_6": 20,
+  "vol_7": 20,
+  "vol_8": 20,
+  "vol_9": 20,
+  "vol_10": 20,
+  "tx_1": 20,
+  "tx_2": 20,
+  "tx_3": 20,
+  "tx_4": 20,
+  "tx_5": 20,
+  "total": 400
  }
 }
