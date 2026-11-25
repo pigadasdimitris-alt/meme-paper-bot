@@ -11,7 +11,7 @@ import contextlib
 import urllib.request
 
 from . import config as C
-from . import copybot, data, engine, live
+from . import copybot, data, engine, live, majors
 from .report import write_readme
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -209,12 +209,22 @@ def lab_row(key, label, st):
 TIMES = {}
 
 
-def save_lab(lab, state, cst):
-    for name, st in lab.items():
+MAJORS = {"trend": ("Trend BTC/ETH/SOL", majors.TREND_EPOCH, majors.trend_cycle),
+          "funding": ("Funding arbitrage", majors.FUND_EPOCH, majors.funding_cycle)}
+
+
+def load_majors(now):
+    LAB_DIR.mkdir(parents=True, exist_ok=True)
+    return {k: majors.load(LAB_DIR / f"{k}.json", now, ep, k) for k, (_, ep, _) in MAJORS.items()}
+
+
+def save_lab(lab, state, cst, mj=None):
+    for name, st in list(lab.items()) + list((mj or {}).items()):
         (LAB_DIR / f"{name}.json").write_text(json.dumps(st, ensure_ascii=False, indent=1))
-    rows = [lab_row("paper", "Momentum" + ("" if getattr(C, "MOMENTUM_ON", True) else " (σταμάτησε)"), state)] + \
+    rows = ([lab_row("paper", "Momentum", state)] if getattr(C, "MOMENTUM_ON", True) else []) + \
            [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + \
-           [lab_row("copy", "Copy πορτοφολιών", cst)]
+           [lab_row("copy", "Copy πορτοφολιών", cst)] + \
+           [lab_row(k, MAJORS[k][0], st) for k, st in (mj or {}).items()]
     rows.sort(key=lambda r: r["equity"], reverse=True)
     LAB_SUMMARY.write_text(json.dumps({"updated": engine.iso(engine.now_utc()), "since": "2026-11-24",
                                        "seconds": {k: round(v, 1) for k, v in TIMES.items()}, "rows": rows}, ensure_ascii=False, indent=1))
@@ -338,6 +348,7 @@ def main():
     cst = copybot.load(COPY_STATE, engine.now_utc())
     engine.SHARED_RUGS.update(cst.get("rug_names") or [])
     lab = load_lab(engine.now_utc())
+    mj = load_majors(engine.now_utc())
     for st in lab.values():
         engine.SHARED_RUGS.update(st.get("rug_names") or [])
     cycle = 0
@@ -383,9 +394,20 @@ def main():
                 engine.log(st, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
                 print(f"lab {name} error:", str(e)[:200], file=sys.stderr, flush=True)
             TIMES[name] = time.time() - t2
-        print("  lab: " + " ".join(f"{n}=${engine.equity(st):.2f}" for n, st in lab.items()), flush=True)
+        for k, st in mj.items():   # BTC / ETH / SOL
+            t2 = time.time()
+            try:
+                MAJORS[k][2](st)
+                health(k)
+            except Exception as e:
+                health(k, e)
+                engine.log(st, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
+                print(f"{k} error:", str(e)[:200], file=sys.stderr, flush=True)
+            TIMES[k] = time.time() - t2
+        print("  lab: " + " ".join(f"{n}=${engine.equity(st):.2f}" for n, st in lab.items()) + " " +
+              " ".join(f"{k}=${majors.equity(st):.2f}" for k, st in mj.items()), flush=True)
         TIMES["cycle"] = time.time() - t0
-        save_lab(lab, state, cst)
+        save_lab(lab, state, cst, mj)
         if lst is not None:
             try:
                 live_cycle(lst, pools)
@@ -404,7 +426,7 @@ def main():
         time.sleep(max(1, C.POLL_SECONDS - (time.time() - t0)))
     save(state)
     save_copy(cst)
-    save_lab(lab, state, cst)
+    save_lab(lab, state, cst, mj)
     if lst is not None:
         LIVE_STATE.write_text(json.dumps(lst, ensure_ascii=False, indent=1))
     git_commit(f"bot: τέλος γύρου {engine.iso(engine.now_utc())}")

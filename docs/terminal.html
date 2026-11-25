@@ -150,7 +150,7 @@ legend span{color:var(--dim);font-weight:400}
 </head>
 <body>
 <div class="wrap">
-  <div class="bar"><span>meme-desk <span class="modes" id="modes" style="display:none"><button data-m="paper" class="on">paper</button><button data-m="scalp">scalp</button><button data-m="trail">trail</button><button data-m="dip">dip</button><button data-m="spike">spike</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="bar"><span>meme-desk <span class="modes" id="modes" style="display:none"><button data-m="scalp" class="on">scalp</button><button data-m="trail">trail</button><button data-m="dip">dip</button><button data-m="spike">spike</button><button data-m="copy">copy</button><button data-m="trend">trend</button><button data-m="funding">funding</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
 
   <fieldset style="--c:#f59e0b"><legend><sup>0</sup>lab <span>— κατάταξη στρατηγικών</span></legend><span class="tag" id="labsince">από 24/11</span>
@@ -197,8 +197,8 @@ legend span{color:var(--dim);font-weight:400}
 <script>
 {
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
-const MODES=["paper","scalp","trail","dip","spike","copy","live"];
-let MODE = MODES.find(m=>m!=="paper" && location.hash.includes(m)) || "paper";
+const MODES=["scalp","trail","dip","spike","copy","trend","funding"];
+let MODE = MODES.find(m=>location.hash.slice(1)===m) || "scalp";
 const FILE = () => ({paper:"state.json",copy:"copy.json",live:"live.json"})[MODE] || `lab/${MODE}.json`;
 const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;
 const RAW = () => `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/docs/${FILE()}`;
@@ -223,7 +223,7 @@ function av(name,img,size=""){
 }
 let ST=null, PREV=null, first=true, lastRun=null, shownEq=null;
 
-const posVal=p=>Math.max(p.qty*p.last_price*(1-SLIP)-FEE,0);
+const posVal=p=>p.value!=null ? +p.value : Math.max(p.qty*p.last_price*(1-SLIP)-FEE,0);
 const equity=st=>st.balance+st.positions.reduce((a,p)=>a+posVal(p),0);
 
 /* clock + sync age tick every second */
@@ -301,7 +301,7 @@ function renderPositions(st){
     const lo=Math.min(p.stop_pct,-10), span=TP-lo, zero=(-lo)/span*100, cur=Math.max(0,Math.min(100,(p.last_pct-lo)/span*100));
     const l=Math.min(zero,cur), w=Math.abs(cur-zero);
     return `<div class="pos"><div class="pn"><b style="display:flex;align-items:center;gap:6px;min-width:0">${av(p.name,p.image,"sm")}<span style="overflow:hidden;text-overflow:ellipsis">${esc(short(p.name))}</span></b><span class="${p.last_pct>=0?"mint":"coral"}">${pct(p.last_pct)}</span></div>
-      <div class="pm">#${p.id} · ${k$(p.entry_signals?.liquidity||0)} liq · ${Math.round((Date.now()-T(p.entry_time))/60000)}m</div>
+      <div class="pm">#${p.id} · ${p.entry_signals?k$(p.entry_signals.liquidity)+" liq · ":(p.funding_earned!=null?`funding ${p.funding_earned>=0?"+":""}$${(+p.funding_earned).toFixed(4)} · `:"")}${Math.round((Date.now()-T(p.entry_time))/60000)}m</div>
       <div class="prog"><u style="left:${zero}%"></u><i class="${p.last_pct<0?"neg":""}" style="left:${l}%;width:${Math.max(w,1.5)}%"></i></div>
       <div class="pm">stop ${pct(p.stop_pct)} · peak ${pct(p.peak_pct)}</div></div>`;
   }).join(""):`<div class="note">καμία θέση · scanner σε αναζήτηση<span class="cursor"></span></div>`;
@@ -414,7 +414,7 @@ function drawLab(){
     return `<div class="lr${r.key===MODE?" sel":""}" data-k="${esc(r.key)}"><span class="rk">${i+1}</span>`+
       `<span><div class="nm">${esc(r.label)}</div><div class="st">${r.trades} trades · ${r.wins}Κ/${r.trades-r.wins}Ζ${r.open?` · ${r.open} ανοιχτά`:""}${r.rugs?` · <span class="coral">${r.rugs} rug</span>`:""}</div></span>`+
       `<span class="eqv">$${(+r.equity).toFixed(2)}</span><span class="pc ${pc>=0?"mint":"coral"}">${pc>=0?"+":""}${pc.toFixed(1)}%</span></div>`; }).join("");
-  $("lab").innerHTML = rows + `<button class="livebtn${MODE==="live"?" on":""}" data-k="live">live (πραγματικά)</button>`;
+  $("lab").innerHTML = rows;
 }
 async function loadLab(){ try{ LAB=await fetchFile("lab.json"); drawLab(); }catch(e){} }
 $("lab").addEventListener("click",e=>{ const r=e.target.closest("[data-k]"); if(r && r.dataset.k!==MODE){ setMode(r.dataset.k); drawLab(); } });
@@ -428,7 +428,7 @@ function setMode(m){
   MODE=m; SLIP = m==="live" ? 0.01 : 0.025; FEE = m==="live" ? 0 : 0.03;
   for(const b of $("modes").children) b.classList.toggle("on", b.dataset.m===m);
   ST=null; PREV=null; first=true; lastRun=null; shownEq=null;
-  try{ history.replaceState(null,"", m==="paper"?"#":"#"+m); }catch(e){}
+  try{ history.replaceState(null,"", "#"+m); }catch(e){}
   load();
 }
 $("modes").addEventListener("click",e=>{const b=e.target.closest("button"); if(b && b.dataset.m!==MODE) setMode(b.dataset.m);});
