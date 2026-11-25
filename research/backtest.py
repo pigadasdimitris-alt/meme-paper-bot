@@ -32,6 +32,9 @@ def ts(s):
 
 
 RAW = {}
+DEXES = ["raydium", "pumpswap", "meteora", "meteora-damm-v2", "raydium-clmm", "orca", "meteora-dbc"]
+DEX_PAGES = int(os.environ.get("BT_DEX_PAGES", "5"))
+MIN_STD5M = 0.4   # % — κάτω από αυτό δεν είναι meme coin (SOL, BTC, μετοχές σε token, staked SOL…)
 
 
 def universe():
@@ -45,6 +48,12 @@ def universe():
     for page in range(1, C.TOP_TX_PAGES + 1):
         got = data.top_volume_pools(page, sort="h24_tx_count_desc"); time.sleep(1)
         RAW[f"tx_{page}"] = len(got); pools += got
+    for dex in DEXES:
+        for page in range(1, DEX_PAGES + 1):
+            dd = data._get(f"{data.GT}/networks/solana/dexes/{dex}/pools?page={page}&sort=h24_volume_usd_desc")
+            time.sleep(2.1)
+            got = [data.parse_gt_pool(x) for x in (dd or {}).get("data", [])]
+            RAW[f"{dex}_{page}"] = len(got); pools += got
     RAW["total"] = len(pools)
     out, seen_mint = [], set()
     for p in sorted(pools, key=lambda x: -x["liquidity"]):
@@ -58,7 +67,12 @@ def universe():
             continue
         seen_mint.add(p["base_mint"])
         out.append(p)
-    return out[:MAX_POOLS]
+    return out
+
+
+def vol(cs):
+    r = [cs[i][4] / cs[i - 1][4] - 1 for i in range(1, len(cs)) if cs[i - 1][4] > 0]
+    return round(100 * statistics.pstdev(r), 2) if len(r) > 2 else None
 
 
 def candles(pool, since):
@@ -79,7 +93,19 @@ def candles(pool, since):
         before = min(int(r[0]) for r in lst)
         if before <= since or len(lst) < 1000:
             break
-    return [rows[k] for k in sorted(rows) if k >= since]
+    out = [rows[k] for k in sorted(rows) if k >= since]
+    # προστασία από λάθη δεδομένων (όπως το MAX_JUMP του bot): φυτίλι >4x από το προηγούμενο κλείσιμο αγνοείται
+    for i in range(1, len(out)):
+        pc = out[i - 1][4]
+        if pc > 0:
+            o, h, l, c = out[i][1:5]
+            if h > C.MAX_JUMP * pc:
+                out[i][2] = max(o, c) if max(o, c) <= C.MAX_JUMP * pc else pc
+            if l < pc / C.MAX_JUMP:
+                out[i][3] = min(o, c) if min(o, c) >= pc / C.MAX_JUMP else pc
+            if not (pc / C.MAX_JUMP <= c <= C.MAX_JUMP * pc):
+                out[i][1] = out[i][4] = out[i][2] = out[i][3] = pc
+    return out
 
 
 # ---------- σήματα εισόδου (ίδια όρια με το config.LAB, όσο το επιτρέπουν τα κεριά) ----------
@@ -208,12 +234,15 @@ def main():
     now = time.time()
     since = int(now - DAYS * 86400) - 12 * STEP
     uni = universe()
+    uni = uni[:MAX_POOLS]
     print(f"σύμπαν: {len(uni)} pools", flush=True)
     series = {}
     for n, p in enumerate(uni, 1):
         cs = candles(p["pool"], since)
-        if len(cs) >= 50:
+        if len(cs) >= 50 and (vol(cs) or 0) >= MIN_STD5M:
             series[p["pool"]] = (p, cs)
+        elif len(cs) >= 50:
+            RAW.setdefault("low_vol", []).append(p["name"])
         if n % 10 == 0:
             print(f"κεριά: {n}/{len(uni)} ({len(series)} με δεδομένα)", flush=True)
     t_mid = since + (now - since) / 2
@@ -226,9 +255,6 @@ def main():
         "costs_per_side": [f"{c * 100:g}%" for c in COSTS],
         "results": {},
     }
-    def vol(cs):
-        r = [cs[i][4] / cs[i - 1][4] - 1 for i in range(1, len(cs)) if cs[i - 1][4] > 0]
-        return round(100 * statistics.pstdev(r), 2) if len(r) > 2 else None
     out["universe"] = [{"name": m["name"], "liq": round(m["liquidity"]), "fdv": round(m["fdv"]),
                         "created": m["created_at"], "candles": len(c), "std5m_pct": vol(c)}
                        for m, c in series.values()]
@@ -241,6 +267,8 @@ def main():
         signal_counts[key] = len(tr)
         out["results"][key] = summarize(tr, t_mid)
         out["results"][key]["sample"] = [{**t, "move": round(t["move"], 2)} for t in tr[:15]]
+        out["results"][key]["top5"] = sorted(({**t, "move": round(t["move"], 2)} for t in tr),
+                                             key=lambda t: -t["move"])[:5]
         print(key, json.dumps(out["results"][key], ensure_ascii=False), flush=True)
     # Βάση σύγκρισης: τυχαίες είσοδοι με τους ίδιους κανόνες εξόδου και περίπου ίδιο πλήθος trades
     total_slots = sum(len(c) for _, c in series.values()) or 1
