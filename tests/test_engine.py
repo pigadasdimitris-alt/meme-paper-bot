@@ -455,3 +455,11 @@ def test_overrides_leave_config_clean_for_momentum():
             pass
     assert not hasattr(C, "MIN_BUY_SELL_RATIO_M5") and not hasattr(C, "TRAIL_PCT")
     assert engine.reject_reason(pool(now), now) is None   # το momentum δεν σπάει μετά το εργαστήριο
+
+
+def test_volume_spike_filter():
+    from bot import run
+    now = engine.now_utc()
+    with run.overrides(C.LAB["spike"]):
+        assert engine.reject_reason(pool(now, vol_m5=30_000, vol_h1=80_000), now) is None
+        assert engine.reject_reason(pool(now, vol_m5=7_000, vol_h1=80_000), now) == "χωρίς έκρηξη όγκου"

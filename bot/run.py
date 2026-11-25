@@ -110,8 +110,9 @@ def one_cycle(state):
     now = engine.now_utc()
     if not fresh and not pools:
         engine.log(state, now, "Δεν ήρθαν δεδομένα από το API σε αυτόν τον γύρο")
-    engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags, rug_fn=data.rugcheck,
-                         verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
+    if getattr(C, "MOMENTUM_ON", True):
+        engine.scan_and_enter(state, pools, now, flags_fn=data.token_flags, rug_fn=data.rugcheck,
+                             verify_fn=lambda p: data.ds_price(p["pool"], p["base_mint"]))
     engine.snapshot(state, engine.now_utc())
     return pools
 
@@ -208,7 +209,7 @@ def lab_row(key, label, st):
 def save_lab(lab, state, cst):
     for name, st in lab.items():
         (LAB_DIR / f"{name}.json").write_text(json.dumps(st, ensure_ascii=False, indent=1))
-    rows = [lab_row("paper", "Momentum", state)] + \
+    rows = [lab_row("paper", "Momentum" + ("" if getattr(C, "MOMENTUM_ON", True) else " (σταμάτησε)"), state)] + \
            [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + \
            [lab_row("copy", "Copy πορτοφολιών", cst)]
     rows.sort(key=lambda r: r["equity"], reverse=True)

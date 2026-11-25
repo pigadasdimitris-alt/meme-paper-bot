@@ -150,7 +150,7 @@ legend span{color:var(--dim);font-weight:400}
 </head>
 <body>
 <div class="wrap">
-  <div class="bar"><span>meme-desk <span class="modes" id="modes" style="display:none"><button data-m="paper" class="on">paper</button><button data-m="scalp">scalp</button><button data-m="trail">trail</button><button data-m="dip">dip</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
+  <div class="bar"><span>meme-desk <span class="modes" id="modes" style="display:none"><button data-m="paper" class="on">paper</button><button data-m="scalp">scalp</button><button data-m="trail">trail</button><button data-m="dip">dip</button><button data-m="spike">spike</button><button data-m="copy">copy</button><button data-m="live">live</button></span></span><span class="mid"><i></i><span id="sync">sync …</span></span><span id="clock">--:--:--</span></div>
   <div class="err" id="err"></div>
 
   <fieldset style="--c:#f59e0b"><legend><sup>0</sup>lab <span>— κατάταξη στρατηγικών</span></legend><span class="tag" id="labsince">από 24/11</span>
@@ -197,7 +197,7 @@ legend span{color:var(--dim);font-weight:400}
 <script>
 {
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
-const MODES=["paper","scalp","trail","dip","copy","live"];
+const MODES=["paper","scalp","trail","dip","spike","copy","live"];
 let MODE = MODES.find(m=>m!=="paper" && location.hash.includes(m)) || "paper";
 const FILE = () => ({paper:"state.json",copy:"copy.json",live:"live.json"})[MODE] || `lab/${MODE}.json`;
 const API = () => `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${FILE()}?ref=main`;

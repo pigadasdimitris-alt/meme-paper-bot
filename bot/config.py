@@ -82,8 +82,14 @@ LAB = {
               "BREAKEVEN_TRIGGER_PCT": 4.0},
     "trail": {"label": "Trailing", "TAKE_PROFIT_PCT": 1e9, "STOP_LOSS_PCT": -10.0, "TRAIL_PCT": 8.0,
               "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 240},
+    "spike": {"label": "Έκρηξη όγκου", "MIN_VOL_SPIKE": 3.0, "MIN_BUY_SELL_RATIO_M5": 1.3,
+              "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
+              "MIN_PRICE_CHANGE_H1": -10.0, "MAX_PRICE_CHANGE_H1": 30.0,
+              "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -8.0, "BREAKEVEN_TRIGGER_PCT": 7.0, "MAX_HOLD_MIN": 60},
     "dip": {"label": "Αγορά στη βουτιά", "MIN_LIQUIDITY_USD": 50_000, "MIN_PRICE_CHANGE_H1": -30.0,
             "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
             "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
             "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
 }
+
+MOMENTUM_ON = False   # 25/11: το momentum σταμάτησε νέες αγορές (89,20$ μετά από 18 trades) — τη θέση του παίρνει το "spike"

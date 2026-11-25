@@ -88,6 +88,9 @@ def reject_reason(p, now):
     sells = max(p["sells_h1"], 1)
     if p["buys_h1"] / sells < C.MIN_BUY_SELL_RATIO_H1:
         return "πολλές πωλήσεις"
+    spike = getattr(C, "MIN_VOL_SPIKE", 0.0)
+    if spike and p["vol_m5"] < spike * max(p.get("vol_h1", 0.0) / 12.0, 1.0):
+        return "χωρίς έκρηξη όγκου"
     if p["buys_m5"] / max(p["sells_m5"], 1) < getattr(C, "MIN_BUY_SELL_RATIO_M5", 0.0):
         return "πωλητές στα 5'"
     if p["pc_m5"] < C.MIN_PRICE_CHANGE_M5:
