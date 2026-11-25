@@ -1,0 +1,306 @@
+{
+ "updated": "2026-11-25T21:00:12Z",
+ "days": 10,
+ "pools": 33,
+ "candles": 70924,
+ "notes": [
+  "survivorship bias: τα rugs λείπουν → αισιόδοξο",
+  "χωρίς φίλτρα αγοραστών/ratio (δεν υπάρχουν στα κεριά)",
+  "TP+SL στο ίδιο κερί = SL"
+ ],
+ "costs_per_side": [
+  "2.5%",
+  "1%",
+  "0.5%"
+ ],
+ "results": {
+  "scalp": {
+   "trades": 249,
+   "win_rate_market": 37.8,
+   "exits": {
+    "χρόνος": 232,
+    "tp": 3,
+    "stop": 10,
+    "stop 0": 4
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.77,
+     "median_net_pct": -5.79,
+     "wins_pct": 1.6,
+     "pnl_usd_10_per_trade": -143.8,
+     "avg_first_half": -5.73,
+     "avg_second_half": -5.81
+    },
+    "1%": {
+     "avg_net_pct": -2.9,
+     "median_net_pct": -2.91,
+     "wins_pct": 6.4,
+     "pnl_usd_10_per_trade": -72.09,
+     "avg_first_half": -2.85,
+     "avg_second_half": -2.93
+    },
+    "0.5%": {
+     "avg_net_pct": -1.92,
+     "median_net_pct": -1.93,
+     "wins_pct": 10.8,
+     "pnl_usd_10_per_trade": -47.72,
+     "avg_first_half": -1.87,
+     "avg_second_half": -1.95
+    }
+   },
+   "distinct_coins": 16
+  },
+  "trail": {
+   "trades": 176,
+   "win_rate_market": 38.6,
+   "exits": {
+    "χρόνος": 160,
+    "trail": 7,
+    "stop": 9
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -6.34,
+     "median_net_pct": -6.36,
+     "wins_pct": 5.7,
+     "pnl_usd_10_per_trade": -111.53,
+     "avg_first_half": -6.83,
+     "avg_second_half": -5.92
+    },
+    "1%": {
+     "avg_net_pct": -3.47,
+     "median_net_pct": -3.49,
+     "wins_pct": 12.5,
+     "pnl_usd_10_per_trade": -61.15,
+     "avg_first_half": -3.99,
+     "avg_second_half": -3.05
+    },
+    "0.5%": {
+     "avg_net_pct": -2.5,
+     "median_net_pct": -2.52,
+     "wins_pct": 18.8,
+     "pnl_usd_10_per_trade": -44.02,
+     "avg_first_half": -3.02,
+     "avg_second_half": -2.07
+    }
+   },
+   "distinct_coins": 16
+  },
+  "dip": {
+   "trades": 13,
+   "win_rate_market": 61.5,
+   "exits": {
+    "stop 0": 1,
+    "tp": 8,
+    "stop": 4
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": 0.37,
+     "median_net_pct": 8.76,
+     "wins_pct": 61.5,
+     "pnl_usd_10_per_trade": 0.49,
+     "avg_first_half": -5.46,
+     "avg_second_half": 0.86
+    },
+    "1%": {
+     "avg_net_pct": 3.44,
+     "median_net_pct": 12.09,
+     "wins_pct": 61.5,
+     "pnl_usd_10_per_trade": 4.47,
+     "avg_first_half": -2.57,
+     "avg_second_half": 3.94
+    },
+    "0.5%": {
+     "avg_net_pct": 4.48,
+     "median_net_pct": 13.22,
+     "wins_pct": 61.5,
+     "pnl_usd_10_per_trade": 5.83,
+     "avg_first_half": -1.59,
+     "avg_second_half": 4.99
+    }
+   },
+   "distinct_coins": 3
+  },
+  "spike": {
+   "trades": 284,
+   "win_rate_market": 40.8,
+   "exits": {
+    "χρόνος": 277,
+    "tp": 2,
+    "stop 0": 2,
+    "stop": 3
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.61,
+     "median_net_pct": -5.74,
+     "wins_pct": 2.1,
+     "pnl_usd_10_per_trade": -159.28,
+     "avg_first_half": -5.91,
+     "avg_second_half": -5.35
+    },
+    "1%": {
+     "avg_net_pct": -2.72,
+     "median_net_pct": -2.86,
+     "wins_pct": 6.7,
+     "pnl_usd_10_per_trade": -77.35,
+     "avg_first_half": -3.03,
+     "avg_second_half": -2.45
+    },
+    "0.5%": {
+     "avg_net_pct": -1.74,
+     "median_net_pct": -1.88,
+     "wins_pct": 11.6,
+     "pnl_usd_10_per_trade": -49.5,
+     "avg_first_half": -2.06,
+     "avg_second_half": -1.47
+    }
+   },
+   "distinct_coins": 15
+  },
+  "scalp_random": {
+   "trades": 118,
+   "win_rate_market": 50.0,
+   "exits": {
+    "χρόνος": 112,
+    "tp": 2,
+    "stop": 3,
+    "stop 0": 1
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.47,
+     "median_net_pct": -5.46,
+     "wins_pct": 1.7,
+     "pnl_usd_10_per_trade": -64.57,
+     "avg_first_half": -5.52,
+     "avg_second_half": -5.42
+    },
+    "1%": {
+     "avg_net_pct": -2.58,
+     "median_net_pct": -2.57,
+     "wins_pct": 3.4,
+     "pnl_usd_10_per_trade": -30.48,
+     "avg_first_half": -2.63,
+     "avg_second_half": -2.53
+    },
+    "0.5%": {
+     "avg_net_pct": -1.6,
+     "median_net_pct": -1.59,
+     "wins_pct": 7.6,
+     "pnl_usd_10_per_trade": -18.89,
+     "avg_first_half": -1.65,
+     "avg_second_half": -1.55
+    }
+   },
+   "distinct_coins": 16
+  },
+  "trail_random": {
+   "trades": 81,
+   "win_rate_market": 44.4,
+   "exits": {
+    "χρόνος": 79,
+    "trail": 1,
+    "stop": 1
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.42,
+     "median_net_pct": -5.65,
+     "wins_pct": 3.7,
+     "pnl_usd_10_per_trade": -43.87,
+     "avg_first_half": -5.68,
+     "avg_second_half": -5.12
+    },
+    "1%": {
+     "avg_net_pct": -2.53,
+     "median_net_pct": -2.77,
+     "wins_pct": 9.9,
+     "pnl_usd_10_per_trade": -20.46,
+     "avg_first_half": -2.79,
+     "avg_second_half": -2.22
+    },
+    "0.5%": {
+     "avg_net_pct": -1.54,
+     "median_net_pct": -1.79,
+     "wins_pct": 12.3,
+     "pnl_usd_10_per_trade": -12.5,
+     "avg_first_half": -1.81,
+     "avg_second_half": -1.24
+    }
+   },
+   "distinct_coins": 15
+  },
+  "dip_random": {
+   "trades": 14,
+   "win_rate_market": 42.9,
+   "exits": {
+    "χρόνος": 14
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.54,
+     "median_net_pct": -5.65,
+     "wins_pct": 0.0,
+     "pnl_usd_10_per_trade": -7.75,
+     "avg_first_half": -5.23,
+     "avg_second_half": -5.84
+    },
+    "1%": {
+     "avg_net_pct": -2.65,
+     "median_net_pct": -2.76,
+     "wins_pct": 0.0,
+     "pnl_usd_10_per_trade": -3.71,
+     "avg_first_half": -2.34,
+     "avg_second_half": -2.96
+    },
+    "0.5%": {
+     "avg_net_pct": -1.67,
+     "median_net_pct": -1.78,
+     "wins_pct": 7.1,
+     "pnl_usd_10_per_trade": -2.34,
+     "avg_first_half": -1.35,
+     "avg_second_half": -1.98
+    }
+   },
+   "distinct_coins": 9
+  },
+  "spike_random": {
+   "trades": 132,
+   "win_rate_market": 53.8,
+   "exits": {
+    "χρόνος": 125,
+    "stop": 7
+   },
+   "by_cost": {
+    "2.5%": {
+     "avg_net_pct": -5.91,
+     "median_net_pct": -5.42,
+     "wins_pct": 0.8,
+     "pnl_usd_10_per_trade": -77.98,
+     "avg_first_half": -5.8,
+     "avg_second_half": -6.01
+    },
+    "1%": {
+     "avg_net_pct": -3.03,
+     "median_net_pct": -2.53,
+     "wins_pct": 0.8,
+     "pnl_usd_10_per_trade": -40.02,
+     "avg_first_half": -2.92,
+     "avg_second_half": -3.14
+    },
+    "0.5%": {
+     "avg_net_pct": -2.05,
+     "median_net_pct": -1.55,
+     "wins_pct": 3.0,
+     "pnl_usd_10_per_trade": -27.12,
+     "avg_first_half": -1.94,
+     "avg_second_half": -2.16
+    }
+   },
+   "distinct_coins": 16
+  }
+ }
+}
