@@ -445,3 +445,13 @@ def test_dip_entry_filter():
     with run.overrides(C.LAB["dip"]):
         assert engine.reject_reason(pool(now, pc_h1=-20, pc_m5=2, buys_m5=60, sells_m5=30), now) is None
         assert engine.reject_reason(pool(now, pc_h1=12), now) == "ήδη εκτοξευμένο"
+
+
+def test_overrides_leave_config_clean_for_momentum():
+    from bot import run
+    now = engine.now_utc()
+    for name in C.LAB:
+        with run.overrides(C.LAB[name]):
+            pass
+    assert not hasattr(C, "MIN_BUY_SELL_RATIO_M5") and not hasattr(C, "TRAIL_PCT")
+    assert engine.reject_reason(pool(now), now) is None   # το momentum δεν σπάει μετά το εργαστήριο

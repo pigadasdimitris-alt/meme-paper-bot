@@ -121,14 +121,18 @@ def one_cycle(state):
 @contextlib.contextmanager
 def overrides(params):
     params = {k: v for k, v in params.items() if k != "label"}
-    old = {k: getattr(C, k, None) for k in params}
+    missing = object()
+    old = {k: getattr(C, k, missing) for k in params}
     for k, v in params.items():
         setattr(C, k, v)
     try:
         yield
     finally:
         for k, v in old.items():
-            setattr(C, k, v)
+            if v is missing:   # η ρύθμιση δεν υπήρχε: τη σβήνουμε (όχι None, που χαλάει τις συγκρίσεις)
+                delattr(C, k)
+            else:
+                setattr(C, k, v)
 
 
 def load_lab(now):
