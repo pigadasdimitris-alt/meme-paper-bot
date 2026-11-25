@@ -206,6 +206,9 @@ def lab_row(key, label, st):
             "rugs": sum(1 for t in closed if "rug" in str(t.get("reason"))), "last_run": st.get("last_run")}
 
 
+TIMES = {}
+
+
 def save_lab(lab, state, cst):
     for name, st in lab.items():
         (LAB_DIR / f"{name}.json").write_text(json.dumps(st, ensure_ascii=False, indent=1))
@@ -214,7 +217,7 @@ def save_lab(lab, state, cst):
            [lab_row("copy", "Copy πορτοφολιών", cst)]
     rows.sort(key=lambda r: r["equity"], reverse=True)
     LAB_SUMMARY.write_text(json.dumps({"updated": engine.iso(engine.now_utc()), "since": "2026-11-24",
-                                       "rows": rows}, ensure_ascii=False, indent=1))
+                                       "seconds": {k: round(v, 1) for k, v in TIMES.items()}, "rows": rows}, ensure_ascii=False, indent=1))
 
 
 # ---------------- LIVE ----------------
@@ -343,6 +346,7 @@ def main():
         pools = []
         try:
             pools = one_cycle(state)
+            TIMES["scan"] = time.time() - t0
             n = len(pools)
             print(f"[{engine.iso(engine.now_utc())}] evaluated={n} watch={len(state.get('watch', {}))} "
                   f"open={len(state['positions'])} "
@@ -352,6 +356,7 @@ def main():
             health("momentum", e)
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")
             print("cycle error:", repr(e), file=sys.stderr, flush=True)
+        t1 = time.time()
         try:   # δεύτερο paper bot: αντιγραφή έξυπνων πορτοφολιών (σταματημένο: δεν έβγαζε trades)
             if not getattr(C, "COPY_BOT", False):
                 raise StopIteration
@@ -366,7 +371,9 @@ def main():
             engine.log(cst, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
             print("copy error:", str(e)[:200], file=sys.stderr, flush=True)
         save_copy(cst)
+        TIMES["copy"] = time.time() - t1
         for name, st in lab.items():   # εργαστήριο: ίδια coins, άλλοι κανόνες
+            t2 = time.time()
             try:
                 with overrides(C.LAB[name]):
                     lab_cycle(st, pools)
@@ -375,7 +382,9 @@ def main():
                 health(name, e)
                 engine.log(st, engine.now_utc(), f"Σφάλμα γύρου: {str(e)[:200]}")
                 print(f"lab {name} error:", str(e)[:200], file=sys.stderr, flush=True)
+            TIMES[name] = time.time() - t2
         print("  lab: " + " ".join(f"{n}=${engine.equity(st):.2f}" for n, st in lab.items()), flush=True)
+        TIMES["cycle"] = time.time() - t0
         save_lab(lab, state, cst)
         if lst is not None:
             try:
