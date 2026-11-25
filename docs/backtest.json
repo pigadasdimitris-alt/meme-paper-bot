@@ -1,8 +1,8 @@
 {
- "updated": "2026-11-25T21:55:09Z",
+ "updated": "2026-11-25T23:08:40Z",
  "days": 10,
- "pools": 85,
- "candles": 153701,
+ "pools": 87,
+ "candles": 163178,
  "notes": [
   "survivorship bias: τα rugs λείπουν → αισιόδοξο",
   "χωρίς φίλτρα αγοραστών/ratio (δεν υπάρχουν στα κεριά)",
@@ -15,41 +15,41 @@
  ],
  "results": {
   "scalp": {
-   "trades": 578,
-   "win_rate_market": 39.6,
+   "trades": 566,
+   "win_rate_market": 39.4,
    "exits": {
-    "χρόνος": 477,
+    "χρόνος": 466,
     "tp": 32,
     "stop": 51,
-    "stop 0": 18
+    "stop 0": 17
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.65,
+     "avg_net_pct": -5.64,
      "median_net_pct": -5.88,
-     "wins_pct": 6.2,
-     "pnl_usd_10_per_trade": -326.3,
-     "avg_first_half": -5.64,
-     "avg_second_half": -5.65
+     "wins_pct": 6.4,
+     "pnl_usd_10_per_trade": -319.39,
+     "avg_first_half": -5.66,
+     "avg_second_half": -5.63
     },
     "1%": {
      "avg_net_pct": -2.76,
      "median_net_pct": -3.0,
      "wins_pct": 11.8,
-     "pnl_usd_10_per_trade": -159.63,
-     "avg_first_half": -2.76,
-     "avg_second_half": -2.76
+     "pnl_usd_10_per_trade": -156.18,
+     "avg_first_half": -2.78,
+     "avg_second_half": -2.75
     },
     "0.5%": {
      "avg_net_pct": -1.78,
      "median_net_pct": -2.03,
-     "wins_pct": 16.6,
-     "pnl_usd_10_per_trade": -102.97,
-     "avg_first_half": -1.78,
-     "avg_second_half": -1.78
+     "wins_pct": 16.4,
+     "pnl_usd_10_per_trade": -100.69,
+     "avg_first_half": -1.79,
+     "avg_second_half": -1.77
     }
    },
-   "distinct_coins": 32,
+   "distinct_coins": 31,
    "sample": [
     {
      "pool": "54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ",
@@ -171,43 +171,85 @@
      "why": "χρόνος",
      "hold": 30
     }
+   ],
+   "top5": [
+    {
+     "pool": "HMzvsEEmtzHhvZNw9uwbaG85HCTmFnkbhzUx16cy7ca3",
+     "name": "CATE / SOL",
+     "t": 1795442400,
+     "move": 8.0,
+     "why": "tp",
+     "hold": 20
+    },
+    {
+     "pool": "AhRKZqCo3UtfyGKBWDG4Z9ZHT7mq66k89zryT2hSJC6G",
+     "name": "wNEAR / SOL",
+     "t": 1795438500,
+     "move": 8.0,
+     "why": "tp",
+     "hold": 20
+    },
+    {
+     "pool": "FnzKY6x7entQ1eR3D225dQyT7ybfka4PskBMQhb8L3CC",
+     "name": "ANSEM / SOL",
+     "t": 1795324200,
+     "move": 8.0,
+     "why": "tp",
+     "hold": 30
+    },
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1794840300,
+     "move": 8.0,
+     "why": "tp",
+     "hold": 25
+    },
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1794901800,
+     "move": 8.0,
+     "why": "tp",
+     "hold": 20
+    }
    ]
   },
   "trail": {
-   "trades": 391,
-   "win_rate_market": 40.2,
+   "trades": 385,
+   "win_rate_market": 39.7,
    "exits": {
-    "χρόνος": 279,
-    "trail": 62,
-    "stop": 50
+    "χρόνος": 275,
+    "trail": 58,
+    "stop": 52
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": 43.56,
-     "median_net_pct": -6.22,
-     "wins_pct": 12.3,
-     "pnl_usd_10_per_trade": 1703.27,
-     "avg_first_half": 102.98,
-     "avg_second_half": -6.09
+     "avg_net_pct": -5.76,
+     "median_net_pct": -6.28,
+     "wins_pct": 11.2,
+     "pnl_usd_10_per_trade": -221.74,
+     "avg_first_half": -5.35,
+     "avg_second_half": -6.13
     },
     "1%": {
-     "avg_net_pct": 47.94,
-     "median_net_pct": -3.35,
-     "wins_pct": 21.0,
-     "pnl_usd_10_per_trade": 1874.63,
-     "avg_first_half": 109.18,
-     "avg_second_half": -3.22
+     "avg_net_pct": -2.88,
+     "median_net_pct": -3.41,
+     "wins_pct": 20.0,
+     "pnl_usd_10_per_trade": -110.86,
+     "avg_first_half": -2.46,
+     "avg_second_half": -3.26
     },
     "0.5%": {
-     "avg_net_pct": 49.43,
-     "median_net_pct": -2.38,
-     "wins_pct": 25.8,
-     "pnl_usd_10_per_trade": 1932.89,
-     "avg_first_half": 111.28,
-     "avg_second_half": -2.25
+     "avg_net_pct": -1.9,
+     "median_net_pct": -2.44,
+     "wins_pct": 24.4,
+     "pnl_usd_10_per_trade": -73.16,
+     "avg_first_half": -1.47,
+     "avg_second_half": -2.28
     }
    },
-   "distinct_coins": 32,
+   "distinct_coins": 31,
    "sample": [
     {
      "pool": "54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ",
@@ -253,9 +295,9 @@
      "pool": "54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ",
      "name": "ANTFUN / USDT",
      "t": 1795199700,
-     "move": 20278.04,
-     "why": "trail",
-     "hold": 120
+     "move": 0.37,
+     "why": "χρόνος",
+     "hold": 240
     },
     {
      "pool": "54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ",
@@ -309,9 +351,9 @@
      "pool": "54Vp27uLaw4wNLo5n7r4fcC6zLamoQc28xBARjss4EUJ",
      "name": "ANTFUN / USDT",
      "t": 1795631700,
-     "move": 0.3,
+     "move": 0.16,
      "why": "χρόνος",
-     "hold": 160
+     "hold": 205
     },
     {
      "pool": "GYqHjuDzTiw7i52Xv1qohDE6eJr6eSZpsrBVikGZyaFV",
@@ -329,41 +371,83 @@
      "why": "χρόνος",
      "hold": 240
     }
+   ],
+   "top5": [
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1794880500,
+     "move": 132.93,
+     "why": "trail",
+     "hold": 155
+    },
+    {
+     "pool": "G8kgi7aUpeX8EVR8VMkrth9SKEv5BietWC33UjAiiMGh",
+     "name": "CYBERLEEK / SOL",
+     "t": 1795105500,
+     "move": 77.45,
+     "why": "trail",
+     "hold": 145
+    },
+    {
+     "pool": "G8kgi7aUpeX8EVR8VMkrth9SKEv5BietWC33UjAiiMGh",
+     "name": "CYBERLEEK / SOL",
+     "t": 1794973200,
+     "move": 32.42,
+     "why": "trail",
+     "hold": 30
+    },
+    {
+     "pool": "G8kgi7aUpeX8EVR8VMkrth9SKEv5BietWC33UjAiiMGh",
+     "name": "CYBERLEEK / SOL",
+     "t": 1795156500,
+     "move": 28.38,
+     "why": "trail",
+     "hold": 180
+    },
+    {
+     "pool": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
+     "name": "FLOAT / SOL",
+     "t": 1795193100,
+     "move": 21.96,
+     "why": "trail",
+     "hold": 160
+    }
    ]
   },
   "dip": {
-   "trades": 50,
-   "win_rate_market": 50.0,
+   "trades": 51,
+   "win_rate_market": 49.0,
    "exits": {
     "stop 0": 5,
     "tp": 18,
-    "χρόνος": 11,
+    "χρόνος": 12,
     "stop": 16
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -3.18,
-     "median_net_pct": -5.37,
-     "wins_pct": 40.0,
-     "pnl_usd_10_per_trade": -15.89,
+     "avg_net_pct": -3.32,
+     "median_net_pct": -5.46,
+     "wins_pct": 39.2,
+     "pnl_usd_10_per_trade": -16.91,
      "avg_first_half": -3.78,
-     "avg_second_half": -2.77
+     "avg_second_half": -3.01
     },
     "1%": {
-     "avg_net_pct": -0.22,
-     "median_net_pct": -2.47,
-     "wins_pct": 40.0,
-     "pnl_usd_10_per_trade": -1.1,
+     "avg_net_pct": -0.36,
+     "median_net_pct": -2.57,
+     "wins_pct": 39.2,
+     "pnl_usd_10_per_trade": -1.85,
      "avg_first_half": -0.84,
-     "avg_second_half": 0.2
+     "avg_second_half": -0.05
     },
     "0.5%": {
-     "avg_net_pct": 0.79,
-     "median_net_pct": -1.49,
-     "wins_pct": 46.0,
-     "pnl_usd_10_per_trade": 3.93,
+     "avg_net_pct": 0.64,
+     "median_net_pct": -1.59,
+     "wins_pct": 45.1,
+     "pnl_usd_10_per_trade": 3.28,
      "avg_first_half": 0.16,
-     "avg_second_half": 1.21
+     "avg_second_half": 0.96
     }
    },
    "distinct_coins": 12,
@@ -488,41 +572,83 @@
      "why": "tp",
      "hold": 15
     }
+   ],
+   "top5": [
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1794897000,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 100
+    },
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1795285500,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 105
+    },
+    {
+     "pool": "G8kgi7aUpeX8EVR8VMkrth9SKEv5BietWC33UjAiiMGh",
+     "name": "CYBERLEEK / SOL",
+     "t": 1795118400,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 15
+    },
+    {
+     "pool": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
+     "name": "FLOAT / SOL",
+     "t": 1795119300,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 30
+    },
+    {
+     "pool": "FJk9sajdc2Q4heRPPu3yLzkmf2ZByZkpiHQLv9e2bn5A",
+     "name": "FLOAT / SOL",
+     "t": 1795141800,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 15
+    }
    ]
   },
   "spike": {
-   "trades": 585,
-   "win_rate_market": 40.2,
+   "trades": 591,
+   "win_rate_market": 39.1,
    "exits": {
-    "χρόνος": 523,
+    "χρόνος": 530,
     "tp": 23,
     "stop 0": 9,
-    "stop": 30
+    "stop": 29
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.49,
-     "median_net_pct": -5.81,
-     "wins_pct": 6.0,
-     "pnl_usd_10_per_trade": -321.05,
-     "avg_first_half": -5.53,
-     "avg_second_half": -5.45
+     "avg_net_pct": -5.5,
+     "median_net_pct": -5.86,
+     "wins_pct": 6.3,
+     "pnl_usd_10_per_trade": -324.96,
+     "avg_first_half": -5.52,
+     "avg_second_half": -5.48
     },
     "1%": {
-     "avg_net_pct": -2.6,
-     "median_net_pct": -2.93,
-     "wins_pct": 12.0,
-     "pnl_usd_10_per_trade": -152.08,
-     "avg_first_half": -2.64,
-     "avg_second_half": -2.56
+     "avg_net_pct": -2.61,
+     "median_net_pct": -2.98,
+     "wins_pct": 11.8,
+     "pnl_usd_10_per_trade": -154.28,
+     "avg_first_half": -2.63,
+     "avg_second_half": -2.59
     },
     "0.5%": {
-     "avg_net_pct": -1.62,
-     "median_net_pct": -1.96,
-     "wins_pct": 17.1,
-     "pnl_usd_10_per_trade": -94.64,
-     "avg_first_half": -1.66,
-     "avg_second_half": -1.58
+     "avg_net_pct": -1.63,
+     "median_net_pct": -2.0,
+     "wins_pct": 16.6,
+     "pnl_usd_10_per_trade": -96.25,
+     "avg_first_half": -1.65,
+     "avg_second_half": -1.61
     }
    },
    "distinct_coins": 31,
@@ -647,150 +773,191 @@
      "why": "χρόνος",
      "hold": 60
     }
+   ],
+   "top5": [
+    {
+     "pool": "FnzKY6x7entQ1eR3D225dQyT7ybfka4PskBMQhb8L3CC",
+     "name": "ANSEM / SOL",
+     "t": 1795282800,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 55
+    },
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1794888000,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 30
+    },
+    {
+     "pool": "Fe7bpDYCs74GqiCUF14HwgUMToPKV1d9mDYVX5BTohFr",
+     "name": "CLAUDIA / SOL",
+     "t": 1795193400,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 30
+    },
+    {
+     "pool": "FrXXHbGiDG2v4bVZqtXGGiiJmg1BQUw4CVXpLSXN58WF",
+     "name": "NEURALINK / USDC",
+     "t": 1795640100,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 20
+    },
+    {
+     "pool": "G8kgi7aUpeX8EVR8VMkrth9SKEv5BietWC33UjAiiMGh",
+     "name": "CYBERLEEK / SOL",
+     "t": 1794973200,
+     "move": 15.0,
+     "why": "tp",
+     "hold": 25
+    }
    ]
   },
   "scalp_random": {
-   "trades": 213,
-   "win_rate_market": 44.1,
+   "trades": 194,
+   "win_rate_market": 47.4,
    "exits": {
-    "χρόνος": 183,
-    "stop 0": 9,
-    "stop": 12,
-    "tp": 9
+    "stop": 15,
+    "χρόνος": 167,
+    "tp": 10,
+    "stop 0": 2
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.36,
-     "median_net_pct": -5.51,
-     "wins_pct": 4.2,
-     "pnl_usd_10_per_trade": -114.27,
-     "avg_first_half": -5.41,
-     "avg_second_half": -5.32
+     "avg_net_pct": -5.42,
+     "median_net_pct": -5.47,
+     "wins_pct": 5.7,
+     "pnl_usd_10_per_trade": -105.09,
+     "avg_first_half": -5.55,
+     "avg_second_half": -5.28
     },
     "1%": {
-     "avg_net_pct": -2.47,
-     "median_net_pct": -2.63,
-     "wins_pct": 7.5,
-     "pnl_usd_10_per_trade": -52.66,
-     "avg_first_half": -2.52,
-     "avg_second_half": -2.43
+     "avg_net_pct": -2.53,
+     "median_net_pct": -2.59,
+     "wins_pct": 9.8,
+     "pnl_usd_10_per_trade": -49.01,
+     "avg_first_half": -2.66,
+     "avg_second_half": -2.39
     },
     "0.5%": {
-     "avg_net_pct": -1.49,
-     "median_net_pct": -1.64,
-     "wins_pct": 15.5,
-     "pnl_usd_10_per_trade": -31.72,
-     "avg_first_half": -1.54,
-     "avg_second_half": -1.45
+     "avg_net_pct": -1.54,
+     "median_net_pct": -1.6,
+     "wins_pct": 12.9,
+     "pnl_usd_10_per_trade": -29.95,
+     "avg_first_half": -1.68,
+     "avg_second_half": -1.4
     }
    },
-   "distinct_coins": 31
+   "distinct_coins": 32
   },
   "trail_random": {
-   "trades": 135,
-   "win_rate_market": 48.1,
+   "trades": 127,
+   "win_rate_market": 41.7,
    "exits": {
-    "χρόνος": 105,
-    "stop": 15,
-    "trail": 15
+    "χρόνος": 100,
+    "trail": 12,
+    "stop": 15
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.45,
-     "median_net_pct": -5.6,
-     "wins_pct": 9.6,
-     "pnl_usd_10_per_trade": -73.56,
-     "avg_first_half": -4.98,
-     "avg_second_half": -5.81
+     "avg_net_pct": -6.35,
+     "median_net_pct": -5.82,
+     "wins_pct": 8.7,
+     "pnl_usd_10_per_trade": -80.64,
+     "avg_first_half": -6.26,
+     "avg_second_half": -6.42
     },
     "1%": {
-     "avg_net_pct": -2.56,
-     "median_net_pct": -2.72,
-     "wins_pct": 14.1,
-     "pnl_usd_10_per_trade": -34.56,
-     "avg_first_half": -2.08,
-     "avg_second_half": -2.93
+     "avg_net_pct": -3.49,
+     "median_net_pct": -2.94,
+     "wins_pct": 16.5,
+     "pnl_usd_10_per_trade": -44.29,
+     "avg_first_half": -3.4,
+     "avg_second_half": -3.56
     },
     "0.5%": {
-     "avg_net_pct": -1.58,
-     "median_net_pct": -1.74,
-     "wins_pct": 23.0,
-     "pnl_usd_10_per_trade": -21.29,
-     "avg_first_half": -1.09,
-     "avg_second_half": -1.96
+     "avg_net_pct": -2.51,
+     "median_net_pct": -1.96,
+     "wins_pct": 24.4,
+     "pnl_usd_10_per_trade": -31.93,
+     "avg_first_half": -2.42,
+     "avg_second_half": -2.59
     }
    },
-   "distinct_coins": 31
+   "distinct_coins": 30
   },
   "dip_random": {
-   "trades": 21,
-   "win_rate_market": 47.6,
+   "trades": 20,
+   "win_rate_market": 40.0,
    "exits": {
     "χρόνος": 19,
-    "tp": 1,
     "stop": 1
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.2,
-     "median_net_pct": -5.66,
-     "wins_pct": 4.8,
-     "pnl_usd_10_per_trade": -10.92,
-     "avg_first_half": -5.3,
-     "avg_second_half": -5.15
+     "avg_net_pct": -6.56,
+     "median_net_pct": -6.13,
+     "wins_pct": 0.0,
+     "pnl_usd_10_per_trade": -13.11,
+     "avg_first_half": -6.68,
+     "avg_second_half": -6.47
     },
     "1%": {
-     "avg_net_pct": -2.3,
-     "median_net_pct": -2.78,
-     "wins_pct": 19.0,
-     "pnl_usd_10_per_trade": -4.83,
-     "avg_first_half": -2.41,
-     "avg_second_half": -2.25
+     "avg_net_pct": -3.7,
+     "median_net_pct": -3.26,
+     "wins_pct": 5.0,
+     "pnl_usd_10_per_trade": -7.4,
+     "avg_first_half": -3.83,
+     "avg_second_half": -3.62
     },
     "0.5%": {
-     "avg_net_pct": -1.32,
-     "median_net_pct": -1.8,
-     "wins_pct": 28.6,
-     "pnl_usd_10_per_trade": -2.77,
-     "avg_first_half": -1.43,
-     "avg_second_half": -1.26
+     "avg_net_pct": -2.73,
+     "median_net_pct": -2.29,
+     "wins_pct": 10.0,
+     "pnl_usd_10_per_trade": -5.46,
+     "avg_first_half": -2.86,
+     "avg_second_half": -2.64
     }
    },
-   "distinct_coins": 20
+   "distinct_coins": 14
   },
   "spike_random": {
-   "trades": 214,
-   "win_rate_market": 48.1,
+   "trades": 202,
+   "win_rate_market": 45.0,
    "exits": {
-    "stop": 8,
-    "χρόνος": 195,
-    "tp": 10,
-    "stop 0": 1
+    "χρόνος": 179,
+    "tp": 4,
+    "stop": 16,
+    "stop 0": 3
    },
    "by_cost": {
     "2.5%": {
-     "avg_net_pct": -5.02,
-     "median_net_pct": -5.49,
-     "wins_pct": 7.0,
-     "pnl_usd_10_per_trade": -107.32,
-     "avg_first_half": -5.54,
-     "avg_second_half": -4.57
+     "avg_net_pct": -5.72,
+     "median_net_pct": -5.56,
+     "wins_pct": 5.0,
+     "pnl_usd_10_per_trade": -115.49,
+     "avg_first_half": -5.8,
+     "avg_second_half": -5.63
     },
     "1%": {
-     "avg_net_pct": -2.11,
-     "median_net_pct": -2.6,
-     "wins_pct": 10.7,
-     "pnl_usd_10_per_trade": -45.2,
-     "avg_first_half": -2.65,
-     "avg_second_half": -1.65
+     "avg_net_pct": -2.84,
+     "median_net_pct": -2.67,
+     "wins_pct": 10.4,
+     "pnl_usd_10_per_trade": -57.29,
+     "avg_first_half": -2.93,
+     "avg_second_half": -2.74
     },
     "0.5%": {
-     "avg_net_pct": -1.13,
-     "median_net_pct": -1.62,
-     "wins_pct": 15.9,
-     "pnl_usd_10_per_trade": -24.09,
-     "avg_first_half": -1.67,
-     "avg_second_half": -0.66
+     "avg_net_pct": -1.86,
+     "median_net_pct": -1.69,
+     "wins_pct": 17.3,
+     "pnl_usd_10_per_trade": -37.5,
+     "avg_first_half": -1.95,
+     "avg_second_half": -1.76
     }
    },
    "distinct_coins": 32
@@ -799,683 +966,699 @@
  "universe": [
   {
    "name": "ANTFUN / USDT",
-   "liq": 11756619,
-   "fdv": 90894137,
+   "liq": 11647936,
+   "fdv": 89808554,
    "created": "2026-07-10T04:29:57Z",
-   "candles": 2840,
-   "std5m_pct": 379.22
+   "candles": 2842,
+   "std5m_pct": 0.42
   },
   {
    "name": "BOME / SOL",
-   "liq": 9469177,
-   "fdv": 32168421,
+   "liq": 9547147,
+   "fdv": 32408036,
    "created": "2024-03-14T07:30:00Z",
-   "candles": 1918,
+   "candles": 1923,
    "std5m_pct": 0.47
   },
   {
    "name": "MEW / SOL",
-   "liq": 6097771,
-   "fdv": 25790519,
+   "liq": 6132951,
+   "fdv": 25941377,
    "created": "2024-03-26T05:26:00Z",
-   "candles": 1941,
+   "candles": 1939,
    "std5m_pct": 0.46
   },
   {
    "name": "Fartcoin / SOL",
-   "liq": 4646782,
-   "fdv": 81148470,
+   "liq": 4673398,
+   "fdv": 81388399,
    "created": "2024-10-18T06:09:47Z",
-   "candles": 2187,
+   "candles": 2190,
    "std5m_pct": 0.51
   },
   {
    "name": "$WIF / SOL",
-   "liq": 3743047,
-   "fdv": 124205113,
+   "liq": 3761168,
+   "fdv": 124730378,
    "created": "2023-11-20T20:10:04Z",
    "candles": 1730,
    "std5m_pct": 0.47
   },
   {
    "name": "jellyjelly / SOL",
-   "liq": 3519940,
-   "fdv": 40067281,
+   "liq": 3533392,
+   "fdv": 40214586,
    "created": "2025-01-29T23:34:09Z",
-   "candles": 2032,
+   "candles": 2034,
    "std5m_pct": 0.54
   },
   {
    "name": "pippin / SOL",
-   "liq": 3407482,
-   "fdv": 18755861,
+   "liq": 3416531,
+   "fdv": 18753190,
    "created": "2024-11-09T20:27:41Z",
-   "candles": 2573,
+   "candles": 2579,
    "std5m_pct": 0.99
   },
   {
    "name": "USDY / USDC",
-   "liq": 2916495,
-   "fdv": 7845120,
+   "liq": 2924545,
+   "fdv": 7876045,
    "created": "2026-03-28T05:23:14Z",
-   "candles": 752,
+   "candles": 755,
    "std5m_pct": 0.41
   },
   {
    "name": "ZEC / USDC",
-   "liq": 2902621,
-   "fdv": 83264674,
+   "liq": 2921384,
+   "fdv": 83686769,
    "created": "2025-10-24T00:47:07Z",
-   "candles": 2860,
+   "candles": 2863,
    "std5m_pct": 0.46
   },
   {
    "name": "HYPE / SOL",
-   "liq": 2764754,
-   "fdv": 41156228,
+   "liq": 2763244,
+   "fdv": 41168489,
    "created": "2025-10-18T01:52:31Z",
    "candles": 1713,
    "std5m_pct": 0.52
   },
   {
    "name": "arc / SOL",
-   "liq": 2437312,
-   "fdv": 26780442,
+   "liq": 2442636,
+   "fdv": 26764442,
    "created": "2024-12-10T21:14:49Z",
    "candles": 2285,
    "std5m_pct": 0.51
   },
   {
    "name": "CRCLx / USDC",
-   "liq": 2421976,
-   "fdv": 49889688,
+   "liq": 2415080,
+   "fdv": 49885959,
    "created": "2026-02-11T12:03:53Z",
-   "candles": 2709,
-   "std5m_pct": 0.41
+   "candles": 2712,
+   "std5m_pct": 0.4
   },
   {
    "name": "SPCX / USDC",
-   "liq": 2340076,
-   "fdv": 13570827,
+   "liq": 2342499,
+   "fdv": 13593936,
    "created": "2026-06-12T15:57:12Z",
-   "candles": 2826,
+   "candles": 2829,
    "std5m_pct": 0.45
   },
   {
    "name": "NVDAx / USDC",
-   "liq": 2292942,
-   "fdv": 78698566,
+   "liq": 2290490,
+   "fdv": 78951129,
    "created": "2025-07-02T01:46:00Z",
-   "candles": 2864,
-   "std5m_pct": 0.56
+   "candles": 2867,
+   "std5m_pct": 0.55
   },
   {
    "name": "USELESS / SOL",
-   "liq": 2275609,
-   "fdv": 69893696,
+   "liq": 2272033,
+   "fdv": 68992653,
    "created": "2025-05-10T14:23:18Z",
-   "candles": 2652,
+   "candles": 2655,
    "std5m_pct": 0.63
   },
   {
    "name": "POPCAT / SOL",
-   "liq": 2204799,
-   "fdv": 25020697,
+   "liq": 2209988,
+   "fdv": 25157417,
    "created": "2023-12-12T22:00:11Z",
-   "candles": 2136,
+   "candles": 2139,
    "std5m_pct": 0.48
   },
   {
    "name": "ALCH / SOL",
-   "liq": 2108305,
-   "fdv": 29826445,
+   "liq": 2113924,
+   "fdv": 29744432,
    "created": "2024-11-27T17:56:51Z",
-   "candles": 1864,
+   "candles": 1870,
    "std5m_pct": 0.47
   },
   {
    "name": "ZEREBRO / SOL",
-   "liq": 2041270,
-   "fdv": 19433722,
+   "liq": 2033246,
+   "fdv": 19213642,
    "created": "2024-10-28T19:08:28Z",
-   "candles": 2279,
+   "candles": 2281,
    "std5m_pct": 0.46
   },
   {
    "name": "Pnut / SOL",
-   "liq": 2016474,
-   "fdv": 26728519,
+   "liq": 2011888,
+   "fdv": 26512342,
    "created": "2024-10-31T15:06:47Z",
-   "candles": 1896,
+   "candles": 1904,
    "std5m_pct": 0.48
   },
   {
    "name": "MOODENG / SOL",
-   "liq": 1860459,
-   "fdv": 28518768,
+   "liq": 1865741,
+   "fdv": 28397983,
    "created": "2024-09-10T18:53:08Z",
-   "candles": 2024,
+   "candles": 2030,
    "std5m_pct": 0.62
   },
   {
    "name": "Ban / SOL",
-   "liq": 1848136,
-   "fdv": 39090371,
+   "liq": 1855863,
+   "fdv": 39428108,
    "created": "2024-10-25T14:59:54Z",
    "candles": 1715,
    "std5m_pct": 0.57
   },
   {
+   "name": "TROLL / SOL",
+   "liq": 1829148,
+   "fdv": 21600176,
+   "created": "2025-04-20T18:30:26Z",
+   "candles": 2473,
+   "std5m_pct": 0.73
+  },
+  {
    "name": "SPX / SOL",
-   "liq": 1497399,
-   "fdv": 21240876,
+   "liq": 1502674,
+   "fdv": 21398700,
    "created": "2023-12-21T16:31:17Z",
-   "candles": 2037,
+   "candles": 2042,
    "std5m_pct": 0.48
   },
   {
    "name": "VINE / SOL",
-   "liq": 1463866,
-   "fdv": 9360038,
+   "liq": 1499507,
+   "fdv": 9701883,
    "created": "2025-01-23T00:22:43Z",
-   "candles": 2813,
+   "candles": 2817,
    "std5m_pct": 1.44
   },
   {
    "name": "hSOL / SOL",
-   "liq": 1386596,
-   "fdv": 41575684,
+   "liq": 1388744,
+   "fdv": 40165503,
    "created": "2026-11-10T14:48:03Z",
-   "candles": 2367,
+   "candles": 2375,
    "std5m_pct": 1.41
   },
   {
    "name": "GRIFFAIN / SOL",
-   "liq": 1297312,
-   "fdv": 9673365,
+   "liq": 1303563,
+   "fdv": 9716077,
    "created": "2024-11-03T00:26:56Z",
-   "candles": 1880,
+   "candles": 1883,
    "std5m_pct": 0.5
   },
   {
    "name": "CATE / SOL",
-   "liq": 1263835,
-   "fdv": 16295962,
+   "liq": 1263653,
+   "fdv": 16220820,
    "created": "2026-07-26T16:32:43Z",
-   "candles": 2893,
+   "candles": 2897,
    "std5m_pct": 0.73
   },
   {
    "name": "GOOGLx / USDC",
-   "liq": 1220734,
-   "fdv": 43529604,
+   "liq": 1247820,
+   "fdv": 44432264,
    "created": "2025-07-19T13:37:59Z",
-   "candles": 1467,
+   "candles": 1477,
    "std5m_pct": 0.48
   },
   {
+   "name": "neet / SOL",
+   "liq": 1223097,
+   "fdv": 20186697,
+   "created": "2025-04-27T00:58:12Z",
+   "candles": 2671,
+   "std5m_pct": 0.64
+  },
+  {
    "name": "ACT / SOL",
-   "liq": 1133600,
-   "fdv": 8584747,
+   "liq": 1140855,
+   "fdv": 8564362,
    "created": "2024-10-19T11:36:39Z",
-   "candles": 2139,
+   "candles": 2143,
    "std5m_pct": 0.46
   },
   {
    "name": "GIGA / SOL",
-   "liq": 1074667,
-   "fdv": 12964082,
+   "liq": 1083291,
+   "fdv": 13115127,
    "created": "2024-01-04T22:40:41Z",
-   "candles": 2134,
+   "candles": 2138,
    "std5m_pct": 0.42
   },
   {
    "name": "wNEAR / SOL",
-   "liq": 1065395,
+   "liq": 1064713,
    "fdv": 8437944,
    "created": "2026-09-08T02:08:50Z",
-   "candles": 475,
+   "candles": 477,
    "std5m_pct": 0.97
   },
   {
    "name": "swarms / SOL",
-   "liq": 1056257,
-   "fdv": 5853844,
+   "liq": 1061111,
+   "fdv": 5913392,
    "created": "2024-12-20T04:47:36Z",
-   "candles": 1840,
+   "candles": 1841,
    "std5m_pct": 0.49
   },
   {
    "name": "GOAT / SOL",
-   "liq": 1041261,
-   "fdv": 10703603,
+   "liq": 1047759,
+   "fdv": 10657274,
    "created": "2024-10-10T21:19:05Z",
-   "candles": 1737,
+   "candles": 1741,
    "std5m_pct": 0.51
   },
   {
    "name": "SPCXx / USDC",
-   "liq": 972502,
+   "liq": 977570,
    "fdv": 70469555,
    "created": "2026-06-12T16:05:43Z",
-   "candles": 1209,
+   "candles": 1203,
    "std5m_pct": 0.99
   },
   {
    "name": "MET / USDC",
-   "liq": 960192,
-   "fdv": 213529751,
+   "liq": 960094,
+   "fdv": 211386440,
    "created": "2026-11-10T18:52:47Z",
-   "candles": 1245,
-   "std5m_pct": 0.5
+   "candles": 1246,
+   "std5m_pct": 0.49
   },
   {
    "name": "PONKE / SOL",
-   "liq": 936264,
-   "fdv": 7327652,
+   "liq": 941266,
+   "fdv": 7301062,
    "created": "2023-12-24T04:10:28Z",
-   "candles": 1487,
+   "candles": 1483,
    "std5m_pct": 0.48
   },
   {
    "name": "CHILLGUY / SOL",
-   "liq": 923077,
-   "fdv": 7395739,
+   "liq": 927535,
+   "fdv": 7431979,
    "created": "2024-11-15T20:08:23Z",
-   "candles": 1712,
+   "candles": 1717,
    "std5m_pct": 0.49
   },
   {
    "name": "AVA / SOL",
-   "liq": 880173,
-   "fdv": 6118988,
+   "liq": 882233,
+   "fdv": 6118901,
    "created": "2024-11-13T19:03:45Z",
-   "candles": 1000,
-   "std5m_pct": 0.77
+   "candles": 2364,
+   "std5m_pct": 0.64
   },
   {
    "name": "aura / SOL",
-   "liq": 826663,
-   "fdv": 4167351,
+   "liq": 830878,
+   "fdv": 4210688,
    "created": "2024-05-30T20:01:08Z",
-   "candles": 1419,
+   "candles": 1417,
    "std5m_pct": 0.58
   },
   {
    "name": "GME / SOL",
-   "liq": 802333,
-   "fdv": 2264444,
+   "liq": 808900,
+   "fdv": 2278802,
    "created": "2024-01-28T00:50:13Z",
-   "candles": 1181,
+   "candles": 1187,
    "std5m_pct": 0.7
   },
   {
    "name": "STONK / SOL",
-   "liq": 785119,
-   "fdv": 23416584,
+   "liq": 785481,
+   "fdv": 23422051,
    "created": "2026-08-12T10:51:40Z",
-   "candles": 2881,
+   "candles": 2886,
    "std5m_pct": 0.57
   },
   {
    "name": "ANSEM / SOL",
-   "liq": 754802,
-   "fdv": 18695779,
+   "liq": 756942,
+   "fdv": 18783340,
    "created": "2026-06-16T21:05:48Z",
-   "candles": 2840,
+   "candles": 2845,
    "std5m_pct": 1.6
   },
   {
    "name": "NVDA / USDC",
-   "liq": 732128,
-   "fdv": 2710375,
+   "liq": 732969,
+   "fdv": 2676395,
    "created": "2026-10-23T18:09:29Z",
-   "candles": 2200,
+   "candles": 2202,
    "std5m_pct": 0.58
   },
   {
    "name": "Bert / SOL",
-   "liq": 667441,
-   "fdv": 7904875,
+   "liq": 672350,
+   "fdv": 7985659,
    "created": "2024-10-01T00:25:41Z",
-   "candles": 1470,
+   "candles": 1477,
    "std5m_pct": 0.56
   },
   {
    "name": "tSpaceX / USDC",
-   "liq": 558283,
-   "fdv": 596020,
+   "liq": 559031,
+   "fdv": 595642,
    "created": "2026-02-11T04:45:27Z",
-   "candles": 1509,
-   "std5m_pct": 1.24
+   "candles": 1512,
+   "std5m_pct": 1.25
   },
   {
    "name": "NPC / SOL",
-   "liq": 514709,
-   "fdv": 1450629,
+   "liq": 516088,
+   "fdv": 1458882,
    "created": "2024-08-10T15:53:59Z",
-   "candles": 1258,
+   "candles": 1257,
    "std5m_pct": 0.62
   },
   {
    "name": "ORCA / SOL",
-   "liq": 512748,
-   "fdv": 88236725,
+   "liq": 510418,
+   "fdv": 87807506,
    "created": "2024-01-04T20:53:02Z",
-   "candles": 2664,
+   "candles": 2665,
    "std5m_pct": 0.44
   },
   {
    "name": "jobcoin / SOL",
-   "liq": 506512,
-   "fdv": 12593773,
+   "liq": 503396,
+   "fdv": 12427616,
    "created": "2025-04-14T22:15:18Z",
-   "candles": 1636,
+   "candles": 1645,
    "std5m_pct": 0.98
   },
   {
    "name": "DOOD / USDC",
-   "liq": 490772,
-   "fdv": 13979820,
+   "liq": 490469,
+   "fdv": 13989130,
    "created": "2025-05-09T13:00:11Z",
-   "candles": 1859,
+   "candles": 1857,
    "std5m_pct": 0.43
   },
   {
    "name": "FARTBOY / SOL",
-   "liq": 474189,
-   "fdv": 14085763,
+   "liq": 474943,
+   "fdv": 14173277,
    "created": "2025-01-05T20:15:10Z",
    "candles": 1039,
    "std5m_pct": 0.97
   },
   {
    "name": "ORE / USDC",
-   "liq": 473783,
-   "fdv": 42532306,
+   "liq": 472836,
+   "fdv": 42686607,
    "created": "2025-11-09T09:00:00Z",
-   "candles": 1544,
+   "candles": 1546,
    "std5m_pct": 0.72
   },
   {
    "name": "CLAUDIA / SOL",
-   "liq": 423182,
-   "fdv": 8013562,
+   "liq": 424152,
+   "fdv": 8076721,
    "created": "2026-10-07T01:44:30Z",
-   "candles": 2889,
+   "candles": 2895,
    "std5m_pct": 2.9
   },
   {
    "name": "GMEx / USDC",
-   "liq": 416929,
-   "fdv": 19540951,
+   "liq": 417580,
+   "fdv": 19539114,
    "created": "2026-08-09T12:33:20Z",
-   "candles": 1288,
+   "candles": 1293,
    "std5m_pct": 0.81
   },
   {
    "name": "CLOUD / USDC",
-   "liq": 408957,
-   "fdv": 38538927,
+   "liq": 410611,
+   "fdv": 39081811,
    "created": "2024-07-18T16:17:00Z",
-   "candles": 1952,
+   "candles": 1957,
    "std5m_pct": 0.93
   },
   {
    "name": "ALON / SOL",
-   "liq": 395690,
-   "fdv": 1751065,
+   "liq": 399062,
+   "fdv": 1760310,
    "created": "2024-03-26T02:26:00Z",
-   "candles": 1230,
+   "candles": 1237,
    "std5m_pct": 0.68
   },
   {
    "name": "BORG / SOL",
-   "liq": 353520,
-   "fdv": 4503203,
+   "liq": 354977,
+   "fdv": 4512567,
    "created": "2024-05-06T06:40:00Z",
-   "candles": 2340,
+   "candles": 2341,
    "std5m_pct": 0.47
   },
   {
    "name": "TTWO / USDC",
-   "liq": 346802,
-   "fdv": 4271119,
+   "liq": 350570,
+   "fdv": 4254762,
    "created": "2026-09-08T13:51:06Z",
-   "candles": 2889,
+   "candles": 2894,
    "std5m_pct": 0.45
   },
   {
    "name": "dreams / SOL",
-   "liq": 337215,
-   "fdv": 3776121,
+   "liq": 343462,
+   "fdv": 3879173,
    "created": "2025-01-19T14:28:47Z",
-   "candles": 898,
-   "std5m_pct": 1.65
+   "candles": 906,
+   "std5m_pct": 1.64
   },
   {
    "name": "NEURALINK / USDC",
-   "liq": 329312,
-   "fdv": 989293,
+   "liq": 327014,
+   "fdv": 974128,
    "created": "2026-10-16T10:15:02Z",
-   "candles": 1643,
+   "candles": 1652,
    "std5m_pct": 0.87
   },
   {
    "name": "OPENAI / USDC",
-   "liq": 308716,
-   "fdv": 1804190,
+   "liq": 311428,
+   "fdv": 1826068,
    "created": "2026-11-06T16:58:01Z",
-   "candles": 2195,
+   "candles": 2202,
    "std5m_pct": 1.26
   },
   {
    "name": "CYBERLEEK / SOL",
-   "liq": 305777,
-   "fdv": 890752,
+   "liq": 305434,
+   "fdv": 883485,
    "created": "2026-08-15T21:07:26Z",
-   "candles": 2794,
+   "candles": 2800,
    "std5m_pct": 2.36
   },
   {
-   "name": "KORI / SOL",
-   "liq": 296434,
-   "fdv": 1770636,
-   "created": "2025-05-13T13:15:25Z",
-   "candles": 897,
-   "std5m_pct": 0.64
-  },
-  {
    "name": "stSOL / USDC",
-   "liq": 278067,
-   "fdv": 3112629,
+   "liq": 280871,
+   "fdv": 3124692,
    "created": "2022-04-28T09:49:03Z",
    "candles": 1614,
    "std5m_pct": 0.4
   },
   {
    "name": "FLOAT / SOL",
-   "liq": 276886,
-   "fdv": 2128983,
+   "liq": 276263,
+   "fdv": 2159014,
    "created": "2026-10-28T22:15:43Z",
-   "candles": 2524,
+   "candles": 2530,
    "std5m_pct": 3.32
   },
   {
    "name": "IDLE / SOL",
-   "liq": 273548,
-   "fdv": 12422788,
+   "liq": 275661,
+   "fdv": 12521502,
    "created": "2025-07-31T11:49:55Z",
-   "candles": 2058,
+   "candles": 2063,
    "std5m_pct": 0.42
   },
   {
    "name": "mihao / SOL",
-   "liq": 267960,
-   "fdv": 4398314,
+   "liq": 270848,
+   "fdv": 4492698,
    "created": "2026-10-25T16:43:15Z",
-   "candles": 2897,
-   "std5m_pct": 2.08
+   "candles": 2904,
+   "std5m_pct": 2.07
   },
   {
    "name": "WOULD / SOL",
-   "liq": 255096,
+   "liq": 256484,
    "fdv": 3384626,
    "created": "2024-07-23T20:24:51Z",
-   "candles": 476,
+   "candles": 478,
    "std5m_pct": 1.96
   },
   {
+   "name": "GEOD(SOL) / USDC",
+   "liq": 247187,
+   "fdv": 54158233,
+   "created": "2025-07-28T21:42:53Z",
+   "candles": 1694,
+   "std5m_pct": 0.69
+  },
+  {
    "name": "META / USDC",
-   "liq": 230417,
-   "fdv": 65859585,
+   "liq": 229361,
+   "fdv": 65887036,
    "created": "2025-08-15T18:26:19Z",
-   "candles": 1442,
+   "candles": 1445,
    "std5m_pct": 1.19
   },
   {
    "name": "HNT / SOL",
-   "liq": 215776,
-   "fdv": 43569106,
+   "liq": 216567,
+   "fdv": 44108564,
    "created": "2023-04-22T17:40:01Z",
-   "candles": 2314,
+   "candles": 2321,
    "std5m_pct": 0.48
   },
   {
    "name": "NATIX / USDC",
-   "liq": 192507,
-   "fdv": 11094974,
+   "liq": 200471,
+   "fdv": 12165145,
    "created": "2024-07-31T13:26:00Z",
-   "candles": 983,
-   "std5m_pct": 1.31
+   "candles": 992,
+   "std5m_pct": 1.32
   },
   {
-   "name": "SI / SOL",
-   "liq": 191828,
-   "fdv": 6509786,
-   "created": "2026-09-21T16:26:48Z",
-   "candles": 2040,
-   "std5m_pct": 2.62
+   "name": "Rizzmas / SOL",
+   "liq": 195164,
+   "fdv": 509492,
+   "created": "2023-12-25T02:11:21Z",
+   "candles": 1628,
+   "std5m_pct": 1.05
   },
   {
    "name": "PEPECAT / SOL",
-   "liq": 191660,
-   "fdv": 4610663,
+   "liq": 192706,
+   "fdv": 4614251,
    "created": "2024-11-27T02:23:45Z",
-   "candles": 748,
+   "candles": 749,
    "std5m_pct": 0.82
   },
   {
+   "name": "SI / SOL",
+   "liq": 191153,
+   "fdv": 6698722,
+   "created": "2026-09-21T16:26:48Z",
+   "candles": 2049,
+   "std5m_pct": 2.63
+  },
+  {
    "name": "FIONA / SOL",
-   "liq": 179532,
-   "fdv": 2628581,
+   "liq": 172019,
+   "fdv": 2424222,
    "created": "2026-11-19T20:53:29Z",
-   "candles": 1740,
-   "std5m_pct": 6.91
+   "candles": 1755,
+   "std5m_pct": 6.88
   },
   {
    "name": "POLYMARKET / USDC",
-   "liq": 159372,
-   "fdv": 596709,
+   "liq": 159095,
+   "fdv": 596425,
    "created": "2026-10-16T09:18:03Z",
-   "candles": 2104,
-   "std5m_pct": 1.23
+   "candles": 2112,
+   "std5m_pct": 1.22
   },
   {
    "name": "MSTRx / SOL",
-   "liq": 120921,
-   "fdv": 56263527,
+   "liq": 120711,
+   "fdv": 56152031,
    "created": "2026-01-10T08:52:00Z",
-   "candles": 1184,
+   "candles": 1193,
    "std5m_pct": 0.65
   },
   {
-   "name": "BASKET / SOL",
-   "liq": 118005,
-   "fdv": 681912,
-   "created": "2026-11-25T04:43:02Z",
-   "candles": 207,
-   "std5m_pct": 13.55
-  },
-  {
    "name": "DOGE / SOL",
-   "liq": 117469,
-   "fdv": 985804,
+   "liq": 117584,
+   "fdv": 979870,
    "created": "2026-09-07T15:12:17Z",
-   "candles": 1748,
+   "candles": 1751,
    "std5m_pct": 0.46
   },
   {
-   "name": "Rings / SOL",
-   "liq": 110749,
-   "fdv": 2023507,
-   "created": "2026-11-16T01:06:58Z",
-   "candles": 2448,
-   "std5m_pct": 5.33
+   "name": "PLTRx / USDC",
+   "liq": 115455,
+   "fdv": 23054877,
+   "created": "2026-03-17T21:02:00Z",
+   "candles": 547,
+   "std5m_pct": 1.54
   },
   {
-   "name": "SQQQ / USDC",
-   "liq": 107056,
-   "fdv": 2062118,
-   "created": "2026-09-25T14:43:08Z",
-   "candles": 1195,
-   "std5m_pct": 1.26
+   "name": "BASKET / SOL",
+   "liq": 114765,
+   "fdv": 641070,
+   "created": "2026-11-25T04:43:02Z",
+   "candles": 221,
+   "std5m_pct": 13.19
+  },
+  {
+   "name": "Rings / SOL",
+   "liq": 109980,
+   "fdv": 1990592,
+   "created": "2026-11-16T01:06:58Z",
+   "candles": 2461,
+   "std5m_pct": 5.32
   },
   {
    "name": "BTC / SOL",
-   "liq": 94853,
-   "fdv": 1640262,
+   "liq": 92788,
+   "fdv": 1589623,
    "created": "2026-09-13T20:21:40Z",
-   "candles": 2837,
+   "candles": 2845,
    "std5m_pct": 2.11
   },
   {
+   "name": "Huss / SOL",
+   "liq": 88660,
+   "fdv": 910973,
+   "created": "2026-11-20T05:40:38Z",
+   "candles": 1352,
+   "std5m_pct": 6.22
+  },
+  {
    "name": "UNITY / SOL",
-   "liq": 88119,
-   "fdv": 600775,
+   "liq": 87117,
+   "fdv": 589816,
    "created": "2024-09-20T03:28:37Z",
-   "candles": 871,
-   "std5m_pct": 2.55
+   "candles": 878,
+   "std5m_pct": 2.54
   },
   {
    "name": "JIMMY / SOL",
-   "liq": 85540,
-   "fdv": 904403,
+   "liq": 73943,
+   "fdv": 684920,
    "created": "2026-11-23T21:11:11Z",
-   "candles": 585,
-   "std5m_pct": 15.59
-  },
-  {
-   "name": "Huss / SOL",
-   "liq": 83058,
-   "fdv": 864924,
-   "created": "2026-11-20T05:40:38Z",
-   "candles": 1339,
-   "std5m_pct": 6.25
+   "candles": 600,
+   "std5m_pct": 15.42
   },
   {
    "name": "DJT / USDC",
-   "liq": 71425,
-   "fdv": 716645,
+   "liq": 71452,
+   "fdv": 715486,
    "created": "2026-09-09T17:58:22Z",
-   "candles": 1000,
-   "std5m_pct": 0.52
-  },
-  {
-   "name": "HOGE / SOL",
-   "liq": 56174,
-   "fdv": 664426,
-   "created": "2026-11-24T00:23:31Z",
-   "candles": 547,
-   "std5m_pct": 3.68
+   "candles": 2372,
+   "std5m_pct": 0.55
   },
   {
    "name": "LENDR / SOL",
-   "liq": 55527,
-   "fdv": 558737,
+   "liq": 61500,
+   "fdv": 669920,
    "created": "2026-11-25T17:27:09Z",
-   "candles": 54,
-   "std5m_pct": 13.94
+   "candles": 69,
+   "std5m_pct": 12.54
   }
  ],
  "universe_raw": 150,
@@ -1543,6 +1726,7 @@
    "ON / USDC",
    "Q / USDC",
    "PI / USDC",
+   "IOST / USDC",
    "PIEVERSE / USDC",
    "CRO / USDC",
    "NIGHT / USDC",
@@ -1554,7 +1738,6 @@
    "ATX / USDC",
    "USX / USDC",
    "BDAG / USDC",
-   "TEL / USDC",
    "BLESS / USDC",
    "ATX / USDC",
    "CASH / USDC",
@@ -1562,7 +1745,6 @@
    "MONERO / USDC",
    "MONERO / USDC",
    "cbBTC / SOL",
-   "DBR / USDC",
    "JupUSD / USDC",
    "WETH / SOL",
    "ONYC / USDC",
