@@ -1,0 +1,98 @@
+{
+ "version": 1,
+ "started_at": "2026-11-25T10:18:37Z",
+ "start_balance": 100.0,
+ "balance": -1.4210854715202004e-14,
+ "positions": [
+  {
+   "id": 1,
+   "coin": "BTC",
+   "name": "BTC hedge",
+   "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
+   "qty": 1.0,
+   "cost": 33.333333333333336,
+   "value": 33.309167,
+   "notional": 16.666666666666668,
+   "entry_market": 58936.68,
+   "entry_time": "2026-11-25T10:21:28Z",
+   "last_price": 58936.68,
+   "last_pct": -0.073,
+   "peak_pct": 0.0,
+   "stop_pct": 0.0,
+   "funding_earned": 0.0,
+   "pool": "BTC",
+   "mint": "BTC"
+  },
+  {
+   "id": 2,
+   "coin": "ETH",
+   "name": "ETH hedge",
+   "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+   "qty": 1.0,
+   "cost": 33.333333333333336,
+   "value": 33.309167,
+   "notional": 16.666666666666668,
+   "entry_market": 1645.62,
+   "entry_time": "2026-11-25T10:21:28Z",
+   "last_price": 1645.62,
+   "last_pct": -0.073,
+   "peak_pct": 0.0,
+   "stop_pct": 0.0,
+   "funding_earned": 0.0,
+   "pool": "ETH",
+   "mint": "ETH"
+  },
+  {
+   "id": 3,
+   "coin": "SOL",
+   "name": "SOL hedge",
+   "image": "https://assets.coingecko.com/coins/images/4128/large/solana.png",
+   "qty": 1.0,
+   "cost": 33.333333333333336,
+   "value": 33.309167,
+   "notional": 16.666666666666668,
+   "entry_market": 67.68,
+   "entry_time": "2026-11-25T10:21:28Z",
+   "last_price": 67.68,
+   "last_pct": -0.073,
+   "peak_pct": 0.0,
+   "stop_pct": 0.0,
+   "funding_earned": 0.0,
+   "pool": "SOL",
+   "mint": "SOL"
+  }
+ ],
+ "closed": [],
+ "seen": {},
+ "daily": {
+  "date": "2026-11-25",
+  "realized": 0.0,
+  "entries": 0
+ },
+ "stats": {
+  "scans": 2,
+  "pools_checked": 0,
+  "rejects": {}
+ },
+ "equity_history": [
+  [
+   "2026-11-25T10:21:28Z",
+   99.9275
+  ],
+  [
+   "2026-11-25T10:24:24Z",
+   99.9275
+  ]
+ ],
+ "log": [
+  {
+   "t": "2026-11-25T10:21:28Z",
+   "msg": "Άνοιγμα: BTC, ETH, SOL — μισό spot, μισό short perp (χωρίς ρίσκο τιμής)"
+  }
+ ],
+ "last_run": "2026-11-25T10:24:24Z",
+ "next_id": 4,
+ "epoch": "2026-11-25-funding",
+ "mode": "funding",
+ "funding_hour": 498778
+}
