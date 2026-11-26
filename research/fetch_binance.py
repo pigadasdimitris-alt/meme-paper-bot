@@ -78,7 +78,8 @@ def klines(sym):
     with cf.ThreadPoolExecutor(8) as ex:
         for rows in ex.map(lambda u: unzip_rows(get(u)), urls):
             for r in rows:
-                ts = int(r[0]) // 1000
+                ts = int(r[0])
+                ts = ts // 1_000_000 if ts > 10**14 else ts // 1000
                 out[ts] = [ts, r[1], r[2], r[3], r[4], r[5], r[9]]
     write(f"klines_{sym}.csv.gz", ["ts", "open", "high", "low", "close", "volume", "taker_buy_volume"],
           [out[k] for k in sorted(out)])
