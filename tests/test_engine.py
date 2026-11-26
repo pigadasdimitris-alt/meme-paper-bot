@@ -460,6 +460,6 @@ def test_overrides_leave_config_clean_for_momentum():
 def test_volume_spike_filter():
     from bot import run
     now = engine.now_utc()
-    with run.overrides(C.LAB["spike"]):
+    with run.overrides(C.LAB_RETIRED["spike"]):
         assert engine.reject_reason(pool(now, vol_m5=30_000, vol_h1=80_000), now) is None
         assert engine.reject_reason(pool(now, vol_m5=7_000, vol_h1=80_000), now) == "χωρίς έκρηξη όγκου"

@@ -112,7 +112,7 @@ def candles(pool, since):
 
 def params(key):
     base = {k: getattr(C, k) for k in dir(C) if k.isupper()}
-    base.update(C.LAB.get(key, {}))
+    base.update({**getattr(C, "LAB_RETIRED", {}), **C.LAB}.get(key, {}))
     return base
 
 
@@ -230,11 +230,13 @@ def summarize(trades, t_mid):
     return res
 
 
-def main():
-    now = time.time()
-    since = int(now - DAYS * 86400) - 12 * STEP
-    uni = universe()
-    uni = uni[:MAX_POOLS]
+def load_series(now, since):
+    cache = os.environ.get("BT_CACHE")
+    if cache and os.path.exists(cache):
+        with open(cache) as f:
+            d = json.load(f)
+        return {k: (v[0], v[1]) for k, v in d.items()}
+    uni = universe()[:MAX_POOLS]
     print(f"σύμπαν: {len(uni)} pools", flush=True)
     series = {}
     for n, p in enumerate(uni, 1):
@@ -245,6 +247,16 @@ def main():
             RAW.setdefault("low_vol", []).append(p["name"])
         if n % 10 == 0:
             print(f"κεριά: {n}/{len(uni)} ({len(series)} με δεδομένα)", flush=True)
+    if cache:
+        with open(cache, "w") as f:
+            json.dump({k: [m, c] for k, (m, c) in series.items()}, f)
+    return series
+
+
+def main():
+    now = time.time()
+    since = int(now - DAYS * 86400) - 12 * STEP
+    series = load_series(now, since)
     t_mid = since + (now - since) / 2
     out = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),

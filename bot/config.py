@@ -78,18 +78,23 @@ COPY_BOT = True   # 24/11: ξανά σε λειτουργία, χαλαρό (χ�
 # Η "momentum" είναι το κύριο paper (docs/state.json). Οι υπόλοιπες αλλάζουν μόνο όσα γράφονται εδώ.
 LAB_EPOCH = "2026-11-24-lab"
 LAB = {
-    "scalp": {"label": "Γρήγορο scalp", "TAKE_PROFIT_PCT": 8.0, "STOP_LOSS_PCT": -5.0, "MAX_HOLD_MIN": 30,
-              "BREAKEVEN_TRIGGER_PCT": 4.0},
     "trail": {"label": "Trailing", "TAKE_PROFIT_PCT": 1e9, "STOP_LOSS_PCT": -10.0, "TRAIL_PCT": 8.0,
               "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 240},
-    "spike": {"label": "Έκρηξη όγκου", "MIN_VOL_SPIKE": 3.0, "MIN_BUY_SELL_RATIO_M5": 1.3,
-              "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
-              "MIN_PRICE_CHANGE_H1": -10.0, "MAX_PRICE_CHANGE_H1": 30.0,
-              "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -8.0, "BREAKEVEN_TRIGGER_PCT": 7.0, "MAX_HOLD_MIN": 60},
     "dip": {"label": "Αγορά στη βουτιά", "MIN_LIQUIDITY_USD": 50_000, "MIN_PRICE_CHANGE_H1": -30.0,
             "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
             "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
             "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
+}
+
+# 26/11: scalp & spike σταμάτησαν — στο backtest (87 meme coins, 10 μέρες, ~1.150 trades) δεν ήταν καλύτερα
+# από τυχαίες αγορές (−2,6% έως −2,8% ανά trade με 1% κόστος). Κρατιούνται εδώ μόνο για αναφορά/backtest.
+LAB_RETIRED = {
+    "scalp": {"label": "Γρήγορο scalp", "TAKE_PROFIT_PCT": 8.0, "STOP_LOSS_PCT": -5.0, "MAX_HOLD_MIN": 30,
+              "BREAKEVEN_TRIGGER_PCT": 4.0},
+    "spike": {"label": "Έκρηξη όγκου", "MIN_VOL_SPIKE": 3.0, "MIN_BUY_SELL_RATIO_M5": 1.3,
+              "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
+              "MIN_PRICE_CHANGE_H1": -10.0, "MAX_PRICE_CHANGE_H1": 30.0,
+              "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -8.0, "BREAKEVEN_TRIGGER_PCT": 7.0, "MAX_HOLD_MIN": 60},
 }
 
 MOMENTUM_ON = False   # 25/11: το momentum σταμάτησε νέες αγορές (89,20$ μετά από 18 trades) — τη θέση του παίρνει το "spike"
