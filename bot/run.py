@@ -241,8 +241,16 @@ def load_majors(now):
 def save_lab(lab, state, cst, mj=None):
     for name, st in list(lab.items()) + list((mj or {}).items()):
         (LAB_DIR / f"{name}.json").write_text(json.dumps(st, ensure_ascii=False, indent=1))
+    sep = []   # στρατηγικές με δικό τους runner (π.χ. trench): διαβάζουμε το αρχείο τους, δεν το γράφουμε
+    for n, cfg in C.LAB.items():
+        f = LAB_DIR / f"{n}.json"
+        if cfg.get("SEPARATE") and f.exists():
+            try:
+                sep.append(lab_row(n, cfg["label"], json.loads(f.read_text())))
+            except Exception:
+                pass
     rows = ([lab_row("paper", "Momentum", state)] if getattr(C, "MOMENTUM_ON", True) else []) + \
-           [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + \
+           [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + sep + \
            [lab_row("copy", "Copy πορτοφολιών", cst)] + \
            [lab_row(k, MAJORS[k][0], st) for k, st in (mj or {}).items()]
     rows.sort(key=lambda r: r["equity"], reverse=True)
@@ -367,7 +375,7 @@ def main():
         engine.SHARED_RUGS.update(lst.get("rug_names") or [])
     cst = copybot.load(COPY_STATE, engine.now_utc())
     engine.SHARED_RUGS.update(cst.get("rug_names") or [])
-    lab = load_lab(engine.now_utc())
+    lab = {n: st for n, st in load_lab(engine.now_utc()).items() if not C.LAB[n].get("SEPARATE")}
     mj = load_majors(engine.now_utc())
     for st in lab.values():
         engine.SHARED_RUGS.update(st.get("rug_names") or [])

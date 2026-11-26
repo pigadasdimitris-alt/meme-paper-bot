@@ -1,0 +1,42 @@
+name: trench
+
+# Γρήγορος runner μόνο για τη στρατηγική «trench» (paper). Έλεγχος θέσεων κάθε 15", σκανάρισμα κάθε ~60".
+# Χωρίς κλειδιά: δεν κάνει ποτέ πραγματικές αγορές.
+on:
+  schedule:
+    - cron: "15,45 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+concurrency:
+  group: trench
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run trench (paper only)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUN_MINUTES: "330"
+          COMMIT_SECONDS: "120"
+        run: |
+          git config user.name "paper-bot"
+          git config user.email "paper-bot@users.noreply.github.com"
+          python -m bot.trench_run
+      - name: Start next round
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f .trench_skipped ]; then echo "παράλειψη — το cron θα ξαναδοκιμάσει"; else gh workflow run trench.yml --ref main; fi

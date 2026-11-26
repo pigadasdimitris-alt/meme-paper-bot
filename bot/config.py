@@ -87,7 +87,7 @@ LAB = {
     # 26/11: «trench» από βίντεο TikTok (@nabiltalks). ΜΟΝΟ paper — εξαιρείται ο κανόνας της 1 μέρας.
     # Coins που μόλις «αποφοίτησαν» από pump.fun → PumpSwap, με τα φίλτρα του: top-10 <30%, όγκος > market cap,
     # 100+ κάτοχοι, ενδιαφέρον (αγοραστές). Γρήγορη έξοδος +50% / −25% / 1 ώρα. Κόστη 4% ανά πλευρά (μικρά pools).
-    "trench": {"label": "Trench (pump.fun)", "TRENCH_SOURCE": True,
+    "trench": {"label": "Trench (pump.fun)", "TRENCH_SOURCE": True, "SEPARATE": True,  # δικός του γρήγορος runner (trench.yml)
                "MIN_AGE_MIN": 3, "MAX_AGE_MIN": 6 * 60, "MIN_LIQUIDITY_USD": 10_000,
                "MIN_FDV_USD": 30_000, "MAX_FDV_USD": 5_000_000, "MIN_VOL_TO_FDV": 1.0,
                "MIN_VOLUME_M5_USD": 1_000, "MIN_BUYERS_M5": 15,

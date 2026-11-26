@@ -495,3 +495,20 @@ def test_trench_pools_watchlist(monkeypatch):
         monkeypatch.setattr(data, "fresh_migrations", lambda **k: [])
         got = run.trench_pools(st, now)
         assert [p["pool"] for p in got] == ["A"]               # συνεχίζει να το παρακολουθεί
+
+
+def test_trench_runner_waits_for_old_bot(monkeypatch, tmp_path):
+    from bot import run, trench_run
+    monkeypatch.setattr(run, "LAB_DIR", tmp_path)
+    monkeypatch.setenv("NO_GIT", "1")
+    st = engine.new_state(engine.now_utc())
+    st.update({"epoch": C.LAB_EPOCH, "mode": "trench", "last_run": engine.iso(engine.now_utc())})
+    (tmp_path / "trench.json").write_text(__import__("json").dumps(st))
+    called = []
+    monkeypatch.setattr(run, "lab_cycle", lambda *a: called.append(1))
+    trench_run.main()
+    assert not called                       # το παλιό bot γράφει ακόμα → δεν ξεκινά
+
+
+def test_main_bot_skips_separate_strategies():
+    assert C.LAB["trench"].get("SEPARATE")
