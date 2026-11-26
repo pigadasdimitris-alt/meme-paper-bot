@@ -10,7 +10,7 @@ from pathlib import Path
 import contextlib
 import urllib.request
 
-from . import orb, config as C
+from . import compress, orb, config as C
 from . import copybot, data, engine, live, majors
 from .report import write_readme
 
@@ -231,7 +231,8 @@ TIMES = {}
 
 MAJORS = {"trend": ("Trend BTC/ETH/SOL", majors.TREND_EPOCH, majors.trend_cycle),
           "funding": ("Funding arbitrage", majors.FUND_EPOCH, majors.funding_cycle),
-          "orb": ("ORB Nasdaq (QQQ)", orb.EPOCH, orb.cycle)}
+          "orb": ("ORB Nasdaq (QQQ)", orb.EPOCH, orb.cycle),
+          "compress": ("Compression breakout", compress.EPOCH, compress.cycle)}
 
 
 def load_majors(now):

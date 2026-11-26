@@ -576,3 +576,58 @@ def test_orb_closes_at_end_of_day_and_skips_outside_hours():
     orb2, st2, _ = _orb_setup()
     orb2.cycle(st2, t930 + timedelta(minutes=6), bars_fn=lambda: small)
     assert not st2["positions"]                                         # κερί χωρίς κίνηση → τίποτα
+
+
+# ---------------- Compression breakout ----------------
+
+def _comp_bars(n, t_end, breakout=0, vol_spike=1.0, base=100.0):
+    """n κεριά 4ω: πρώτα θορυβώδη, μετά πολύ ήσυχα (συμπίεση), και στο τέλος προαιρετικό breakout."""
+    import math
+    bars, t0 = [], t_end - n * 4 * 3600
+    for k in range(n):
+        amp = 2.0 if k < n - 60 else 0.05          # τα τελευταία 60 κεριά: ακραία ησυχία
+        c = base + amp * math.sin(k * 0.7)
+        o = base + amp * math.sin((k - 1) * 0.7)
+        bars.append((t0 + k * 4 * 3600, o, max(o, c) + 0.01, min(o, c) - 0.01, c, 1000.0))
+    if breakout:
+        t, o, h, l, c, v = bars[-1]
+        c2 = base + breakout
+        bars[-1] = (t, base, max(base, c2) + 0.01, min(base, c2) - 0.01, c2, 1000.0 * vol_spike)
+    return bars
+
+
+def test_compress_signal_needs_squeeze_breakout_volume_and_regime():
+    from bot import compress
+    up = _comp_bars(800, 10**9, breakout=1.0, vol_spike=3.0)
+    assert compress.signal(up, len(up) - 1, True)[0] == 1          # long
+    assert compress.signal(up, len(up) - 1, False)[0] == 0         # BTC καθοδικό → όχι long
+    weak = _comp_bars(800, 10**9, breakout=1.0, vol_spike=1.2)
+    assert compress.signal(weak, len(weak) - 1, True)[0] == 0      # χωρίς όγκο → τίποτα
+    dn = _comp_bars(800, 10**9, breakout=-1.0, vol_spike=3.0)
+    assert compress.signal(dn, len(dn) - 1, False)[0] == -1        # short
+
+
+def test_compress_cycle_opens_trails_and_stops():
+    from datetime import datetime, timezone
+    from bot import compress, majors
+    now = datetime(2026, 11, 26, 12, 0, 5, tzinfo=timezone.utc)
+    st = majors.new_state(now, compress.EPOCH, "compress")
+    now_s = int(now.timestamp())
+    btc_rising = [(t, o + k * 0.5, h + k * 0.5, l + k * 0.5, c + k * 0.5, v)
+                  for k, (t, o, h, l, c, v) in enumerate(_comp_bars(800, now_s - now_s % (4 * 3600)))]
+    eth = _comp_bars(800, now_s - now_s % (4 * 3600), breakout=1.0, vol_spike=3.0)
+    flat = _comp_bars(800, now_s - now_s % (4 * 3600))
+    cands = lambda coin, ns: btc_rising if coin == "BTC" else (eth if coin == "ETH" else flat)
+    ctx = {c: (101.0 if c == "ETH" else 100.0, 0.00001) for c in compress.COINS}
+    ctx["BTC"] = (btc_rising[-1][4], 0.00001)
+    compress.cycle(st, now, candles_fn=cands, ctx_fn=lambda: ctx)
+    assert [p["coin"] for p in st["positions"]] == ["ETH"]
+    p = st["positions"][0]
+    assert p["side"] == 1 and p["stop"] < 101.0 and p["notional"] <= 3 * 100 + 1e-9
+    assert abs(p["risk_usd"] - 1.0) < 0.05 or p["notional"] >= 3 * 100 - 1e-6
+    compress.cycle(st, now, candles_fn=cands, ctx_fn=lambda: ctx)          # ίδιο κερί → καμία νέα είσοδος
+    assert len(st["positions"]) == 1
+    ctx2 = dict(ctx, ETH=(p["stop"] - 0.01, 0.00001))
+    compress.cycle(st, now, candles_fn=cands, ctx_fn=lambda: ctx2)
+    assert not st["positions"] and st["closed"][-1]["reason"] == "stop"
+    assert st["closed"][-1]["pnl"] < 0 and st["closed"][-1]["r_multiple"] < -0.9

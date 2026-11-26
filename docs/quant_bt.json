@@ -1,0 +1,1196 @@
+{
+ "symbols": [
+  "ADAUSDT",
+  "AVAXUSDT",
+  "BNBUSDT",
+  "BTCUSDT",
+  "DOGEUSDT",
+  "DOTUSDT",
+  "ETHUSDT",
+  "FTTUSDT",
+  "LINKUSDT",
+  "LTCUSDT",
+  "LUNAUSDT",
+  "SOLUSDT",
+  "XRPUSDT"
+ ],
+ "start": "2021-01-01 00:00:00+00:00",
+ "end": "2026-11-25 23:00:00+00:00",
+ "holdout_start": "2026-05-25 23:00:00+00:00",
+ "costs": {
+  "fee_per_side": 0.00045,
+  "slip_btc_eth": 0.0003,
+  "slip_alts": 0.001
+ },
+ "strategies": {
+  "compression": {
+   "walk_forward_oos": {
+    "trades": 915,
+    "win_rate": 30.9,
+    "avg_R": 0.276,
+    "expectancy_pct": 0.276,
+    "profit_factor": 1.41,
+    "avg_win_pct": 3.09,
+    "avg_loss_pct": -0.984,
+    "total_pct": 781.1,
+    "max_dd_pct": -56.3,
+    "sharpe_monthly_ann": 0.8,
+    "costs_pct_total": 110.1,
+    "by_year_pct": {
+     "2022": 133.3,
+     "2023": 132.4,
+     "2024": -55.6,
+     "2025": 60.4,
+     "2026": -18.2
+    },
+    "by_symbol_pct": {
+     "XRPUSDT": -2.7,
+     "LTCUSDT": 3.2,
+     "FTTUSDT": 3.6,
+     "ADAUSDT": 5.1,
+     "LINKUSDT": 8.0,
+     "DOTUSDT": 8.2,
+     "LUNAUSDT": 16.5,
+     "AVAXUSDT": 18.2,
+     "BNBUSDT": 27.7,
+     "SOLUSDT": 29.7,
+     "ETHUSDT": 30.9,
+     "BTCUSDT": 34.8,
+     "DOGEUSDT": 69.2
+    },
+    "without_best_symbol_pct": 183.2
+   },
+   "portfolio_max3_oos": {
+    "trades": 568,
+    "win_rate": 29.4,
+    "avg_R": 0.254,
+    "expectancy_pct": 0.254,
+    "profit_factor": 1.37,
+    "avg_win_pct": 3.206,
+    "avg_loss_pct": -0.975,
+    "total_pct": 232.2,
+    "max_dd_pct": -35.8,
+    "sharpe_monthly_ann": 0.71,
+    "costs_pct_total": 67.5,
+    "by_year_pct": {
+     "2022": 104.4,
+     "2023": 67.4,
+     "2024": -36.4,
+     "2025": 31.1,
+     "2026": -22.1
+    },
+    "by_symbol_pct": {
+     "XRPUSDT": -24.8,
+     "ADAUSDT": -5.6,
+     "AVAXUSDT": 3.0,
+     "ETHUSDT": 3.4,
+     "DOTUSDT": 5.0,
+     "SOLUSDT": 9.0,
+     "LUNAUSDT": 9.3,
+     "LTCUSDT": 10.2,
+     "BNBUSDT": 16.1,
+     "LINKUSDT": 17.6,
+     "BTCUSDT": 33.0,
+     "DOGEUSDT": 68.1
+    },
+    "without_best_symbol_pct": 76.2,
+    "cagr_pct": 32.9
+   },
+   "portfolio_max3_holdout": {
+    "trades": 59,
+    "win_rate": 23.7,
+    "avg_R": 0.857,
+    "expectancy_pct": 0.857,
+    "profit_factor": 2.05,
+    "avg_win_pct": 7.049,
+    "avg_loss_pct": -1.069,
+    "total_pct": 55.3,
+    "max_dd_pct": -19.9,
+    "sharpe_monthly_ann": 1.22,
+    "costs_pct_total": 8.5,
+    "by_year_pct": {
+     "2026": 50.6
+    },
+    "by_symbol_pct": {
+     "AVAXUSDT": -6.6,
+     "LTCUSDT": -5.4,
+     "BNBUSDT": -2.7,
+     "XRPUSDT": -2.3,
+     "ETHUSDT": -2.0,
+     "DOGEUSDT": -0.2,
+     "LINKUSDT": 2.4,
+     "ADAUSDT": 7.1,
+     "DOTUSDT": 9.0,
+     "SOLUSDT": 11.6,
+     "BTCUSDT": 39.7
+    },
+    "without_best_symbol_pct": 10.9,
+    "cagr_pct": 147.9
+   },
+   "folds": [
+    {
+     "test_from": "2022-01-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.0,
+      "reg": true
+     },
+     "trades": 58,
+     "avg_R": 1.219
+    },
+    {
+     "test_from": "2022-04-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.0,
+      "reg": true
+     },
+     "trades": 42,
+     "avg_R": 1.205
+    },
+    {
+     "test_from": "2022-07-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.0,
+      "reg": true
+     },
+     "trades": 57,
+     "avg_R": -0.404
+    },
+    {
+     "test_from": "2022-10-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 68,
+     "avg_R": 0.574
+    },
+    {
+     "test_from": "2023-01-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 28,
+     "avg_R": 2.217
+    },
+    {
+     "test_from": "2023-04-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 52,
+     "avg_R": 0.32
+    },
+    {
+     "test_from": "2023-07-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 52,
+     "avg_R": 0.655
+    },
+    {
+     "test_from": "2023-10-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 15,
+     "avg_R": 1.044
+    },
+    {
+     "test_from": "2024-01-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 15,
+     "avg_R": -0.743
+    },
+    {
+     "test_from": "2024-04-01",
+     "params": {
+      "sq": 0.2,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 46,
+     "avg_R": -0.559
+    },
+    {
+     "test_from": "2024-07-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.0,
+      "reg": true
+     },
+     "trades": 36,
+     "avg_R": 0.142
+    },
+    {
+     "test_from": "2024-10-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.0,
+      "reg": false
+     },
+     "trades": 44,
+     "avg_R": -0.499
+    },
+    {
+     "test_from": "2025-01-01",
+     "params": {
+      "sq": 0.2,
+      "vm": 1.5,
+      "reg": false
+     },
+     "trades": 76,
+     "avg_R": 0.049
+    },
+    {
+     "test_from": "2025-04-01",
+     "params": {
+      "sq": 0.1,
+      "vm": 1.5,
+      "reg": false
+     },
+     "trades": 95,
+     "avg_R": -0.136
+    },
+    {
+     "test_from": "2025-07-01",
+     "params": {
+      "sq": 0.2,
+      "vm": 1.0,
+      "reg": false
+     },
+     "trades": 108,
+     "avg_R": 0.865
+    },
+    {
+     "test_from": "2025-10-01",
+     "params": {
+      "sq": 0.2,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 62,
+     "avg_R": -0.462
+    },
+    {
+     "test_from": "2026-01-01",
+     "params": {
+      "sq": 0.2,
+      "vm": 1.5,
+      "reg": true
+     },
+     "trades": 61,
+     "avg_R": -0.248
+    }
+   ],
+   "chosen_params_for_holdout": {
+    "sq": 0.1,
+    "vm": 1.5,
+    "reg": true
+   },
+   "holdout": {
+    "trades": 84,
+    "win_rate": 33.3,
+    "avg_R": 1.699,
+    "expectancy_pct": 1.699,
+    "profit_factor": 3.4,
+    "avg_win_pct": 7.219,
+    "avg_loss_pct": -1.061,
+    "total_pct": 269.0,
+    "max_dd_pct": -23.6,
+    "sharpe_monthly_ann": 1.45,
+    "costs_pct_total": 12.4,
+    "by_year_pct": {
+     "2026": 142.8
+    },
+    "by_symbol_pct": {
+     "LINKUSDT": 2.9,
+     "AVAXUSDT": 3.8,
+     "SOLUSDT": 7.0,
+     "ETHUSDT": 8.2,
+     "DOTUSDT": 9.0,
+     "LTCUSDT": 11.9,
+     "BNBUSDT": 12.8,
+     "DOGEUSDT": 13.0,
+     "ADAUSDT": 13.3,
+     "XRPUSDT": 22.2,
+     "BTCUSDT": 38.6
+    },
+    "without_best_symbol_pct": 104.1
+   },
+   "random_baseline": {
+    "trades": 1019,
+    "win_rate": 25.8,
+    "avg_R": 0.002,
+    "expectancy_pct": 0.002,
+    "profit_factor": 1.0,
+    "avg_win_pct": 2.811,
+    "avg_loss_pct": -0.975,
+    "total_pct": -24.7,
+    "max_dd_pct": -61.3,
+    "sharpe_monthly_ann": 0.01,
+    "costs_pct_total": 113.4,
+    "by_year_pct": {
+     "2022": -24.4,
+     "2023": -16.2,
+     "2024": 23.3,
+     "2025": 12.3,
+     "2026": 7.5
+    },
+    "by_symbol_pct": {
+     "BNBUSDT": -20.6,
+     "LTCUSDT": -15.1,
+     "ETHUSDT": -14.0,
+     "ADAUSDT": -13.2,
+     "DOTUSDT": -7.9,
+     "AVAXUSDT": -2.2,
+     "XRPUSDT": -1.4,
+     "FTTUSDT": -0.1,
+     "LINKUSDT": 2.2,
+     "SOLUSDT": 2.9,
+     "LUNAUSDT": 16.1,
+     "DOGEUSDT": 25.0,
+     "BTCUSDT": 30.6
+    },
+    "without_best_symbol_pct": -28.3
+   },
+   "double_costs_oos": {
+    "trades": 692,
+    "win_rate": 29.3,
+    "avg_R": 0.139,
+    "expectancy_pct": 0.139,
+    "profit_factor": 1.18,
+    "avg_win_pct": 3.182,
+    "avg_loss_pct": -1.124,
+    "total_pct": 96.6,
+    "max_dd_pct": -73.8,
+    "sharpe_monthly_ann": 0.33,
+    "costs_pct_total": 170.7,
+    "by_year_pct": {
+     "2022": 107.5,
+     "2023": 110.6,
+     "2024": -46.2,
+     "2025": -7.6,
+     "2026": -68.0
+    },
+    "by_symbol_pct": {
+     "XRPUSDT": -20.4,
+     "LTCUSDT": -12.0,
+     "ADAUSDT": -8.3,
+     "DOTUSDT": -4.1,
+     "FTTUSDT": 3.5,
+     "LINKUSDT": 7.3,
+     "AVAXUSDT": 8.0,
+     "SOLUSDT": 11.8,
+     "ETHUSDT": 16.7,
+     "LUNAUSDT": 17.8,
+     "BNBUSDT": 18.0,
+     "BTCUSDT": 21.1,
+     "DOGEUSDT": 36.9
+    },
+    "without_best_symbol_pct": 59.4
+   },
+   "criteria": {
+    "100+ OOS trades": true,
+    "θετικό μετά από κόστη": true,
+    "≥0 με διπλά κόστη": true,
+    "profit factor ≥ 1,2": true,
+    "Sharpe ≥ 0,8": true,
+    "καλύτερη από τυχαίες": true,
+    "κερδοφόρα στα 2/3 των ετών": false,
+    "όχι από ένα coin": true,
+    "θετική στο holdout": true
+   },
+   "passes": false
+  },
+  "failed_breakout": {
+   "walk_forward_oos": {
+    "trades": 13898,
+    "win_rate": 32.9,
+    "avg_R": -0.332,
+    "expectancy_pct": -0.319,
+    "profit_factor": 0.61,
+    "avg_win_pct": 1.528,
+    "avg_loss_pct": -1.227,
+    "total_pct": -100.0,
+    "max_dd_pct": -100.0,
+    "sharpe_monthly_ann": -6.73,
+    "costs_pct_total": 3771.3,
+    "by_year_pct": {
+     "2022": -1202.1,
+     "2023": -755.1,
+     "2024": -1098.6,
+     "2025": -1076.3,
+     "2026": -306.6
+    },
+    "by_symbol_pct": {
+     "ADAUSDT": -455.1,
+     "LINKUSDT": -446.3,
+     "BNBUSDT": -443.4,
+     "DOGEUSDT": -440.0,
+     "DOTUSDT": -413.6,
+     "AVAXUSDT": -411.0,
+     "SOLUSDT": -391.4,
+     "LTCUSDT": -387.4,
+     "XRPUSDT": -369.5,
+     "BTCUSDT": -296.5,
+     "ETHUSDT": -291.2,
+     "FTTUSDT": -46.8,
+     "LUNAUSDT": -46.6
+    },
+    "without_best_symbol_pct": -4392.2
+   },
+   "portfolio_max3_oos": {
+    "trades": 10460,
+    "win_rate": 31.1,
+    "avg_R": -0.386,
+    "expectancy_pct": -0.371,
+    "profit_factor": 0.57,
+    "avg_win_pct": 1.565,
+    "avg_loss_pct": -1.245,
+    "total_pct": -100.0,
+    "max_dd_pct": -100.0,
+    "sharpe_monthly_ann": -7.45,
+    "costs_pct_total": 3022.5,
+    "by_year_pct": {
+     "2022": -1031.4,
+     "2023": -640.2,
+     "2024": -1010.2,
+     "2025": -950.6,
+     "2026": -245.4
+    },
+    "by_symbol_pct": {
+     "ADAUSDT": -446.3,
+     "BNBUSDT": -426.5,
+     "LINKUSDT": -386.5,
+     "AVAXUSDT": -375.8,
+     "DOGEUSDT": -372.4,
+     "LTCUSDT": -341.3,
+     "DOTUSDT": -329.7,
+     "SOLUSDT": -306.1,
+     "XRPUSDT": -294.6,
+     "BTCUSDT": -285.5,
+     "ETHUSDT": -265.6,
+     "FTTUSDT": -29.8,
+     "LUNAUSDT": -17.6
+    },
+    "without_best_symbol_pct": -3860.2,
+    "cagr_pct": -100.0
+   },
+   "portfolio_max3_holdout": {
+    "trades": 1098,
+    "win_rate": 29.8,
+    "avg_R": -0.437,
+    "expectancy_pct": -0.398,
+    "profit_factor": 0.57,
+    "avg_win_pct": 1.749,
+    "avg_loss_pct": -1.309,
+    "total_pct": -98.9,
+    "max_dd_pct": -99.0,
+    "sharpe_monthly_ann": -5.84,
+    "costs_pct_total": 376.4,
+    "by_year_pct": {
+     "2026": -437.2
+    },
+    "by_symbol_pct": {
+     "BNBUSDT": -61.4,
+     "LTCUSDT": -54.5,
+     "DOTUSDT": -51.4,
+     "BTCUSDT": -49.0,
+     "XRPUSDT": -38.2,
+     "ADAUSDT": -37.0,
+     "DOGEUSDT": -36.5,
+     "LINKUSDT": -35.8,
+     "SOLUSDT": -25.2,
+     "ETHUSDT": -24.3,
+     "AVAXUSDT": -24.0
+    },
+    "without_best_symbol_pct": -413.2,
+    "cagr_pct": -100.0
+   },
+   "folds": [
+    {
+     "test_from": "2022-01-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.0
+     },
+     "trades": 1212,
+     "avg_R": -0.217
+    },
+    {
+     "test_from": "2022-04-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 769,
+     "avg_R": -0.47
+    },
+    {
+     "test_from": "2022-07-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 942,
+     "avg_R": -0.248
+    },
+    {
+     "test_from": "2022-10-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 1008,
+     "avg_R": -0.366
+    },
+    {
+     "test_from": "2023-01-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 661,
+     "avg_R": -0.306
+    },
+    {
+     "test_from": "2023-04-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 634,
+     "avg_R": -0.169
+    },
+    {
+     "test_from": "2023-07-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 677,
+     "avg_R": -0.367
+    },
+    {
+     "test_from": "2023-10-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 705,
+     "avg_R": -0.347
+    },
+    {
+     "test_from": "2024-01-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 727,
+     "avg_R": -0.288
+    },
+    {
+     "test_from": "2024-04-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 704,
+     "avg_R": -0.328
+    },
+    {
+     "test_from": "2024-07-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 751,
+     "avg_R": -0.428
+    },
+    {
+     "test_from": "2024-10-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 780,
+     "avg_R": -0.476
+    },
+    {
+     "test_from": "2025-01-01",
+     "params": {
+      "lb": 48,
+      "vm": 1.5
+     },
+     "trades": 707,
+     "avg_R": -0.386
+    },
+    {
+     "test_from": "2025-04-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 842,
+     "avg_R": -0.218
+    },
+    {
+     "test_from": "2025-07-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 921,
+     "avg_R": -0.488
+    },
+    {
+     "test_from": "2025-10-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 905,
+     "avg_R": -0.238
+    },
+    {
+     "test_from": "2026-01-01",
+     "params": {
+      "lb": 24,
+      "vm": 1.5
+     },
+     "trades": 953,
+     "avg_R": -0.34
+    }
+   ],
+   "chosen_params_for_holdout": {
+    "lb": 48,
+    "vm": 1.5
+   },
+   "holdout": {
+    "trades": 1436,
+    "win_rate": 31.9,
+    "avg_R": -0.371,
+    "expectancy_pct": -0.34,
+    "profit_factor": 0.61,
+    "avg_win_pct": 1.688,
+    "avg_loss_pct": -1.289,
+    "total_pct": -99.4,
+    "max_dd_pct": -99.5,
+    "sharpe_monthly_ann": -5.42,
+    "costs_pct_total": 467.7,
+    "by_year_pct": {
+     "2026": -487.8
+    },
+    "by_symbol_pct": {
+     "LTCUSDT": -85.4,
+     "BNBUSDT": -61.5,
+     "BTCUSDT": -60.3,
+     "DOTUSDT": -57.3,
+     "LINKUSDT": -49.4,
+     "XRPUSDT": -47.3,
+     "ADAUSDT": -40.7,
+     "SOLUSDT": -35.6,
+     "DOGEUSDT": -26.5,
+     "AVAXUSDT": -20.5,
+     "ETHUSDT": -3.2
+    },
+    "without_best_symbol_pct": -484.6
+   },
+   "random_baseline": {
+    "trades": 10078,
+    "win_rate": 33.2,
+    "avg_R": -0.279,
+    "expectancy_pct": -0.264,
+    "profit_factor": 0.66,
+    "avg_win_pct": 1.547,
+    "avg_loss_pct": -1.163,
+    "total_pct": -100.0,
+    "max_dd_pct": -100.0,
+    "sharpe_monthly_ann": -7.06,
+    "costs_pct_total": 2628.3,
+    "by_year_pct": {
+     "2022": -710.2,
+     "2023": -530.3,
+     "2024": -650.0,
+     "2025": -551.2,
+     "2026": -220.9
+    },
+    "by_symbol_pct": {
+     "BNBUSDT": -372.2,
+     "LINKUSDT": -308.8,
+     "XRPUSDT": -285.6,
+     "LTCUSDT": -267.7,
+     "BTCUSDT": -253.6,
+     "ADAUSDT": -227.9,
+     "ETHUSDT": -221.1,
+     "DOTUSDT": -217.6,
+     "AVAXUSDT": -193.0,
+     "DOGEUSDT": -163.8,
+     "SOLUSDT": -103.1,
+     "FTTUSDT": -40.7,
+     "LUNAUSDT": -7.5
+    },
+    "without_best_symbol_pct": -2655.0
+   },
+   "double_costs_oos": {
+    "trades": 12315,
+    "win_rate": 30.1,
+    "avg_R": -0.613,
+    "expectancy_pct": -0.588,
+    "profit_factor": 0.44,
+    "avg_win_pct": 1.54,
+    "avg_loss_pct": -1.504,
+    "total_pct": -100.0,
+    "max_dd_pct": -100.0,
+    "sharpe_monthly_ann": -9.17,
+    "costs_pct_total": 6625.7,
+    "by_year_pct": {
+     "2022": -1500.4,
+     "2023": -1546.8,
+     "2024": -1884.3,
+     "2025": -1679.6,
+     "2026": -627.9
+    },
+    "by_symbol_pct": {
+     "BNBUSDT": -817.7,
+     "LINKUSDT": -724.5,
+     "ADAUSDT": -712.3,
+     "DOTUSDT": -687.3,
+     "DOGEUSDT": -678.0,
+     "XRPUSDT": -673.5,
+     "LTCUSDT": -668.6,
+     "AVAXUSDT": -654.5,
+     "SOLUSDT": -572.6,
+     "BTCUSDT": -502.0,
+     "ETHUSDT": -433.6,
+     "FTTUSDT": -69.0,
+     "LUNAUSDT": -45.4
+    },
+    "without_best_symbol_pct": -7193.8
+   },
+   "criteria": {
+    "100+ OOS trades": true,
+    "θετικό μετά από κόστη": false,
+    "≥0 με διπλά κόστη": false,
+    "profit factor ≥ 1,2": false,
+    "Sharpe ≥ 0,8": false,
+    "καλύτερη από τυχαίες": false,
+    "κερδοφόρα στα 2/3 των ετών": false,
+    "όχι από ένα coin": false,
+    "θετική στο holdout": false
+   },
+   "passes": false
+  },
+  "funding_oi": {
+   "walk_forward_oos": {
+    "trades": 626,
+    "win_rate": 36.9,
+    "avg_R": 0.042,
+    "expectancy_pct": 0.042,
+    "profit_factor": 1.07,
+    "avg_win_pct": 1.693,
+    "avg_loss_pct": -0.924,
+    "total_pct": 16.6,
+    "max_dd_pct": -42.3,
+    "sharpe_monthly_ann": 0.21,
+    "costs_pct_total": 42.3,
+    "by_year_pct": {
+     "2022": 14.1,
+     "2023": 7.3,
+     "2024": 9.3,
+     "2025": -11.7,
+     "2026": 7.0
+    },
+    "by_symbol_pct": {
+     "LTCUSDT": -11.7,
+     "DOGEUSDT": -8.0,
+     "AVAXUSDT": -4.1,
+     "FTTUSDT": -1.9,
+     "LINKUSDT": -1.2,
+     "XRPUSDT": -0.2,
+     "ADAUSDT": -0.0,
+     "SOLUSDT": 0.5,
+     "ETHUSDT": 8.3,
+     "BTCUSDT": 9.4,
+     "DOTUSDT": 15.9,
+     "BNBUSDT": 19.2
+    },
+    "without_best_symbol_pct": 6.9
+   },
+   "portfolio_max3_oos": {
+    "trades": 477,
+    "win_rate": 35.6,
+    "avg_R": 0.047,
+    "expectancy_pct": 0.047,
+    "profit_factor": 1.08,
+    "avg_win_pct": 1.867,
+    "avg_loss_pct": -0.96,
+    "total_pct": 14.2,
+    "max_dd_pct": -36.4,
+    "sharpe_monthly_ann": 0.24,
+    "costs_pct_total": 36.9,
+    "by_year_pct": {
+     "2022": 10.4,
+     "2023": 3.4,
+     "2024": 10.1,
+     "2025": -11.9,
+     "2026": 10.7
+    },
+    "by_symbol_pct": {
+     "LTCUSDT": -13.6,
+     "ADAUSDT": -6.0,
+     "LINKUSDT": -2.3,
+     "FTTUSDT": -2.1,
+     "AVAXUSDT": -1.8,
+     "XRPUSDT": -0.4,
+     "DOGEUSDT": 2.1,
+     "SOLUSDT": 2.3,
+     "ETHUSDT": 2.8,
+     "BTCUSDT": 8.8,
+     "DOTUSDT": 9.4,
+     "BNBUSDT": 23.3
+    },
+    "without_best_symbol_pct": -0.7,
+    "cagr_pct": 3.2
+   },
+   "portfolio_max3_holdout": {
+    "trades": 49,
+    "win_rate": 42.9,
+    "avg_R": 0.277,
+    "expectancy_pct": 0.277,
+    "profit_factor": 1.53,
+    "avg_win_pct": 1.869,
+    "avg_loss_pct": -0.918,
+    "total_pct": 13.5,
+    "max_dd_pct": -6.8,
+    "sharpe_monthly_ann": 1.69,
+    "costs_pct_total": 6.2,
+    "by_year_pct": {
+     "2026": 13.6
+    },
+    "by_symbol_pct": {
+     "BTCUSDT": -3.9,
+     "BNBUSDT": -1.6,
+     "DOGEUSDT": -0.8,
+     "SOLUSDT": -0.8,
+     "LTCUSDT": -0.4,
+     "LINKUSDT": 1.1,
+     "XRPUSDT": 2.0,
+     "ADAUSDT": 2.5,
+     "AVAXUSDT": 3.7,
+     "ETHUSDT": 5.4,
+     "DOTUSDT": 6.3
+    },
+    "without_best_symbol_pct": 7.3,
+    "cagr_pct": 33.5
+   },
+   "folds": [
+    {
+     "test_from": "2022-01-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 46,
+     "avg_R": 0.124
+    },
+    {
+     "test_from": "2022-04-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 35,
+     "avg_R": -0.287
+    },
+    {
+     "test_from": "2022-07-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 34,
+     "avg_R": 0.296
+    },
+    {
+     "test_from": "2022-10-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 24,
+     "avg_R": 0.386
+    },
+    {
+     "test_from": "2023-01-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 45,
+     "avg_R": 0.004
+    },
+    {
+     "test_from": "2023-04-01",
+     "params": {
+      "pc": 0.95,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 85,
+     "avg_R": 0.434
+    },
+    {
+     "test_from": "2023-07-01",
+     "params": {
+      "pc": 0.95,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 61,
+     "avg_R": -0.113
+    },
+    {
+     "test_from": "2023-10-01",
+     "params": {
+      "pc": 0.95,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 151,
+     "avg_R": -0.17
+    },
+    {
+     "test_from": "2024-01-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 15,
+     "avg_R": 0.51
+    },
+    {
+     "test_from": "2024-04-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 9,
+     "avg_R": 0.518
+    },
+    {
+     "test_from": "2024-07-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 8,
+     "avg_R": 0.027
+    },
+    {
+     "test_from": "2024-10-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 14,
+     "avg_R": -0.1
+    },
+    {
+     "test_from": "2025-01-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 6,
+     "avg_R": -0.654
+    },
+    {
+     "test_from": "2025-04-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 18,
+     "avg_R": -0.386
+    },
+    {
+     "test_from": "2025-07-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 31,
+     "avg_R": 0.072
+    },
+    {
+     "test_from": "2025-10-01",
+     "params": {
+      "pc": 0.95,
+      "oig": 0.05,
+      "oi": true
+     },
+     "trades": 5,
+     "avg_R": -0.611
+    },
+    {
+     "test_from": "2026-01-01",
+     "params": {
+      "pc": 0.98,
+      "oig": -9,
+      "oi": false
+     },
+     "trades": 39,
+     "avg_R": 0.18
+    }
+   ],
+   "chosen_params_for_holdout": {
+    "pc": 0.98,
+    "oig": -9,
+    "oi": false
+   },
+   "holdout": {
+    "trades": 52,
+    "win_rate": 42.3,
+    "avg_R": 0.244,
+    "expectancy_pct": 0.244,
+    "profit_factor": 1.45,
+    "avg_win_pct": 1.851,
+    "avg_loss_pct": -0.934,
+    "total_pct": 12.5,
+    "max_dd_pct": -8.7,
+    "sharpe_monthly_ann": 1.29,
+    "costs_pct_total": 6.6,
+    "by_year_pct": {
+     "2026": 12.7
+    },
+    "by_symbol_pct": {
+     "BTCUSDT": -5.1,
+     "DOGEUSDT": -0.8,
+     "SOLUSDT": -0.8,
+     "LTCUSDT": -0.4,
+     "BNBUSDT": -0.2,
+     "LINKUSDT": 1.1,
+     "XRPUSDT": 2.0,
+     "ADAUSDT": 2.5,
+     "AVAXUSDT": 3.7,
+     "ETHUSDT": 4.3,
+     "DOTUSDT": 6.3
+    },
+    "without_best_symbol_pct": 6.4
+   },
+   "random_baseline": {
+    "trades": 859,
+    "win_rate": 35.6,
+    "avg_R": -0.132,
+    "expectancy_pct": -0.132,
+    "profit_factor": 0.76,
+    "avg_win_pct": 1.198,
+    "avg_loss_pct": -0.867,
+    "total_pct": -70.2,
+    "max_dd_pct": -71.6,
+    "sharpe_monthly_ann": -1.46,
+    "costs_pct_total": 66.8,
+    "by_year_pct": {
+     "2022": -18.3,
+     "2023": -28.5,
+     "2024": -39.9,
+     "2025": -6.5,
+     "2026": -19.8
+    },
+    "by_symbol_pct": {
+     "ETHUSDT": -25.8,
+     "LINKUSDT": -22.8,
+     "BTCUSDT": -13.9,
+     "XRPUSDT": -13.5,
+     "AVAXUSDT": -13.5,
+     "BNBUSDT": -11.2,
+     "ADAUSDT": -10.3,
+     "DOTUSDT": -9.5,
+     "SOLUSDT": -6.0,
+     "DOGEUSDT": -1.7,
+     "FTTUSDT": -0.4,
+     "LUNAUSDT": -0.2,
+     "LTCUSDT": 15.7
+    },
+    "without_best_symbol_pct": -128.7
+   },
+   "double_costs_oos": {
+    "trades": 856,
+    "win_rate": 36.8,
+    "avg_R": -0.089,
+    "expectancy_pct": -0.089,
+    "profit_factor": 0.86,
+    "avg_win_pct": 1.481,
+    "avg_loss_pct": -1.003,
+    "total_pct": -58.2,
+    "max_dd_pct": -69.8,
+    "sharpe_monthly_ann": -0.51,
+    "costs_pct_total": 123.0,
+    "by_year_pct": {
+     "2022": 6.6,
+     "2023": -32.0,
+     "2024": -17.8,
+     "2025": -38.7,
+     "2026": 6.1
+    },
+    "by_symbol_pct": {
+     "XRPUSDT": -35.2,
+     "BNBUSDT": -28.5,
+     "LTCUSDT": -19.4,
+     "AVAXUSDT": -13.3,
+     "SOLUSDT": -12.6,
+     "DOGEUSDT": -4.3,
+     "FTTUSDT": -2.3,
+     "ETHUSDT": -0.1,
+     "ADAUSDT": 7.2,
+     "LINKUSDT": 8.9,
+     "BTCUSDT": 10.1,
+     "DOTUSDT": 13.6
+    },
+    "without_best_symbol_pct": -89.5
+   },
+   "criteria": {
+    "100+ OOS trades": true,
+    "θετικό μετά από κόστη": true,
+    "≥0 με διπλά κόστη": false,
+    "profit factor ≥ 1,2": false,
+    "Sharpe ≥ 0,8": false,
+    "καλύτερη από τυχαίες": true,
+    "κερδοφόρα στα 2/3 των ετών": true,
+    "όχι από ένα coin": true,
+    "θετική στο holdout": true
+   },
+   "passes": false
+  }
+ }
+}

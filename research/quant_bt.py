@@ -242,6 +242,7 @@ def random_signals(sig_list, o, rng):
 def metrics(trades):
     if not trades:
         return {"trades": 0}
+    trades = sorted(trades, key=lambda t: t["t_out"])   # χρονολογικά (για drawdown)
     r = np.array([t["ret"] for t in trades])
     R = np.array([t["R"] for t in trades])
     wins, losses = r[r > 0], r[r <= 0]
@@ -264,6 +265,21 @@ def metrics(trades):
             "by_year_pct": {int(k): round(100 * float(v), 1) for k, v in years.items()},
             "by_symbol_pct": {k: round(100 * float(v), 1) for k, v in by_sym.sort_values().items()},
             "without_best_symbol_pct": round(100 * float(df[df["sym"] != best]["ret"].sum()), 1)}
+
+
+def portfolio(trades, max_open=3):
+    """Ρεαλιστικό χαρτοφυλάκιο: το πολύ max_open ανοιχτές θέσεις ταυτόχρονα, χρονολογικά."""
+    open_until, kept = [], []
+    for t in sorted(trades, key=lambda t: t["t_in"]):
+        open_until = [x for x in open_until if x > t["t_in"]]
+        if len(open_until) < max_open:
+            open_until.append(t["t_out"])
+            kept.append(t)
+    m = metrics(kept)
+    if kept:
+        days = (pd.Timestamp(kept[-1]["t_out"]) - pd.Timestamp(kept[0]["t_in"])).days or 1
+        m["cagr_pct"] = round(100 * ((1 + m["total_pct"] / 100) ** (365 / days) - 1), 1)
+    return m
 
 
 # ---------------- walk-forward ----------------
@@ -329,7 +345,7 @@ def main():
             double += in_range(simulate(name, sigs[(best_all, s)], df, s, fund[s], cost_mult=2.0),
                                start + pd.DateOffset(months=TRAIN_M), holdout_start)
         m_oos = metrics(oos)
-        res = {"walk_forward_oos": m_oos, "folds": folds, "chosen_params_for_holdout": S["grid"][best_all],
+        res = {"walk_forward_oos": m_oos, "portfolio_max3_oos": portfolio(oos), "portfolio_max3_holdout": portfolio(hold), "folds": folds, "chosen_params_for_holdout": S["grid"][best_all],
                "holdout": metrics(hold), "random_baseline": metrics(rnd), "double_costs_oos": metrics(double)}
         mo, mh, mr, md = m_oos, res["holdout"], res["random_baseline"], res["double_costs_oos"]
         yrs = mo.get("by_year_pct", {})
