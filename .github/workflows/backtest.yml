@@ -6,6 +6,7 @@ on:
     inputs:
       days: {description: "Πόσες μέρες πίσω", default: "10"}
       max_pools: {description: "Μέγιστος αριθμός coins", default: "150"}
+      kind: {description: "meme ή funding", default: "meme"}
 
 permissions:
   contents: write
@@ -27,11 +28,12 @@ jobs:
         env:
           BT_DAYS: ${{ inputs.days }}
           BT_MAX_POOLS: ${{ inputs.max_pools }}
-        run: python research/backtest.py
+        run: |
+          if [ "${{ inputs.kind }}" = "funding" ]; then python research/funding_bt.py; else python research/backtest.py; fi
       - name: Save result
         run: |
           git config user.name "paper-bot"
           git config user.email "paper-bot@users.noreply.github.com"
-          git add docs/backtest.json
+          git add docs/backtest.json docs/funding_bt.json 2>/dev/null || true
           git commit -q -m "backtest" || exit 0
           for i in 1 2 3 4 5; do git pull -q --rebase -X theirs && git push -q && break; sleep 5; done
