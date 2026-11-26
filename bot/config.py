@@ -84,6 +84,19 @@ LAB = {
             "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
             "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
             "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
+    # 26/11: «trench» από βίντεο TikTok (@nabiltalks). ΜΟΝΟ paper — εξαιρείται ο κανόνας της 1 μέρας.
+    # Coins που μόλις «αποφοίτησαν» από pump.fun → PumpSwap, με τα φίλτρα του: top-10 <30%, όγκος > market cap,
+    # 100+ κάτοχοι, ενδιαφέρον (αγοραστές). Γρήγορη έξοδος +50% / −25% / 1 ώρα. Κόστη 4% ανά πλευρά (μικρά pools).
+    "trench": {"label": "Trench (pump.fun)", "TRENCH_SOURCE": True,
+               "MIN_AGE_MIN": 3, "MAX_AGE_MIN": 6 * 60, "MIN_LIQUIDITY_USD": 10_000,
+               "MIN_FDV_USD": 30_000, "MAX_FDV_USD": 5_000_000, "MIN_VOL_TO_FDV": 1.0,
+               "MIN_VOLUME_M5_USD": 1_000, "MIN_BUYERS_M5": 15,
+               "MIN_BUY_SELL_RATIO_H1": 1.0, "MIN_BUY_SELL_RATIO_M5": 1.0,
+               "MIN_PRICE_CHANGE_M5": 0.0, "MAX_PRICE_CHANGE_M5": 40.0,
+               "MIN_PRICE_CHANGE_H1": -20.0, "MAX_PRICE_CHANGE_H1": 300.0,
+               "MAX_TOP10_PCT": 30.0, "MIN_HOLDERS": 100,
+               "TAKE_PROFIT_PCT": 50.0, "STOP_LOSS_PCT": -25.0, "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 60,
+               "SLIPPAGE_PER_SIDE": 0.04},
 }
 
 # 26/11: scalp & spike σταμάτησαν — στο backtest (87 meme coins, 10 μέρες, ~1.150 trades) δεν ήταν καλύτερα

@@ -83,6 +83,9 @@ def reject_reason(p, now):
         return "FDV εκτός ορίων"
     if p["vol_m5"] < C.MIN_VOLUME_M5_USD:
         return "χαμηλός όγκος 5'"
+    vf = getattr(C, "MIN_VOL_TO_FDV", 0.0)
+    if vf and p.get("vol_h24", 0.0) < vf * p["fdv"]:
+        return "όγκος < market cap"
     if p["buyers_m5"] < C.MIN_BUYERS_M5:
         return "λίγοι αγοραστές"
     sells = max(p["sells_h1"], 1)
@@ -390,6 +393,9 @@ def rug_reason(rc):
         return "rugcheck: κίνδυνος"
     if rc.get("top10", 0) > getattr(C, "MAX_TOP10_PCT", 35.0):
         return "top-10 κάτοχοι πολλά"
+    min_h = getattr(C, "MIN_HOLDERS", 0)
+    if min_h and rc.get("holders") is not None and rc["holders"] < min_h:
+        return "λίγοι κάτοχοι"
     lp = rc.get("lp_locked")
     if lp is not None and lp < getattr(C, "MIN_LP_LOCKED_PCT", 90.0):
         return "LP ξεκλείδωτη"

@@ -183,9 +183,29 @@ def load_lab(now):
     return out
 
 
+def trench_pools(st, now):
+    """Πηγή για το «trench»: φρέσκα migrations + λίστα παρακολούθησης (ένα coin ελέγχεται για ώρες μετά το migration)."""
+    cyc = st.setdefault("tcycle", 0)
+    st["tcycle"] = cyc + 1
+    fresh = data.fresh_migrations(new_pages=3, tx_pages=2 if cyc % 5 == 0 else 0)
+    watch = st.setdefault("twatch", {})
+    max_age = C.MAX_AGE_MIN * 60
+    for p in fresh:
+        created = engine.parse_time(p["created_at"])
+        if p["pool"] and created and (now - created).total_seconds() < max_age:
+            watch[p["pool"]] = p["created_at"]
+    for k in [k for k, v in watch.items() if (now - engine.parse_time(v)).total_seconds() >= max_age]:
+        del watch[k]
+    known = {p["pool"] for p in fresh}
+    rest = [a for a in watch if a not in known][:60]
+    return fresh + (data.fetch_pools(rest) if rest else [])
+
+
 def lab_cycle(st, pools):
     now = engine.now_utc()
     engine.roll_day(st, now)
+    if getattr(C, "TRENCH_SOURCE", False):
+        pools = trench_pools(st, now)
     if st["positions"]:
         quotes = data.pools_now(st["positions"])
         confirm = lambda pos: (data.ds_price(pos["pool"], pos["mint"])

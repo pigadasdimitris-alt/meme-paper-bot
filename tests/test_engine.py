@@ -463,3 +463,35 @@ def test_volume_spike_filter():
     with run.overrides(C.LAB_RETIRED["spike"]):
         assert engine.reject_reason(pool(now, vol_m5=30_000, vol_h1=80_000), now) is None
         assert engine.reject_reason(pool(now, vol_m5=7_000, vol_h1=80_000), now) == "χωρίς έκρηξη όγκου"
+
+
+def test_trench_filters():
+    from bot import run
+    now = engine.now_utc()
+    with run.overrides(C.LAB["trench"]):
+        young = (now - timedelta(minutes=40)).isoformat()
+        ok = pool(now, created_at=young, liquidity=20_000, fdv=200_000, vol_h24=300_000, buyers_m5=30,
+                  pc_m5=3, pc_h1=50, buys_m5=60, sells_m5=30, buys_h1=200, sells_h1=150)
+        assert engine.reject_reason(ok, now) is None          # φρέσκο coin επιτρέπεται μόνο στο trench
+        assert engine.reject_reason({**ok, "vol_h24": 100_000}, now) == "όγκος < market cap"
+        assert engine.rug_reason({"ok": True, "top10": 20, "lp_locked": 100, "holders": 50}) == "λίγοι κάτοχοι"
+        assert engine.rug_reason({"ok": True, "top10": 33, "lp_locked": 100, "holders": 500}) == "top-10 κάτοχοι πολλά"
+        assert engine.rug_reason({"ok": True, "top10": 20, "lp_locked": 100, "holders": 500}) is None
+        assert abs(C.SLIPPAGE_PER_SIDE - 0.04) < 1e-9
+    assert engine.reject_reason(ok, now) == "πολύ καινούργιο"  # εκτός trench ισχύει ο κανόνας της 1 μέρας
+    assert not hasattr(C, "TRENCH_SOURCE") and not hasattr(C, "MIN_HOLDERS")
+
+
+def test_trench_pools_watchlist(monkeypatch):
+    from bot import run, data
+    now = engine.now_utc()
+    mk = lambda a, mins: {"pool": a, "created_at": (now - timedelta(minutes=mins)).isoformat(), "dex": "pumpswap"}
+    monkeypatch.setattr(data, "fresh_migrations", lambda **k: [mk("A", 10), mk("OLD", 500)])
+    monkeypatch.setattr(data, "fetch_pools", lambda addrs: [mk(a, 60) for a in addrs])
+    st = {}
+    with run.overrides(C.LAB["trench"]):
+        got = run.trench_pools(st, now)
+        assert [p["pool"] for p in got] == ["A", "OLD"] and set(st["twatch"]) == {"A"}
+        monkeypatch.setattr(data, "fresh_migrations", lambda **k: [])
+        got = run.trench_pools(st, now)
+        assert [p["pool"] for p in got] == ["A"]               # συνεχίζει να το παρακολουθεί

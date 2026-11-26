@@ -62,6 +62,7 @@ def parse_gt_pool(p):
         "liquidity": _f(a.get("reserve_in_usd")),
         "vol_m5": _f(vol.get("m5")),
         "vol_h1": _f(vol.get("h1")),
+        "vol_h24": _f(vol.get("h24")),
         "pc_m5": _f(pc.get("m5")),
         "pc_h1": _f(pc.get("h1")),
         "pc_h6": _f(pc.get("h6")),
@@ -95,6 +96,16 @@ def top_volume_pools(page, sort="h24_volume_usd_desc"):
     d = _get(f"{GT}/networks/solana/pools?page={page}&sort={sort}")
     time.sleep(1.5)
     return [parse_gt_pool(p) for p in (d or {}).get("data", [])]
+
+
+def fresh_migrations(new_pages=3, tx_pages=0):
+    """Coins που μόλις «αποφοίτησαν» από το pump.fun (νέα pools στο PumpSwap) + τα πιο ενεργά PumpSwap pools."""
+    out = [p for p in new_pools(new_pages) if p.get("dex") == "pumpswap"]
+    for page in range(1, tx_pages + 1):
+        d = _get(f"{GT}/networks/solana/dexes/pumpswap/pools?page={page}&sort=h24_tx_count_desc")
+        out += [parse_gt_pool(p) for p in (d or {}).get("data", [])]
+        time.sleep(1.5)
+    return out
 
 
 def fetch_pools(addresses):
@@ -211,8 +222,9 @@ def parse_rugcheck(rep, pool):
         if m.get("pubkey") == pool:
             lp_locked = _f((m.get("lp") or {}).get("lpLockedPct"), None)
     danger = [r.get("name") for r in rep.get("risks") or [] if str(r.get("level")).lower() == "danger"]
+    holders = rep.get("totalHolders")
     return {"ok": True, "top10": round(top, 1), "lp_locked": lp_locked, "danger": danger,
-            "rugged": bool(rep.get("rugged"))}
+            "rugged": bool(rep.get("rugged")), "holders": int(holders) if holders is not None else None}
 
 
 def rugcheck(mint, pool):
