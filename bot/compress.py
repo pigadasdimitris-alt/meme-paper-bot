@@ -10,6 +10,7 @@
 - Κόστος: fee 0,045% + slippage 0,03% (BTC/ETH) ή 0,10% ανά πλευρά, και το ωριαίο funding του Hyperliquid.
 """
 import json
+import statistics
 import time
 import urllib.request
 
@@ -23,6 +24,15 @@ STOP_ATR, TRAIL_ATR, MAX_BARS = 1.5, 3.0, 30
 RISK, MAX_LEV, MAX_OPEN = 0.01, 3.0, 3
 FEE = 0.00045
 EPOCH = "2026-11-26-compress"
+
+# Παραλλαγές (Experiments, 27/11). Το baseline μένει ΑΚΡΙΒΩΣ όπως ήταν.
+BASE = {"vm": VM, "trail": TRAIL_ATR, "calm": False}
+VARIANTS = {
+    "compress": BASE,                                                # baseline (paper από 26/11)
+    "compress_vol2": dict(BASE, vm=2.0),                             # Exp. B: όγκος > 2× (μόνο είσοδος)
+    "compress_calm_t2": dict(BASE, calm=True, trail=2.0),            # Exp. A+C: BTC σε ήρεμη αγορά + trailing 2×ATR
+    "compress_vol2_t2": dict(BASE, vm=2.0, trail=2.0),               # Exp. B+C: όγκος > 2× + trailing 2×ATR
+}
 
 
 def slip(coin):
@@ -101,14 +111,14 @@ def squeeze_recent(bars, i):
     return False
 
 
-def signal(bars, i, btc_up):
+def signal(bars, i, btc_up, P=BASE):
     """Σήμα στο κλείσιμο του κεριού i: +1 long, −1 short, 0 τίποτα. Επιστρέφει (side, atr)."""
     if i < RANK_MIN + 30:
         return 0, None
     c, v = bars[i][4], bars[i][5]
     hi = max(b[2] for b in bars[i - LOOK:i])
     lo = min(b[3] for b in bars[i - LOOK:i])
-    if v <= VM * _mean([b[5] for b in bars[i - 19:i + 1]]):
+    if v <= P["vm"] * _mean([b[5] for b in bars[i - 19:i + 1]]):
         return 0, None
     if not (c > hi or c < lo) or not squeeze_recent(bars, i):
         return 0, None
@@ -123,6 +133,17 @@ def signal(bars, i, btc_up):
 def btc_regime(btc_bars):
     cl = [b[4] for b in btc_bars[-300:]]
     return len(cl) == 300 and cl[-1] > _mean(cl)
+
+
+def btc_calm(btc_bars):
+    """Η μεταβλητότητα του BTC (30 μέρες) είναι κάτω από τη διάμεσο των τελευταίων 180 ημερών."""
+    cl = [b[4] for b in btc_bars]
+    rets = [cl[k] / cl[k - 1] - 1 for k in range(1, len(cl))]
+    vols = [_std(rets[k - 180:k]) for k in range(180, len(rets) + 1)]
+    hist = vols[-1080:]
+    if len(hist) < 300:
+        return False
+    return vols[-1] < statistics.median(hist)
 
 
 # ---------------- paper ----------------
@@ -144,10 +165,16 @@ def _close(st, pos, price, reason, now):
     engine.log(st, now, f"ΚΛΕΙΣΙΜΟ {pos['name']} — {reason} — {pnl:+.2f}$")
 
 
-def cycle(st, now=None, candles_fn=hl_candles, ctx_fn=hl_ctx):
+def cycle(st, now=None, candles_fn=hl_candles, ctx_fn=hl_ctx, P=BASE, shared=None):
+    """shared: κοινή cache κεριών/τιμών για όλες τις παραλλαγές στον ίδιο κύκλο (ίδια δεδομένα για όλες)."""
     now = now or engine.now_utc()
     now_s = int(now.timestamp())
-    ctx = ctx_fn()
+    if shared is not None and shared.get("ctx_t") == now_s // 60:
+        ctx = shared["ctx"]
+    else:
+        ctx = ctx_fn()
+        if shared is not None:
+            shared.update({"ctx": ctx, "ctx_t": now_s // 60})
     if not ctx:
         raise RuntimeError("δεν ήρθαν τιμές από το Hyperliquid")
     # 1) funding κάθε ώρα για τις ανοιχτές θέσεις (long πληρώνει θετικό funding)
@@ -167,12 +194,20 @@ def cycle(st, now=None, candles_fn=hl_candles, ctx_fn=hl_ctx):
     # 3) νέο κλεισμένο κερί 4ω → trailing, λήξη χρόνου, νέες είσοδοι
     bar_close = now_s // BAR * BAR
     if st.get("last_bar") != bar_close:
-        bars = {c: candles_fn(c, now_s) for c in COINS}
+        if shared is not None and shared.get("bar") == bar_close:
+            bars = shared["bars"]
+        else:
+            bars = {c: candles_fn(c, now_s) for c in COINS}
+            if shared is not None:
+                shared.update({"bars": bars, "bar": bar_close})
         if not bars.get("BTC"):
             raise RuntimeError("δεν ήρθαν κεριά BTC")
         st["last_bar"] = bar_close
         btc_up = btc_regime(bars["BTC"])
         st["btc_regime"] = "ανοδικό" if btc_up else "καθοδικό"
+        calm = btc_calm(bars["BTC"]) if P["calm"] else True
+        if P["calm"]:
+            st["btc_calm"] = calm
         for p in list(st["positions"]):
             b = bars.get(p["coin"])
             if not b:
@@ -181,7 +216,7 @@ def cycle(st, now=None, candles_fn=hl_candles, ctx_fn=hl_ctx):
             last_c = b[i][4]
             p["bars"] += 1
             p["best"] = max(p["best"], last_c) if p["side"] > 0 else min(p["best"], last_c)
-            new_stop = p["best"] - p["side"] * TRAIL_ATR * atr(b, i)
+            new_stop = p["best"] - p["side"] * P["trail"] * atr(b, i)
             if (p["side"] > 0 and new_stop > p["stop"]) or (p["side"] < 0 and new_stop < p["stop"]):
                 p["stop"], p["moved"] = new_stop, p["moved"] + 1
             if p["bars"] >= MAX_BARS:
@@ -193,8 +228,8 @@ def cycle(st, now=None, candles_fn=hl_candles, ctx_fn=hl_ctx):
                 continue
             if any(p["coin"] == coin for p in st["positions"]):
                 continue
-            side, a = signal(b, len(b) - 1, btc_up)
-            if not side:
+            side, a = signal(b, len(b) - 1, btc_up, P)
+            if not side or not calm:
                 continue
             px = ctx[coin][0]
             stop = px - side * STOP_ATR * a

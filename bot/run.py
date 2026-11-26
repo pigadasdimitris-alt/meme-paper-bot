@@ -229,10 +229,15 @@ def lab_row(key, label, st):
 TIMES = {}
 
 
+_CSH = {}   # κοινά κεριά/τιμές για όλες τις παραλλαγές της Compression (ίδια δεδομένα για όλες)
 MAJORS = {"trend": ("Trend BTC/ETH/SOL", majors.TREND_EPOCH, majors.trend_cycle),
           "funding": ("Funding arbitrage", majors.FUND_EPOCH, majors.funding_cycle),
           "orb": ("ORB Nasdaq (QQQ)", orb.EPOCH, orb.cycle),
-          "compress": ("Compression breakout", compress.EPOCH, compress.cycle)}
+          "compress": ("Compression breakout", compress.EPOCH, lambda st: compress.cycle(st, shared=_CSH))}
+for _k, _lbl in (("compress_vol2", "Compression · όγκος 2×"), ("compress_calm_t2", "Compression · ήρεμη αγορά + trail 2"),
+                 ("compress_vol2_t2", "Compression · όγκος 2× + trail 2")):
+    MAJORS[_k] = (_lbl, "2026-11-27-" + _k,
+                  (lambda P: (lambda st: compress.cycle(st, P=P, shared=_CSH)))(compress.VARIANTS[_k]))
 
 
 def load_majors(now):

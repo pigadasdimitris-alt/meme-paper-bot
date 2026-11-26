@@ -631,3 +631,23 @@ def test_compress_cycle_opens_trails_and_stops():
     compress.cycle(st, now, candles_fn=cands, ctx_fn=lambda: ctx2)
     assert not st["positions"] and st["closed"][-1]["reason"] == "stop"
     assert st["closed"][-1]["pnl"] < 0 and st["closed"][-1]["r_multiple"] < -0.9
+
+
+def test_compress_variants_differ_only_where_intended():
+    from bot import compress
+    b = compress.VARIANTS
+    assert b["compress"] == {"vm": 1.5, "trail": 3.0, "calm": False}          # baseline ανέγγιχτο
+    assert b["compress_vol2"] == dict(b["compress"], vm=2.0)
+    assert b["compress_calm_t2"] == dict(b["compress"], calm=True, trail=2.0)
+    mid = _comp_bars(800, 10**9, breakout=1.0, vol_spike=1.8)               # όγκος 1,8×: περνά στο baseline, όχι στο vol2
+    assert compress.signal(mid, len(mid) - 1, True, b["compress"])[0] == 1
+    assert compress.signal(mid, len(mid) - 1, True, b["compress_vol2"])[0] == 0
+
+
+def test_btc_calm():
+    from bot import compress
+    import math
+    quiet_now = [(k, 0, 0, 0, 100 * (1 + (0.02 if k < 1200 else 0.001) * math.sin(k)), 1) for k in range(1300)]
+    wild_now = [(k, 0, 0, 0, 100 * (1 + (0.001 if k < 1200 else 0.02) * math.sin(k)), 1) for k in range(1300)]
+    assert compress.btc_calm(quiet_now) is True
+    assert compress.btc_calm(wild_now) is False
