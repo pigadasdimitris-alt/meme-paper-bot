@@ -427,7 +427,7 @@ def test_no_rebuy_after_stop_loss():
 def test_trailing_stop_and_lab_overrides():
     from bot import run
     now = engine.now_utc()
-    with run.overrides(C.LAB["trail"]):
+    with run.overrides(C.LAB_RETIRED["trail"]):
         s = engine.new_state(now)
         engine.scan_and_enter(s, [pool(now)], now)
         pos = s["positions"][0]
@@ -442,7 +442,7 @@ def test_trailing_stop_and_lab_overrides():
 def test_dip_entry_filter():
     from bot import run
     now = engine.now_utc()
-    with run.overrides(C.LAB["dip"]):
+    with run.overrides(C.LAB_RETIRED["dip"]):
         assert engine.reject_reason(pool(now, pc_h1=-20, pc_m5=2, buys_m5=60, sells_m5=30), now) is None
         assert engine.reject_reason(pool(now, pc_h1=12), now) == "ήδη εκτοξευμένο"
 
@@ -512,3 +512,67 @@ def test_trench_runner_waits_for_old_bot(monkeypatch, tmp_path):
 
 def test_main_bot_skips_separate_strategies():
     assert C.LAB["trench"].get("SEPARATE")
+
+
+# ---------------- ORB Nasdaq ----------------
+
+def _orb_bars(day_utc_930, first, rest):
+    """first=(o,h,l,c) για το κερί 9:30· rest = λίστα (o,h,l,c) για τα επόμενα κεριά 5'."""
+    out = [(day_utc_930, *first)]
+    for i, b in enumerate(rest, 1):
+        out.append((day_utc_930 + 300 * i, *b))
+    return out
+
+
+def _orb_setup():
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    from bot import orb, majors
+    t930 = datetime(2026, 11, 24, 9, 30, tzinfo=ZoneInfo("America/New_York"))
+    st = majors.new_state(t930, orb.EPOCH, "orb")
+    return orb, st, t930
+
+
+def test_orb_long_hits_target():
+    orb, st, t930 = _orb_setup()
+    ts = int(t930.timestamp())
+    bars = _orb_bars(ts, (500, 501, 499.5, 500.8), [(500.8, 500.9, 500.7, 500.8)])
+    orb.cycle(st, t930 + timedelta(minutes=6), bars_fn=lambda: bars)      # 9:36 → είσοδος long @500.8
+    p = st["positions"][0]
+    assert p["side"] == "long" and p["stop"] == 499.5 and abs(p["target"] - (500.8 + 13)) < 1e-6
+    assert abs(p["risk_usd"] - 1.0) < 1e-6 or p["shares"] * p["entry"] <= 4 * 100 + 1e-6
+    bars2 = bars + [(ts + 600, 501, 514.0, 500.9, 513.5)]
+    orb.cycle(st, t930 + timedelta(minutes=11), bars_fn=lambda: bars2)
+    t = st["closed"][-1]
+    assert t["reason"] == "στόχος 10R" and t["pnl"] > 0 and not st["positions"]
+
+
+def test_orb_short_stop_and_one_trade_per_day():
+    orb, st, t930 = _orb_setup()
+    ts = int(t930.timestamp())
+    bars = _orb_bars(ts, (500, 500.5, 499, 499.2), [(499.2, 499.3, 499.1, 499.2)])
+    orb.cycle(st, t930 + timedelta(minutes=6), bars_fn=lambda: bars)
+    assert st["positions"][0]["side"] == "short" and st["positions"][0]["stop"] == 500.5
+    bars2 = bars + [(ts + 600, 499.2, 501, 499, 500.9)]
+    orb.cycle(st, t930 + timedelta(minutes=11), bars_fn=lambda: bars2)
+    t = st["closed"][-1]
+    assert t["reason"] == "stop" and t["pnl"] < 0 and abs(t["exit_market"] - 500.5) < 1e-9
+    orb.cycle(st, t930 + timedelta(minutes=14), bars_fn=lambda: bars2)
+    assert not st["positions"] and len(st["closed"]) == 1          # μόνο ένα trade τη μέρα
+
+
+def test_orb_closes_at_end_of_day_and_skips_outside_hours():
+    orb, st, t930 = _orb_setup()
+    ts = int(t930.timestamp())
+    bars = _orb_bars(ts, (500, 501, 499.5, 500.8), [(500.8, 500.9, 500.7, 500.8)])
+    orb.cycle(st, t930 + timedelta(minutes=6), bars_fn=lambda: bars)
+    late = bars + [(ts + 300 * k, 501, 501.5, 500.6, 501.2) for k in range(2, 78)]
+    orb.cycle(st, t930 + timedelta(hours=6, minutes=26), bars_fn=lambda: late)   # 15:56
+    assert st["closed"][-1]["reason"] == "κλείσιμο αγοράς" and not st["positions"]
+    called = []
+    orb.cycle(st, t930 + timedelta(hours=8), bars_fn=lambda: called.append(1))
+    assert not called                                                   # εκτός ωραρίου: καμία κλήση
+    small = _orb_bars(ts, (500, 500.01, 499.99, 500.001), [(500, 500, 500, 500)])
+    orb2, st2, _ = _orb_setup()
+    orb2.cycle(st2, t930 + timedelta(minutes=6), bars_fn=lambda: small)
+    assert not st2["positions"]                                         # κερί χωρίς κίνηση → τίποτα

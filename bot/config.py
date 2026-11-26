@@ -78,12 +78,6 @@ COPY_BOT = True   # 24/11: ξανά σε λειτουργία, χαλαρό (χ�
 # Η "momentum" είναι το κύριο paper (docs/state.json). Οι υπόλοιπες αλλάζουν μόνο όσα γράφονται εδώ.
 LAB_EPOCH = "2026-11-24-lab"
 LAB = {
-    "trail": {"label": "Trailing", "TAKE_PROFIT_PCT": 1e9, "STOP_LOSS_PCT": -10.0, "TRAIL_PCT": 8.0,
-              "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 240},
-    "dip": {"label": "Αγορά στη βουτιά", "MIN_LIQUIDITY_USD": 50_000, "MIN_PRICE_CHANGE_H1": -30.0,
-            "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
-            "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
-            "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
     # 26/11: «trench» από βίντεο TikTok (@nabiltalks). ΜΟΝΟ paper — εξαιρείται ο κανόνας της 1 μέρας.
     # Coins που μόλις «αποφοίτησαν» από pump.fun → PumpSwap, με τα φίλτρα του: top-10 <30%, όγκος > market cap,
     # 100+ κάτοχοι, ενδιαφέρον (αγοραστές). Γρήγορη έξοδος +50% / −25% / 1 ώρα. Κόστη 4% ανά πλευρά (μικρά pools).
@@ -102,6 +96,15 @@ LAB = {
 # 26/11: scalp & spike σταμάτησαν — στο backtest (87 meme coins, 10 μέρες, ~1.150 trades) δεν ήταν καλύτερα
 # από τυχαίες αγορές (−2,6% έως −2,8% ανά trade με 1% κόστος). Κρατιούνται εδώ μόνο για αναφορά/backtest.
 LAB_RETIRED = {
+    # 26/11 βράδυ: trail & dip σταμάτησαν — στο backtest (87 coins, 10 μέρες) trail = ίδιο με τυχαίες αγορές
+    # (−2,9%/trade), dip αρνητικό σε μεγαλύτερο δείγμα και καμία από 300 παραλλαγές δεν πέρασε τον τελικό έλεγχο.
+    "trail": {"label": "Trailing", "TAKE_PROFIT_PCT": 1e9, "STOP_LOSS_PCT": -10.0, "TRAIL_PCT": 8.0,
+              "BREAKEVEN_TRIGGER_PCT": 1e9, "MAX_HOLD_MIN": 240},
+    "dip": {"label": "Αγορά στη βουτιά", "MIN_LIQUIDITY_USD": 50_000, "MIN_PRICE_CHANGE_H1": -30.0,
+            "MAX_PRICE_CHANGE_H1": -12.0, "MIN_PRICE_CHANGE_M5": 0.5, "MAX_PRICE_CHANGE_M5": 8.0,
+            "MIN_BUY_SELL_RATIO_H1": 0.0, "MIN_BUY_SELL_RATIO_M5": 1.2, "MIN_BUYERS_M5": 15,
+            "TAKE_PROFIT_PCT": 15.0, "STOP_LOSS_PCT": -10.0, "MAX_HOLD_MIN": 120},
+
     "scalp": {"label": "Γρήγορο scalp", "TAKE_PROFIT_PCT": 8.0, "STOP_LOSS_PCT": -5.0, "MAX_HOLD_MIN": 30,
               "BREAKEVEN_TRIGGER_PCT": 4.0},
     "spike": {"label": "Έκρηξη όγκου", "MIN_VOL_SPIKE": 3.0, "MIN_BUY_SELL_RATIO_M5": 1.3,

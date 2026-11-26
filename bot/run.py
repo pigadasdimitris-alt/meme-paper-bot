@@ -10,7 +10,7 @@ from pathlib import Path
 import contextlib
 import urllib.request
 
-from . import config as C
+from . import orb, config as C
 from . import copybot, data, engine, live, majors
 from .report import write_readme
 
@@ -230,7 +230,8 @@ TIMES = {}
 
 
 MAJORS = {"trend": ("Trend BTC/ETH/SOL", majors.TREND_EPOCH, majors.trend_cycle),
-          "funding": ("Funding arbitrage", majors.FUND_EPOCH, majors.funding_cycle)}
+          "funding": ("Funding arbitrage", majors.FUND_EPOCH, majors.funding_cycle),
+          "orb": ("ORB Nasdaq (QQQ)", orb.EPOCH, orb.cycle)}
 
 
 def load_majors(now):
@@ -251,7 +252,7 @@ def save_lab(lab, state, cst, mj=None):
                 pass
     rows = ([lab_row("paper", "Momentum", state)] if getattr(C, "MOMENTUM_ON", True) else []) + \
            [lab_row(n, C.LAB[n]["label"], st) for n, st in lab.items()] + sep + \
-           [lab_row("copy", "Copy πορτοφολιών", cst)] + \
+           ([lab_row("copy", "Copy πορτοφολιών", cst)] if getattr(C, "COPY_BOT", False) else []) + \
            [lab_row(k, MAJORS[k][0], st) for k, st in (mj or {}).items()]
     rows.sort(key=lambda r: r["equity"], reverse=True)
     LAB_SUMMARY.write_text(json.dumps({"updated": engine.iso(engine.now_utc()), "since": "2026-11-24",
@@ -383,7 +384,11 @@ def main():
     while True:
         t0 = time.time()
         pools = []
+        need_scan = getattr(C, "MOMENTUM_ON", True) or bool(lab) or bool(state["positions"]) or getattr(C, "COPY_BOT", False) or \
+            (lst is not None and (lst.get("control") == "on" or lst.get("positions")))
         try:
+            if not need_scan:   # καμία meme στρατηγική στο κοινό bot: δεν χρειάζεται σκανάρισμα
+                raise StopIteration
             pools = one_cycle(state)
             TIMES["scan"] = time.time() - t0
             n = len(pools)
@@ -391,6 +396,8 @@ def main():
                   f"open={len(state['positions'])} "
                   f"closed={len(state['closed'])} equity=${engine.equity(state):.2f}", flush=True)
             health("momentum")
+        except StopIteration:
+            pass
         except Exception as e:  # ένας κακός γύρος δεν σταματά το bot
             health("momentum", e)
             engine.log(state, engine.now_utc(), f"Σφάλμα γύρου: {e!r}")
