@@ -708,3 +708,30 @@ def test_calls_parse_warmup_entry_and_tp():
     pages["ch"] = page(old + [(3, "x", t), (4, f"again {mint}", t + timedelta(minutes=6))])
     calls.cycle(st, t + timedelta(minutes=7), fetch_fn=ff, price_fn=pf, channels=["ch"])
     assert not st["positions"]
+
+
+def test_calls_discovery_promotes_active_and_retires_dead():
+    from datetime import timedelta
+    from bot import calls, majors
+    t = engine.now_utc()
+    mint = "Bz5N9wrcxDw2YTf8tQkG8PJzdbUW89ZNWLWbdqA2pump"
+
+    def page(msgs, extra=""):
+        return extra + "".join(f'<div data-post="x/{i}"><div>{txt}</div><time datetime="{w.isoformat()}">x</time></div>'
+                               for i, txt, w in msgs)
+    pages = {
+        "seed": page([(1, "join t.me/hotcalls and @deadcalls, @tradebot", t - timedelta(days=20))]),
+        "hotcalls": page([(i, f"ape {mint}", t - timedelta(hours=i)) for i in range(1, 5)]),
+        "deadcalls": page([(1, f"ape {mint}", t - timedelta(days=40))]),
+    }
+    old = calls.CHANNELS
+    calls.CHANNELS = ["seed"]
+    try:
+        st = majors.new_state(t, calls.EPOCH, "calls")
+        calls.cycle(st, t, price_fn=lambda ms: {}, page_fn=lambda n: pages.get(n))
+        assert "tradebot" not in st["candidates"] and "hotcalls" in st["candidates"]
+        assert st["active"] == ["hotcalls"]                      # ενεργό → μπαίνει
+        assert "seed" in st["retired"]                           # 20 μέρες χωρίς ποστ → αποσύρεται
+        assert calls.channel_list(st) == ["hotcalls"]
+    finally:
+        calls.CHANNELS = old
