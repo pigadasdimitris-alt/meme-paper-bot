@@ -676,3 +676,35 @@ def test_attention_warmup_then_fresh_entries_and_24h_exit():
     c = st["closed"][-1]
     assert c["coin"] == "NEW" and c["reason"] == "24 ώρες" and c["pnl"] > 0
     assert abs(c["excess_pct"] - (10.0 - 2.0)) < 0.01           # coin +10%, BTC +2% → excess +8%
+
+
+def test_calls_parse_warmup_entry_and_tp():
+    from datetime import timedelta
+    from bot import calls, majors
+    t = engine.now_utc()
+    mint = "Bz5N9wrcxDw2YTf8tQkG8PJzdbUW89ZNWLWbdqA2pump"
+
+    def page(msgs):
+        return "".join(f'<div class="tgme_widget_message" data-post="ch/{i}"><div class="tgme_widget_message_text">{txt}</div>'
+                       f'<time datetime="{w.isoformat()}" class="time">x</time></div>' for i, txt, w in msgs)
+
+    old = [(1, "gm", t - timedelta(hours=5)), (2, f"call {mint}", t - timedelta(hours=4))]
+    assert calls.parse_channel(page(old))[1][3] == [mint]
+    st = majors.new_state(t, calls.EPOCH, "calls")
+    pages = {"ch": page(old)}
+    price = {"v": 1.0}
+    pf = lambda ms: {m: (price["v"], 20000.0, "SHU") for m in ms}
+    ff = lambda n: calls.parse_channel(pages[n])
+    calls.cycle(st, t, fetch_fn=ff, price_fn=pf, channels=["ch"])
+    assert not st["positions"]                                   # warmup: δεν αγοράζει παλιά calls
+    pages["ch"] = page(old + [(3, f"new {mint} &amp; go", t + timedelta(minutes=2))])
+    calls.cycle(st, t + timedelta(minutes=3), fetch_fn=ff, price_fn=pf, channels=["ch"])
+    assert len(st["positions"]) == 1 and st["channels"]["ch"]["calls"] == 1
+    price["v"] = 2.2
+    calls.cycle(st, t + timedelta(minutes=4), fetch_fn=ff, price_fn=pf, channels=["ch"])
+    assert not st["positions"] and st["closed"][0]["reason"].startswith("TP")
+    assert st["closed"][0]["pnl"] > 10 and st["channels"]["ch"]["pnl"] > 10
+    # το ίδιο token ξανά μέσα σε 24 ώρες → όχι νέα αγορά
+    pages["ch"] = page(old + [(3, "x", t), (4, f"again {mint}", t + timedelta(minutes=6))])
+    calls.cycle(st, t + timedelta(minutes=7), fetch_fn=ff, price_fn=pf, channels=["ch"])
+    assert not st["positions"]
