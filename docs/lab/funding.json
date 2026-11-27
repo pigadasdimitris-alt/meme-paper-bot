@@ -11,18 +11,18 @@
    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
    "qty": 1.0,
    "cost": 33.333333333333336,
-   "value": 33.315413,
+   "value": 33.315536,
    "notional": 16.666666666666668,
    "entry_market": 58936.68,
    "entry_time": "2026-11-25T10:21:28Z",
-   "last_price": 59575.78,
-   "last_pct": -0.054,
+   "last_price": 59768.46,
+   "last_pct": -0.053,
    "peak_pct": 0.0,
    "stop_pct": 0.0,
-   "funding_earned": 0.006246,
+   "funding_earned": 0.006369,
    "pool": "BTC",
    "mint": "BTC",
-   "last_rate": 1.25e-05
+   "last_rate": 7.3561e-06
   },
   {
    "id": 2,
@@ -31,18 +31,18 @@
    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
    "qty": 1.0,
    "cost": 33.333333333333336,
-   "value": 33.315658,
+   "value": 33.315866,
    "notional": 16.666666666666668,
    "entry_market": 1645.62,
    "entry_time": "2026-11-25T10:21:28Z",
-   "last_price": 1661.38,
-   "last_pct": -0.053,
+   "last_price": 1667.81,
+   "last_pct": -0.052,
    "peak_pct": 0.0,
    "stop_pct": 0.0,
-   "funding_earned": 0.006491,
+   "funding_earned": 0.006699,
    "pool": "ETH",
    "mint": "ETH",
-   "last_rate": 9.0789e-06
+   "last_rate": 1.25e-05
   },
   {
    "id": 3,
@@ -51,18 +51,18 @@
    "image": "https://assets.coingecko.com/coins/images/4128/large/solana.png",
    "qty": 1.0,
    "cost": 33.333333333333336,
-   "value": 33.313538,
+   "value": 33.313746,
    "notional": 16.666666666666668,
    "entry_market": 67.68,
    "entry_time": "2026-11-25T10:21:28Z",
-   "last_price": 71.43,
+   "last_price": 71.91,
    "last_pct": -0.059,
    "peak_pct": 0.0,
    "stop_pct": 0.0,
-   "funding_earned": 0.004371,
+   "funding_earned": 0.004579,
    "pool": "SOL",
    "mint": "SOL",
-   "last_rate": -3.0758e-06
+   "last_rate": 1.25e-05
   }
  ],
  "closed": [],
@@ -73,7 +73,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 1328,
+  "scans": 1330,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -5389,6 +5389,14 @@
   [
    "2026-11-27T17:57:56Z",
    99.9446
+  ],
+  [
+   "2026-11-27T18:01:14Z",
+   99.9451
+  ],
+  [
+   "2026-11-27T18:04:23Z",
+   99.9451
   ]
  ],
  "log": [
@@ -5615,11 +5623,15 @@
   {
    "t": "2026-11-27T17:00:58Z",
    "msg": "Funding: BTC +0.0013%/ώρα, ETH +0.0009%/ώρα, SOL -0.0003%/ώρα → +0.0003$"
+  },
+  {
+   "t": "2026-11-27T18:01:14Z",
+   "msg": "Funding: BTC +0.0007%/ώρα, ETH +0.0013%/ώρα, SOL +0.0013%/ώρα → +0.0005$"
   }
  ],
- "last_run": "2026-11-27T17:57:56Z",
+ "last_run": "2026-11-27T18:04:23Z",
  "next_id": 4,
  "epoch": "2026-11-25-funding",
  "mode": "funding",
- "funding_hour": 498833
+ "funding_hour": 498834
 }
