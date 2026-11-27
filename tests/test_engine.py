@@ -735,3 +735,56 @@ def test_calls_discovery_promotes_active_and_retires_dead():
         assert calls.channel_list(st) == ["hotcalls"]
     finally:
         calls.CHANNELS = old
+
+
+def test_pump_shield_blocks_flagged_and_takes_clean():
+    from datetime import timedelta
+    from bot import majors, pump
+    t = engine.now_utc()
+    clean, dirty = "A" * 32 + "pump", "B" * 32 + "pump"
+    st = majors.new_state(t, pump.EPOCH, "pump")
+    prices = {clean: 1.0, dirty: 1.0}
+    pf = lambda ms: {m: (prices[m], 50000.0, "X") for m in ms if m in prices}
+
+    def rf(m, now):
+        fl = [] if m == clean else ["φούσκωσε ήδη πριν το call", "λίγα πορτοφόλια μάζεψαν πριν το call"]
+        return {"pool": "P" + m[0], "price": 1.0, "liq": 50000, "name": m[0], "flags": fl, "insiders": {"w1": 100.0}}
+    feed = [("ch", 1, t, f"ape {clean}", [clean]), ("ch", 2, t, f"ape {dirty}", [dirty])]
+    pump.cycle(st, t, feed=feed, price_fn=pf, risk_fn=rf, trades_fn=lambda p: [])
+    assert len(st["positions"]) == 1 and len(st["shadow"]) == 1 and not feed
+    # οι insiders πουλάνε → έξοδος dump
+    ts = int(t.timestamp()) + 60
+    pump.cycle(st, t + timedelta(minutes=3), feed=[], price_fn=pf, risk_fn=rf,
+               trades_fn=lambda p: [(ts, "w1", "sell", 80.0)])
+    assert not st["positions"] and st["closed"][0]["reason"].startswith("dump")
+    prices[dirty] = 0.5                                       # το σκιώδες πέφτει −50% → SL
+    pump.cycle(st, t + timedelta(minutes=4), feed=[], price_fn=pf, risk_fn=rf, trades_fn=lambda p: [])
+    assert st["shield"]["blocked"] == 1 and st["shield"]["blocked_pnl"] < 0 and abs(st["balance"] - 100 - st["closed"][0]["pnl"]) < 1e-3
+
+
+def test_pump_schedule_parse_and_fast_window():
+    from datetime import timedelta, timezone
+    from bot import majors, pump
+    w = engine.now_utc().replace(hour=13, minute=0, second=0, microsecond=0)
+    assert pump.parse_schedule("At exactly 16:00 PM GMT, we will send the Contract Address here", w) == w.replace(hour=16)
+    assert pump.parse_schedule("gm at 16:00", w) is None
+    st = majors.new_state(w, pump.EPOCH, "pump")
+    at = w.replace(hour=16)
+    clock = {"t": w.timestamp()}
+    mint = "C" * 32 + "pump"
+    def fetch(ch):
+        return [(5, at, "CA: " + mint, [mint])] if clock["t"] >= at.timestamp() + 6 else [(4, w, "soon", [])]
+    def price(ms):
+        return {m: (1.0 + max(0, clock["t"] - at.timestamp()) / 100, 9000.0, "PMP") for m in ms}
+    def sleep(s):
+        clock["t"] += s
+    feed = [("dexpumps", 4, w, "At exactly 16:00 PM GMT, we will send the Contract Address here", [])]
+    pump.cycle(st, w, feed=feed, price_fn=price, risk_fn=lambda m, n: None, trades_fn=lambda p: [],
+               fetch_fn=fetch, clock=lambda: clock["t"], sleep=sleep)
+    assert st["events"] and not st["events"][0].get("done")
+    clock["t"] = at.timestamp() - 60
+    pump.cycle(st, at - timedelta(seconds=60), feed=[], price_fn=price, risk_fn=lambda m, n: None,
+               trades_fn=lambda p: [], fetch_fn=fetch, clock=lambda: clock["t"], sleep=sleep)
+    assert st["events"][0]["done"] and st["closed"], st["log"][-3:]
+    tr = st["closed"][0]
+    assert tr["kind"] == "scheduled" and 6 <= tr["sec_after"] <= 12 and tr["reason"].startswith("TP")

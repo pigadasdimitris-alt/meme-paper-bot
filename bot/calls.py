@@ -30,6 +30,7 @@ MAX_ACTIVE, RETIRE_DAYS, PROMOTE_DAYS, PROMOTE_CALLS = 25, 14, 3, 3
 HANDLE = re.compile(r"(?:t\.me/|telegram\.me/|@)([A-Za-z][A-Za-z0-9_]{4,31})")
 SKIP_H = ("addlist", "joinchat", "share", "iv", "proxy", "socks", "s", "c")
 EPOCH = "2026-11-28-calls"
+FEED = []   # κάθε νέο μήνυμα των καναλιών (για το bot Pump & Dump): (κανάλι, id, ώρα, κείμενο, διευθύνσεις)
 DS_TOK = "https://api.dexscreener.com/latest/dex/tokens/"
 UA = {"User-Agent": "meme-paper-bot/1.0 (paper research)", "Accept": "text/html,application/json"}
 B58 = re.compile(r"(?<![1-9A-HJ-NP-Za-km-z])[1-9A-HJ-NP-Za-km-z]{32,44}(?![1-9A-HJ-NP-Za-km-z])")
@@ -64,7 +65,7 @@ def parse_channel(page):
                 pass
         text = _html.unescape(re.sub(r"<[^>]+>", " ", chunk))
         addrs = list(dict.fromkeys(B58.findall(text)))
-        out.append((mid, when, re.sub(r"\s+", " ", text).strip()[:300], addrs))
+        out.append((mid, when, re.sub(r"\s+", " ", text).strip()[:600], addrs))
     return out
 
 
@@ -224,6 +225,7 @@ def cycle(st, now=None, fetch_fn=None, price_fn=ds_tokens, channels=None, page_f
                 if first_time or mid <= c.get("last_id", 0):
                     continue
                 c["posts"] = c.get("posts", 0) + 1
+                FEED.append((name, mid, when, text, addrs))
                 if addrs:
                     c["calls"] = c.get("calls", 0) + 1
                     age = (now - when).total_seconds() / 60 if when else 0
