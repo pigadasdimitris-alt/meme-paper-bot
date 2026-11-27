@@ -134,9 +134,9 @@
 <body>
 <div class="wrap">
   <div class="hud">
-    <div class="brand">Εργαστήριο<small>Κέντρο ελέγχου · paper</small></div>
+    <div class="brand">Εργαστήριο<small>Κέντρο ελέγχου</small></div>
     <div class="hud-r">
-      <span class="chip" id="live">Live off</span>
+      <span class="chip danger" id="live" style="display:none">LIVE</span>
       <button class="btn" id="refresh" aria-label="Ανανέωση"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
     </div>
   </div>
@@ -258,7 +258,7 @@ async function load(){
   drawScene(); drawRank(); drawFeed();
   try{ const r=await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/control.json?t=${Date.now()}`,{cache:"no-store"});
     if(r.ok){ const on=String((await r.json()).live||"off").toLowerCase()==="on";
-      $("live").textContent=on?"LIVE ON":"Live off"; $("live").className="chip"+(on?" danger":""); } }catch(e){}
+      $("live").style.display=on?"":"none"; } }catch(e){}
 }
 
 function drawScene(){
@@ -285,7 +285,7 @@ function drawScene(){
   SAY=[];
   if(best) SAY.push(`Boss, πρώτη θέση: ${info(best.key).nick} με ${sgn(100*(best.equity/best.start-1))}%.`);
   if(worst&&worst!==best) SAY.push(`Boss, υπό παρακολούθηση: ${info(worst.key).nick} στο ${sgn(100*(worst.equity/worst.start-1))}%.`);
-  SAY.push(open?`Boss, ${open} θέσεις ανοιχτές τώρα. Όλα paper, το live είναι κλειστό.`:"Boss, καμία ανοιχτή θέση. Τα bots περιμένουν σήματα.");
+  SAY.push(open?`Boss, ${open} θέσεις ανοιχτές τώρα.`:"Boss, καμία ανοιχτή θέση. Τα bots περιμένουν σήματα.");
   const reg=(ST.compress||{}).btc_regime; if(reg) SAY.push(`Boss, η αγορά του BTC είναι ${reg}: η Compression ψάχνει μόνο ${reg==="ανοδικό"?"long":"short"}.`);
   const ev=allEvents()[0]; if(ev) SAY.push(`Boss, νέο από ${ev.who}: ${ev.txt}`);
   SAY.push("Boss, ετυμηγορία την Τρίτη 1/12: όποια δεν ξεπερνά το funding, φεύγει.");
