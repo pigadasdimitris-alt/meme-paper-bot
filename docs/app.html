@@ -4,122 +4,150 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Εργαστήριο">
-<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b0d1a">
 <link rel="apple-touch-icon" href="icon-180.png">
-<title>Εργαστήριο</title>
+<title>Εργαστήριο · Κέντρο ελέγχου</title>
 <style>
   :root{
-    --bg:#f2f2f7; --card:#ffffff; --text:#000000; --sub:#6c6c70; --line:rgba(60,60,67,.14);
-    --blue:#007aff; --green:#248a3d; --red:#d70015; --amber:#b25000; --fill:rgba(118,118,128,.12);
-    --chip-g:rgba(52,199,89,.14); --chip-r:rgba(255,59,48,.12);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#000000; --card:#1c1c1e; --text:#ffffff; --sub:#98989f; --line:rgba(84,84,88,.6);
-      --blue:#0a84ff; --green:#30d158; --red:#ff453a; --amber:#ff9f0a; --fill:rgba(118,118,128,.24);
-      --chip-g:rgba(48,209,88,.18); --chip-r:rgba(255,69,58,.18); }
+    --bg:#0b0d1a; --bg2:#12152a; --panel:#171b34; --line:#2a3060; --text:#e8ecff; --sub:#8a92c4;
+    --g:#3ef08a; --r:#ff4d6d; --y:#ffd23f; --c:#4dd8ff; --p:#b48cff;
+    --px:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;background:var(--bg);color:var(--text)}
-  body{font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
-    -webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) 0 calc(28px + env(safe-area-inset-bottom))}
-  .wrap{max-width:560px;margin:0 auto;padding:0 16px}
-  .top{display:flex;align-items:center;justify-content:space-between;height:44px}
-  .back{display:none;align-items:center;gap:2px;color:var(--blue);font-size:17px;background:none;border:0;padding:0;cursor:pointer}
-  .back svg{width:22px;height:22px}
-  .icon-btn{background:none;border:0;color:var(--blue);padding:8px;margin-right:-8px;cursor:pointer}
-  .icon-btn svg{width:22px;height:22px;display:block}
-  .spin svg{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-  h1{font-size:34px;line-height:41px;font-weight:700;letter-spacing:.37px;margin:2px 0 4px}
-  .lead{color:var(--sub);font-size:15px;margin:0 0 18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
-  .dot.warn{background:var(--amber)}.dot.bad{background:var(--red)}
-  .pill{font-size:13px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--fill);color:var(--sub)}
-  .sec{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:-.08px;margin:26px 16px 7px}
-  .card{background:var(--card);border-radius:12px;overflow:hidden}
-  .foot{font-size:13px;color:var(--sub);margin:7px 16px 0;line-height:1.4}
-  .row{display:flex;align-items:center;gap:12px;padding:11px 16px;min-height:60px;position:relative;cursor:pointer}
-  .row+.row::before{content:"";position:absolute;top:0;right:0;left:60px;border-top:.5px solid var(--line)}
-  .row.flat{cursor:default;min-height:44px}
-  .row.flat+.row.flat::before{left:16px}
-  .ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex:none;color:#fff}
-  .ic svg{width:19px;height:19px}
-  .mid{flex:1;min-width:0}
-  .t{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .s{font-size:13px;color:var(--sub);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .right{text-align:right;flex:none}
-  .v{font-size:17px;font-variant-numeric:tabular-nums}
-  .chip{display:inline-block;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;padding:1px 7px;border-radius:6px;margin-top:2px}
-  .chip.g{background:var(--chip-g);color:var(--green)}.chip.r{background:var(--chip-r);color:var(--red)}.chip.n{background:var(--fill);color:var(--sub)}
-  .chev{color:var(--sub);opacity:.5;flex:none}.chev svg{width:8px;height:14px;display:block}
-  .g{color:var(--green)}.r{color:var(--red)}
-  .sum{display:grid;grid-template-columns:1fr 1fr;gap:0}
-  .sum>div{padding:14px 16px;min-width:0}.sum>div+div{border-left:.5px solid var(--line)}
-  .k{font-size:13px;color:var(--sub)}.big{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.3px}
-  .hero{padding:16px}
-  .hero .big{font-size:40px}
-  .chart{display:block;width:100%;height:150px;margin-top:10px}
-  .desc{padding:14px 16px;font-size:15px;line-height:1.45;color:var(--text)}
-  .empty{padding:14px 16px;color:var(--sub);font-size:15px}
-  .lesson{padding:12px 16px;font-size:15px;line-height:1.4;position:relative}
-  .lesson+.lesson::before{content:"";position:absolute;top:0;right:0;left:16px;border-top:.5px solid var(--line)}
-  .lesson b{font-weight:600}
-  #detail{display:none}
-  .err{display:none;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--chip-r);color:var(--red);font-size:15px}
+  body{font:15px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;-webkit-font-smoothing:antialiased;
+    padding:env(safe-area-inset-top) 0 calc(30px + env(safe-area-inset-bottom));
+    background:radial-gradient(ellipse at 50% 0%,#1d2250 0%,var(--bg) 60%) fixed}
+  .wrap{max-width:620px;margin:0 auto;padding:0 12px}
+  .hud{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 6px}
+  .brand{font:800 20px/1 var(--px);letter-spacing:2px;text-transform:uppercase;
+    background:linear-gradient(90deg,var(--c),var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .brand small{display:block;font:600 10px/1.6 var(--px);letter-spacing:3px;color:var(--sub);-webkit-text-fill-color:var(--sub)}
+  .hud-r{display:flex;gap:6px;align-items:center}
+  .chip{font:700 10px/1 var(--px);letter-spacing:1px;padding:6px 8px;border-radius:6px;border:1px solid var(--line);color:var(--sub);background:var(--bg2);text-transform:uppercase}
+  .chip.danger{color:var(--r);border-color:#7a2236}
+  .btn{background:var(--bg2);border:1px solid var(--line);border-radius:8px;color:var(--c);padding:6px;cursor:pointer}
+  .btn svg{width:18px;height:18px;display:block}.spin svg{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+  .status{display:flex;align-items:center;gap:8px;font:600 11px/1 var(--px);color:var(--sub);letter-spacing:.5px;margin:2px 2px 10px}
+  .led{width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:pulse 1.6s infinite;flex:none}
+  .led.warn{background:var(--y);box-shadow:0 0 8px var(--y)}.led.bad{background:var(--r);box-shadow:0 0 8px var(--r);animation:none}
+  @keyframes pulse{50%{opacity:.35}}
+  .scene{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);padding:12px 8px 14px;
+    background:
+      repeating-linear-gradient(0deg,rgba(77,216,255,.05) 0 1px,transparent 1px 24px),
+      repeating-linear-gradient(90deg,rgba(77,216,255,.05) 0 1px,transparent 1px 24px),
+      linear-gradient(180deg,#151a3a,#0d1024)}
+  .scene::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+  #cables{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+  #cables path{fill:none;stroke-width:1.5;stroke-dasharray:3 7;animation:flow 1.2s linear infinite;opacity:.55}
+  @keyframes flow{to{stroke-dashoffset:-20}}
+  .grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 6px}
+  .desk{position:relative;text-align:center;cursor:pointer;padding-top:30px;min-width:0}
+  .desk:active{transform:scale(.97)}
+  .bubble{position:absolute;top:0;left:50%;transform:translateX(-50%);white-space:nowrap;font:800 12px/1 var(--px);
+    padding:5px 7px;border-radius:7px;background:var(--panel);border:1px solid var(--line);animation:bob 3s ease-in-out infinite}
+  .bubble::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-4px;border:4px solid transparent;border-top-color:var(--line);border-bottom:0}
+  .bubble.g{color:var(--g);border-color:#1f6b45}.bubble.r{color:var(--r);border-color:#7a2236}.bubble.n{color:var(--sub)}
+  @keyframes bob{50%{transform:translate(-50%,-3px)}}
+  .sprite{width:100%;max-width:120px;height:auto;display:block;margin:0 auto}
+  .plate{margin-top:2px;font:800 10px/1.2 var(--px);letter-spacing:.3px;text-transform:uppercase;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .plate i{font-style:normal;display:block;color:var(--sub);font-weight:600;letter-spacing:0;text-transform:none;font-size:10px;margin-top:1px}
+  .boss{grid-column:1/-1;display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:center;margin:4px 2px;
+    padding:10px;border-radius:14px;border:1px solid #3a3f86;background:linear-gradient(135deg,rgba(180,140,255,.16),rgba(77,216,255,.08));
+    box-shadow:0 0 30px rgba(180,140,255,.15) inset}
+  .boss .sprite{max-width:112px}
+  .boss .tag{font:800 9px/1 var(--px);letter-spacing:2px;color:var(--p);text-align:center;margin-top:4px}
+  .screens{display:grid;grid-template-columns:1fr 1fr;gap:6px;min-width:0}
+  .scr{background:#070914;border:1px solid #2b3170;border-radius:8px;padding:7px 8px;box-shadow:0 0 12px rgba(77,216,255,.12) inset;min-width:0}
+  .scr .k{font:700 9px/1 var(--px);letter-spacing:1px;color:var(--sub);text-transform:uppercase}
+  .scr .v{font:800 19px/1.25 var(--px);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .scr.wide{grid-column:1/-1}
+  .say{grid-column:1/-1;font:600 12px/1.35 var(--px);color:var(--y);min-height:50px;padding:7px 9px;border-radius:8px;
+    background:rgba(255,210,63,.07);border:1px dashed rgba(255,210,63,.35)}
+  .say::before{content:"BOSS › ";color:var(--p);font-weight:800}
+  .caret{display:inline-block;width:7px;height:12px;background:var(--y);vertical-align:-1px;margin-left:2px;animation:pulse 1s steps(1) infinite}
+  .sec{font:800 11px/1 var(--px);letter-spacing:2px;color:var(--c);text-transform:uppercase;margin:22px 4px 8px;display:flex;align-items:center;gap:8px}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+  .card{background:rgba(23,27,52,.85);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .row{display:flex;align-items:center;gap:10px;padding:10px 12px;position:relative;cursor:pointer}
+  .row+.row{border-top:1px solid rgba(42,48,96,.7)}
+  .sw{width:10px;height:28px;border-radius:3px;flex:none}
+  .mid{flex:1;min-width:0}.t{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .s{font-size:12px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .right{text-align:right;flex:none;font:700 14px/1.3 var(--px)}
+  .pc{font:800 11px/1 var(--px);padding:3px 6px;border-radius:5px;display:inline-block;margin-top:3px}
+  .pc.g{background:rgba(62,240,138,.12);color:var(--g)}.pc.r{background:rgba(255,77,109,.12);color:var(--r)}.pc.n{background:rgba(138,146,196,.12);color:var(--sub)}
+  .g{color:var(--g)}.r{color:var(--r)}
+  .feed .row{cursor:default;padding:8px 12px;font-size:13px;align-items:flex-start}
+  .feed .tm{font:600 11px/1.6 var(--px);color:var(--sub);flex:none;width:40px}
+  .dot{width:8px;height:8px;border-radius:2px;flex:none;margin-top:5px}
+  .empty{padding:14px;color:var(--sub);font-size:14px}
+  .lesson{padding:11px 13px;font-size:14px;line-height:1.45}.lesson+.lesson{border-top:1px solid rgba(42,48,96,.7)}.lesson b{color:var(--c)}
+  .foot{font-size:12px;color:var(--sub);margin:8px 6px 0}
+  #sheet{position:fixed;inset:0;z-index:20;display:none;background:rgba(5,6,14,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  #sheet.on{display:block}
+  .pane{position:absolute;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:linear-gradient(180deg,#191e3d,#10132a);
+    border-top:1px solid #3a3f86;border-radius:20px 20px 0 0;padding:10px 14px calc(24px + env(safe-area-inset-bottom));animation:up .22s ease-out;
+    max-width:620px;margin:0 auto}
+  @keyframes up{from{transform:translateY(30%);opacity:0}}
+  .grab{width:40px;height:5px;border-radius:3px;background:#3a3f86;margin:0 auto 10px}
+  .ph{display:flex;align-items:center;gap:12px}
+  .ph .sprite{width:64px;max-width:64px;margin:0}
+  .ph h2{margin:0;font:800 17px/1.2 var(--px)}
+  .close{margin-left:auto;background:none;border:0;color:var(--sub);padding:6px;cursor:pointer}.close svg{width:22px;height:22px}
+  .big{font:800 32px/1.1 var(--px);margin-top:10px}
+  .chart{display:block;width:100%;height:130px;margin:8px 0 4px}
+  .desc{font-size:14px;line-height:1.5;color:#c6cbf0}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+  .stats div{background:#0c0f22;border:1px solid var(--line);border-radius:8px;padding:7px;min-width:0}
+  .stats b{display:block;font:800 15px/1.2 var(--px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stats span{font:600 9px/1 var(--px);color:var(--sub);letter-spacing:1px;text-transform:uppercase}
+  .err{display:none;margin:6px 0;padding:9px 12px;border-radius:10px;background:rgba(255,77,109,.12);color:var(--r);font-size:13px}
+  .hand{animation:type .28s steps(1) infinite}.hand.b{animation-delay:.14s}
+  @keyframes type{50%{transform:translateY(-1px)}}
+  .idle .hand{animation:none}
+  .eye{animation:blink 4.5s infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+  .glow{animation:glow 1.8s ease-in-out infinite}@keyframes glow{50%{opacity:.45}}
+  .zz{font:800 4px var(--px);fill:#8a92c4;animation:zz 2.4s ease-in-out infinite}
+  @keyframes zz{0%{opacity:0;transform:translate(0,0)}40%{opacity:1}100%{opacity:0;transform:translate(2px,-3px)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top">
-    <button class="back" id="back" aria-label="Πίσω">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Εργαστήριο
-    </button>
-    <span></span>
-    <button class="icon-btn" id="refresh" aria-label="Ανανέωση">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
-    </button>
+  <div class="hud">
+    <div class="brand">Εργαστήριο<small>Κέντρο ελέγχου · paper</small></div>
+    <div class="hud-r">
+      <span class="chip" id="live">Live off</span>
+      <button class="btn" id="refresh" aria-label="Ανανέωση"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
+    </div>
   </div>
+  <div class="status"><span class="led" id="led"></span><span id="ago">ΣΥΝΔΕΣΗ…</span></div>
   <div class="err" id="err">Δεν φόρτωσαν τα δεδομένα. Δοκίμασε ξανά σε λίγο.</div>
 
-  <!-- ΑΡΧΙΚΗ -->
-  <div id="home">
-    <h1>Εργαστήριο</h1>
-    <p class="lead"><span class="dot" id="dot"></span><span id="ago">φόρτωση…</span><span class="pill">Paper</span><span class="pill" id="live">Live κλειστό</span></p>
-
-    <div class="card sum">
-      <div><div class="k">Σύνολο</div><div class="big" id="total">—</div><div class="k" id="totalpc">&nbsp;</div></div>
-      <div><div class="k">Καλύτερη</div><div class="big" id="best" style="font-size:22px;line-height:34px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">—</div><div class="k" id="bestpc">&nbsp;</div></div>
-    </div>
-
-    <div class="sec">Στρατηγικές</div>
-    <div class="card" id="list"></div>
-    <div class="foot">100$ εικονικά σε κάθε στρατηγική. Πάτα μία για λεπτομέρειες.</div>
-
-    <div class="sec">Τι μάθαμε ως τώρα</div>
-    <div class="card" id="lessons"><div class="empty">φόρτωση…</div></div>
-    <div class="foot">Επόμενη ετυμηγορία: Τρίτη 1/12. Μένει ό,τι ξεπερνά το funding.</div>
+  <div class="scene" id="scene">
+    <svg id="cables"></svg>
+    <div class="grid" id="grid"></div>
   </div>
 
-  <!-- ΛΕΠΤΟΜΕΡΕΙΕΣ -->
-  <div id="detail">
-    <h1 id="dTitle">—</h1>
-    <div class="card hero">
-      <div class="k">Κεφάλαιο</div>
-      <div class="big" id="dEq">—</div>
-      <div id="dPc" class="k">&nbsp;</div>
-      <svg class="chart" id="dChart" viewBox="0 0 320 150" preserveAspectRatio="none"></svg>
-    </div>
-    <div class="sec">Τι κάνει</div>
-    <div class="card"><div class="desc" id="dDesc"></div></div>
-    <div class="sec">Ανοιχτές θέσεις</div>
-    <div class="card" id="dOpen"></div>
-    <div class="sec">Τελευταία trades</div>
-    <div class="card" id="dClosed"></div>
-    <div class="foot" id="dStats"></div>
-  </div>
+  <div class="sec">Κατάταξη</div>
+  <div class="card" id="rank"></div>
+  <div class="foot">100$ εικονικά σε κάθε στρατηγική. Πάτα έναν χαρακτήρα ή μια γραμμή για λεπτομέρειες.</div>
+
+  <div class="sec">Ζωντανή δραστηριότητα</div>
+  <div class="card feed" id="feed"><div class="empty">φόρτωση…</div></div>
+
+  <div class="sec">Τι μάθαμε ως τώρα</div>
+  <div class="card" id="lessons"><div class="empty">φόρτωση…</div></div>
+  <div class="foot">Επόμενη ετυμηγορία: Τρίτη 1/12. Μένει ό,τι ξεπερνά το funding.</div>
 </div>
+
+<div id="sheet"><div class="pane" id="pane"></div></div>
 
 <script>
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
@@ -127,39 +155,65 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 const INFO={
-  trench:{file:"lab/trench.json", color:"#ff9500",
-    desc:"Coins που μόλις «αποφοίτησαν» από το pump.fun, με τα φίλτρα του βίντεο: λίγοι μεγάλοι κάτοχοι, όγκος πάνω από το market cap, 100+ κάτοχοι. Έξοδος στο +50%, στο −25% ή μετά από 1 ώρα. Κόστος 4% ανά πλευρά. Ελέγχει τις θέσεις κάθε 15 δευτερόλεπτα.",
-    icon:'<path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/>'},
-  orb:{file:"lab/orb.json", color:"#5856d6",
-    desc:"Nasdaq (QQQ). Στις 16:30 ώρα Ελλάδας κοιτάει το πρώτο κερί 5 λεπτών: αν ανέβηκε αγοράζει, αν έπεσε κάνει short. Stop στο άλλο άκρο του κεριού, στόχος 10 φορές το ρίσκο, αλλιώς κλείνει στις 22:55. Ρίσκο 1% ανά trade. Βασίζεται σε δημοσιευμένη έρευνα (Zarattini & Aziz).",
-    icon:'<path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l4-4 3 3 5-6"/>'},
-  compress:{file:"lab/compress.json", color:"#ff2d55",
-    desc:"Η αρχική έκδοση (baseline), μένει ανέγγιχτη για σύγκριση. Στον έλεγχο με σταθερές ρυθμίσεις: ~15% τον χρόνο με πτώση έως −50%. Σε 11 μεγάλα coins (BTC, ETH, SOL κ.ά.) περιμένει περίοδο ακραίας ησυχίας (στενές Bollinger), και μπαίνει όταν η τιμή σπάσει το εύρος των 20 κεριών 4 ωρών με δυνατό όγκο. Long μόνο σε ανοδική αγορά BTC, short μόνο σε καθοδική. Stop 1,5×ATR, trailing 3×ATR, έως 5 μέρες. Ρίσκο 1% ανά trade, έως 3 θέσεις. Λίγα trades: περίπου 2 την εβδομάδα.",
-    icon:'<path d="M4 12h4l2-5 4 10 2-5h4"/>'},
-  compress_vol2:{file:"lab/compress_vol2.json", color:"#af52de",
-    desc:"Παραλλαγή της Compression (Experiment B): ίδιοι κανόνες, αλλά μπαίνει μόνο όταν ο όγκος του breakout είναι πάνω από 2× τον μέσο (αντί 1,5×). Στο backtest 2022–2026: ~35% τον χρόνο, μέγιστη πτώση −26% (baseline: −50%).",
-    icon:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'},
-  compress_calm_t2:{file:"lab/compress_calm_t2.json", color:"#30b0c7",
-    desc:"Παραλλαγή της Compression: μπαίνει μόνο όταν η αγορά του BTC είναι ήρεμη (μεταβλητότητα κάτω από τη διάμεσο 6 μηνών) και βγαίνει πιο γρήγορα (trailing 2×ATR). Η πιο σταθερή στο backtest: θετική σε 4 από 5 χρόνια, πτώση έως −22%.",
-    icon:'<path d="M3 12c3-4 6-4 9 0s6 4 9 0"/>'},
-  compress_vol2_t2:{file:"lab/compress_vol2_t2.json", color:"#5ac8fa",
-    desc:"Παραλλαγή της Compression: όγκος πάνω από 2× και πιο γρήγορη έξοδος (trailing 2×ATR). Η μικρότερη πτώση στο backtest (−14%), με ~26% τον χρόνο.",
-    icon:'<path d="M12 3v18M5 10l7-7 7 7"/>'},
-  attention:{file:"lab/attention.json", color:"#ffcc00",
-    desc:"Δοκιμάζει αν η προσοχή του κόσμου προηγείται της τιμής. Κάθε ώρα διαβάζει τα trending του CoinGecko (από τις αναζητήσεις χρηστών). Όταν ένα coin μπαίνει πρώτη φορά στα trending και υπάρχει στο Hyperliquid, αγοράζει 10$ και το κρατά 24 ώρες. Μετράει και την κίνηση του BTC, για να φαίνεται αν κέρδισε η προσοχή ή απλώς ανέβηκε όλη η αγορά.",
-    icon:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'},
-  funding:{file:"lab/funding.json", color:"#34c759",
-    desc:"BTC, ETH, SOL: μισό ποσό αγορά και μισό short στα futures, άρα η τιμή δεν επηρεάζει. Εισπράττει το ωριαίο funding. Στο backtest 6 μηνών: περίπου 3,3% τον χρόνο, κάθε μήνας θετικός. Είναι η βάση σύγκρισης.",
-    icon:'<circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10.5c0-1 1-1.6 2.5-1.6s2.5.7 2.5 1.6-1 1.4-2.5 1.5-2.5.6-2.5 1.6 1 1.6 2.5 1.6 2.5-.6 2.5-1.6"/>'},
-  trend:{file:"lab/trend.json", color:"#007aff",
-    desc:"BTC, ETH, SOL: κρατάει ένα coin μόνο όταν ο μέσος όρος 50 ωρών είναι πάνω από τον μέσο 200 ωρών (ανοδική τάση). Αλλιώς μένει σε μετρητά. Λίγες κινήσεις, κρίνεται σε εβδομάδες.",
-    icon:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>'},
-  copy:{file:"copy.json", color:"#8e8e93", desc:"Αντιγραφή έξυπνων πορτοφολιών.", icon:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>'},
+  trench:{file:"lab/trench.json",nick:"Trench",col:"#ff9f43",hair:"#5a2d0c",skin:"#f1c27d",
+    desc:"Coins που μόλις «αποφοίτησαν» από το pump.fun, με τα φίλτρα του βίντεο: λίγοι μεγάλοι κάτοχοι, όγκος πάνω από το market cap, 100+ κάτοχοι. Έξοδος +50%, −25% ή 1 ώρα. Κόστος 4% ανά πλευρά. Ελέγχει θέσεις κάθε 15\"."},
+  orb:{file:"lab/orb.json",nick:"ORB Nasdaq",col:"#7c6cff",hair:"#1b1b2f",skin:"#e0ac69",
+    desc:"Nasdaq (QQQ). Στις 16:30 κοιτάει το πρώτο κερί 5 λεπτών: αν ανέβηκε αγοράζει, αν έπεσε κάνει short. Stop στο άλλο άκρο, στόχος 10× το ρίσκο, αλλιώς κλείνει στις 22:55. Έρευνα Zarattini & Aziz."},
+  compress:{file:"lab/compress.json",nick:"Compression",col:"#ff4d8d",hair:"#2b2b2b",skin:"#c68642",
+    desc:"Volatility Compression (baseline, ανέγγιχτο). Περιμένει ακραία ησυχία (στενές Bollinger) σε 11 μεγάλα coins και μπαίνει στο σπάσιμο του εύρους με δυνατό όγκο. Long μόνο σε ανοδικό BTC, short σε καθοδικό. Στον έλεγχο: ~15%/χρόνο, πτώση έως −50%."},
+  compress_vol2:{file:"lab/compress_vol2.json",nick:"Comp · Όγκος 2×",col:"#c06cff",hair:"#4a2511",skin:"#f1c27d",
+    desc:"Compression με αυστηρότερο όγκο (2× αντί 1,5×). Backtest 2022–2026: ~35%/χρόνο, πτώση έως −26%."},
+  compress_calm_t2:{file:"lab/compress_calm_t2.json",nick:"Comp · Ήρεμη+T2",col:"#2fd0e0",hair:"#e6c15a",skin:"#ffdbac",
+    desc:"Compression μόνο όταν η αγορά του BTC είναι ήρεμη, με πιο γρήγορη έξοδο (trailing 2×ATR). Η πιο σταθερή: θετική 4/5 χρόνια, πτώση έως −22%."},
+  compress_vol2_t2:{file:"lab/compress_vol2_t2.json",nick:"Comp · Όγκος+T2",col:"#5ac8fa",hair:"#6b3e26",skin:"#e0ac69",
+    desc:"Compression με όγκο 2× και trailing 2×ATR. Η μικρότερη πτώση στο backtest (−14%), ~26%/χρόνο."},
+  attention:{file:"lab/attention.json",nick:"Attention",col:"#ffd23f",hair:"#111",skin:"#f1c27d",
+    desc:"Δοκιμάζει αν η προσοχή του κόσμου προηγείται της τιμής. Κάθε ώρα διαβάζει τα trending του CoinGecko· όταν ένα coin μπαίνει πρώτη φορά και υπάρχει στο Hyperliquid, αγοράζει 10$ για 24 ώρες. Μετράει και το BTC για σύγκριση."},
+  funding:{file:"lab/funding.json",nick:"Funding",col:"#3ef08a",hair:"#777",skin:"#ffdbac",
+    desc:"BTC, ETH, SOL: μισό αγορά, μισό short, άρα η τιμή δεν τον επηρεάζει. Εισπράττει το ωριαίο funding. Backtest 6 μηνών ~3,3%/χρόνο, κάθε μήνας θετικός. Ο πήχης για όλους."},
+  trend:{file:"lab/trend.json",nick:"Trend",col:"#4d9bff",hair:"#c9a227",skin:"#e0ac69",
+    desc:"BTC, ETH, SOL: κρατάει μόνο όταν ο μέσος 50 ωρών είναι πάνω από τον μέσο 200 ωρών. Αλλιώς μετρητά."},
+  copy:{file:"copy.json",nick:"Copy",col:"#8a92c4",hair:"#333",skin:"#f1c27d",desc:"Αντιγραφή πορτοφολιών (σταματημένο)."},
 };
-const DEF={color:"#8e8e93", desc:"", icon:'<circle cx="12" cy="12" r="7"/>'};
-const info=k=>INFO[k]||{...DEF,file:`lab/${k}.json`};
-const ico=(k)=>`<div class="ic" style="background:${info(k).color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${info(k).icon}</svg></div>`;
-const CHEV='<span class="chev"><svg viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg></span>';
+const info=k=>INFO[k]||{file:`lab/${k}.json`,nick:k,col:"#8a92c4",hair:"#333",skin:"#f1c27d",desc:""};
+
+/* pixel χαρακτήρας σε SVG (16×12 σώμα + γραφείο) */
+const MAP=[
+"....hhhhhhhh....",
+"...hhhhhhhhhh...",
+"...hssssssssh...",
+"...sesssssses...",
+"...ssssssssss...",
+"....ssssssss....",
+".....ssssss.....",
+"......ssss......",
+"...cccccccccc...",
+"..cccccccccccc..",
+".cccccccccccccc.",
+".cccccccccccccc."];
+function sprite(k,{mood=0,busy=false,boss=false,lid="#3a3f6b"}={}){
+  const I=info(k), P={h:boss?"#c9c9d6":I.hair,s:boss?"#f1c27d":I.skin,c:boss?"#22264a":I.col,e:"#10121f"};
+  let r="";
+  MAP.forEach((row,y)=>[...row].forEach((ch,x)=>{
+    if(ch===".")return;
+    r+=`<rect${ch==="e"?' class="eye"':""} x="${x+2}" y="${y+2}" width="1" height="1" fill="${P[ch]}"/>`;
+  }));
+  const M="#7a3b2e";
+  r+= mood>0?`<rect x="7" y="7" width="1" height="1" fill="${M}"/><rect x="8" y="8" width="3" height="1" fill="${M}"/><rect x="11" y="7" width="1" height="1" fill="${M}"/>`
+     : mood<0?`<rect x="8" y="7" width="3" height="1" fill="${M}"/><rect x="7" y="8" width="1" height="1" fill="${M}"/><rect x="11" y="8" width="1" height="1" fill="${M}"/>`
+     :`<rect x="8" y="8" width="3" height="1" fill="${M}"/>`;
+  if(mood<0) r+=`<rect x="15" y="3" width="1" height="2" fill="#7fd3ff"/>`;
+  if(boss) r+=`<rect x="5" y="5" width="3" height="1.4" fill="#05060c"/><rect x="12" y="5" width="3" height="1.4" fill="#05060c"/><rect x="8" y="5" width="4" height="0.6" fill="#05060c"/>
+    <rect x="8" y="10" width="4" height="1" fill="#e8ecff"/><rect x="9" y="10" width="2" height="4" fill="#ff4d6d"/>`;
+  r+=`<rect x="0" y="14" width="20" height="5" fill="#2a2f5c"/><rect x="0" y="14" width="20" height="1" fill="#454c8a"/>
+      <rect x="1" y="19" width="2" height="3" fill="#1c2045"/><rect x="17" y="19" width="2" height="3" fill="#1c2045"/>
+      <rect x="6" y="10" width="8" height="5" fill="#c9cde8"/><rect x="6.5" y="10.5" width="7" height="4" fill="${lid}"${busy?' class="glow"':""}/>
+      <rect x="9.5" y="12" width="1" height="1" fill="#fff" opacity=".85"/>
+      <rect class="hand" x="4" y="13" width="2" height="1.4" fill="${P.s}"/><rect class="hand b" x="14" y="13" width="2" height="1.4" fill="${P.s}"/>
+      <rect x="16" y="11" width="2" height="3" fill="#e8ecff" opacity=".8"/><rect x="18" y="12" width="1" height="1" fill="#e8ecff" opacity=".8"/>`;
+  if(!busy) r+=`<text class="zz" x="15.5" y="3">z</text><text class="zz" x="17" y="1.6" style="animation-delay:1.2s">z</text>`;
+  return `<svg class="sprite${busy?"":" idle"}" viewBox="0 0 20 22" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
 
 async function fetchFile(name){
   try{ const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/${name}?ref=main`,{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"}); if(r.ok) return r.json(); }catch(e){}
@@ -168,102 +222,161 @@ async function fetchFile(name){
 }
 const usd=v=>(v<0?"−":"")+"$"+Math.abs(v).toFixed(2);
 const sgn=(v,d=1)=>(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(d);
-const chip=pc=>`<span class="chip ${pc>0.05?"g":pc<-0.05?"r":"n"}">${sgn(pc)}%</span>`;
+const cls=pc=>pc>0.05?"g":pc<-0.05?"r":"n";
 function ago(iso){ if(!iso) return "—"; const m=Math.round((Date.now()-new Date(iso))/60000);
-  if(m<1) return "μόλις τώρα"; if(m<60) return `πριν ${m}′`; const h=Math.floor(m/60); if(h<24) return `πριν ${h} ώρ.`; return `πριν ${Math.floor(h/24)} μέρ.`; }
-function when(iso){ const d=new Date(iso); return d.toLocaleDateString("el-GR",{day:"numeric",month:"numeric"})+" "+d.toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"}); }
+  if(m<1) return "μόλις τώρα"; if(m<60) return `πριν ${m}′`; const h=Math.floor(m/60); return h<24?`πριν ${h} ώρ.`:`πριν ${Math.floor(h/24)} μέρ.`; }
+const hm=iso=>new Date(iso).toLocaleTimeString("el-GR",{hour:"2-digit",minute:"2-digit"});
+const when=iso=>{const d=new Date(iso);return d.toLocaleDateString("el-GR",{day:"numeric",month:"numeric"})+" "+hm(iso);};
 
-let LAB=null, CUR=null, DET=null;
-const STATE_CACHE={};
+let ROWS=[], ST={}, SAY=[], sayI=0, sayTimer=null;
 
-async function loadHome(){
-  LAB=await fetchFile("lab.json");
-  // ο runner του trench γράφει δικό του αρχείο: φρέσκια τιμή από εκεί
-  const rows=LAB.rows.slice();
-  await Promise.all(rows.map(async r=>{ try{ const st=await fetchFile(info(r.key).file); STATE_CACHE[r.key]=st;
-    const h=st.equity_history||[]; if(h.length) r.equity=h[h.length-1][1]; r.last_run=st.last_run||r.last_run;
-    r.trades=(st.closed||[]).length; r.wins=(st.closed||[]).filter(t=>t.pnl>0).length; r.open=(st.positions||[]).length; }catch(e){} }));
+async function load(){
+  const lab=await fetchFile("lab.json");
+  const rows=lab.rows.slice();
+  await Promise.all(rows.map(async r=>{ try{ const st=await fetchFile(info(r.key).file); ST[r.key]=st;
+    const h=st.equity_history||[]; if(h.length) r.equity=h[h.length-1][1];
+    r.last_run=st.last_run||r.last_run; r.trades=(st.closed||[]).length; r.wins=(st.closed||[]).filter(t=>t.pnl>0).length;
+    r.open=(st.positions||[]).length; }catch(e){} }));
   rows.sort((a,b)=>b.equity-a.equity);
-  const tot=rows.reduce((s,r)=>s+r.equity,0), start=rows.reduce((s,r)=>s+r.start,0);
-  $("total").textContent=usd(tot); $("totalpc").innerHTML=`<span class="${tot>=start?"g":"r"}">${sgn(tot-start,2)}$ (${sgn(100*(tot/start-1))}%)</span> από ${usd(start)}`;
-  if(rows.length){ const b=rows[0]; $("best").textContent=b.label.replace(/ \(.*\)/,"").replace(/ BTC\/ETH\/SOL/,"").replace(/ arbitrage/,""); $("bestpc").innerHTML=`<span class="${b.equity>=b.start?"g":"r"}">${sgn(100*(b.equity/b.start-1))}%</span>`; }
-  const age=(Date.now()-new Date(LAB.updated))/60000;
-  $("dot").className="dot"+(age>30?" bad":age>12?" warn":"");
-  $("ago").textContent=(age>30?"Σταματημένο · ":"Τρέχει · ")+"ενημέρωση "+ago(LAB.updated);
-  $("list").innerHTML=rows.map(r=>{ const pc=100*(r.equity/r.start-1);
-    const stale=r.last_run && (Date.now()-new Date(r.last_run))/60000>30;
-    const sub=`${r.trades} trades${r.trades?` · ${r.wins} ${r.wins===1?"κερδισμένο":"κερδισμένα"}`:""}${r.open?` · ${r.open} ανοιχτά`:""}${stale?" · σταματημένο":""}`;
-    return `<div class="row" data-k="${esc(r.key)}">${ico(r.key)}<div class="mid"><div class="t">${esc(r.label)}</div><div class="s">${sub}</div></div>`+
-      `<div class="right"><div class="v">${usd(r.equity)}</div>${chip(pc)}</div>${CHEV}</div>`; }).join("") || `<div class="empty">Καμία στρατηγική</div>`;
-  document.querySelectorAll("#list .row").forEach(el=>el.onclick=()=>openDetail(el.dataset.k));
+  ROWS=rows;
+  const age=(Date.now()-new Date(lab.updated))/60000;
+  $("led").className="led"+(age>30?" bad":age>12?" warn":"");
+  $("ago").textContent=(age>30?"ΣΤΑΜΑΤΗΜΕΝΟ":"ONLINE")+" · ενημέρωση "+ago(lab.updated)+" · "+rows.length+" στρατηγικές";
+  drawScene(); drawRank(); drawFeed();
   try{ const r=await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/control.json?t=${Date.now()}`,{cache:"no-store"});
-    if(r.ok){ const on=String((await r.json()).live||"off").toLowerCase()==="on"; const el=$("live");
-      el.textContent=on?"LIVE ΑΝΟΙΧΤΟ":"Live κλειστό"; el.style.background=on?"var(--chip-r)":""; el.style.color=on?"var(--red)":""; } }catch(e){}
+    if(r.ok){ const on=String((await r.json()).live||"off").toLowerCase()==="on";
+      $("live").textContent=on?"LIVE ON":"Live off"; $("live").className="chip"+(on?" danger":""); } }catch(e){}
 }
 
+function drawScene(){
+  const tot=ROWS.reduce((s,r)=>s+r.equity,0), start=ROWS.reduce((s,r)=>s+r.start,0)||1;
+  const open=ROWS.reduce((s,r)=>s+(r.open||0),0), trades=ROWS.reduce((s,r)=>s+(r.trades||0),0);
+  const desk=r=>{ const pc=100*(r.equity/r.start-1), I=info(r.key);
+    const busy=(r.open||0)>0, stale=r.last_run&&(Date.now()-new Date(r.last_run))/60000>30;
+    const st=stale?"εκτός σύνδεσης":busy?`${r.open} ${r.open===1?"θέση":"θέσεις"} ανοιχτ${r.open===1?"ή":"ές"}`:"περιμένει σήμα";
+    return `<div class="desk" data-k="${esc(r.key)}"><div class="bubble ${cls(pc)}">${sgn(pc)}%</div>
+      ${sprite(r.key,{mood:pc>0.5?1:pc<-3?-1:0,busy,lid:busy?(pc>=0?"#1f9d5b":"#b3264a"):"#3a3f6b"})}
+      <div class="plate" style="color:${I.col}">${esc(I.nick)}<i>${esc(st)}</i></div></div>`; };
+  const bossPc=100*(tot/start-1);
+  const boss=`<div class="boss" id="boss"><div>${sprite("boss",{boss:true,busy:true,mood:bossPc>=0?1:-1,lid:"#4dd8ff"})}<div class="tag">HEAD OF LAB</div></div>
+    <div class="screens">
+      <div class="scr wide"><div class="k">Σύνολο εργαστηρίου</div><div class="v ${cls(bossPc)}">${usd(tot)} <span style="font-size:13px">${sgn(bossPc)}%</span></div></div>
+      <div class="scr"><div class="k">Ανοιχτές</div><div class="v">${open}</div></div>
+      <div class="scr"><div class="k">Trades</div><div class="v">${trades}</div></div>
+      <div class="say" id="say"></div>
+    </div></div>`;
+  const ds=ROWS.map(desk);
+  $("grid").innerHTML=ds.slice(0,3).join("")+boss+ds.slice(3).join("");
+  document.querySelectorAll(".desk").forEach(el=>el.onclick=()=>openDetail(el.dataset.k));
+  const best=ROWS[0], worst=ROWS[ROWS.length-1];
+  SAY=[];
+  if(best) SAY.push(`Πρώτη θέση: ${info(best.key).nick} με ${sgn(100*(best.equity/best.start-1))}%.`);
+  if(worst&&worst!==best) SAY.push(`Υπό παρακολούθηση: ${info(worst.key).nick} στο ${sgn(100*(worst.equity/worst.start-1))}%.`);
+  SAY.push(open?`${open} θέσεις ανοιχτές τώρα. Όλα paper, το live είναι κλειστό.`:"Καμία ανοιχτή θέση. Περιμένουμε σήματα. Η υπομονή είναι μέρος της στρατηγικής.");
+  const reg=(ST.compress||{}).btc_regime; if(reg) SAY.push(`Η αγορά του BTC είναι ${reg}: η Compression ψάχνει μόνο ${reg==="ανοδικό"?"long":"short"}.`);
+  const ev=allEvents()[0]; if(ev) SAY.push(`Τελευταίο: ${ev.who}, ${ev.txt}`);
+  SAY.push("Ετυμηγορία την Τρίτη 1/12: όποια δεν ξεπερνά το funding, φεύγει.");
+  speak();
+  requestAnimationFrame(drawCables);
+}
+function speak(){
+  clearInterval(sayTimer); const el=$("say"); if(!el||!SAY.length) return;
+  const show=()=>{ const msg=SAY[sayI++%SAY.length]; let n=0; clearInterval(el._t);
+    el._t=setInterval(()=>{ n+=2; el.innerHTML=esc(msg.slice(0,n))+'<span class="caret"></span>'; if(n>=msg.length) clearInterval(el._t); },30); };
+  show(); sayTimer=setInterval(show,5500);
+}
+function drawCables(){
+  const sc=$("scene"), b=$("boss"); if(!b) return;
+  const R=sc.getBoundingClientRect(), B=b.getBoundingClientRect();
+  const bx=B.left-R.left+B.width/2, by=B.top-R.top+B.height/2;
+  let p="";
+  document.querySelectorAll(".desk").forEach(d=>{ const D=d.getBoundingClientRect(), I=info(d.dataset.k);
+    const x=D.left-R.left+D.width/2, y=D.top-R.top+D.height*0.62, my=(y+by)/2;
+    p+=`<path d="M${x.toFixed(1)},${y.toFixed(1)} C${x.toFixed(1)},${my.toFixed(1)} ${bx.toFixed(1)},${my.toFixed(1)} ${bx.toFixed(1)},${by.toFixed(1)}" stroke="${I.col}"/>`; });
+  $("cables").setAttribute("viewBox",`0 0 ${R.width} ${R.height}`); $("cables").innerHTML=p;
+}
+addEventListener("resize",()=>requestAnimationFrame(drawCables));
+
+function drawRank(){
+  $("rank").innerHTML=ROWS.map((r,i)=>{ const pc=100*(r.equity/r.start-1), I=info(r.key);
+    return `<div class="row" data-k="${esc(r.key)}"><div class="sw" style="background:${I.col}"></div><div class="mid">
+      <div class="t">${i+1}. ${esc(I.nick)}</div>
+      <div class="s">${r.trades} trades${r.trades?` · ${r.wins} κερδ.`:""}${r.open?` · ${r.open} ανοιχτ.`:""}</div></div>
+      <div class="right">${usd(r.equity)}<br><span class="pc ${cls(pc)}">${sgn(pc)}%</span></div></div>`; }).join("")||`<div class="empty">Καμία στρατηγική</div>`;
+  document.querySelectorAll("#rank .row").forEach(el=>el.onclick=()=>openDetail(el.dataset.k));
+}
+function allEvents(){
+  const ev=[];
+  for(const [k,st] of Object.entries(ST)){ const I=info(k);
+    (st.log||[]).slice(-15).forEach(l=>{
+      let t, txt;
+      if(typeof l==="object"&&l){ t=l.t||l.time; txt=l.msg||l.text||""; }
+      else { const m=/^\[?([0-9T:\-+Z.]+)\]?\s*(.*)$/.exec(String(l)); t=m&&m[1]; txt=m?m[2]:String(l); }
+      if(/ΑΝΟΙΓΜΑ|ΚΛΕΙΣΙΜΟ|ΑΓΟΡΑ|ΠΩΛΗΣΗ/.test(txt||"")) ev.push({k,who:I.nick,col:I.col,t,txt}); }); }
+  return ev.filter(e=>e.t&&!isNaN(new Date(e.t))).sort((a,b)=>new Date(b.t)-new Date(a.t));
+}
+function drawFeed(){
+  const ev=allEvents().slice(0,14);
+  $("feed").innerHTML=ev.length?ev.map(e=>`<div class="row"><span class="tm">${hm(e.t)}</span><span class="dot" style="background:${e.col}"></span>
+    <div class="mid"><div class="t" style="font-size:13px;color:${e.col}">${esc(e.who)}</div><div class="s" style="white-space:normal">${esc(e.txt)}</div></div></div>`).join("")
+    :`<div class="empty">Καμία κίνηση ακόμα</div>`;
+}
 async function loadLessons(){
   const L=[];
-  try{ const bt=await fetchFile("backtest.json"); const res=bt.results||{};
-    const ks=["scalp","spike","trail","dip"].filter(k=>res[k]&&res[k].trades);
-    const avg=ks.map(k=>res[k].by_cost["1%"].avg_net_pct);
-    if(ks.length) L.push(`<b>Meme coins, γρήγορα trades:</b> σε ${bt.pools} coins και περίπου ${ks.reduce((s,k)=>s+res[k].trades,0).toLocaleString("el-GR")} trades backtest, όλες οι στρατηγικές βγήκαν αρνητικές (${Math.min(...avg).toFixed(1)}% έως ${Math.max(...avg).toFixed(1)}% ανά trade) και καμία καλύτερη από τυχαίες αγορές. Σταμάτησαν.`);
-  }catch(e){}
+  try{ const bt=await fetchFile("backtest.json"); const res=bt.results||{}; const ks=["scalp","spike","trail","dip"].filter(k=>res[k]&&res[k].trades);
+    if(ks.length){ const a=ks.map(k=>res[k].by_cost["1%"].avg_net_pct);
+      L.push(`<b>Meme coins:</b> σε ~${ks.reduce((s,k)=>s+res[k].trades,0).toLocaleString("el-GR")} trades backtest όλες αρνητικές (${Math.min(...a).toFixed(1)}% έως ${Math.max(...a).toFixed(1)}%/trade), καμία καλύτερη από τυχαίες αγορές.`); } }catch(e){}
+  L.push(`<b>Compression:</b> η μόνη crypto στρατηγική που πέρασε backtest 5 ετών. Το baseline ~15%/χρόνο με πτώση έως −50%. Οι παραλλαγές «Όγκος 2×» και «Ήρεμη+T2» είναι πιο σταθερές (πτώση −14% έως −26%).`);
   try{ const fb=await fetchFile("funding_bt.json"); const r=fb.results.now_btc_eth_sol;
-    L.push(`<b>Funding:</b> στο backtest ${Math.round(fb.days)} ημερών βγήκε ${r.apr_pct.toFixed(1).replace(".",",")}% τον χρόνο, σταθερά θετικό αλλά μικρό. Είναι ο πήχης για τις υπόλοιπες.`);
-  }catch(e){}
-  L.push(`<b>Τα κόστη μετράνε:</b> σε μικρά pools η ολίσθηση (2–5% ανά πλευρά) τρώει το κέρδος των γρήγορων trades.`);
+    L.push(`<b>Funding:</b> backtest ${Math.round(fb.days)} ημερών ${r.apr_pct.toFixed(1).replace(".",",")}%/χρόνο, σταθερό αλλά μικρό. Ο πήχης.`); }catch(e){}
+  L.push(`<b>Κόστη:</b> σε μικρά pools η ολίσθηση (2–5%/πλευρά) τρώει το κέρδος των γρήγορων trades. Στα μεγάλα coins είναι ~0,1%.`);
   $("lessons").innerHTML=L.map(x=>`<div class="lesson">${x}</div>`).join("");
 }
 
-function chart(hist, start){
-  const svg=$("dChart"); if(!hist||hist.length<2){ svg.innerHTML=""; return; }
-  const step=Math.max(1,Math.ceil(hist.length/240)); const pts=hist.filter((_,i)=>i%step===0||i===hist.length-1).map(h=>h[1]);
-  const lo=Math.min(start,...pts), hi=Math.max(start,...pts), pad=Math.max((hi-lo)*0.15, start*0.002);
-  const y=v=>142-(v-(lo-pad))/((hi+pad)-(lo-pad))*134, x=i=>i/(pts.length-1)*320;
-  const up=pts[pts.length-1]>=start, col=up?"var(--green)":"var(--red)";
+function chart(hist,start){
+  if(!hist||hist.length<2) return "";
+  const step=Math.max(1,Math.ceil(hist.length/240)), pts=hist.filter((_,i)=>i%step===0||i===hist.length-1).map(h=>h[1]);
+  const lo=Math.min(start,...pts), hi=Math.max(start,...pts), pad=Math.max((hi-lo)*.15,start*.002);
+  const y=v=>124-(v-(lo-pad))/((hi+pad)-(lo-pad))*118, x=i=>i/(pts.length-1)*320, col=pts[pts.length-1]>=start?"#3ef08a":"#ff4d6d";
   const d=pts.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
-  svg.innerHTML=`<defs><linearGradient id="gf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${up?"#34c759":"#ff3b30"}" stop-opacity=".22"/><stop offset="1" stop-color="${up?"#34c759":"#ff3b30"}" stop-opacity="0"/></linearGradient></defs>`+
-    `<line x1="0" x2="320" y1="${y(start).toFixed(1)}" y2="${y(start).toFixed(1)}" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>`+
-    `<path d="${d}L320,150L0,150Z" fill="url(#gf)"/>`+
-    `<path d="${d}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+  return `<svg class="chart" viewBox="0 0 320 130" preserveAspectRatio="none"><defs><linearGradient id="gf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".28"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
+    <line x1="0" x2="320" y1="${y(start).toFixed(1)}" y2="${y(start).toFixed(1)}" stroke="#3a3f86" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>
+    <path d="${d}L320,130L0,130Z" fill="url(#gf)"/><path d="${d}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`;
 }
-
-async function openDetail(k, keepScroll){
-  CUR=k; const row=(LAB.rows||[]).find(r=>r.key===k)||{label:k,start:100};
-  $("home").style.display="none"; $("detail").style.display="block"; $("back").style.display="flex";
-  if(!keepScroll) window.scrollTo(0,0);
-  $("dTitle").textContent=row.label; $("dDesc").textContent=info(k).desc||"—";
-  let st=STATE_CACHE[k]; try{ st=await fetchFile(info(k).file); STATE_CACHE[k]=st; }catch(e){}
-  if(!st){ $("dOpen").innerHTML=`<div class="empty">Δεν υπάρχουν δεδομένα ακόμα</div>`; return; }
-  const h=st.equity_history||[], start=st.start_balance||100, eq=h.length?h[h.length-1][1]:start, pc=100*(eq/start-1);
-  $("dEq").textContent=usd(eq); $("dPc").innerHTML=`<span class="${eq>=start?"g":"r"}">${sgn(eq-start,2)}$ (${sgn(pc)}%)</span> από ${usd(start)}`;
-  chart(h,start);
-  const pos=st.positions||[];
-  $("dOpen").innerHTML=pos.length?pos.map(p=>{ const v=p.last_pct!=null?p.last_pct:(p.value!=null&&p.cost?100*(p.value/p.cost-1):0);
-    const sub=p.funding_earned!=null?`funding ${sgn(p.funding_earned,3)}$`:`από ${when(p.entry_time)}`;
-    return `<div class="row flat"><div class="mid"><div class="t">${esc(p.name)}</div><div class="s">${sub}</div></div><div class="right">${chip(v)}</div></div>`; }).join("")
-    :`<div class="empty">Καμία ανοιχτή θέση</div>`;
-  const cl=(st.closed||[]).slice().reverse();
-  $("dClosed").innerHTML=cl.length?cl.slice(0,20).map(t=>`<div class="row flat"><div class="mid"><div class="t">${esc(t.name)}</div>`+
-    `<div class="s">${esc(t.reason||"")} · ${t.exit_time?when(t.exit_time):""}</div></div><div class="right"><div class="v ${t.pnl>=0?"g":"r"}">${sgn(t.pnl,2)}$</div></div></div>`).join("")
-    :`<div class="empty">Κανένα trade ακόμα</div>`;
-  const wins=cl.filter(t=>t.pnl>0).length;
-  $("dStats").textContent=cl.length?`${cl.length} trades · ${wins} κερδισμένα (${Math.round(100*wins/cl.length)}%) · τελευταία ενημέρωση ${ago(st.last_run)}`:`Τελευταία ενημέρωση ${ago(st.last_run)}`;
+async function openDetail(k){
+  const r=ROWS.find(x=>x.key===k)||{label:k,start:100}, I=info(k);
+  let st=ST[k]; try{ st=await fetchFile(I.file); ST[k]=st; }catch(e){}
+  st=st||{}; const h=st.equity_history||[], start=st.start_balance||100, eq=h.length?h[h.length-1][1]:start, pc=100*(eq/start-1);
+  const cl=(st.closed||[]).slice().reverse(), wins=cl.filter(t=>t.pnl>0).length, pos=st.positions||[];
+  const gp=cl.filter(t=>t.pnl>0).reduce((s,t)=>s+t.pnl,0), gl=-cl.filter(t=>t.pnl<=0).reduce((s,t)=>s+t.pnl,0);
+  let peak=start, dd=0; h.forEach(x=>{ peak=Math.max(peak,x[1]); dd=Math.min(dd,x[1]/peak-1); });
+  $("pane").innerHTML=`<div class="grab"></div>
+    <div class="ph">${sprite(k,{mood:pc>0.5?1:pc<-3?-1:0,busy:pos.length>0,lid:pos.length?(pc>=0?"#1f9d5b":"#b3264a"):"#3a3f6b"})}
+      <div style="min-width:0"><h2 style="color:${I.col}">${esc(I.nick)}</h2><div class="s">${esc(r.label)}</div></div>
+      <button class="close" id="x" aria-label="Κλείσιμο"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="big ${cls(pc)}">${usd(eq)} <span style="font-size:16px">${sgn(pc)}%</span></div>
+    ${chart(h,start)}
+    <div class="stats"><div><b>${cl.length}</b><span>Trades</span></div><div><b>${cl.length?Math.round(100*wins/cl.length)+"%":"—"}</b><span>Κερδισμένα</span></div>
+      <div><b>${gl>0?(gp/gl).toFixed(2):"—"}</b><span>Profit factor</span></div><div><b class="${dd<-0.0005?"r":""}">${(100*dd).toFixed(1)}%</b><span>Max πτώση</span></div>
+      <div><b>${pos.length}</b><span>Ανοιχτές</span></div><div><b>${ago(st.last_run)}</b><span>Ενημέρωση</span></div></div>
+    <div class="sec">Τι κάνει</div><div class="desc">${esc(I.desc||"—")}</div>
+    <div class="sec">Ανοιχτές θέσεις</div><div class="card">${pos.length?pos.map(p=>{ const v=p.last_pct!=null?p.last_pct:(p.value!=null&&p.cost?100*(p.value/p.cost-1):0);
+      return `<div class="row" style="cursor:default"><div class="mid"><div class="t">${esc(p.name)}</div><div class="s">από ${when(p.entry_time)}</div></div><div class="right"><span class="pc ${cls(v)}">${sgn(v)}%</span></div></div>`;}).join(""):`<div class="empty">Καμία ανοιχτή θέση</div>`}</div>
+    <div class="sec">Τελευταία trades</div><div class="card">${cl.length?cl.slice(0,20).map(t=>`<div class="row" style="cursor:default"><div class="mid"><div class="t">${esc(t.name)}</div>
+      <div class="s">${esc(t.reason||"")} · ${t.exit_time?when(t.exit_time):""}</div></div><div class="right ${t.pnl>=0?"g":"r"}">${sgn(t.pnl,2)}$</div></div>`).join(""):`<div class="empty">Κανένα trade ακόμα</div>`}</div>`;
+  $("sheet").classList.add("on"); $("x").onclick=closeDetail;
 }
-
-function goHome(){ CUR=null; $("detail").style.display="none"; $("home").style.display="block"; $("back").style.display="none";
-  if(location.hash) history.replaceState(null,"",location.pathname+location.search); }
-$("back").onclick=goHome;
+function closeDetail(){ $("sheet").classList.remove("on"); }
+$("sheet").onclick=e=>{ if(e.target.id==="sheet") closeDetail(); };
 
 async function refresh(){
   const b=$("refresh"); b.classList.add("spin");
-  try{ await loadHome(); $("err").style.display="none"; if(CUR) await openDetail(CUR,true); }
-  catch(e){ $("err").style.display="block"; }
+  try{ await load(); $("err").style.display="none"; }catch(e){ $("err").style.display="block"; }
   b.classList.remove("spin");
 }
 $("refresh").onclick=refresh;
 refresh(); loadLessons();
-setInterval(()=>{ if(!document.hidden) refresh(); },60000);
+setInterval(()=>{ if(!document.hidden&&!$("sheet").classList.contains("on")) refresh(); },60000);
 document.addEventListener("visibilitychange",()=>{ if(!document.hidden) refresh(); });
 </script>
 </body>
