@@ -2,25 +2,24 @@
  "version": 1,
  "started_at": "2026-11-27T00:57:08Z",
  "start_balance": 100.0,
- "balance": 100.0,
- "positions": [
+ "balance": 98.95580898956531,
+ "positions": [],
+ "closed": [
   {
    "id": 1,
    "name": "QQQ short",
-   "side": "short",
-   "entry": 640.0700073242188,
-   "stop": 645.8900146484375,
-   "target": 581.8699340820312,
-   "shares": 0.17182108961250064,
-   "risk_usd": 0.9999999999999999,
-   "equity_at_entry": 100.0,
    "entry_time": "2026-11-27T14:35:35Z",
-   "entry_ts": 1795790135,
-   "value": -0.8519,
-   "symbol": "QQQ"
+   "exit_time": "2026-11-27T15:50:00Z",
+   "hold_min": 74.4,
+   "entry_market": 640.0700073242188,
+   "exit_market": 645.8900146484375,
+   "cost": 1.0,
+   "pnl": -1.0442,
+   "pnl_pct": -1.04,
+   "r_multiple": -1.04,
+   "reason": "stop"
   }
  ],
- "closed": [],
  "seen": {},
  "daily": {
   "date": "2026-11-27",
@@ -28,7 +27,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 26,
+  "scans": 28,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1576,15 +1575,27 @@
   [
    "2026-11-27T15:41:51Z",
    99.1481
+  ],
+  [
+   "2026-11-27T15:44:56Z",
+   99.0665
+  ],
+  [
+   "2026-11-27T15:50:00Z",
+   98.9558
   ]
  ],
  "log": [
   {
    "t": "2026-11-27T14:35:35Z",
    "msg": "ΑΝΟΙΓΜΑ QQQ short @ 640.07 · stop 645.89 · στόχος 581.87 · ρίσκο 1.00$"
+  },
+  {
+   "t": "2026-11-27T15:50:00Z",
+   "msg": "ΚΛΕΙΣΙΜΟ QQQ short — stop — -1.04$"
   }
  ],
- "last_run": "2026-11-27T15:41:51Z",
+ "last_run": "2026-11-27T15:50:00Z",
  "next_id": 2,
  "epoch": "2026-11-26-orb",
  "mode": "orb",
