@@ -29,7 +29,8 @@ EPOCH = "2026-11-27-attention"
 
 def _get(url, body=None):
     data = json.dumps(body).encode() if body is not None else None
-    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json", "Accept": "application/json"})
+    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json", "Accept": "application/json",
+                                                              "User-Agent": "meme-paper-bot/1.0 (paper research)"})
     for i in range(3):
         try:
             with urllib.request.urlopen(req, timeout=20) as r:
