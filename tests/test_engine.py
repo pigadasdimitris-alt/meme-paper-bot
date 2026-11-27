@@ -651,3 +651,28 @@ def test_btc_calm():
     wild_now = [(k, 0, 0, 0, 100 * (1 + (0.001 if k < 1200 else 0.02) * math.sin(k)), 1) for k in range(1300)]
     assert compress.btc_calm(quiet_now) is True
     assert compress.btc_calm(wild_now) is False
+
+
+# ---------------- Attention ----------------
+
+def test_attention_warmup_then_fresh_entries_and_24h_exit():
+    from datetime import datetime, timezone, timedelta
+    from bot import attention, majors
+    t = datetime(2026, 11, 27, 10, 0, 30, tzinfo=timezone.utc)
+    st = majors.new_state(t, attention.EPOCH, "attention")
+    mkt = {"BTC": (60000.0, 0.00001), "PEPE": (1.0, 0.0001), "SOL": (70.0, 0.00001)}
+    attention.cycle(st, t, trending_fn=lambda: ["SOL", "PEPE"], market_fn=lambda: mkt, side_fn=lambda: None)
+    assert not st["positions"]                                   # warm-up: καμία αγορά την πρώτη ώρα
+    attention.cycle(st, t + timedelta(hours=1), trending_fn=lambda: ["SOL", "PEPE", "WIF"],
+                    market_fn=lambda: mkt, side_fn=lambda: None)
+    assert not st["positions"]                                   # SOL/PEPE όχι φρέσκα, WIF δεν υπάρχει στο Hyperliquid
+    mkt["NEW"] = (2.0, 0.0)
+    attention.cycle(st, t + timedelta(hours=2), trending_fn=lambda: ["NEW", "SOL"],
+                    market_fn=lambda: mkt, side_fn=lambda: None)
+    assert [p["coin"] for p in st["positions"]] == ["NEW"]
+    mkt2 = dict(mkt, NEW=(2.2, 0.0), BTC=(61200.0, 0.0))
+    attention.cycle(st, t + timedelta(hours=26, minutes=1), trending_fn=lambda: ["NEW"],
+                    market_fn=lambda: mkt2, side_fn=lambda: None)
+    c = st["closed"][-1]
+    assert c["coin"] == "NEW" and c["reason"] == "24 ώρες" and c["pnl"] > 0
+    assert abs(c["excess_pct"] - (10.0 - 2.0)) < 0.01           # coin +10%, BTC +2% → excess +8%
