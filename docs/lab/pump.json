@@ -26,11 +26,11 @@
     "3XDQLzmKw1Qd2DA2NoXUqWi5maH5YDnGcTEC7vfNDcWu": 1077.01,
     "AWkk8EtSdm19buX1S6D2XxSjf1FBXq6j9wgkTtSGzKY5": 983.09
    },
-   "peak_pct": 36.1,
+   "peak_pct": 36.2,
    "low_pct": -0.0,
-   "value": 2.5575,
+   "value": 2.5767,
    "missing": 0,
-   "last_pct": 36.04
+   "last_pct": 36.25
   },
   {
    "id": 21,
@@ -76,9 +76,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -25.9,
-   "value": -3.0459,
+   "value": -3.056,
    "missing": 0,
-   "last_pct": -24.66
+   "last_pct": -24.77
   },
   {
    "id": 32,
@@ -102,9 +102,9 @@
    },
    "peak_pct": 6.6,
    "low_pct": -3.5,
-   "value": -0.2984,
+   "value": -0.2141,
    "missing": 0,
-   "last_pct": 5.1
+   "last_pct": 6.01
   },
   {
    "id": 38,
@@ -128,9 +128,9 @@
    },
    "peak_pct": 13.6,
    "low_pct": -3.3,
-   "value": 0.3314,
+   "value": 0.0612,
    "missing": 0,
-   "last_pct": 11.92
+   "last_pct": 9.0
   },
   {
    "id": 41,
@@ -156,9 +156,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -2.4,
-   "value": 0.702,
+   "value": 0.2488,
    "missing": 0,
-   "last_pct": 15.94
+   "last_pct": 11.03
   }
  ],
  "closed": [
@@ -386,7 +386,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 445,
+  "scans": 447,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2170,6 +2170,14 @@
   [
    "2026-11-28T06:29:05Z",
    70.8792
+  ],
+  [
+   "2026-11-28T06:30:22Z",
+   71.1092
+  ],
+  [
+   "2026-11-28T06:31:40Z",
+   70.2492
   ]
  ],
  "log": [
@@ -2384,10 +2392,14 @@
   {
    "t": "2026-11-28T06:29:05Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα FINGART [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T06:31:40Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα WLFI [SpyDefiLive] — ρηχό pool, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T06:29:05Z",
- "next_id": 44,
+ "last_run": "2026-11-28T06:31:40Z",
+ "next_id": 45,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2415,10 +2427,10 @@
     "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 47.07
    },
    "peak_pct": 1.7,
-   "low_pct": -0.6,
-   "value": -0.8285,
+   "low_pct": -2.2,
+   "value": -0.9737,
    "missing": 0,
-   "last_pct": -0.64
+   "last_pct": -2.21
   },
   {
    "id": 43,
@@ -2444,11 +2456,36 @@
     "2hnQdzWK4YGMd17wfLgNKTJ4Wwi2wRfUnqCZ8YHgNe28": 538.93,
     "E3x1KGHoQWpyb6zR9RRJs1CPYrdHRgxcXbX81nySppJX": 365.13
    },
-   "peak_pct": 0.0,
+   "peak_pct": 13.3,
    "low_pct": -2.3,
-   "value": -0.977,
+   "value": 0.4586,
    "missing": 0,
-   "last_pct": -2.25
+   "last_pct": 13.3
+  },
+  {
+   "id": 44,
+   "kind": "call",
+   "mint": "4HEfa8ytHJk75E4qdThEbtNdyGRg2qfQHMo8nu2Cpump",
+   "name": "WLFI",
+   "channel": "SpyDefiLive",
+   "entry_market": 1.414091496e-06,
+   "entry": 1.47065515584e-06,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T06:31:40Z",
+   "entry_ts": 1795847500,
+   "pool": "Hzzq73ttNf519vYJKumrASi9wEsPPsQ8wQh1YGoo6H8B",
+   "flags": [
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "BKRu7LmcpstcYmYLc1T5RYAmuxgii3VPZwHDwdCxCJKD": 9.83
+   },
+   "peak_pct": 4.0,
+   "low_pct": 0.0,
+   "value": -0.4043,
+   "missing": 0,
+   "last_pct": 3.95
   }
  ],
  "events": [],
@@ -2495,9 +2532,10 @@
   "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h": 1795842640,
   "9TKbd3VFaMSXsEAicD9JVQWpWwAoLi4fSgWmZL2cpump": 1795843665,
   "EaiNiPA791st8dtYYuRKqU4M2wetyRdRzk5K2VT1pump": 1795846668,
-  "WZVWLfThgm14NN8HRDoyiEeXVvdUDMzGMHUS3VLpump": 1795847345
+  "WZVWLfThgm14NN8HRDoyiEeXVvdUDMzGMHUS3VLpump": 1795847345,
+  "4HEfa8ytHJk75E4qdThEbtNdyGRg2qfQHMo8nu2Cpump": 1795847500
  },
- "last_dump_check": 1795847345,
+ "last_dump_check": 1795847500,
  "shield": {
   "taken": 10,
   "taken_pnl": -31.8492,
