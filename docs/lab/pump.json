@@ -56,9 +56,9 @@
    },
    "peak_pct": 29.8,
    "low_pct": -0.0,
-   "value": 1.975,
+   "value": 1.9802,
    "missing": 0,
-   "last_pct": 29.73
+   "last_pct": 29.79
   },
   {
    "id": 21,
@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 30.1,
    "low_pct": -38.6,
-   "value": 0.121,
+   "value": 0.1363,
    "missing": 0,
-   "last_pct": 9.64
+   "last_pct": 9.81
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -24.2,
-   "value": -2.5279,
+   "value": -2.6921,
    "missing": 0,
-   "last_pct": -19.05
+   "last_pct": -20.83
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.7,
    "low_pct": -3.0,
-   "value": -0.7727,
+   "value": -0.8096,
    "missing": 0,
-   "last_pct": -0.04
+   "last_pct": -0.44
   },
   {
    "id": 38,
@@ -182,11 +182,11 @@
     "4WzoTXqZAauNU2wNd7yykz1LcphKrSuLUvRB1ZJmNa75": 154.8,
     "71pAfN1nJhcLaezSRYvwdsNFE9PnY9hNfcxB4nZ1gdAp": 141.95
    },
-   "peak_pct": 2.0,
+   "peak_pct": 3.5,
    "low_pct": -2.4,
-   "value": -0.5869,
+   "value": -0.4424,
    "missing": 0,
-   "last_pct": 1.98
+   "last_pct": 3.54
   }
  ],
  "closed": [
@@ -392,7 +392,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 397,
+  "scans": 399,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1984,6 +1984,14 @@
   [
    "2026-11-28T05:40:28Z",
    65.756
+  ],
+  [
+   "2026-11-28T05:41:10Z",
+   65.9688
+  ],
+  [
+   "2026-11-28T05:42:10Z",
+   65.7199
   ]
  ],
  "log": [
@@ -2188,7 +2196,7 @@
    "msg": "ΚΛΕΙΣΙΜΟ HarryBōlz — dump: οι insiders πούλησαν 152% — -1.63$ (κορυφή +1%)"
   }
  ],
- "last_run": "2026-11-28T05:40:28Z",
+ "last_run": "2026-11-28T05:42:10Z",
  "next_id": 42,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -2221,36 +2229,6 @@
    "value": -1.2511,
    "missing": 0,
    "last_pct": -5.22
-  },
-  {
-   "id": 40,
-   "kind": "call",
-   "mint": "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h",
-   "name": "tremp",
-   "channel": "SpyDefiLive",
-   "entry_market": 9.912324087e-06,
-   "entry": 1.030881705048e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T05:10:40Z",
-   "entry_ts": 1795842640,
-   "pool": "3Cr5EhcHynP1L6zFJ9RBrmq2wbeDERGTe7EfhLQqWHkh",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ρηχό pool",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 958.26,
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 900.37,
-    "3VUNtVtjjx5ckUojT7UocJ5fbuAJRsNUXNfTBnPte9vC": 343.8,
-    "FcBm8smZDfpjxwJSJowk3w6oyR2zqiKnSVUpWpVnY7py": 166.54,
-    "GgUHMPKaazTqnk7ApFJuXurv1bBJ5rggfj3snUxSqxw8": 141.59
-   },
-   "peak_pct": 0.0,
-   "low_pct": 0.0,
-   "value": 0.0,
-   "missing": 29
   }
  ],
  "events": [],
@@ -2301,8 +2279,8 @@
  "shield": {
   "taken": 9,
   "taken_pnl": -35.4495,
-  "blocked": 23,
-  "blocked_pnl": -53.2799
+  "blocked": 24,
+  "blocked_pnl": -62.8184
  },
  "shadow_closed": [
   {
@@ -2839,6 +2817,31 @@
    "pnl_pct": -12.2,
    "reason": "κλείδωμα κέρδους (κορυφή +98%)",
    "hold_min": 57.4
+  },
+  {
+   "id": 40,
+   "kind": "call",
+   "mint": "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h",
+   "name": "tremp",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T05:10:40Z",
+   "entry_market": 9.912324087e-06,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": 0.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T05:41:10Z",
+   "exit_market": 4.9561620435e-07,
+   "pnl": -9.5385,
+   "pnl_pct": -95.38,
+   "reason": "χάθηκε η τιμή (rug;)",
+   "hold_min": 30.5
   }
  ]
 }
