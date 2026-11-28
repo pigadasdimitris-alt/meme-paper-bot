@@ -28,9 +28,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -28.7,
-   "value": -2.0709,
+   "value": -2.1251,
    "missing": 0,
-   "last_pct": -14.1
+   "last_pct": -14.69
   },
   {
    "id": 32,
@@ -54,9 +54,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.3142,
+   "value": -0.2616,
    "missing": 0,
-   "last_pct": 4.93
+   "last_pct": 5.5
   },
   {
    "id": 38,
@@ -80,9 +80,9 @@
    },
    "peak_pct": 15.9,
    "low_pct": -3.3,
-   "value": 0.2773,
+   "value": 0.0558,
    "missing": 0,
-   "last_pct": 11.34
+   "last_pct": 8.94
   },
   {
    "id": 41,
@@ -108,9 +108,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -17.1,
-   "value": -1.3602,
+   "value": -1.5896,
    "missing": 0,
-   "last_pct": -6.4
+   "last_pct": -8.89
   },
   {
    "id": 48,
@@ -134,9 +134,9 @@
    },
    "peak_pct": 37.5,
    "low_pct": -10.0,
-   "value": -0.3315,
+   "value": -0.7718,
    "missing": 0,
-   "last_pct": 4.74
+   "last_pct": -0.03
   }
  ],
  "closed": [
@@ -406,7 +406,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 547,
+  "scans": 549,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2598,6 +2598,14 @@
   [
    "2026-11-28T08:15:18Z",
    66.6554
+  ],
+  [
+   "2026-11-28T08:16:39Z",
+   65.7626
+  ],
+  [
+   "2026-11-28T08:17:23Z",
+   65.7626
   ]
  ],
  "log": [
@@ -2860,10 +2868,18 @@
   {
    "t": "2026-11-28T07:50:56Z",
    "msg": "ΚΛΕΙΣΙΜΟ MINT — χρόνος — +2.23$ (κορυφή +38%)"
+  },
+  {
+   "t": "2026-11-28T08:16:39Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα DUMP [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T08:16:39Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Småkager [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
   }
  ],
- "last_run": "2026-11-28T08:15:18Z",
- "next_id": 54,
+ "last_run": "2026-11-28T08:17:23Z",
+ "next_id": 56,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2892,9 +2908,9 @@
    },
    "peak_pct": 18.7,
    "low_pct": -5.2,
-   "value": -0.7568,
+   "value": -0.8605,
    "missing": 0,
-   "last_pct": 0.13
+   "last_pct": -0.99
   },
   {
    "id": 44,
@@ -3003,14 +3019,16 @@
   "B29od4bd54VAVAqJFToRKkKJadUGK5v8pkAVb5uvpump": 1795850693,
   "AKotzk1dhcNangAJBtvNKtT9bhbSVZc2mMhRFgkFpump": 1795850842,
   "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476,
-  "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605
+  "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605,
+  "4SuU3DJ7RGMmjQAMjPyeQPP7HRMaAd5gqZuPp26Dpump": 1795853799,
+  "BW98q4cYxCeJM3uoB43Yy2e1EcjF4fPpeAuRkrhWpump": 1795853799
  },
- "last_dump_check": 1795853718,
+ "last_dump_check": 1795853843,
  "shield": {
   "taken": 12,
   "taken_pnl": -29.5451,
-  "blocked": 33,
-  "blocked_pnl": -97.2864
+  "blocked": 35,
+  "blocked_pnl": -110.2053
  },
  "shadow_closed": [
   {
@@ -3782,6 +3800,55 @@
    "pnl_pct": -14.8,
    "reason": "κλείδωμα κέρδους (κορυφή +82%)",
    "hold_min": 39.7
+  },
+  {
+   "id": 54,
+   "kind": "call",
+   "mint": "4SuU3DJ7RGMmjQAMjPyeQPP7HRMaAd5gqZuPp26Dpump",
+   "name": "DUMP",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T08:16:39Z",
+   "entry_market": 1.028897222e-05,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": -45.9,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T08:16:39Z",
+   "exit_market": 2.783e-06,
+   "pnl": -7.5032,
+   "pnl_pct": -75.03,
+   "reason": "rug (έφυγε η ρευστότητα)",
+   "hold_min": 0.0
+  },
+  {
+   "id": 55,
+   "kind": "call",
+   "mint": "BW98q4cYxCeJM3uoB43Yy2e1EcjF4fPpeAuRkrhWpump",
+   "name": "Småkager",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T08:16:39Z",
+   "entry_market": 1.533322329e-05,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": -0.7,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T08:16:39Z",
+   "exit_market": 7.615e-06,
+   "pnl": -5.4157,
+   "pnl_pct": -54.16,
+   "reason": "rug (έφυγε η ρευστότητα)",
+   "hold_min": 0.0
   }
  ]
 }
