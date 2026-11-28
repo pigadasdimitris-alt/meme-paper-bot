@@ -2,37 +2,8 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 63.48922685695816,
- "positions": [
-  {
-   "id": 66,
-   "kind": "call",
-   "mint": "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump",
-   "name": "OKOWARE",
-   "channel": "SpyDefiLive",
-   "entry_market": 3.329795431e-05,
-   "entry": 3.46298724824e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T11:47:10Z",
-   "entry_ts": 1795866430,
-   "pool": "CG7LMjxL1jVhSK2HFUuWunArCWiX5nSkaMiVsnncyDnf",
-   "flags": [
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 200.6,
-    "3ErtXe3FwpvrmZdpZn5bfDMbvWNdp3sCDtNcHh2661oD": 113.96,
-    "Ar2Y6o1QmrRAskjii1cRfijeKugHH13ycxW5cd7rro1x": 106.97,
-    "3Km7UkmVA8fwesijovPUtqdQFBwMS95DQTJczJjtQnbo": 104.25,
-    "2xRWnbqNqkMFLp6HmFAEwXf4RsWPbtzpXZiRzJx3X1GL": 104.09
-   },
-   "peak_pct": 41.0,
-   "low_pct": -20.5,
-   "value": -0.1117,
-   "missing": 0,
-   "last_pct": 7.12
-  }
- ],
+ "balance": 62.90352661118601,
+ "positions": [],
  "closed": [
   {
    "id": 3,
@@ -461,6 +432,28 @@
    "pnl_pct": -19.9,
    "reason": "κλείδωμα κέρδους (κορυφή +51%)",
    "hold_min": 8.0
+  },
+  {
+   "id": 66,
+   "kind": "call",
+   "mint": "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump",
+   "name": "OKOWARE",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T11:47:10Z",
+   "entry_market": 3.329795431e-05,
+   "flags": [
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 41.0,
+   "low_pct": -20.5,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T11:57:10Z",
+   "exit_market": 3.396e-05,
+   "pnl": -0.5857,
+   "pnl_pct": -5.86,
+   "reason": "dump: οι insiders πούλησαν 65%",
+   "hold_min": 10.0
   }
  ],
  "seen": {},
@@ -470,7 +463,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 766,
+  "scans": 768,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -3538,6 +3531,14 @@
   [
    "2026-11-28T11:55:10Z",
    63.3775
+  ],
+  [
+   "2026-11-28T11:55:44Z",
+   61.7059
+  ],
+  [
+   "2026-11-28T11:57:10Z",
+   62.9035
   ]
  ],
  "log": [
@@ -3884,10 +3885,18 @@
   {
    "t": "2026-11-28T11:47:10Z",
    "msg": "ΑΓΟΡΑ OKOWARE [SpyDefiLive] — call @ 3.3298e-05 · σημάδια: ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T11:57:10Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Hachiware [SpyDefiLive] — ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T11:57:10Z",
+   "msg": "ΚΛΕΙΣΙΜΟ OKOWARE — dump: οι insiders πούλησαν 65% — -0.59$ (κορυφή +41%)"
   }
  ],
- "last_run": "2026-11-28T11:55:10Z",
- "next_id": 67,
+ "last_run": "2026-11-28T11:57:10Z",
+ "next_id": 68,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -3916,9 +3925,9 @@
    },
    "peak_pct": 29.1,
    "low_pct": -5.2,
-   "value": -0.3646,
+   "value": -0.3835,
    "missing": 0,
-   "last_pct": 4.38
+   "last_pct": 4.18
   },
   {
    "id": 44,
@@ -3968,9 +3977,38 @@
    },
    "peak_pct": 0.0,
    "low_pct": -10.8,
-   "value": -1.4975,
+   "value": -1.473,
    "missing": 0,
-   "last_pct": -7.89
+   "last_pct": -7.62
+  },
+  {
+   "id": 67,
+   "kind": "call",
+   "mint": "3JfzkFiB95EY8ZvE3TtsKQcQ4Sf2M1SMzZKu1JNwkoqw",
+   "name": "Hachiware",
+   "channel": "SpyDefiLive",
+   "entry_market": 2.484070491e-05,
+   "entry": 2.58343331064e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T11:57:10Z",
+   "entry_ts": 1795867030,
+   "pool": "7aJonGED7JPgev49Ff4cm7fskWjEuBWpK4rQjFR9y6xK",
+   "flags": [
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "6V21evCGzR9CJGDMMhKS79q3TaXCBrRymEdWPJJeZPnp": 560.8,
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 557.66,
+    "HgZn3pMinK37tZhWbCQPmX5RHBW7qhcHkWtFGLjSwij6": 158.66,
+    "BeZegi7NenWfyJLxdWoTnRMKveBorJsvkjsiJGwyJgJ": 147.99,
+    "wgmFQYvpxEJLGWTHFvsghjzMuC4xxHhkqycocex2mLZ": 140.11
+   },
+   "peak_pct": 0.0,
+   "low_pct": -9.2,
+   "value": -1.6167,
+   "missing": 0,
+   "last_pct": -9.18
   }
  ],
  "events": [],
@@ -4040,12 +4078,13 @@
   "4cZsB6UgdUBTi13JMusBap9r2qGW1MPrdaSVAYkSpump": 1795859925,
   "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump": 1795860556,
   "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump": 1795861030,
-  "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump": 1795866430
+  "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump": 1795866430,
+  "3JfzkFiB95EY8ZvE3TtsKQcQ4Sf2M1SMzZKu1JNwkoqw": 1795867030
  },
- "last_dump_check": 1795866910,
+ "last_dump_check": 1795867030,
  "shield": {
-  "taken": 20,
-  "taken_pnl": -36.5108,
+  "taken": 21,
+  "taken_pnl": -37.0965,
   "blocked": 42,
   "blocked_pnl": -118.574
  },
