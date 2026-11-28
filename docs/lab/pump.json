@@ -56,9 +56,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -28.7,
-   "value": -2.7378,
+   "value": -2.814,
    "missing": 0,
-   "last_pct": -21.33
+   "last_pct": -22.15
   },
   {
    "id": 32,
@@ -82,9 +82,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.3142,
+   "value": -0.3248,
    "missing": 0,
-   "last_pct": 4.93
+   "last_pct": 4.81
   },
   {
    "id": 38,
@@ -136,9 +136,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -2.4,
-   "value": -0.2299,
+   "value": -0.8106,
    "missing": 0,
-   "last_pct": 5.84
+   "last_pct": -0.45
   },
   {
    "id": 48,
@@ -161,10 +161,10 @@
     "CRwjThpc6X7M6bhqhchZC2SPCTvFeFHvYRjvrZmSW8FK": 317.73
    },
    "peak_pct": 37.5,
-   "low_pct": -9.6,
-   "value": -1.2423,
+   "low_pct": -9.8,
+   "value": -1.6782,
    "missing": 0,
-   "last_pct": -5.12
+   "last_pct": -9.85
   }
  ],
  "closed": [
@@ -412,7 +412,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 513,
+  "scans": 515,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2468,6 +2468,14 @@
   [
    "2026-11-28T07:40:05Z",
    65.9612
+  ],
+  [
+   "2026-11-28T07:41:36Z",
+   65.2161
+  ],
+  [
+   "2026-11-28T07:42:56Z",
+   64.8578
   ]
  ],
  "log": [
@@ -2728,7 +2736,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα WLFI [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
   }
  ],
- "last_run": "2026-11-28T07:40:05Z",
+ "last_run": "2026-11-28T07:42:56Z",
  "next_id": 54,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -2756,11 +2764,11 @@
     "8SQhY4SMiFX5JinHkYDQuVcpa93mKRJPczpucDCZKMKM": 49.37,
     "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 47.07
    },
-   "peak_pct": 11.7,
+   "peak_pct": 12.1,
    "low_pct": -5.2,
-   "value": 0.1822,
+   "value": 0.3519,
    "missing": 0,
-   "last_pct": 10.31
+   "last_pct": 12.15
   },
   {
    "id": 44,
@@ -2812,9 +2820,9 @@
    },
    "peak_pct": 82.5,
    "low_pct": 0.0,
-   "value": 5.4618,
+   "value": 3.8483,
    "missing": 0,
-   "last_pct": 67.5
+   "last_pct": 50.02
   },
   {
    "id": 51,
@@ -2842,36 +2850,6 @@
    "value": -1.0229,
    "missing": 0,
    "last_pct": -2.75
-  },
-  {
-   "id": 53,
-   "kind": "call",
-   "mint": "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1",
-   "name": "WLFI",
-   "channel": "SpyDefiLive",
-   "entry_market": 6.286339993e-06,
-   "entry": 6.53779359272e-06,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T07:40:05Z",
-   "entry_ts": 1795851605,
-   "pool": "A8jsRtatyxvnYDEbG1jhMeXveSC78qV7JZwjrFUuhZc2",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ρηχό pool"
-   ],
-   "insiders": {
-    "DEuoGiEXZsQ2d3gSwkdJ3Ak55S6bBQX2Z1RQwdN5Y84": 184.74,
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 154.88,
-    "6hmq4KHxMbSNwMjuspvJVSnxpoN8cpc4QciVhT6urFGJ": 150.58,
-    "5Wd8KYukuAu78apZjEVLvf5GKtDg8j6H2XuJR7sQAS4N": 148.24,
-    "649ot18fccD6Mc9V4aHWTdoSVCuqAEtg9aWuxBA9cRoU": 140.15
-   },
-   "peak_pct": 0.0,
-   "low_pct": -27.0,
-   "value": -3.266,
-   "missing": 0,
-   "last_pct": -27.05
   }
  ],
  "events": [],
@@ -2930,12 +2908,12 @@
   "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476,
   "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605
  },
- "last_dump_check": 1795851605,
+ "last_dump_check": 1795851776,
  "shield": {
   "taken": 11,
   "taken_pnl": -31.7792,
-  "blocked": 31,
-  "blocked_pnl": -91.025
+  "blocked": 32,
+  "blocked_pnl": -95.8064
  },
  "shadow_closed": [
   {
@@ -3660,6 +3638,30 @@
    "pnl_pct": -62.68,
    "reason": "rug (έφυγε η ρευστότητα)",
    "hold_min": 0.0
+  },
+  {
+   "id": 53,
+   "kind": "call",
+   "mint": "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1",
+   "name": "WLFI",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T07:40:05Z",
+   "entry_market": 6.286339993e-06,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": -43.5,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T07:42:56Z",
+   "exit_market": 3.554e-06,
+   "pnl": -4.7814,
+   "pnl_pct": -47.81,
+   "reason": "SL -40%",
+   "hold_min": 2.9
   }
  ]
 }
