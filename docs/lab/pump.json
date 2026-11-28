@@ -28,9 +28,9 @@
    },
    "peak_pct": 37.7,
    "low_pct": -0.0,
-   "value": 2.2376,
+   "value": 2.2358,
    "missing": 0,
-   "last_pct": 32.57
+   "last_pct": 32.55
   },
   {
    "id": 24,
@@ -82,9 +82,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.2352,
+   "value": -0.3142,
    "missing": 0,
-   "last_pct": 5.79
+   "last_pct": 4.93
   },
   {
    "id": 38,
@@ -136,9 +136,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -2.4,
-   "value": -0.2243,
+   "value": -0.2299,
    "missing": 0,
-   "last_pct": 5.9
+   "last_pct": 5.84
   },
   {
    "id": 48,
@@ -162,9 +162,9 @@
    },
    "peak_pct": 37.5,
    "low_pct": -9.6,
-   "value": -1.6523,
+   "value": -1.2423,
    "missing": 0,
-   "last_pct": -9.57
+   "last_pct": -5.12
   }
  ],
  "closed": [
@@ -412,7 +412,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 511,
+  "scans": 513,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2460,6 +2460,14 @@
   [
    "2026-11-28T07:37:56Z",
    65.6376
+  ],
+  [
+   "2026-11-28T07:38:44Z",
+   66.168
+  ],
+  [
+   "2026-11-28T07:40:05Z",
+   65.9612
   ]
  ],
  "log": [
@@ -2714,10 +2722,14 @@
   {
    "t": "2026-11-28T07:37:56Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Crema [reapergamble] — οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
+  },
+  {
+   "t": "2026-11-28T07:40:05Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα WLFI [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
   }
  ],
- "last_run": "2026-11-28T07:37:56Z",
- "next_id": 53,
+ "last_run": "2026-11-28T07:40:05Z",
+ "next_id": 54,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2746,9 +2758,9 @@
    },
    "peak_pct": 11.7,
    "low_pct": -5.2,
-   "value": 0.1256,
+   "value": 0.1822,
    "missing": 0,
-   "last_pct": 9.69
+   "last_pct": 10.31
   },
   {
    "id": 44,
@@ -2800,9 +2812,9 @@
    },
    "peak_pct": 82.5,
    "low_pct": 0.0,
-   "value": 6.556,
+   "value": 5.4618,
    "missing": 0,
-   "last_pct": 79.36
+   "last_pct": 67.5
   },
   {
    "id": 51,
@@ -2830,6 +2842,36 @@
    "value": -1.0229,
    "missing": 0,
    "last_pct": -2.75
+  },
+  {
+   "id": 53,
+   "kind": "call",
+   "mint": "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1",
+   "name": "WLFI",
+   "channel": "SpyDefiLive",
+   "entry_market": 6.286339993e-06,
+   "entry": 6.53779359272e-06,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T07:40:05Z",
+   "entry_ts": 1795851605,
+   "pool": "A8jsRtatyxvnYDEbG1jhMeXveSC78qV7JZwjrFUuhZc2",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool"
+   ],
+   "insiders": {
+    "DEuoGiEXZsQ2d3gSwkdJ3Ak55S6bBQX2Z1RQwdN5Y84": 184.74,
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 154.88,
+    "6hmq4KHxMbSNwMjuspvJVSnxpoN8cpc4QciVhT6urFGJ": 150.58,
+    "5Wd8KYukuAu78apZjEVLvf5GKtDg8j6H2XuJR7sQAS4N": 148.24,
+    "649ot18fccD6Mc9V4aHWTdoSVCuqAEtg9aWuxBA9cRoU": 140.15
+   },
+   "peak_pct": 0.0,
+   "low_pct": -27.0,
+   "value": -3.266,
+   "missing": 0,
+   "last_pct": -27.05
   }
  ],
  "events": [],
@@ -2885,9 +2927,10 @@
   "E8UGPD9dx8Ezzt83Xi37Eh4HHzPWn2WPqfbg21NNpump": 1795849837,
   "B29od4bd54VAVAqJFToRKkKJadUGK5v8pkAVb5uvpump": 1795850693,
   "AKotzk1dhcNangAJBtvNKtT9bhbSVZc2mMhRFgkFpump": 1795850842,
-  "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476
+  "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476,
+  "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605
  },
- "last_dump_check": 1795851476,
+ "last_dump_check": 1795851605,
  "shield": {
   "taken": 11,
   "taken_pnl": -31.7792,
