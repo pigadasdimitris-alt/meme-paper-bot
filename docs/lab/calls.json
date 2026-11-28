@@ -2,7 +2,7 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 84.26704699808506,
+ "balance": 94.10752286668044,
  "positions": [
   {
    "id": 5,
@@ -57,9 +57,9 @@
    "entry_liq": 26267,
    "peak_pct": 9.5,
    "low_pct": -26.7,
-   "value": -2.9626,
+   "value": -2.7759,
    "missing": 0,
-   "last_pct": -23.76
+   "last_pct": -21.74
   },
   {
    "id": 24,
@@ -76,9 +76,9 @@
    "entry_liq": 66309,
    "peak_pct": 45.4,
    "low_pct": -33.1,
-   "value": 1.1097,
+   "value": 1.8372,
    "missing": 0,
-   "last_pct": 20.35
+   "last_pct": 28.24
   },
   {
    "id": 27,
@@ -95,9 +95,9 @@
    "entry_liq": 322919,
    "peak_pct": 9.4,
    "low_pct": -4.1,
-   "value": -0.6279,
+   "value": -0.5964,
    "missing": 0,
-   "last_pct": 1.53
+   "last_pct": 1.87
   },
   {
    "id": 31,
@@ -119,25 +119,6 @@
    "last_pct": -1.55
   },
   {
-   "id": 32,
-   "mint": "EwUVBpdM5vw1CJHRMSLywzVjyQSJZpy6qboxEPBKpump",
-   "name": "PumpMas",
-   "channel": "SpyDefiLive",
-   "msg": 45325,
-   "entry_market": 0.0001707,
-   "entry": 0.000177528,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T05:01:35Z",
-   "entry_ts": 1795842095,
-   "delay_min": 1.4,
-   "entry_liq": 30090,
-   "peak_pct": 33.6,
-   "low_pct": -3.2,
-   "value": 1.9075,
-   "missing": 0,
-   "last_pct": 29.0
-  },
-  {
    "id": 34,
    "mint": "9TKbd3VFaMSXsEAicD9JVQWpWwAoLi4fSgWmZL2cpump",
    "name": "Snowball",
@@ -152,9 +133,9 @@
    "entry_liq": 46069,
    "peak_pct": 33.9,
    "low_pct": -33.8,
-   "value": -2.5544,
+   "value": -2.2554,
    "missing": 0,
-   "last_pct": -19.34
+   "last_pct": -16.1
   },
   {
    "id": 35,
@@ -188,11 +169,11 @@
    "entry_ts": 1795859064,
    "delay_min": 1.0,
    "entry_liq": 25651,
-   "peak_pct": 2.2,
+   "peak_pct": 4.3,
    "low_pct": -3.3,
-   "value": -0.5689,
+   "value": -0.3733,
    "missing": 0,
-   "last_pct": 2.17
+   "last_pct": 4.29
   }
  ],
  "closed": [
@@ -699,6 +680,24 @@
    "peak_pct": 61.3,
    "low_pct": -97.0,
    "reason": "κλείδωμα κέρδους (κορυφή +61%)"
+  },
+  {
+   "id": 32,
+   "name": "PumpMas",
+   "mint": "EwUVBpdM5vw1CJHRMSLywzVjyQSJZpy6qboxEPBKpump",
+   "channel": "SpyDefiLive",
+   "msg": 45325,
+   "entry_time": "2026-11-28T05:01:35Z",
+   "exit_time": "2026-11-28T09:59:24Z",
+   "delay_min": 1.4,
+   "entry_market": 0.0001707,
+   "exit_market": 0.0003669,
+   "hold_min": 297.8,
+   "pnl": 9.8405,
+   "pnl_pct": 98.4,
+   "peak_pct": 114.9,
+   "low_pct": -3.2,
+   "reason": "TP +100%"
   }
  ],
  "seen": {},
@@ -708,7 +707,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 649,
+  "scans": 650,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -3308,6 +3307,10 @@
   [
    "2026-11-28T09:58:24Z",
    80.8252
+  ],
+  [
+   "2026-11-28T09:59:24Z",
+   90.1985
   ]
  ],
  "log": [
@@ -3682,9 +3685,13 @@
   {
    "t": "2026-11-28T09:44:24Z",
    "msg": "ΑΓΟΡΑ Santa — call από SpyDefiLive (πριν 1′) @ 0.0001935, ρευστ. 25,651$"
+  },
+  {
+   "t": "2026-11-28T09:59:24Z",
+   "msg": "ΚΛΕΙΣΙΜΟ PumpMas [SpyDefiLive] — TP +100% — +9.84$ (κορυφή +115%)"
   }
  ],
- "last_run": "2026-11-28T09:58:24Z",
+ "last_run": "2026-11-28T09:59:24Z",
  "next_id": 39,
  "epoch": "2026-11-28-calls",
  "mode": "calls",
@@ -3715,9 +3722,9 @@
    "last_id": 45374,
    "posts": 98,
    "calls": 92,
-   "pnl": -11.2707,
-   "trades": 27,
-   "wins": 9,
+   "pnl": -1.4302,
+   "trades": 28,
+   "wins": 10,
    "dupes": 13
   },
   "Doraemon_Call": {
