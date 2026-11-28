@@ -2,7 +2,7 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 104.39648341496058,
+ "balance": 99.71895630335884,
  "positions": [
   {
    "id": 1,
@@ -19,28 +19,9 @@
    "entry_liq": 14651,
    "peak_pct": 67.9,
    "low_pct": -11.2,
-   "value": 1.8547,
+   "value": 0.3888,
    "missing": 0,
-   "last_pct": 28.43
-  },
-  {
-   "id": 3,
-   "mint": "6XGHv8KvqJg5Kekr8zydwmpHrJhWSARJZKJNTHJ97UyQ",
-   "name": "BITGOIN",
-   "channel": "SpyDefiLive",
-   "msg": 45279,
-   "entry_market": 14585.51,
-   "entry": 15168.930400000001,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T00:08:21Z",
-   "entry_ts": 1795824501,
-   "delay_min": 2.2,
-   "entry_liq": 39394,
-   "peak_pct": 0.0,
-   "low_pct": -37.0,
-   "value": -4.1848,
-   "missing": 0,
-   "last_pct": -37.0
+   "last_pct": 12.55
   },
   {
    "id": 5,
@@ -76,9 +57,9 @@
    "entry_liq": 9812,
    "peak_pct": 0.0,
    "low_pct": -19.5,
-   "value": -2.5646,
+   "value": -0.9038,
    "missing": 0,
-   "last_pct": -19.45
+   "last_pct": -1.46
   }
  ],
  "closed": [
@@ -117,6 +98,24 @@
    "peak_pct": 114.4,
    "low_pct": 0.0,
    "reason": "TP +100%"
+  },
+  {
+   "id": 3,
+   "name": "BITGOIN",
+   "mint": "6XGHv8KvqJg5Kekr8zydwmpHrJhWSARJZKJNTHJ97UyQ",
+   "channel": "SpyDefiLive",
+   "msg": 45279,
+   "entry_time": "2026-11-28T00:08:21Z",
+   "exit_time": "2026-11-28T00:22:28Z",
+   "delay_min": 2.2,
+   "entry_market": 14585.51,
+   "exit_market": 8410.023,
+   "hold_min": 14.1,
+   "pnl": -4.6775,
+   "pnl_pct": -46.78,
+   "peak_pct": 0.0,
+   "low_pct": -42.3,
+   "reason": "SL -40%"
   }
  ],
  "seen": {},
@@ -126,7 +125,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 82,
+  "scans": 84,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -458,6 +457,14 @@
   [
    "2026-11-28T00:21:28Z",
    98.5812
+  ],
+  [
+   "2026-11-28T00:22:28Z",
+   98.0924
+  ],
+  [
+   "2026-11-28T00:23:28Z",
+   98.2834
   ]
  ],
  "log": [
@@ -504,9 +511,13 @@
   {
    "t": "2026-11-28T00:20:28Z",
    "msg": "ΑΓΟΡΑ Bambi — call από SpyDefiLive (πριν 1′) @ 2.401e-05, ρευστ. 9,812$"
+  },
+  {
+   "t": "2026-11-28T00:22:28Z",
+   "msg": "ΚΛΕΙΣΙΜΟ BITGOIN [SpyDefiLive] — SL -40% — -4.68$ (κορυφή +0%)"
   }
  ],
- "last_run": "2026-11-28T00:21:28Z",
+ "last_run": "2026-11-28T00:23:28Z",
  "next_id": 7,
  "epoch": "2026-11-28-calls",
  "mode": "calls",
@@ -536,17 +547,17 @@
    "last_id": 45282,
    "posts": 6,
    "calls": 6,
-   "pnl": 4.3965,
-   "trades": 2,
+   "pnl": -0.281,
+   "trades": 3,
    "wins": 1
   }
  },
- "last_fetch": 1795825228,
+ "last_fetch": 1795825348,
  "candidates": {
   "Telegram": {
    "from": "shockedcalls",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 131,
+   "seen": 135,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 20,
    "calls": 0,
@@ -555,7 +566,7 @@
   "fearcalls": {
    "from": "shockedcalls",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 40,
+   "seen": 41,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 20,
    "calls": 7,
@@ -564,7 +575,7 @@
   "legeeeeend": {
    "from": "legends_call",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 40,
+   "seen": 41,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 0,
    "calls": 0,
@@ -631,7 +642,7 @@
   "BIuntz_capital": {
    "from": "SIGNALCALLS",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 40,
+   "seen": 41,
    "probed": "2026-11-27T23:31:15Z",
    "msgs": 0,
    "calls": 0,
@@ -640,7 +651,7 @@
   "SelbyArc": {
    "from": "SIGNALCALLS",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 40,
+   "seen": 41,
    "probed": "2026-11-27T23:31:15Z",
    "msgs": 0,
    "calls": 0,
@@ -663,17 +674,17 @@
   "Doraemon_Call": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "Marshmellow100xCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "SpyDefiLiveArc": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "Bassiecalls": {
    "from": "SpyDefiLive",
@@ -683,87 +694,87 @@
   "GemsmineEth": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "TOXICgambols": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "SpyDefi": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "SpyDefiLiveBSC": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "spacemancallz": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "CryptoChefCooks": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "MitchGemsGambles": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "mackcalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "MENACalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "SpyDefiLiveRH": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "InfinityGainCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "mooncatgems": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "SpyDefiLiveSol": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 9
+   "seen": 10
   },
   "casgems": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:06:15Z",
-   "seen": 8
+   "seen": 9
   },
   "spacemancallzsolana": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:06:15Z",
-   "seen": 8
+   "seen": 9
   },
   "maniacapes": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:08:21Z",
-   "seen": 7
+   "seen": 8
   },
   "SMOKERSCLUB420415": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:18:28Z",
-   "seen": 2
+   "seen": 3
   }
  },
  "retired": [
