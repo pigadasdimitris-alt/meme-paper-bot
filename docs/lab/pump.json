@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 3.2,
    "low_pct": -38.6,
-   "value": -2.7241,
+   "value": -2.8261,
    "missing": 0,
-   "last_pct": -21.18
+   "last_pct": -22.28
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -8.3,
-   "value": -1.2915,
+   "value": -1.2322,
    "missing": 0,
-   "last_pct": -5.66
+   "last_pct": -5.02
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.6,
    "low_pct": -3.0,
-   "value": -0.7147,
+   "value": -0.7358,
    "missing": 0,
-   "last_pct": 0.59
+   "last_pct": 0.36
   }
  ],
  "closed": [
@@ -316,7 +316,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 304,
+  "scans": 306,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1536,6 +1536,14 @@
   [
    "2026-11-28T04:04:39Z",
    66.6177
+  ],
+  [
+   "2026-11-28T04:05:29Z",
+   66.457
+  ],
+  [
+   "2026-11-28T04:06:43Z",
+   66.5539
   ]
  ],
  "log": [
@@ -1704,7 +1712,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα PRISMEICE [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T04:04:39Z",
+ "last_run": "2026-11-28T04:06:43Z",
  "next_id": 34,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -1763,38 +1771,9 @@
    },
    "peak_pct": 81.7,
    "low_pct": -29.8,
-   "value": 0.6714,
+   "value": -0.5698,
    "missing": 0,
-   "last_pct": 15.61
-  },
-  {
-   "id": 33,
-   "kind": "call",
-   "mint": "8N6WF11pLUUeUu8b1HbnDJHTzyL4bbr8YRdPS6Znpump",
-   "name": "PRISMEICE",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0001027980878,
-   "entry": 0.000106910011312,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T03:50:39Z",
-   "entry_ts": 1795837839,
-   "pool": "6ZXqJN9JCZxb7hnWYxijDs72jEnspsEUbo7BkL2K4jEb",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "4MvtitU5dBaYfLTvk6j1tXtHxSTaU66G556MSy4imHi1": 177.55,
-    "73scXaEhUDZTkTAWDjp7t7woRG4a4YcV8A7ZiSaCa51H": 131.01,
-    "7MHF1CPvhuEhQKcBVU5PRB2bGiHBVFXhuFQTTjC1ED6P": 128.22,
-    "7edYyp9pqRWxy9pbAMHsGAXCzH5fRKSECTXj3wXH6QfM": 116.94,
-    "GuhhQ3Ew3Bj4C8kUrsK9PUvcg5vB7hNHFqBXyX35DQKP": 110.68
-   },
-   "peak_pct": 72.0,
-   "low_pct": -17.4,
-   "value": 5.4717,
-   "missing": 0,
-   "last_pct": 67.61
+   "last_pct": 2.16
   }
  ],
  "events": [],
@@ -1833,12 +1812,12 @@
   "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump": 1795837119,
   "8N6WF11pLUUeUu8b1HbnDJHTzyL4bbr8YRdPS6Znpump": 1795837839
  },
- "last_dump_check": 1795838614,
+ "last_dump_check": 1795838803,
  "shield": {
   "taken": 8,
   "taken_pnl": -33.817,
-  "blocked": 17,
-  "blocked_pnl": -43.1943
+  "blocked": 18,
+  "blocked_pnl": -33.9332
  },
  "shadow_closed": [
   {
@@ -2236,6 +2215,29 @@
    "pnl": -7.9227,
    "pnl_pct": -79.23,
    "reason": "SL -40%",
+   "hold_min": 16.1
+  },
+  {
+   "id": 33,
+   "kind": "call",
+   "mint": "8N6WF11pLUUeUu8b1HbnDJHTzyL4bbr8YRdPS6Znpump",
+   "name": "PRISMEICE",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T03:50:39Z",
+   "entry_market": 0.0001027980878,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 108.7,
+   "low_pct": -17.4,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T04:06:43Z",
+   "exit_market": 0.0002145,
+   "pnl": 9.2611,
+   "pnl_pct": 92.61,
+   "reason": "TP +100%",
    "hold_min": 16.1
   }
  ]
