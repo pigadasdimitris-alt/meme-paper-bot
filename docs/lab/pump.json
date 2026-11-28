@@ -56,9 +56,9 @@
    },
    "peak_pct": 17.5,
    "low_pct": -0.0,
-   "value": 0.8272,
+   "value": 0.815,
    "missing": 0,
-   "last_pct": 17.29
+   "last_pct": 17.16
   },
   {
    "id": 21,
@@ -75,10 +75,10 @@
    "flags": [],
    "insiders": {},
    "peak_pct": 3.2,
-   "low_pct": -23.1,
-   "value": -2.7904,
+   "low_pct": -31.4,
+   "value": -3.6674,
    "missing": 0,
-   "last_pct": -21.9
+   "last_pct": -31.4
   },
   {
    "id": 23,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.6,
    "low_pct": -23.9,
-   "value": -2.9727,
+   "value": -2.1998,
    "missing": 0,
-   "last_pct": -23.87
+   "last_pct": -15.5
   },
   {
    "id": 24,
@@ -132,9 +132,37 @@
    },
    "peak_pct": 0.0,
    "low_pct": -3.0,
-   "value": -0.8344,
+   "value": -1.046,
    "missing": 0,
-   "last_pct": -0.71
+   "last_pct": -3.0
+  },
+  {
+   "id": 25,
+   "kind": "call",
+   "mint": "BRRktKPa8m4dMrQ1fT6fLJABQjYUqLaEhPuMHxUvpump",
+   "name": "JEFFLE",
+   "channel": "SpyDefiLive",
+   "entry_market": 5.521717377e-05,
+   "entry": 5.74258607208e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T02:48:37Z",
+   "entry_ts": 1795834117,
+   "pool": "46DZgx6Enexfdj5YUxtLrzkREUS1FKeuEPmaZFQZEAVc",
+   "flags": [
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "AzWnNS9isJR9HZ6WAEAUwqVMu5SAwHsPNmrmEVCroyMS": 632.38,
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 405.86,
+    "4JY8oypmFFEZq3FyzGAqrL4ExXnud1J8K6Bid38PLa2b": 394.35,
+    "J22upXJYdZvs2zFq5FZK73TEi3pDffy6kLi1qEozjobq": 344.77,
+    "J31k45bUcnfMDBpEs4r7Q5xw5eXhZSb5nDhMRw2uZBSY": 322.03
+   },
+   "peak_pct": 12.9,
+   "low_pct": 0.0,
+   "value": 0.4198,
+   "missing": 0,
+   "last_pct": 12.88
   }
  ],
  "closed": [
@@ -252,7 +280,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 226,
+  "scans": 228,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1160,6 +1188,14 @@
   [
    "2026-11-28T02:46:37Z",
    73.6918
+  ],
+  [
+   "2026-11-28T02:47:29Z",
+   74.0178
+  ],
+  [
+   "2026-11-28T02:48:37Z",
+   73.7837
   ]
  ],
  "log": [
@@ -1278,10 +1314,14 @@
   {
    "t": "2026-11-28T02:40:37Z",
    "msg": "ΑΓΟΡΑ Slingoor [SpyDefiLive] — call @ 0.000109071 · σημάδια: λίγα πορτοφόλια μάζεψαν πριν το call"
+  },
+  {
+   "t": "2026-11-28T02:48:37Z",
+   "msg": "ΑΓΟΡΑ JEFFLE [SpyDefiLive] — call @ 5.52172e-05 · σημάδια: ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T02:46:37Z",
- "next_id": 25,
+ "last_run": "2026-11-28T02:48:37Z",
+ "next_id": 26,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -1340,9 +1380,10 @@
   "2YAfPhCrGSW82Ra33sWgurXt4dQ29SwXusvUXdJGpump": 1795832294,
   "ExizLaN54XVXpY1FLH8yXtpbHPawm7UzTcmfJJH5pump": 1795833035,
   "81TW4gTEH4aNsSaKCoBhoznx9AG8AiYoBXfvEzJkpump": 1795833517,
-  "ANvsL4A6tJKAXJsPg7XVSHQA7KYmFcpW42jPuhVtpump": 1795833637
+  "ANvsL4A6tJKAXJsPg7XVSHQA7KYmFcpW42jPuhVtpump": 1795833637,
+  "BRRktKPa8m4dMrQ1fT6fLJABQjYUqLaEhPuMHxUvpump": 1795834117
  },
- "last_dump_check": 1795833892,
+ "last_dump_check": 1795834049,
  "shield": {
   "taken": 5,
   "taken_pnl": -24.1383,
