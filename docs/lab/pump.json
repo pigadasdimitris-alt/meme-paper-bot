@@ -26,11 +26,11 @@
     "JT8ovY8UbJ7ePd8xQyffMquMxMpTgRTDMWyTef6X35V": 248.54,
     "E6cQhMebMmMKbs2BNtE6PPioYjF8Xdq93PGo2XTqFUT6": 207.76
    },
-   "peak_pct": 0.0,
+   "peak_pct": 19.4,
    "low_pct": -32.9,
-   "value": -3.5086,
+   "value": 1.0189,
    "missing": 0,
-   "last_pct": -29.68
+   "last_pct": 19.37
   },
   {
    "id": 3,
@@ -55,10 +55,10 @@
     "4GE5AQFL2AuFyFQ9wPSovxHcUtXe6MBQJ777qb5U3aka": 212.7
    },
    "peak_pct": 0.0,
-   "low_pct": -24.9,
-   "value": -3.068,
+   "low_pct": -27.5,
+   "value": -2.7492,
    "missing": 0,
-   "last_pct": -24.9
+   "last_pct": -21.45
   }
  ],
  "closed": [],
@@ -69,7 +69,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 74,
+  "scans": 76,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -369,6 +369,14 @@
   [
    "2026-11-28T00:13:28Z",
    93.4234
+  ],
+  [
+   "2026-11-28T00:14:30Z",
+   96.5714
+  ],
+  [
+   "2026-11-28T00:15:28Z",
+   98.2697
   ]
  ],
  "log": [
@@ -389,35 +397,11 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα aurbit [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T00:13:28Z",
+ "last_run": "2026-11-28T00:15:28Z",
  "next_id": 5,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
- "shadow": [
-  {
-   "id": 4,
-   "kind": "call",
-   "mint": "4qFwbK9Usb7h12BKzjf8edSEbX8oxLhpKJVHLRWnpump",
-   "name": "aurbit",
-   "channel": "SpyDefiLive",
-   "entry_market": 9.362228547e-05,
-   "entry": 9.73671768888e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T00:08:24Z",
-   "entry_ts": 1795824504,
-   "pool": "7xtfb2uLcQzaTN1w8EK6PMkdTFiSazKAjWANrJwAUHNn",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {},
-   "peak_pct": 71.3,
-   "low_pct": -6.2,
-   "value": 5.8148,
-   "missing": 0,
-   "last_pct": 71.33
-  }
- ],
+ "shadow": [],
  "events": [],
  "seen_mints": {
   "B2HU7PEkoKmhkMhfZa5tFN3YJdwLeLq6Fg85saoo111": 1795824378,
@@ -425,12 +409,12 @@
   "6XGHv8KvqJg5Kekr8zydwmpHrJhWSARJZKJNTHJ97UyQ": 1795824504,
   "4qFwbK9Usb7h12BKzjf8edSEbX8oxLhpKJVHLRWnpump": 1795824504
  },
- "last_dump_check": 1795824750,
+ "last_dump_check": 1795824870,
  "shield": {
   "taken": 0,
   "taken_pnl": 0.0,
-  "blocked": 1,
-  "blocked_pnl": -6.1097
+  "blocked": 2,
+  "blocked_pnl": 2.6728
  },
  "shadow_closed": [
   {
@@ -455,6 +439,29 @@
    "pnl_pct": -61.1,
    "reason": "SL -40%",
    "hold_min": 0.0
+  },
+  {
+   "id": 4,
+   "kind": "call",
+   "mint": "4qFwbK9Usb7h12BKzjf8edSEbX8oxLhpKJVHLRWnpump",
+   "name": "aurbit",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T00:08:24Z",
+   "entry_market": 9.362228547e-05,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 103.5,
+   "low_pct": -6.2,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T00:14:30Z",
+   "exit_market": 0.0001905,
+   "pnl": 8.7825,
+   "pnl_pct": 87.83,
+   "reason": "TP +100%",
+   "hold_min": 6.1
   }
  ]
 }
