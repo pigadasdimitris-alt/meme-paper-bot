@@ -26,11 +26,11 @@
     "3XDQLzmKw1Qd2DA2NoXUqWi5maH5YDnGcTEC7vfNDcWu": 1077.01,
     "AWkk8EtSdm19buX1S6D2XxSjf1FBXq6j9wgkTtSGzKY5": 983.09
    },
-   "peak_pct": 35.9,
+   "peak_pct": 36.1,
    "low_pct": -0.0,
-   "value": 2.5089,
+   "value": 2.5575,
    "missing": 0,
-   "last_pct": 35.51
+   "last_pct": 36.04
   },
   {
    "id": 21,
@@ -48,9 +48,9 @@
    "insiders": {},
    "peak_pct": 53.8,
    "low_pct": -38.6,
-   "value": 3.8074,
+   "value": 2.4817,
    "missing": 0,
-   "last_pct": 49.58
+   "last_pct": 35.22
   },
   {
    "id": 24,
@@ -76,9 +76,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -25.9,
-   "value": -2.9257,
+   "value": -3.0459,
    "missing": 0,
-   "last_pct": -23.36
+   "last_pct": -24.66
   },
   {
    "id": 32,
@@ -102,9 +102,9 @@
    },
    "peak_pct": 6.6,
    "low_pct": -3.5,
-   "value": -0.3669,
+   "value": -0.2984,
    "missing": 0,
-   "last_pct": 4.36
+   "last_pct": 5.1
   },
   {
    "id": 38,
@@ -156,9 +156,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -2.4,
-   "value": 0.5661,
+   "value": 0.702,
    "missing": 0,
-   "last_pct": 14.47
+   "last_pct": 15.94
   }
  ],
  "closed": [
@@ -386,7 +386,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 443,
+  "scans": 445,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2162,6 +2162,14 @@
   [
    "2026-11-28T06:26:46Z",
    72.0721
+  ],
+  [
+   "2026-11-28T06:27:46Z",
+   70.8431
+  ],
+  [
+   "2026-11-28T06:29:05Z",
+   70.8792
   ]
  ],
  "log": [
@@ -2372,10 +2380,14 @@
   {
    "t": "2026-11-28T06:17:48Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα survive [SpyDefiLive] — λίγα πορτοφόλια μάζεψαν πριν το call, ρηχό pool"
+  },
+  {
+   "t": "2026-11-28T06:29:05Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα FINGART [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T06:26:46Z",
- "next_id": 43,
+ "last_run": "2026-11-28T06:29:05Z",
+ "next_id": 44,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2403,10 +2415,40 @@
     "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 47.07
    },
    "peak_pct": 1.7,
-   "low_pct": -0.3,
-   "value": -0.6144,
+   "low_pct": -0.6,
+   "value": -0.8285,
    "missing": 0,
-   "last_pct": 1.68
+   "last_pct": -0.64
+  },
+  {
+   "id": 43,
+   "kind": "call",
+   "mint": "WZVWLfThgm14NN8HRDoyiEeXVvdUDMzGMHUS3VLpump",
+   "name": "FINGART",
+   "channel": "SpyDefiLive",
+   "entry_market": 9.946910296e-05,
+   "entry": 0.0001034478670784,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T06:29:05Z",
+   "entry_ts": 1795847345,
+   "pool": "D7yg57fPBWJYzMiJQYe4kMizuoZ8SeSVTbqMMcsxu9Pu",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "AAAMV76hrUzPZaVookC1YdeEbxLgJcxFiuXjz5dETzpa": 980.43,
+    "6Ltz4sqmdzx2moKyMcHFkkuho6tvqVxKCjHWHhm1hq5N": 923.16,
+    "AD6CQYZ68YykBvxe5QDXeYwxqDAdijWu9bMcXL5KuRdW": 897.7,
+    "2hnQdzWK4YGMd17wfLgNKTJ4Wwi2wRfUnqCZ8YHgNe28": 538.93,
+    "E3x1KGHoQWpyb6zR9RRJs1CPYrdHRgxcXbX81nySppJX": 365.13
+   },
+   "peak_pct": 0.0,
+   "low_pct": -2.3,
+   "value": -0.977,
+   "missing": 0,
+   "last_pct": -2.25
   }
  ],
  "events": [],
@@ -2452,9 +2494,10 @@
   "HpN63T13XBcp2xmM6yRkGPB5HMwxtXTghCQjooS8pump": 1795842640,
   "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h": 1795842640,
   "9TKbd3VFaMSXsEAicD9JVQWpWwAoLi4fSgWmZL2cpump": 1795843665,
-  "EaiNiPA791st8dtYYuRKqU4M2wetyRdRzk5K2VT1pump": 1795846668
+  "EaiNiPA791st8dtYYuRKqU4M2wetyRdRzk5K2VT1pump": 1795846668,
+  "WZVWLfThgm14NN8HRDoyiEeXVvdUDMzGMHUS3VLpump": 1795847345
  },
- "last_dump_check": 1795847206,
+ "last_dump_check": 1795847345,
  "shield": {
   "taken": 10,
   "taken_pnl": -31.8492,
