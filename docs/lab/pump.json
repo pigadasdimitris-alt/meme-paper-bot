@@ -3,7 +3,36 @@
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
  "balance": 63.48922685695816,
- "positions": [],
+ "positions": [
+  {
+   "id": 66,
+   "kind": "call",
+   "mint": "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump",
+   "name": "OKOWARE",
+   "channel": "SpyDefiLive",
+   "entry_market": 3.329795431e-05,
+   "entry": 3.46298724824e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T11:47:10Z",
+   "entry_ts": 1795866430,
+   "pool": "CG7LMjxL1jVhSK2HFUuWunArCWiX5nSkaMiVsnncyDnf",
+   "flags": [
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 200.6,
+    "3ErtXe3FwpvrmZdpZn5bfDMbvWNdp3sCDtNcHh2661oD": 113.96,
+    "Ar2Y6o1QmrRAskjii1cRfijeKugHH13ycxW5cd7rro1x": 106.97,
+    "3Km7UkmVA8fwesijovPUtqdQFBwMS95DQTJczJjtQnbo": 104.25,
+    "2xRWnbqNqkMFLp6HmFAEwXf4RsWPbtzpXZiRzJx3X1GL": 104.09
+   },
+   "peak_pct": 0.0,
+   "low_pct": -0.9,
+   "value": -0.8491,
+   "missing": 0,
+   "last_pct": -0.86
+  }
+ ],
  "closed": [
   {
    "id": 3,
@@ -441,7 +470,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 756,
+  "scans": 758,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -3469,6 +3498,14 @@
   [
    "2026-11-28T11:45:10Z",
    63.4892
+  ],
+  [
+   "2026-11-28T11:45:45Z",
+   63.4892
+  ],
+  [
+   "2026-11-28T11:47:10Z",
+   62.6401
   ]
  ],
  "log": [
@@ -3811,10 +3848,14 @@
   {
    "t": "2026-11-28T10:25:11Z",
    "msg": "ΚΛΕΙΣΙΜΟ Mojave — κλείδωμα κέρδους (κορυφή +51%) — -1.99$ (κορυφή +51%)"
+  },
+  {
+   "t": "2026-11-28T11:47:10Z",
+   "msg": "ΑΓΟΡΑ OKOWARE [SpyDefiLive] — call @ 3.3298e-05 · σημάδια: ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T11:45:10Z",
- "next_id": 66,
+ "last_run": "2026-11-28T11:47:10Z",
+ "next_id": 67,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -3895,9 +3936,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -10.8,
-   "value": -1.5302,
+   "value": -1.4975,
    "missing": 0,
-   "last_pct": -8.24
+   "last_pct": -7.89
   }
  ],
  "events": [],
@@ -3966,9 +4007,10 @@
   "CcpN5RXTEjbRqbtuHoxyiMZorzsghbfpeyYQjSvTgS27": 1795859085,
   "4cZsB6UgdUBTi13JMusBap9r2qGW1MPrdaSVAYkSpump": 1795859925,
   "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump": 1795860556,
-  "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump": 1795861030
+  "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump": 1795861030,
+  "ANxUJcRwevw9xcWMQNrwgpzcdeSgXzNq6hLUxGG3pump": 1795866430
  },
- "last_dump_check": 1795861511,
+ "last_dump_check": 1795866430,
  "shield": {
   "taken": 20,
   "taken_pnl": -36.5108,
