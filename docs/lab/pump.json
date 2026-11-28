@@ -28,9 +28,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -28.7,
-   "value": -1.8813,
+   "value": -1.889,
    "missing": 0,
-   "last_pct": -12.05
+   "last_pct": -12.13
   },
   {
    "id": 32,
@@ -54,9 +54,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.3195,
+   "value": -0.2247,
    "missing": 0,
-   "last_pct": 4.87
+   "last_pct": 5.9
   },
   {
    "id": 38,
@@ -108,9 +108,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -17.1,
-   "value": -1.9777,
+   "value": -1.9664,
    "missing": 0,
-   "last_pct": -13.09
+   "last_pct": -12.97
   },
   {
    "id": 48,
@@ -134,9 +134,9 @@
    },
    "peak_pct": 68.9,
    "low_pct": -10.0,
-   "value": 4.1315,
+   "value": 3.32,
    "missing": 0,
-   "last_pct": 53.09
+   "last_pct": 44.3
   }
  ],
  "closed": [
@@ -406,7 +406,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 565,
+  "scans": 567,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2670,6 +2670,14 @@
   [
    "2026-11-28T08:33:23Z",
    70.642
+  ],
+  [
+   "2026-11-28T08:34:23Z",
+   70.5191
+  ],
+  [
+   "2026-11-28T08:35:44Z",
+   69.9289
   ]
  ],
  "log": [
@@ -2944,10 +2952,14 @@
   {
    "t": "2026-11-28T08:28:44Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα MEMECARD [SpyDefiLiveSol] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη"
+  },
+  {
+   "t": "2026-11-28T08:35:44Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα mElons [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη"
   }
  ],
- "last_run": "2026-11-28T08:33:23Z",
- "next_id": 57,
+ "last_run": "2026-11-28T08:35:44Z",
+ "next_id": 58,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2974,11 +2986,11 @@
     "8SQhY4SMiFX5JinHkYDQuVcpa93mKRJPczpucDCZKMKM": 49.37,
     "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 47.07
    },
-   "peak_pct": 18.7,
+   "peak_pct": 21.7,
    "low_pct": -5.2,
-   "value": -0.2138,
+   "value": 0.795,
    "missing": 0,
-   "last_pct": 6.02
+   "last_pct": 16.95
   },
   {
    "id": 44,
@@ -3028,9 +3040,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -3.5,
-   "value": -1.0883,
+   "value": -0.8592,
    "missing": 0,
-   "last_pct": -3.46
+   "last_pct": -0.97
   },
   {
    "id": 56,
@@ -3055,11 +3067,40 @@
     "6mqJKZRT84mwiDoPFgW3yerVcbUw8RiYHKLtnL2uvCnR": 266.56,
     "2vEtW6BQtd5Ag3AYeidEmVi2DVKe8spoM9fDAiWcvkNT": 262.12
    },
-   "peak_pct": 19.1,
+   "peak_pct": 33.6,
    "low_pct": 0.0,
-   "value": 0.9912,
+   "value": 2.3311,
    "missing": 0,
-   "last_pct": 19.07
+   "last_pct": 33.59
+  },
+  {
+   "id": 57,
+   "kind": "call",
+   "mint": "BF96JuMxsA6rSs1Ab7kq5VATDq4wd1eKNnTDu3YXLuff",
+   "name": "mElons",
+   "channel": "SpyDefiLive",
+   "entry_market": 3.352815513e-05,
+   "entry": 3.4869281335200004e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T08:35:44Z",
+   "entry_ts": 1795854944,
+   "pool": "5QSwhk6KHcZyWgkL1iiJXFAgi7veTM59zFEFD4Dj7i7b",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη"
+   ],
+   "insiders": {
+    "25sAQfNMLv8MyUder48xBipjyk8uE81JJirQwRtRQDvb": 103.68,
+    "52M4B8gnzN7pQ4ELd7rALaZtMWfYMNBY2kgx2BtpQCy5": 96.51,
+    "6cjWLNimnhpx8fSdBbauyMZMWLmBpjZ4PYSS7RmtAqGS": 89.3,
+    "8dX3S6rw6517PVzNfwVVPS8AH3qtSUanQWHCRrHMm7RW": 82.17,
+    "6HtMPMmAMLmJxqbj6WpizuQF1Nbp5XgWx3DBWKxtBVgE": 77.82
+   },
+   "peak_pct": 6.7,
+   "low_pct": 0.0,
+   "value": -0.152,
+   "missing": 0,
+   "last_pct": 6.69
   }
  ],
  "events": [],
@@ -3119,9 +3160,10 @@
   "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605,
   "4SuU3DJ7RGMmjQAMjPyeQPP7HRMaAd5gqZuPp26Dpump": 1795853799,
   "BW98q4cYxCeJM3uoB43Yy2e1EcjF4fPpeAuRkrhWpump": 1795853799,
-  "56mtGRjxa676X3AyzTpnqVzPjd42wM7K7xBqFkRq55Wu": 1795854524
+  "56mtGRjxa676X3AyzTpnqVzPjd42wM7K7xBqFkRq55Wu": 1795854524,
+  "BF96JuMxsA6rSs1Ab7kq5VATDq4wd1eKNnTDu3YXLuff": 1795854944
  },
- "last_dump_check": 1795854803,
+ "last_dump_check": 1795854944,
  "shield": {
   "taken": 12,
   "taken_pnl": -29.5451,
