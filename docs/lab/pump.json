@@ -2,7 +2,7 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 66.1848712523168,
+ "balance": 65.49076626565918,
  "positions": [
   {
    "id": 32,
@@ -26,9 +26,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.2141,
+   "value": -0.2405,
    "missing": 0,
-   "last_pct": 6.01
+   "last_pct": 5.73
   },
   {
    "id": 38,
@@ -55,32 +55,6 @@
    "value": 0.5691,
    "missing": 0,
    "last_pct": 14.5
-  },
-  {
-   "id": 48,
-   "kind": "call",
-   "mint": "HmGQsYJyeiWrV6jABUY2Cb3bEmVxwk6LzVxCchsCpump",
-   "name": "WLFI",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0002138594776,
-   "entry": 0.000222413856704,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T07:03:58Z",
-   "entry_ts": 1795849438,
-   "pool": "46973pyxHLtcjiZYtMZaQTYQji6yaxHTHqhqoc74VwCB",
-   "flags": [],
-   "insiders": {
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 2092.64,
-    "333hex7YqrBghiDz7Da4gZaQKu7Y9cdKUzcFXMsBXEDr": 420.37,
-    "73R2CY8TwH2gW16vcj1QUPJ1bC4i5jurrW44w6oNms9S": 343.48,
-    "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 327.21,
-    "CRwjThpc6X7M6bhqhchZC2SPCTvFeFHvYRjvrZmSW8FK": 317.73
-   },
-   "peak_pct": 68.9,
-   "low_pct": -10.0,
-   "value": 1.9043,
-   "missing": 0,
-   "last_pct": 28.96
   }
  ],
  "closed": [
@@ -385,6 +359,26 @@
    "pnl_pct": -25.87,
    "reason": "dump: οι insiders πούλησαν 204%",
    "hold_min": 193.7
+  },
+  {
+   "id": 48,
+   "kind": "call",
+   "mint": "HmGQsYJyeiWrV6jABUY2Cb3bEmVxwk6LzVxCchsCpump",
+   "name": "WLFI",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T07:03:58Z",
+   "entry_market": 0.0002138594776,
+   "flags": [],
+   "peak_pct": 68.9,
+   "low_pct": -10.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T08:59:24Z",
+   "exit_market": 0.0002156,
+   "pnl": -0.6941,
+   "pnl_pct": -6.94,
+   "reason": "κλείδωμα κέρδους (κορυφή +69%)",
+   "hold_min": 115.4
   }
  ],
  "seen": {},
@@ -394,7 +388,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 589,
+  "scans": 591,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2754,6 +2748,14 @@
   [
    "2026-11-28T08:58:45Z",
    68.4442
+  ],
+  [
+   "2026-11-28T08:59:24Z",
+   65.7983
+  ],
+  [
+   "2026-11-28T09:00:45Z",
+   65.8194
   ]
  ],
  "log": [
@@ -3048,9 +3050,13 @@
   {
    "t": "2026-11-28T08:56:45Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα ASCEND [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
+  },
+  {
+   "t": "2026-11-28T08:59:24Z",
+   "msg": "ΚΛΕΙΣΙΜΟ WLFI — κλείδωμα κέρδους (κορυφή +69%) — -0.69$ (κορυφή +69%)"
   }
  ],
- "last_run": "2026-11-28T08:58:45Z",
+ "last_run": "2026-11-28T09:00:45Z",
  "next_id": 60,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -3080,9 +3086,9 @@
    },
    "peak_pct": 21.7,
    "low_pct": -5.2,
-   "value": -0.0252,
+   "value": 0.2294,
    "missing": 0,
-   "last_pct": 8.06
+   "last_pct": 10.82
   },
   {
    "id": 44,
@@ -3159,11 +3165,11 @@
     "8dX3S6rw6517PVzNfwVVPS8AH3qtSUanQWHCRrHMm7RW": 82.17,
     "6HtMPMmAMLmJxqbj6WpizuQF1Nbp5XgWx3DBWKxtBVgE": 77.82
    },
-   "peak_pct": 80.0,
+   "peak_pct": 88.5,
    "low_pct": 0.0,
-   "value": 6.6152,
+   "value": 7.3998,
    "missing": 0,
-   "last_pct": 80.0
+   "last_pct": 88.5
   },
   {
    "id": 58,
@@ -3188,11 +3194,11 @@
     "8D6D6wWzXXZ4S4dQidFiuX7ev6zcqXwTAM8zYcaxLGfu": 204.78,
     "886HQEJt6KNMaZJRNkQvkVUK6nLVvQ8AHfYAmAqmaTR7": 197.1
    },
-   "peak_pct": 33.4,
+   "peak_pct": 64.5,
    "low_pct": -4.8,
-   "value": 2.3129,
+   "value": 3.3873,
    "missing": 0,
-   "last_pct": 33.39
+   "last_pct": 45.03
   }
  ],
  "events": [],
@@ -3257,10 +3263,10 @@
   "6zYqYgrSVHz3f4dGHUuwNKnDvwjzHqEAxyekmhzRpump": 1795856085,
   "F5DxJtHaFNnxdjBXounqM3xXMSqSSLgJ5u8yt5m5pump": 1795856205
  },
- "last_dump_check": 1795856244,
+ "last_dump_check": 1795856364,
  "shield": {
-  "taken": 14,
-  "taken_pnl": -33.8152,
+  "taken": 15,
+  "taken_pnl": -34.5093,
   "blocked": 37,
   "blocked_pnl": -116.2853
  },
