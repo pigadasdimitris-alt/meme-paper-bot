@@ -54,11 +54,11 @@
     "3XDQLzmKw1Qd2DA2NoXUqWi5maH5YDnGcTEC7vfNDcWu": 1077.01,
     "AWkk8EtSdm19buX1S6D2XxSjf1FBXq6j9wgkTtSGzKY5": 983.09
    },
-   "peak_pct": 22.8,
+   "peak_pct": 23.1,
    "low_pct": -0.0,
-   "value": 1.3054,
+   "value": 1.3594,
    "missing": 0,
-   "last_pct": 22.48
+   "last_pct": 23.06
   },
   {
    "id": 21,
@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 3.2,
    "low_pct": -31.7,
-   "value": -3.4583,
+   "value": -3.6419,
    "missing": 0,
-   "last_pct": -29.13
+   "last_pct": -31.12
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -4.4,
-   "value": -0.5552,
+   "value": -0.5382,
    "missing": 0,
-   "last_pct": 2.32
+   "last_pct": 2.5
   },
   {
    "id": 27,
@@ -132,9 +132,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -13.0,
-   "value": -1.2908,
+   "value": -1.2635,
    "missing": 0,
-   "last_pct": -5.65
+   "last_pct": -5.35
   }
  ],
  "closed": [
@@ -296,7 +296,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 260,
+  "scans": 262,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1340,6 +1340,14 @@
   [
    "2026-11-28T03:20:40Z",
    64.9594
+  ],
+  [
+   "2026-11-28T03:21:29Z",
+   64.8478
+  ],
+  [
+   "2026-11-28T03:22:39Z",
+   64.8741
   ]
  ],
  "log": [
@@ -1484,7 +1492,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα VICECAT [SpyDefiLive] — οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T03:20:40Z",
+ "last_run": "2026-11-28T03:22:39Z",
  "next_id": 29,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -1517,36 +1525,6 @@
    "value": -1.2926,
    "missing": 0,
    "last_pct": -5.67
-  },
-  {
-   "id": 26,
-   "kind": "call",
-   "mint": "5JRNV7dJztArZLPtmt38CYvbypzcUsUtDu6Y26xQpump",
-   "name": "小猫仙人",
-   "channel": "SpyDefiLive",
-   "entry_market": 8.142395256e-06,
-   "entry": 8.46809106624e-06,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T02:52:44Z",
-   "entry_ts": 1795834364,
-   "pool": "x9fwQegMgXZ7jdKkT9ryCeFbswpxVkkWhSCSW6Gwyk5",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ρηχό pool",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "FpaNtqx2zxYC635bRM37KDCVBnwEnvU3f6euj4UFEMnN": 282.92,
-    "2DNUufc1HGToseNS8wkWZvigpJ6UEpucxQ3ZnJUjBG8Q": 280.69,
-    "8RB5cwrwHrxotxFURLWKH21MjkzeA93vGtLfqBbgKEiG": 211.91,
-    "2mpYrCv8XifEaB1JsaRZwiGkKpQP6V6DpHdomnLLGud5": 177.17,
-    "BRx8TP6HsD9srJ62rcYizjAHyZ5mt3cp8wPBEZioTsym": 176.75
-   },
-   "peak_pct": 0.0,
-   "low_pct": 0.0,
-   "value": 0.0,
-   "missing": 29
   }
  ],
  "events": [],
@@ -1584,8 +1562,8 @@
  "shield": {
   "taken": 7,
   "taken_pnl": -34.6421,
-  "blocked": 14,
-  "blocked_pnl": -20.5182
+  "blocked": 15,
+  "blocked_pnl": -30.0567
  },
  "shadow_closed": [
   {
@@ -1911,6 +1889,31 @@
    "pnl_pct": -58.67,
    "reason": "SL -40%",
    "hold_min": 6.8
+  },
+  {
+   "id": 26,
+   "kind": "call",
+   "mint": "5JRNV7dJztArZLPtmt38CYvbypzcUsUtDu6Y26xQpump",
+   "name": "小猫仙人",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T02:52:44Z",
+   "entry_market": 8.142395256e-06,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": 0.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T03:21:29Z",
+   "exit_market": 4.0711976280000006e-07,
+   "pnl": -9.5385,
+   "pnl_pct": -95.38,
+   "reason": "χάθηκε η τιμή (rug;)",
+   "hold_min": 28.8
   }
  ]
 }
