@@ -28,9 +28,9 @@
    },
    "peak_pct": 51.3,
    "low_pct": -32.9,
-   "value": 3.0992,
+   "value": 2.7474,
    "missing": 0,
-   "last_pct": 41.91
+   "last_pct": 38.1
   },
   {
    "id": 7,
@@ -53,10 +53,10 @@
     "3fykQiUrDp3YkZTxmqSvCniq8jNy3mfHg3cjUAFm8x4C": 86.18
    },
    "peak_pct": 13.1,
-   "low_pct": -2.1,
-   "value": -0.3104,
+   "low_pct": -4.3,
+   "value": -1.1655,
    "missing": 0,
-   "last_pct": 4.97
+   "last_pct": -4.29
   }
  ],
  "closed": [
@@ -90,7 +90,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 112,
+  "scans": 114,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -542,6 +542,14 @@
   [
    "2026-11-28T00:51:28Z",
    98.2035
+  ],
+  [
+   "2026-11-28T00:52:31Z",
+   97.3207
+  ],
+  [
+   "2026-11-28T00:53:28Z",
+   96.9966
   ]
  ],
  "log": [
@@ -586,7 +594,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Vicewire [SpyDefiLive] — οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T00:51:28Z",
+ "last_run": "2026-11-28T00:53:28Z",
  "next_id": 10,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -645,38 +653,9 @@
    },
    "peak_pct": 94.0,
    "low_pct": 0.0,
-   "value": 5.8152,
+   "value": 5.172,
    "missing": 0,
-   "last_pct": 71.33
-  },
-  {
-   "id": 9,
-   "kind": "call",
-   "mint": "viCEWiReoWxwmRRfGmWmpP1FFdB8Jm8PzZChVJ9dvg6",
-   "name": "Vicewire",
-   "channel": "SpyDefiLive",
-   "entry_market": 4.878566168e-05,
-   "entry": 5.07370881472e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T00:50:31Z",
-   "entry_ts": 1795827031,
-   "pool": "88T4NHVEEieMQ4LFxa2Juew2VcnBkzyDueFgsfrR2VLG",
-   "flags": [
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 419.09,
-    "Cx676pbEZicYs2Y8177D9SG8XEYWRrBqPDxLLVi1t6uX": 296.14,
-    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 206.73,
-    "F7p3dFrjRTbtRp8FRF6qHLomXbKRBzpvBLjtQcfcgmNe": 144.89,
-    "4BMB6mPAi7Adq1hxckqaSgggwdtJM1Fss9tzyQ6ypEPD": 140.7
-   },
-   "peak_pct": 4.1,
-   "low_pct": -14.1,
-   "value": -2.0702,
-   "missing": 0,
-   "last_pct": -14.09
+   "last_pct": 64.36
   }
  ],
  "events": [],
@@ -691,12 +670,12 @@
   "9G9Ssh55SZEoniFjMrMefug9fBy67bUvHzWAxb5Ypump": 1795826191,
   "viCEWiReoWxwmRRfGmWmpP1FFdB8Jm8PzZChVJ9dvg6": 1795827031
  },
- "last_dump_check": 1795827031,
+ "last_dump_check": 1795827151,
  "shield": {
   "taken": 1,
   "taken_pnl": -4.5853,
-  "blocked": 3,
-  "blocked_pnl": -2.4198
+  "blocked": 4,
+  "blocked_pnl": -7.6441
  },
  "shadow_closed": [
   {
@@ -768,6 +747,29 @@
    "pnl_pct": -50.93,
    "reason": "SL -40%",
    "hold_min": 11.0
+  },
+  {
+   "id": 9,
+   "kind": "call",
+   "mint": "viCEWiReoWxwmRRfGmWmpP1FFdB8Jm8PzZChVJ9dvg6",
+   "name": "Vicewire",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T00:50:31Z",
+   "entry_market": 4.878566168e-05,
+   "flags": [
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 4.1,
+   "low_pct": -48.3,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T00:53:28Z",
+   "exit_market": 2.524e-05,
+   "pnl": -5.2243,
+   "pnl_pct": -52.24,
+   "reason": "SL -40%",
+   "hold_min": 3.0
   }
  ]
 }
