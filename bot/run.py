@@ -10,7 +10,7 @@ from pathlib import Path
 import contextlib
 import urllib.request
 
-from . import attention, calls, compress, orb, pump, config as C
+from . import attention, calls, calls_exit, compress, orb, pump, config as C
 from . import copybot, data, engine, live, majors
 from .report import write_readme
 
@@ -236,7 +236,9 @@ _CSH = {}   # κοινά κεριά/τιμές για όλες τις παραλ
 MAJORS = {"orb": ("ORB Nasdaq (QQQ)", orb.EPOCH, orb.cycle),
           "attention": ("Attention (CoinGecko trending)", attention.EPOCH, attention.cycle),
           "calls": ("Telegram calls", calls.EPOCH, calls.cycle),
-          "pump": ("Pump & Dump", pump.EPOCH, pump.cycle)}
+          "pump": ("Pump & Dump", pump.EPOCH, pump.cycle),
+          "calls_half": ("Calls · μισά στο +50%", calls_exit.EPOCH, lambda st: calls_exit.cycle(st, "calls_half")),
+          "calls_tp50": ("Calls · στόχος +50%", calls_exit.EPOCH, lambda st: calls_exit.cycle(st, "calls_tp50"))}
 for _k, _lbl in (("compress_vol2", "Compression · όγκος 2×"), ("compress_calm_t2", "Compression · ήρεμη αγορά + trail 2")):
     MAJORS[_k] = (_lbl, "2026-11-27-" + _k,
                   (lambda P: (lambda st: compress.cycle(st, P=P, shared=_CSH)))(compress.VARIANTS[_k]))

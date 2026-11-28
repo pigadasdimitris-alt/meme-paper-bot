@@ -802,3 +802,30 @@ def test_calls_profit_lock():
     for i, px in enumerate([1.6, 1.3, 1.08]):
         calls.cycle(st, t + timedelta(minutes=i + 1), price_fn=lambda ms, px=px: {"M": (px, 20000.0, "M")})
     assert not st["positions"] and st["closed"][0]["reason"].startswith("κλείδωμα")
+
+
+def test_calls_exit_variants_and_wallets():
+    from datetime import timedelta
+    from bot import calls_exit, majors, pump
+    t = engine.now_utc()
+    m = "D" * 32 + "pump"
+    px = {"v": 1.0}
+    pf = lambda ms: {x: (px["v"], 20000.0, "D") for x in ms}
+    sh = majors.new_state(t, calls_exit.EPOCH, "calls_half")
+    tp = majors.new_state(t, calls_exit.EPOCH, "calls_tp50")
+    for st, k in ((sh, "calls_half"), (tp, "calls_tp50")):
+        calls_exit.cycle(st, k, t, feed=[("c", 1, t, "x", [m])], price_fn=pf)
+        assert len(st["positions"]) == 1
+    px["v"] = 1.6
+    for st, k in ((sh, "calls_half"), (tp, "calls_tp50")):
+        calls_exit.cycle(st, k, t + timedelta(minutes=1), feed=[], price_fn=pf)
+    assert not tp["positions"] and tp["closed"][0]["pnl"] > 4          # όλο στο +50%
+    assert sh["positions"][0]["notional"] == 5.0 and sh["balance"] > 100   # μισά πουλήθηκαν
+    px["v"] = 0.99
+    calls_exit.cycle(sh, "calls_half", t + timedelta(minutes=2), feed=[], price_fn=pf)
+    assert not sh["positions"] and sh["closed"][0]["reason"].startswith("stop στην είσοδο") and sh["closed"][0]["pnl"] > 0
+    st = majors.new_state(t, pump.EPOCH, "pump")
+    for i in range(3):
+        pump.record_wallets(st, {"W1": 50.0, "W2": 10.0}, f"mint{i}", "c", t)
+    pump.record_wallets(st, {"W1": 50.0}, "mint0", "c", t)               # ίδιο mint δεν μετράει ξανά
+    assert st["wallets"]["W1"]["n"] == 3 and st["repeat_wallets"] == 2

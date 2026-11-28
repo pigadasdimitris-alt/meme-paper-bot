@@ -32,6 +32,7 @@ HANDLE = re.compile(r"(?:t\.me/|telegram\.me/|@)([A-Za-z][A-Za-z0-9_]{4,31})")
 SKIP_H = ("addlist", "joinchat", "share", "iv", "proxy", "socks", "s", "c")
 EPOCH = "2026-11-28-calls"
 FEED = []   # κάθε νέο μήνυμα των καναλιών (για το bot Pump & Dump): (κανάλι, id, ώρα, κείμενο, διευθύνσεις)
+SUBS = {"pump": FEED}   # κάθε συνδρομητής (Pump & Dump, παραλλαγές εξόδου) παίρνει δικό του αντίγραφο
 DS_TOK = "https://api.dexscreener.com/latest/dex/tokens/"
 UA = {"User-Agent": "meme-paper-bot/1.0 (paper research)", "Accept": "text/html,application/json"}
 B58 = re.compile(r"(?<![1-9A-HJ-NP-Za-km-z])[1-9A-HJ-NP-Za-km-z]{32,44}(?![1-9A-HJ-NP-Za-km-z])")
@@ -228,7 +229,8 @@ def cycle(st, now=None, fetch_fn=None, price_fn=ds_tokens, channels=None, page_f
                 if first_time or mid <= c.get("last_id", 0):
                     continue
                 c["posts"] = c.get("posts", 0) + 1
-                FEED.append((name, mid, when, text, addrs))
+                for q in SUBS.values():
+                    q.append((name, mid, when, text, addrs))
                 if addrs:
                     c["calls"] = c.get("calls", 0) + 1
                     age = (now - when).total_seconds() / 60 if when else 0

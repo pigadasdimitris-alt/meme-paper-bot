@@ -111,6 +111,29 @@ def risk(mint, now, pool_fn=gt_pool, trades_fn=gt_trades, ohlcv_fn=gt_ohlcv):
     return info
 
 
+# ---------------- 2β. συλλογή πορτοφολιών (για τη μελλοντική στρατηγική «ακολουθούμε τους insiders») ----------------
+
+def record_wallets(st, insiders, mint, channel, now):
+    """Κρατά ποια πορτοφόλια ήταν στους 5 μεγαλύτερους αγοραστές την ώρα ΠΡΙΝ από κάθε call."""
+    W = st.setdefault("wallets", {})
+    for w, usd in insiders.items():
+        if not w:
+            continue
+        x = W.setdefault(w, {"n": 0, "usd": 0.0, "mints": [], "channels": [], "first": engine.iso(now)})
+        if mint in x["mints"]:
+            continue
+        x["n"] += 1
+        x["usd"] = round(x["usd"] + usd, 2)
+        x["mints"] = (x["mints"] + [mint])[-10:]
+        if channel not in x["channels"]:
+            x["channels"] = (x["channels"] + [channel])[-5:]
+        x["last"] = engine.iso(now)
+    if len(W) > 3000:          # κρατάμε τα πιο «επαναλαμβανόμενα»
+        for w in sorted(W, key=lambda w: (W[w]["n"], W[w].get("last", "")))[:len(W) - 3000]:
+            del W[w]
+    st["repeat_wallets"] = sum(1 for x in W.values() if x["n"] >= 3)
+
+
 # ---------------- θέσεις ----------------
 
 def _open(st, now, kind, mint, name, channel, price, info, shadow=False, extra=None):
@@ -282,6 +305,7 @@ def cycle(st, now=None, feed=None, price_fn=calls.ds_tokens, risk_fn=risk, trade
             if not info:
                 continue
             seen[mint] = now_s
+            record_wallets(st, info.get("insiders") or {}, mint, channel, now)
             shadow = len(info["flags"]) > RISK_MAX
             if not shadow and len(st["positions"]) >= MAX_OPEN:
                 break
