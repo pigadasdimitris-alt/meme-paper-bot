@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Εργαστήριο">
@@ -17,7 +17,9 @@
     --px:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;background:var(--bg);color:var(--text)}
+  html,body{margin:0;background:var(--bg);color:var(--text);touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;max-width:100%}
+  *{-webkit-tap-highlight-color:transparent}
+  .desk,.row,.boss,.plate,.bubble,button{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
   body{font:15px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;-webkit-font-smoothing:antialiased;
     padding:env(safe-area-inset-top) 0 calc(30px + env(safe-area-inset-bottom));
     background:radial-gradient(ellipse at 50% 0%,#2c1458 0%,var(--bg) 60%) fixed}
@@ -164,6 +166,12 @@
 <div id="sheet"><div class="pane" id="pane"></div></div>
 
 <script>
+(function(){
+  document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
+  document.addEventListener("gesturechange",e=>e.preventDefault(),{passive:false});
+  document.addEventListener("touchmove",e=>{ if(e.touches&&e.touches.length>1) e.preventDefault(); },{passive:false});
+})();
+
 const OWNER="pigadasdimitris-alt", REPO="meme-paper-bot";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -293,8 +301,8 @@ function drawScene(){
   document.querySelectorAll(".desk").forEach(el=>el.onclick=()=>openDetail(el.dataset.k));
   const best=ROWS[0], worst=ROWS[ROWS.length-1];
   SAY=[];
-  if(best) SAY.push(`Boss, πρώτη θέση: ${info(best.key).nick} με ${sgn(100*(best.equity/best.start-1))}%.`);
-  if(worst&&worst!==best) SAY.push(`Boss, υπό παρακολούθηση: ${info(worst.key).nick} στο ${sgn(100*(worst.equity/worst.start-1))}%.`);
+  if(best) SAY.push(`Boss, πρώτη θέση: ${info(best.key).nick} με ${sgnUsd(best.equity-best.start)}.`);
+  if(worst&&worst!==best) SAY.push(`Boss, υπό παρακολούθηση: ${info(worst.key).nick} στο ${sgnUsd(worst.equity-worst.start)}.`);
   SAY.push(open?`Boss, ${open} θέσεις ανοιχτές τώρα.`:"Boss, καμία ανοιχτή θέση. Τα bots περιμένουν σήματα.");
   const reg=(ST.compress||{}).btc_regime; if(reg) SAY.push(`Boss, η αγορά του BTC είναι ${reg}: η Compression ψάχνει μόνο ${reg==="ανοδικό"?"long":"short"}.`);
   const ev=allEvents()[0]; if(ev) SAY.push(`Boss, νέο από ${ev.who}: ${ev.txt}`);
