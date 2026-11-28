@@ -788,3 +788,17 @@ def test_pump_schedule_parse_and_fast_window():
     assert st["events"][0]["done"] and st["closed"], st["log"][-3:]
     tr = st["closed"][0]
     assert tr["kind"] == "scheduled" and 6 <= tr["sec_after"] <= 12 and tr["reason"].startswith("TP")
+
+
+def test_calls_profit_lock():
+    from datetime import timedelta
+    from bot import calls, majors
+    t = engine.now_utc()
+    st = majors.new_state(t, calls.EPOCH, "calls")
+    st["last_fetch"] = int(t.timestamp()) + 10 ** 6
+    st["positions"].append({"id": 1, "mint": "M", "name": "M", "channel": "c", "msg": 1, "entry_market": 1.0,
+                            "entry": 1.04, "notional": 10.0, "entry_time": engine.iso(t), "entry_ts": int(t.timestamp()),
+                            "delay_min": 0, "peak_pct": 0.0, "low_pct": 0.0, "value": 0.0})
+    for i, px in enumerate([1.6, 1.3, 1.08]):
+        calls.cycle(st, t + timedelta(minutes=i + 1), price_fn=lambda ms, px=px: {"M": (px, 20000.0, "M")})
+    assert not st["positions"] and st["closed"][0]["reason"].startswith("κλείδωμα")

@@ -180,6 +180,8 @@ def _manage(st, now, price_fn, trades_fn, shadow=False):
             _close(st, p, price * 0.5, now, "rug (έφυγε η ρευστότητα)", shadow)
         elif move >= tp:
             _close(st, p, price, now, f"TP +{int(tp * 100)}%", shadow)
+        elif not sched and p["peak_pct"] >= 100 * calls.LOCK_AT and move <= calls.LOCK_FLOOR:
+            _close(st, p, price, now, f"κλείδωμα κέρδους (κορυφή +{p['peak_pct']:.0f}%)", shadow)
         elif move <= sl:
             _close(st, p, price, now, f"SL {int(sl * 100)}%", shadow)
         elif now_s - p["entry_ts"] >= max_s:

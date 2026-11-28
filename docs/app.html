@@ -55,6 +55,7 @@
   .sprite{width:100%;max-width:120px;height:auto;display:block;margin:0 auto}
   .plate{margin-top:2px;font:800 10px/1.2 var(--px);letter-spacing:.3px;text-transform:uppercase;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .plate i.job{color:#e9dcff;white-space:normal;line-height:1.15;min-height:2.3em;font-size:9.5px}
   .plate i{font-style:normal;display:block;color:var(--sub);font-weight:600;letter-spacing:0;text-transform:none;font-size:10px;margin-top:1px}
   .boss{grid-column:1/-1;margin:6px 0;padding:10px;border-radius:16px;border:2px solid #7a55d8;position:relative;
     background:linear-gradient(160deg,rgba(199,155,255,.22),rgba(255,106,213,.10) 60%,rgba(16,8,33,.6));box-shadow:0 0 40px rgba(199,155,255,.30),0 0 30px rgba(199,155,255,.18) inset}
@@ -168,29 +169,29 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 const INFO={
-  trench:{file:"lab/trench.json",nick:"Trench",col:"#ff9f43",hair:"#5a2d0c",skin:"#f1c27d",
+  trench:{job:"Νέα coins του pump.fun",file:"lab/trench.json",nick:"Trench",col:"#ff9f43",hair:"#5a2d0c",skin:"#f1c27d",
     desc:"Coins που μόλις «αποφοίτησαν» από το pump.fun, με τα φίλτρα του βίντεο: λίγοι μεγάλοι κάτοχοι, όγκος πάνω από το market cap, 100+ κάτοχοι. Έξοδος +50%, −25% ή 1 ώρα. Κόστος 4% ανά πλευρά. Ελέγχει θέσεις κάθε 15\"."},
-  orb:{file:"lab/orb.json",nick:"ORB Nasdaq",col:"#7c6cff",hair:"#1b1b2f",skin:"#e0ac69",
+  orb:{job:"Nasdaq: 1ο κερί της μέρας",file:"lab/orb.json",nick:"ORB Nasdaq",col:"#7c6cff",hair:"#1b1b2f",skin:"#e0ac69",
     desc:"Nasdaq (QQQ). Στις 16:30 κοιτάει το πρώτο κερί 5 λεπτών: αν ανέβηκε αγοράζει, αν έπεσε κάνει short. Stop στο άλλο άκρο, στόχος 10× το ρίσκο, αλλιώς κλείνει στις 22:55. Έρευνα Zarattini & Aziz."},
-  compress:{file:"lab/compress.json",nick:"Compression",col:"#ff4d8d",hair:"#2b2b2b",skin:"#c68642",
+  compress:{job:"Σπασίματα σε 11 coins",file:"lab/compress.json",nick:"Compression",col:"#ff4d8d",hair:"#2b2b2b",skin:"#c68642",
     desc:"Volatility Compression (baseline, ανέγγιχτο). Περιμένει ακραία ησυχία (στενές Bollinger) σε 11 μεγάλα coins και μπαίνει στο σπάσιμο του εύρους με δυνατό όγκο. Long μόνο σε ανοδικό BTC, short σε καθοδικό. Στον έλεγχο: ~15%/χρόνο, πτώση έως −50%."},
-  compress_vol2:{file:"lab/compress_vol2.json",nick:"Comp · Όγκος 2×",col:"#c06cff",hair:"#4a2511",skin:"#f1c27d",
+  compress_vol2:{job:"Σπασίματα με διπλό όγκο",file:"lab/compress_vol2.json",nick:"Comp · Όγκος 2×",col:"#c06cff",hair:"#4a2511",skin:"#f1c27d",
     desc:"Compression με αυστηρότερο όγκο (2× αντί 1,5×). Backtest 2022–2026: ~35%/χρόνο, πτώση έως −26%."},
-  compress_calm_t2:{file:"lab/compress_calm_t2.json",nick:"Comp · Ήρεμη+T2",col:"#2fd0e0",hair:"#e6c15a",skin:"#ffdbac",
+  compress_calm_t2:{job:"Σπασίματα σε ήρεμη αγορά",file:"lab/compress_calm_t2.json",nick:"Comp · Ήρεμη+T2",col:"#2fd0e0",hair:"#e6c15a",skin:"#ffdbac",
     desc:"Compression μόνο όταν η αγορά του BTC είναι ήρεμη, με πιο γρήγορη έξοδο (trailing 2×ATR). Η πιο σταθερή: θετική 4/5 χρόνια, πτώση έως −22%."},
-  compress_vol2_t2:{file:"lab/compress_vol2_t2.json",nick:"Comp · Όγκος+T2",col:"#5ac8fa",hair:"#6b3e26",skin:"#e0ac69",
+  compress_vol2_t2:{job:"Σπασίματα, γρήγορη έξοδος",file:"lab/compress_vol2_t2.json",nick:"Comp · Όγκος+T2",col:"#5ac8fa",hair:"#6b3e26",skin:"#e0ac69",
     desc:"Compression με όγκο 2× και trailing 2×ATR. Η μικρότερη πτώση στο backtest (−14%), ~26%/χρόνο."},
-  attention:{file:"lab/attention.json",nick:"Attention",col:"#ffd23f",hair:"#111",skin:"#f1c27d",
+  attention:{job:"Trending του CoinGecko",file:"lab/attention.json",nick:"Attention",col:"#ffd23f",hair:"#111",skin:"#f1c27d",
     desc:"Δοκιμάζει αν η προσοχή του κόσμου προηγείται της τιμής. Κάθε ώρα διαβάζει τα trending του CoinGecko· όταν ένα coin μπαίνει πρώτη φορά και υπάρχει στο Hyperliquid, αγοράζει 10$ για 24 ώρες. Μετράει και το BTC για σύγκριση."},
-  calls:{file:"lab/calls.json",nick:"Telegram Calls",col:"#29b6f6",hair:"#222",skin:"#c68642",
-    desc:"Διαβάζει κάθε 2 λεπτά δημόσια κανάλια Telegram με calls. Σε νέο call (Solana, ρευστότητα ≥5K$) αγοράζει 10$ τη στιγμή που το διαβάζει. Έξοδος +100% / −40% / 12 ώρες. Μετράει ποια κανάλια ποστάρουν και ποια βγάζουν λεφτά."},
-  pump:{file:"lab/pump.json",nick:"Pump & Dump",col:"#ff3b5c",hair:"#111",skin:"#e0ac69",
+  calls:{job:"Calls από Telegram",file:"lab/calls.json",nick:"Telegram Calls",col:"#29b6f6",hair:"#222",skin:"#c68642",
+    desc:"Διαβάζει κάθε 2 λεπτά δημόσια κανάλια Telegram με calls. Σε νέο call (Solana, ρευστότητα ≥5K$) αγοράζει 10$ τη στιγμή που το διαβάζει. Έξοδος +100% / −40% / 12 ώρες· αν φτάσει +50%, κλειδώνει κέρδος και πουλάει αν γυρίσει στο +10%. Μετράει ποια κανάλια ποστάρουν και ποια βγάζουν λεφτά."},
+  pump:{job:"Κυνηγά στημένα pumps",file:"lab/pump.json",nick:"Pump & Dump",col:"#ff3b5c",hair:"#111",skin:"#e0ac69",
     desc:"Κυνηγάει τα στημένα pumps των καναλιών Telegram. Ασπίδα: πριν από κάθε call ελέγχει αν έχει ήδη φουσκώσει, αν λίγα πορτοφόλια (insiders) μάζεψαν πριν και αν πουλάνε ήδη· με 2+ σημάδια δεν αγοράζει (μετράει όμως τι θα γινόταν). Βγαίνει όταν πουλάνε οι insiders. Στα προγραμματισμένα pumps («στις 16:00 GMT») μπαίνει σε γρήγορη λειτουργία και μπαίνει μόλις βγει το CA."},
-  funding:{file:"lab/funding.json",nick:"Funding",col:"#3ef08a",hair:"#777",skin:"#ffdbac",
+  funding:{job:"Εισπράττει funding",file:"lab/funding.json",nick:"Funding",col:"#3ef08a",hair:"#777",skin:"#ffdbac",
     desc:"BTC, ETH, SOL: μισό αγορά, μισό short, άρα η τιμή δεν τον επηρεάζει. Εισπράττει το ωριαίο funding. Backtest 6 μηνών ~3,3%/χρόνο, κάθε μήνας θετικός. Ο πήχης για όλους."},
-  trend:{file:"lab/trend.json",nick:"Trend",col:"#4d9bff",hair:"#c9a227",skin:"#e0ac69",
+  trend:{job:"Ακολουθεί την τάση",file:"lab/trend.json",nick:"Trend",col:"#4d9bff",hair:"#c9a227",skin:"#e0ac69",
     desc:"BTC, ETH, SOL: κρατάει μόνο όταν ο μέσος 50 ωρών είναι πάνω από τον μέσο 200 ωρών. Αλλιώς μετρητά."},
-  copy:{file:"copy.json",nick:"Copy",col:"#a898d6",hair:"#333",skin:"#f1c27d",desc:"Αντιγραφή πορτοφολιών (σταματημένο)."},
+  copy:{job:"Αντιγράφει πορτοφόλια",file:"copy.json",nick:"Copy",col:"#a898d6",hair:"#333",skin:"#f1c27d",desc:"Αντιγραφή πορτοφολιών (σταματημένο)."},
 };
 const info=k=>INFO[k]||{file:`lab/${k}.json`,nick:k,col:"#a898d6",hair:"#333",skin:"#f1c27d",desc:""};
 
@@ -238,6 +239,7 @@ async function fetchFile(name){
   if(!r.ok) throw new Error(r.status); return r.json();
 }
 const usd=v=>(v<0?"−":"")+"$"+Math.abs(v).toFixed(2);
+const sgnUsd=v=>(v>0.004?"+":v<-0.004?"−":"")+"$"+Math.abs(v).toFixed(2);
 const sgn=(v,d=1)=>(v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(d);
 const cls=pc=>pc>0.05?"g":pc<-0.05?"r":"n";
 function ago(iso){ if(!iso) return "—"; const m=Math.round((Date.now()-new Date(iso))/60000);
@@ -271,9 +273,9 @@ function drawScene(){
   const desk=r=>{ const pc=100*(r.equity/r.start-1), I=info(r.key);
     const busy=(r.open||0)>0, stale=r.last_run&&(Date.now()-new Date(r.last_run))/60000>30;
     const st=stale?"εκτός σύνδεσης":busy?`${r.open} ${r.open===1?"θέση":"θέσεις"} ανοιχτ${r.open===1?"ή":"ές"}`:"περιμένει σήμα";
-    return `<div class="desk" data-k="${esc(r.key)}"><div class="bubble ${cls(pc)}">${sgn(pc)}%</div>
+    return `<div class="desk" data-k="${esc(r.key)}"><div class="bubble ${cls(pc)}">${sgnUsd(r.equity-r.start)}</div>
       ${sprite(r.key,{mood:pc>0.5?1:pc<-3?-1:0,busy,lid:busy?(pc>=0?"#1f9d5b":"#b3264a"):"#3e2e6e"})}
-      <div class="plate" style="color:${I.col}">${esc(I.nick)}<i>${esc(st)}</i></div></div>`; };
+      <div class="plate" style="color:${I.col}">${esc(I.nick)}<i class="job">${esc(I.job||"")}</i><i>${esc(st)}</i></div></div>`; };
   const bossPc=100*(tot/start-1);
   const boss=`<div class="boss" id="boss">
     <div class="ledp" id="led2" style="--glow:${bossPc>=0?"rgba(62,240,138,.35)":"rgba(255,77,109,.35)"}"><div class="k">ΣΥΝΟΛΟ ΕΡΓΑΣΤΗΡΙΟΥ</div>
@@ -324,8 +326,8 @@ function drawRank(){
   $("rank").innerHTML=ROWS.map((r,i)=>{ const pc=100*(r.equity/r.start-1), I=info(r.key);
     return `<div class="row" data-k="${esc(r.key)}"><div class="sw" style="background:${I.col}"></div><div class="mid">
       <div class="t">${i+1}. ${esc(I.nick)}</div>
-      <div class="s">${r.trades} trades${r.trades?` · ${r.wins} κερδ.`:""}${r.open?` · ${r.open} ανοιχτ.`:""}</div></div>
-      <div class="right">${usd(r.equity)}<br><span class="pc ${cls(pc)}">${sgn(pc)}%</span></div></div>`; }).join("")||`<div class="empty">Καμία στρατηγική</div>`;
+      <div class="s">${esc(I.job||"")} · ${r.trades} trades${r.trades?` · ${r.wins} κερδ.`:""}${r.open?` · ${r.open} ανοιχτ.`:""}</div></div>
+      <div class="right"><b class="${cls(pc)}">${sgnUsd(r.equity-r.start)}</b><br><span class="pc ${cls(pc)}">${usd(r.equity)} · ${sgn(pc)}%</span></div></div>`; }).join("")||`<div class="empty">Καμία στρατηγική</div>`;
   document.querySelectorAll("#rank .row").forEach(el=>el.onclick=()=>openDetail(el.dataset.k));
 }
 function allEvents(){
@@ -377,14 +379,16 @@ async function openDetail(k){
     <div class="ph">${sprite(k,{mood:pc>0.5?1:pc<-3?-1:0,busy:pos.length>0,lid:pos.length?(pc>=0?"#1f9d5b":"#b3264a"):"#3e2e6e"})}
       <div style="min-width:0"><h2 style="color:${I.col}">${esc(I.nick)}</h2><div class="s">${esc(r.label)}</div></div>
       <button class="close" id="x" aria-label="Κλείσιμο"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    <div class="big ${cls(pc)}">${usd(eq)} <span style="font-size:16px">${sgn(pc)}%</span></div>
+    <div class="big ${cls(pc)}">${sgnUsd(eq-start)} <span style="font-size:16px">${pc>=0?"κέρδος":"ζημιά"} · ${sgn(pc)}%</span></div>
+    <div class="s" style="margin:-4px 0 8px">Αξία τώρα ${usd(eq)} από ${usd(start)}</div>
     ${chart(h,start)}
     <div class="stats"><div><b>${cl.length}</b><span>Trades</span></div><div><b>${cl.length?Math.round(100*wins/cl.length)+"%":"—"}</b><span>Κερδισμένα</span></div>
       <div><b>${gl>0?(gp/gl).toFixed(2):"—"}</b><span>Profit factor</span></div><div><b class="${dd<-0.0005?"r":""}">${(100*dd).toFixed(1)}%</b><span>Max πτώση</span></div>
       <div><b>${pos.length}</b><span>Ανοιχτές</span></div><div><b>${ago(st.last_run)}</b><span>Ενημέρωση</span></div></div>
     <div class="sec">Τι κάνει</div><div class="desc">${esc(I.desc||"—")}</div>
-    <div class="sec">Ανοιχτές θέσεις</div><div class="card">${pos.length?pos.map(p=>{ const v=p.last_pct!=null?p.last_pct:(p.value!=null&&p.cost?100*(p.value/p.cost-1):0);
-      return `<div class="row" style="cursor:default"><div class="mid"><div class="t">${esc(p.name)}</div><div class="s">από ${when(p.entry_time)}</div></div><div class="right"><span class="pc ${cls(v)}">${sgn(v)}%</span></div></div>`;}).join(""):`<div class="empty">Καμία ανοιχτή θέση</div>`}</div>
+    <div class="sec">Ανοιχτές θέσεις</div><div class="s" style="margin:-4px 0 6px">Τα $ είναι αν πουλούσε τώρα, μετά τα κόστη.</div><div class="card">${pos.length?pos.map(p=>{ const v=p.last_pct!=null?p.last_pct:(p.value!=null&&p.cost?100*(p.value/p.cost-1):0);
+      const m=p.value!=null?p.value:0;
+      return `<div class="row" style="cursor:default"><div class="mid"><div class="t">${esc(p.name)}</div><div class="s">από ${when(p.entry_time)}${p.peak_pct!=null?` · κορυφή ${sgn(p.peak_pct,0)}%`:""}</div></div><div class="right"><b class="${cls(m)}">${sgnUsd(m)}</b><br><span class="pc ${cls(v)}">${sgn(v)}%</span></div></div>`;}).join(""):`<div class="empty">Καμία ανοιχτή θέση</div>`}</div>
     <div class="sec">Τελευταία trades</div><div class="card">${cl.length?cl.slice(0,20).map(t=>`<div class="row" style="cursor:default"><div class="mid"><div class="t">${esc(t.name)}</div>
       <div class="s">${esc(t.reason||"")} · ${t.exit_time?when(t.exit_time):""}</div></div><div class="right ${t.pnl>=0?"g":"r"}">${sgn(t.pnl,2)}$</div></div>`).join(""):`<div class="empty">Κανένα trade ακόμα</div>`}</div>`;
   $("sheet").classList.add("on"); $("x").onclick=closeDetail;

@@ -21,6 +21,7 @@ CHANNELS = ["shockedcalls", "legends_call", "pyrotradingjournal", "dexpumps", "S
 SIZE, MAX_OPEN = 10.0, 10
 TP, SL, MAX_H = 1.00, -0.40, 12
 SLIP = 0.04
+LOCK_AT, LOCK_FLOOR = 0.50, 0.10   # 28/11: αν φτάσει +50%, δεν το αφήνουμε να γυρίσει κάτω από +10%
 MIN_LIQ, RUG_LIQ = 5000.0, 500.0
 MAX_AGE_MIN = 30
 FETCH_EVERY = 120
@@ -190,6 +191,8 @@ def cycle(st, now=None, fetch_fn=None, price_fn=ds_tokens, channels=None, page_f
                 _close(st, p, price * 0.5, now, "rug (έφυγε η ρευστότητα)")
             elif move >= TP:
                 _close(st, p, price, now, f"TP +{int(TP * 100)}%")
+            elif p["peak_pct"] >= 100 * LOCK_AT and move <= LOCK_FLOOR:
+                _close(st, p, price, now, f"κλείδωμα κέρδους (κορυφή +{p['peak_pct']:.0f}%)")
             elif move <= SL:
                 _close(st, p, price, now, f"SL {int(SL * 100)}%")
             elif now_s - p["entry_ts"] >= MAX_H * 3600:
