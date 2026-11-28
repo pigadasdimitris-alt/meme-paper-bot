@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 3.2,
    "low_pct": -38.6,
-   "value": -1.9083,
+   "value": -1.9236,
    "missing": 0,
-   "last_pct": -12.34
+   "last_pct": -12.51
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -8.4,
-   "value": -0.9868,
+   "value": -1.1984,
    "missing": 0,
-   "last_pct": -2.36
+   "last_pct": -4.65
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.6,
    "low_pct": -3.0,
-   "value": -0.7622,
+   "value": -0.8149,
    "missing": 0,
-   "last_pct": 0.08
+   "last_pct": -0.49
   }
  ],
  "closed": [
@@ -316,7 +316,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 343,
+  "scans": 345,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1692,6 +1692,14 @@
   [
    "2026-11-28T04:43:25Z",
    67.7463
+  ],
+  [
+   "2026-11-28T04:44:11Z",
+   67.7463
+  ],
+  [
+   "2026-11-28T04:45:25Z",
+   67.4667
   ]
  ],
  "log": [
@@ -1866,10 +1874,14 @@
   {
    "t": "2026-11-28T04:31:04Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Frogger [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T04:45:25Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα FLOKIMAS [AnimeGems] — λίγα πορτοφόλια μάζεψαν πριν το call, ρηχό pool"
   }
  ],
- "last_run": "2026-11-28T04:43:25Z",
- "next_id": 36,
+ "last_run": "2026-11-28T04:45:25Z",
+ "next_id": 37,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -1898,9 +1910,9 @@
    },
    "peak_pct": 21.9,
    "low_pct": -19.9,
-   "value": -0.8846,
+   "value": -1.0851,
    "missing": 0,
-   "last_pct": -1.25
+   "last_pct": -3.42
   },
   {
    "id": 34,
@@ -1927,9 +1939,9 @@
    },
    "peak_pct": 20.0,
    "low_pct": -16.8,
-   "value": 1.0804,
+   "value": 0.9957,
    "missing": 0,
-   "last_pct": 20.04
+   "last_pct": 19.12
   },
   {
    "id": 35,
@@ -1949,10 +1961,10 @@
    ],
    "insiders": {},
    "peak_pct": 17.6,
-   "low_pct": -20.9,
-   "value": -1.9788,
+   "low_pct": -22.0,
+   "value": -2.8,
    "missing": 0,
-   "last_pct": -13.1
+   "last_pct": -22.0
   }
  ],
  "events": [],
@@ -1991,14 +2003,15 @@
   "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump": 1795837119,
   "8N6WF11pLUUeUu8b1HbnDJHTzyL4bbr8YRdPS6Znpump": 1795837839,
   "3rVr2RBzEXXKf1cVvZ6HBvFg2XmBK4iMgZv9q9q4pump": 1795840264,
-  "GGatn9GfrvRgFMFZy9ZSaTsKmpwnzCTogmocLHCjpump": 1795840264
+  "GGatn9GfrvRgFMFZy9ZSaTsKmpwnzCTogmocLHCjpump": 1795840264,
+  "J25aXtTx91Eg3MNe6P2bP4Qyvu7yYDeEFmRyw3UTpump": 1795841125
  },
- "last_dump_check": 1795840931,
+ "last_dump_check": 1795841051,
  "shield": {
   "taken": 8,
   "taken_pnl": -33.817,
-  "blocked": 19,
-  "blocked_pnl": -39.7793
+  "blocked": 20,
+  "blocked_pnl": -45.1719
  },
  "shadow_closed": [
   {
@@ -2443,6 +2456,29 @@
    "pnl_pct": -58.46,
    "reason": "SL -40%",
    "hold_min": 62.8
+  },
+  {
+   "id": 36,
+   "kind": "call",
+   "mint": "J25aXtTx91Eg3MNe6P2bP4Qyvu7yYDeEFmRyw3UTpump",
+   "name": "FLOKIMAS",
+   "channel": "AnimeGems",
+   "entry_time": "2026-11-28T04:45:25Z",
+   "entry_market": 2.422173256e-05,
+   "flags": [
+    "λίγα πορτοφόλια μάζεψαν πριν το call",
+    "ρηχό pool"
+   ],
+   "peak_pct": 0.0,
+   "low_pct": -0.2,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T04:45:25Z",
+   "exit_market": 1.209e-05,
+   "pnl": -5.3926,
+   "pnl_pct": -53.93,
+   "reason": "rug (έφυγε η ρευστότητα)",
+   "hold_min": 0.0
   }
  ]
 }
