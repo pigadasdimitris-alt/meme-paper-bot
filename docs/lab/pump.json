@@ -28,9 +28,37 @@
    },
    "peak_pct": 0.0,
    "low_pct": -28.6,
-   "value": -3.4099,
+   "value": -2.0534,
    "missing": 0,
-   "last_pct": -28.61
+   "last_pct": -13.91
+  },
+  {
+   "id": 3,
+   "kind": "call",
+   "mint": "6XGHv8KvqJg5Kekr8zydwmpHrJhWSARJZKJNTHJ97UyQ",
+   "name": "BITGOIN",
+   "channel": "SpyDefiLive",
+   "entry_market": 15664.1551680393,
+   "entry": 16290.721374760873,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T00:08:24Z",
+   "entry_ts": 1795824504,
+   "pool": "HFVPB5T7LZnSxocPrijaJwxPaws7c7VJUorWNLorGreb",
+   "flags": [
+    "φούσκωσε ήδη πριν το call"
+   ],
+   "insiders": {
+    "AfxxQLBt9cSovjYnFLC6pZ149RsoX9WEpzZC18ybpUen": 371.73,
+    "2vgV9WLE8nRZMMd12DxD7abCvEUTx9cysV7skpvR8gAu": 272.47,
+    "yWyqrhdcEZrpuenCk9oev4z4Y3bMZAPZMtUNx3PaJaZ": 227.75,
+    "G1V3t31F8DAFAkkHQgf5kCPGzJG4CRvKTXZpzg2wLCbr": 213.16,
+    "4GE5AQFL2AuFyFQ9wPSovxHcUtXe6MBQJ777qb5U3aka": 212.7
+   },
+   "peak_pct": 0.0,
+   "low_pct": -17.2,
+   "value": -2.3524,
+   "missing": 0,
+   "last_pct": -17.15
   }
  ],
  "closed": [],
@@ -41,7 +69,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 68,
+  "scans": 70,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -317,6 +345,14 @@
   [
    "2026-11-28T00:07:21Z",
    96.5901
+  ],
+  [
+   "2026-11-28T00:08:24Z",
+   95.5942
+  ],
+  [
+   "2026-11-28T00:09:28Z",
+   95.5942
   ]
  ],
  "log": [
@@ -327,19 +363,53 @@
   {
    "t": "2026-11-28T00:06:18Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα PAIRBALL [SpyDefiLive] — ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T00:08:24Z",
+   "msg": "ΑΓΟΡΑ BITGOIN [SpyDefiLive] — call @ 15664.2 · σημάδια: φούσκωσε ήδη πριν το call"
+  },
+  {
+   "t": "2026-11-28T00:08:24Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα aurbit [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T00:07:21Z",
- "next_id": 3,
+ "last_run": "2026-11-28T00:09:28Z",
+ "next_id": 5,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
- "shadow": [],
+ "shadow": [
+  {
+   "id": 4,
+   "kind": "call",
+   "mint": "4qFwbK9Usb7h12BKzjf8edSEbX8oxLhpKJVHLRWnpump",
+   "name": "aurbit",
+   "channel": "SpyDefiLive",
+   "entry_market": 9.362228547e-05,
+   "entry": 9.73671768888e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T00:08:24Z",
+   "entry_ts": 1795824504,
+   "pool": "7xtfb2uLcQzaTN1w8EK6PMkdTFiSazKAjWANrJwAUHNn",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {},
+   "peak_pct": 39.0,
+   "low_pct": 0.0,
+   "value": 2.8273,
+   "missing": 0,
+   "last_pct": 38.96
+  }
+ ],
  "events": [],
  "seen_mints": {
   "B2HU7PEkoKmhkMhfZa5tFN3YJdwLeLq6Fg85saoo111": 1795824378,
-  "HNZ4ZUb8T7wV3ZDSqhSQ4cuVBpeNS5ur41WycQjvpump": 1795824378
+  "HNZ4ZUb8T7wV3ZDSqhSQ4cuVBpeNS5ur41WycQjvpump": 1795824378,
+  "6XGHv8KvqJg5Kekr8zydwmpHrJhWSARJZKJNTHJ97UyQ": 1795824504,
+  "4qFwbK9Usb7h12BKzjf8edSEbX8oxLhpKJVHLRWnpump": 1795824504
  },
- "last_dump_check": 1795824378,
+ "last_dump_check": 1795824504,
  "shield": {
   "taken": 0,
   "taken_pnl": 0.0,
