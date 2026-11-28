@@ -56,9 +56,9 @@
    },
    "peak_pct": 26.0,
    "low_pct": -0.0,
-   "value": 1.5472,
+   "value": 1.6306,
    "missing": 0,
-   "last_pct": 25.09
+   "last_pct": 26.0
   },
   {
    "id": 21,
@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 3.2,
    "low_pct": -38.6,
-   "value": -2.6527,
+   "value": -2.7955,
    "missing": 0,
-   "last_pct": -20.4
+   "last_pct": -21.95
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -8.3,
-   "value": -1.2915,
+   "value": -1.3084,
    "missing": 0,
-   "last_pct": -5.66
+   "last_pct": -5.84
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.6,
    "low_pct": -3.0,
-   "value": -0.8518,
+   "value": -0.7938,
    "missing": 0,
-   "last_pct": -0.89
+   "last_pct": -0.27
   }
  ],
  "closed": [
@@ -316,7 +316,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 326,
+  "scans": 328,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1624,6 +1624,14 @@
   [
    "2026-11-28T04:26:39Z",
    66.5346
+  ],
+  [
+   "2026-11-28T04:27:29Z",
+   66.4568
+  ],
+  [
+   "2026-11-28T04:28:39Z",
+   66.5163
   ]
  ],
  "log": [
@@ -1792,7 +1800,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα PRISMEICE [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T04:26:39Z",
+ "last_run": "2026-11-28T04:28:39Z",
  "next_id": 34,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -1825,35 +1833,6 @@
    "value": -0.5249,
    "missing": 0,
    "last_pct": 2.65
-  },
-  {
-   "id": 29,
-   "kind": "call",
-   "mint": "APmirEVL5wkbYVZ88TDdr9cwJ6WfRCWuzm4wQWyzpump",
-   "name": "BTCBALLS",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0003495473296,
-   "entry": 0.000363529222784,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T03:24:39Z",
-   "entry_ts": 1795836279,
-   "pool": "HaZ1AyKU3RoKaqQ8G5qHucE1M4Xb3ZCeU2WMWWYG4cvg",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "9FTWsSNYoALyAxD3ia8LsNwhktYg48LS9uBiTewKkgdD": 355.8,
-    "G2bGYcL9FXBAjV97Bpm5Ejp9Sya4bwwQgEwS9wF1euY4": 354.44,
-    "4J1oWkqvvSLoAcYbohaDRJooRYK86DzBXn5EMTkuvDWU": 351.98,
-    "GnryzbHcybzaeGCTFsgXMb7RMbYija9JwYSd1ZtpZcW9": 349.13,
-    "7MXYKRRYuaxBWFySXnG3QpB9AB3imPN4z8QorsETkVFa": 346.21
-   },
-   "peak_pct": 81.7,
-   "low_pct": -29.8,
-   "value": -2.4236,
-   "missing": 0,
-   "last_pct": -17.92
   }
  ],
  "events": [],
@@ -1892,12 +1871,12 @@
   "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump": 1795837119,
   "8N6WF11pLUUeUu8b1HbnDJHTzyL4bbr8YRdPS6Znpump": 1795837839
  },
- "last_dump_check": 1795839929,
+ "last_dump_check": 1795840049,
  "shield": {
   "taken": 8,
   "taken_pnl": -33.817,
-  "blocked": 18,
-  "blocked_pnl": -33.9332
+  "blocked": 19,
+  "blocked_pnl": -39.7793
  },
  "shadow_closed": [
   {
@@ -2319,6 +2298,29 @@
    "pnl_pct": 92.61,
    "reason": "TP +100%",
    "hold_min": 16.1
+  },
+  {
+   "id": 29,
+   "kind": "call",
+   "mint": "APmirEVL5wkbYVZ88TDdr9cwJ6WfRCWuzm4wQWyzpump",
+   "name": "BTCBALLS",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T03:24:39Z",
+   "entry_market": 0.0003495473296,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 81.7,
+   "low_pct": -55.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T04:27:29Z",
+   "exit_market": 0.0001573,
+   "pnl": -5.8461,
+   "pnl_pct": -58.46,
+   "reason": "SL -40%",
+   "hold_min": 62.8
   }
  ]
 }
