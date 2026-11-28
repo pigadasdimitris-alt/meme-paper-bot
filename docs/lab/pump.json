@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 30.1,
    "low_pct": -38.6,
-   "value": 0.2943,
+   "value": 0.2841,
    "missing": 0,
-   "last_pct": 11.52
+   "last_pct": 11.41
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -24.2,
-   "value": -2.5169,
+   "value": -2.6109,
    "missing": 0,
-   "last_pct": -18.93
+   "last_pct": -19.95
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.7,
    "low_pct": -3.0,
-   "value": -0.8781,
+   "value": -0.7991,
    "missing": 0,
-   "last_pct": -1.18
+   "last_pct": -0.32
   },
   {
    "id": 37,
@@ -206,11 +206,11 @@
     "4WzoTXqZAauNU2wNd7yykz1LcphKrSuLUvRB1ZJmNa75": 154.8,
     "71pAfN1nJhcLaezSRYvwdsNFE9PnY9hNfcxB4nZ1gdAp": 141.95
    },
-   "peak_pct": 0.0,
+   "peak_pct": 0.3,
    "low_pct": -2.4,
-   "value": -0.9919,
+   "value": -0.9948,
    "missing": 0,
-   "last_pct": -2.41
+   "last_pct": -2.44
   }
  ],
  "closed": [
@@ -394,7 +394,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 385,
+  "scans": 387,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1938,6 +1938,14 @@
   [
    "2026-11-28T05:27:45Z",
    66.0924
+  ],
+  [
+   "2026-11-28T05:28:28Z",
+   66.2158
+  ],
+  [
+   "2026-11-28T05:29:53Z",
+   66.0643
   ]
  ],
  "log": [
@@ -2138,7 +2146,7 @@
    "msg": "ΑΓΟΡΑ Snowball [SpyDefiLive] — call @ 0.000325862 · σημάδια: οι πρώτοι αγοραστές πουλάνε ήδη"
   }
  ],
- "last_run": "2026-11-28T05:27:45Z",
+ "last_run": "2026-11-28T05:29:53Z",
  "next_id": 42,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -2173,29 +2181,6 @@
    "last_pct": -4.1
   },
   {
-   "id": 35,
-   "kind": "call",
-   "mint": "GGatn9GfrvRgFMFZy9ZSaTsKmpwnzCTogmocLHCjpump",
-   "name": "Frogger",
-   "channel": "SpyDefiLive",
-   "entry_market": 8.16027069e-05,
-   "entry": 8.4866815176e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T04:31:04Z",
-   "entry_ts": 1795840264,
-   "pool": "FbrErC88G2wZJpPN5Auwt6CciVm1isANrSJ5FJkd9tvG",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {},
-   "peak_pct": 98.4,
-   "low_pct": -22.0,
-   "value": 1.6173,
-   "missing": 0,
-   "last_pct": 25.85
-  },
-  {
    "id": 40,
    "kind": "call",
    "mint": "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h",
@@ -2223,7 +2208,7 @@
    "peak_pct": 0.0,
    "low_pct": 0.0,
    "value": 0.0,
-   "missing": 17
+   "missing": 19
   }
  ],
  "events": [],
@@ -2270,12 +2255,12 @@
   "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h": 1795842640,
   "9TKbd3VFaMSXsEAicD9JVQWpWwAoLi4fSgWmZL2cpump": 1795843665
  },
- "last_dump_check": 1795843582,
+ "last_dump_check": 1795843708,
  "shield": {
   "taken": 8,
   "taken_pnl": -33.817,
-  "blocked": 22,
-  "blocked_pnl": -52.0602
+  "blocked": 23,
+  "blocked_pnl": -53.2799
  },
  "shadow_closed": [
   {
@@ -2789,6 +2774,29 @@
    "pnl_pct": -15.0,
    "reason": "κλείδωμα κέρδους (κορυφή +64%)",
    "hold_min": 5.0
+  },
+  {
+   "id": 35,
+   "kind": "call",
+   "mint": "GGatn9GfrvRgFMFZy9ZSaTsKmpwnzCTogmocLHCjpump",
+   "name": "Frogger",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T04:31:04Z",
+   "entry_market": 8.16027069e-05,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 98.4,
+   "low_pct": -22.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T05:28:28Z",
+   "exit_market": 7.762e-05,
+   "pnl": -1.2197,
+   "pnl_pct": -12.2,
+   "reason": "κλείδωμα κέρδους (κορυφή +98%)",
+   "hold_min": 57.4
   }
  ]
 }
