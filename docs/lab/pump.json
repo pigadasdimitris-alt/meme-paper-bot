@@ -28,9 +28,37 @@
    },
    "peak_pct": 16.3,
    "low_pct": -3.4,
-   "value": 0.7365,
+   "value": 0.4508,
    "missing": 0,
-   "last_pct": 16.31
+   "last_pct": 13.22
+  },
+  {
+   "id": 65,
+   "kind": "call",
+   "mint": "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump",
+   "name": "Mojave",
+   "channel": "SpyDefiLiveSol",
+   "entry_market": 3.175996808e-05,
+   "entry": 3.30303668032e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T10:17:10Z",
+   "entry_ts": 1795861030,
+   "pool": "ARMqz5KMqEcJV18c8JCjVmWVkBTrrpNLiuAchKwAaRiH",
+   "flags": [
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 346.22,
+    "7e8LpuucxJW5DRBsXDyrq1XXgcHGMFGiKDLo6v2qDUcq": 238.13,
+    "2xk8YBpvrYSMRqSdRFk8oxTs3h3P5ds8C6WuY83gtnFp": 208.95,
+    "4JXUHGuc8dDAV35xgMUvAjgQGxC5yRHbAHRaDGvbnPaL": 184.2,
+    "HANcjmXUgZ5as9nUFcKC7ang9hwJcMYE7fCF5LrXZf4j": 180.5
+   },
+   "peak_pct": 0.0,
+   "low_pct": -11.3,
+   "value": -1.8126,
+   "missing": 0,
+   "last_pct": -11.3
   }
  ],
  "closed": [
@@ -426,7 +454,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 666,
+  "scans": 668,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -3094,6 +3122,14 @@
   [
    "2026-11-28T10:15:10Z",
    65.7649
+  ],
+  [
+   "2026-11-28T10:15:45Z",
+   65.5173
+  ],
+  [
+   "2026-11-28T10:17:10Z",
+   63.6666
   ]
  ],
  "log": [
@@ -3424,10 +3460,14 @@
   {
    "t": "2026-11-28T10:09:16Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα SMOOTH [SpyDefiLive] — οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T10:17:10Z",
+   "msg": "ΑΓΟΡΑ Mojave [SpyDefiLiveSol] — call @ 3.176e-05 · σημάδια: ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T10:15:10Z",
- "next_id": 65,
+ "last_run": "2026-11-28T10:17:10Z",
+ "next_id": 66,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -3513,35 +3553,6 @@
    "last_pct": -4.52
   },
   {
-   "id": 63,
-   "kind": "call",
-   "mint": "4cZsB6UgdUBTi13JMusBap9r2qGW1MPrdaSVAYkSpump",
-   "name": "HPD",
-   "channel": "SpyDefiLive",
-   "entry_market": 2.504177783e-05,
-   "entry": 2.6043448943200003e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T09:58:45Z",
-   "entry_ts": 1795859925,
-   "pool": "5HQ3K2ShHyEJdjEstnD2Q8jGFo5TRQg1k56bWPBqXsQ1",
-   "flags": [
-    "ρηχό pool",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "BguvFTHPojhb4xZpbeQq1kUvqmhHd7hw1az2EwSWzF6m": 347.6,
-    "FnDoQw5XHg3KS6emceq3H9KrUy8LDGBGzRo9YedH25Cj": 243.59,
-    "3YLWZNrn8NFRbsyhbRNoy3dYypn3Pu2EKr58aXCwBMrP": 236.77,
-    "7CCtEt3Gv9kwbdWoF2ZnXBpQ2yjo9Wu36ZhNaEVz3nt2": 222.17,
-    "7FABtyLQ4mTtvqjDhHVH4yxgD4R2jywyw8sYYPDStpX9": 194.56
-   },
-   "peak_pct": 21.2,
-   "low_pct": -13.5,
-   "value": 1.1838,
-   "missing": 0,
-   "last_pct": 21.16
-  },
-  {
    "id": 64,
    "kind": "call",
    "mint": "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump",
@@ -3567,9 +3578,9 @@
    },
    "peak_pct": 3.4,
    "low_pct": -35.6,
-   "value": -4.0593,
+   "value": -0.5171,
    "missing": 0,
-   "last_pct": -35.64
+   "last_pct": 2.73
   }
  ],
  "events": [],
@@ -3637,14 +3648,15 @@
   "sFtjvR8ydeqyYetbRZVnptA6mERhFkKvCpNyghwpump": 1795858125,
   "CcpN5RXTEjbRqbtuHoxyiMZorzsghbfpeyYQjSvTgS27": 1795859085,
   "4cZsB6UgdUBTi13JMusBap9r2qGW1MPrdaSVAYkSpump": 1795859925,
-  "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump": 1795860556
+  "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump": 1795860556,
+  "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump": 1795861030
  },
- "last_dump_check": 1795860824,
+ "last_dump_check": 1795860945,
  "shield": {
   "taken": 18,
   "taken_pnl": -34.9717,
-  "blocked": 40,
-  "blocked_pnl": -108.7027
+  "blocked": 41,
+  "blocked_pnl": -113.3062
  },
  "shadow_closed": [
   {
@@ -4582,6 +4594,29 @@
    "pnl_pct": 84.87,
    "reason": "TP +100%",
    "hold_min": 8.7
+  },
+  {
+   "id": 63,
+   "kind": "call",
+   "mint": "4cZsB6UgdUBTi13JMusBap9r2qGW1MPrdaSVAYkSpump",
+   "name": "HPD",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T09:58:45Z",
+   "entry_market": 2.504177783e-05,
+   "flags": [
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 21.2,
+   "low_pct": -41.5,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T10:17:10Z",
+   "exit_market": 1.464e-05,
+   "pnl": -4.6035,
+   "pnl_pct": -46.03,
+   "reason": "SL -40%",
+   "hold_min": 18.4
   }
  ]
 }
