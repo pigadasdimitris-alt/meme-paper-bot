@@ -74,11 +74,11 @@
    "pool": "3VrhjGEaG6ixPT58R3G1riM7ZCGUVSZijLhktnRCz1kv",
    "flags": [],
    "insiders": {},
-   "peak_pct": 3.2,
+   "peak_pct": 4.8,
    "low_pct": -38.6,
-   "value": -0.4756,
+   "value": -0.6795,
    "missing": 0,
-   "last_pct": 3.18
+   "last_pct": 0.97
   },
   {
    "id": 24,
@@ -103,10 +103,10 @@
     "7AKyDp9625jT7EmxAoYwH1EGQvriU2EzqGNz1MNXGiJe": 213.49
    },
    "peak_pct": 6.2,
-   "low_pct": -11.8,
-   "value": -1.6478,
+   "low_pct": -12.0,
+   "value": -1.8813,
    "missing": 0,
-   "last_pct": -9.52
+   "last_pct": -12.05
   },
   {
    "id": 32,
@@ -130,9 +130,9 @@
    },
    "peak_pct": 0.7,
    "low_pct": -3.0,
-   "value": -0.8254,
+   "value": -0.7622,
    "missing": 0,
-   "last_pct": -0.61
+   "last_pct": 0.08
   },
   {
    "id": 37,
@@ -366,7 +366,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 367,
+  "scans": 369,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1838,6 +1838,14 @@
   [
    "2026-11-28T05:08:40Z",
    67.3819
+  ],
+  [
+   "2026-11-28T05:09:24Z",
+   67.4156
+  ],
+  [
+   "2026-11-28T05:10:40Z",
+   67.0077
   ]
  ],
  "log": [
@@ -2024,10 +2032,18 @@
   {
    "t": "2026-11-28T05:01:52Z",
    "msg": "ΑΓΟΡΑ PumpMas [SpyDefiLive] — call @ 0.000170831 · καθαρό"
+  },
+  {
+   "t": "2026-11-28T05:10:40Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα MEMES [SpyDefiLive] — ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T05:10:40Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα tremp [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T05:08:40Z",
- "next_id": 39,
+ "last_run": "2026-11-28T05:10:40Z",
+ "next_id": 41,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -2079,9 +2095,68 @@
    "insiders": {},
    "peak_pct": 93.4,
    "low_pct": -22.0,
-   "value": 4.8185,
+   "value": 2.5222,
    "missing": 0,
-   "last_pct": 60.53
+   "last_pct": 35.66
+  },
+  {
+   "id": 39,
+   "kind": "call",
+   "mint": "HpN63T13XBcp2xmM6yRkGPB5HMwxtXTghCQjooS8pump",
+   "name": "MEMES",
+   "channel": "SpyDefiLive",
+   "entry_market": 2.67247299e-05,
+   "entry": 2.7793719096e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T05:10:40Z",
+   "entry_ts": 1795842640,
+   "pool": "CCYm9VLK4GzrF2qVdHrBqAcPUvMq4cEkJ4pdapoyrDbK",
+   "flags": [
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "HTYho9ioTJcS4Dymi57HB65RBFu549gjyQ7kncfkknti": 986.56,
+    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 766.64,
+    "34zYdndtXRYNyY5AnoxSW5iPxAxtWTA23etZ6RSpT3HZ": 393.42,
+    "9AnJhF7vFhcR5G93xsN1y9PDp4vA2i8TkrUvgi4m9GBV": 383.15,
+    "2jsjeQ6UKyHBW7Ck6a57cP7ZwkUd5sMkpJVGwPkiPy1g": 348.78
+   },
+   "peak_pct": 5.9,
+   "low_pct": 0.0,
+   "value": -0.2251,
+   "missing": 0,
+   "last_pct": 5.89
+  },
+  {
+   "id": 40,
+   "kind": "call",
+   "mint": "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h",
+   "name": "tremp",
+   "channel": "SpyDefiLive",
+   "entry_market": 9.912324087e-06,
+   "entry": 1.030881705048e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T05:10:40Z",
+   "entry_ts": 1795842640,
+   "pool": "3Cr5EhcHynP1L6zFJ9RBrmq2wbeDERGTe7EfhLQqWHkh",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 958.26,
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 900.37,
+    "3VUNtVtjjx5ckUojT7UocJ5fbuAJRsNUXNfTBnPte9vC": 343.8,
+    "FcBm8smZDfpjxwJSJowk3w6oyR2zqiKnSVUpWpVnY7py": 166.54,
+    "GgUHMPKaazTqnk7ApFJuXurv1bBJ5rggfj3snUxSqxw8": 141.59
+   },
+   "peak_pct": 0.0,
+   "low_pct": 0.0,
+   "value": 0.0,
+   "missing": 1
   }
  ],
  "events": [],
@@ -2123,9 +2198,11 @@
   "GGatn9GfrvRgFMFZy9ZSaTsKmpwnzCTogmocLHCjpump": 1795840264,
   "J25aXtTx91Eg3MNe6P2bP4Qyvu7yYDeEFmRyw3UTpump": 1795841125,
   "EHJMZdc43u4dcQ9uDcUv5VuB9podCoPhx8PDtByzpump": 1795841485,
-  "EwUVBpdM5vw1CJHRMSLywzVjyQSJZpy6qboxEPBKpump": 1795842112
+  "EwUVBpdM5vw1CJHRMSLywzVjyQSJZpy6qboxEPBKpump": 1795842112,
+  "HpN63T13XBcp2xmM6yRkGPB5HMwxtXTghCQjooS8pump": 1795842640,
+  "AHZR7sRtUcpt2a1AzrvWHMbZrPjz1DoNNvZ4T4Bv9f5h": 1795842640
  },
- "last_dump_check": 1795842520,
+ "last_dump_check": 1795842640,
  "shield": {
   "taken": 8,
   "taken_pnl": -33.817,
