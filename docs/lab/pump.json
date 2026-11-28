@@ -76,9 +76,9 @@
    "insiders": {},
    "peak_pct": 3.2,
    "low_pct": -37.4,
-   "value": -4.0294,
+   "value": -4.1518,
    "missing": 0,
-   "last_pct": -35.32
+   "last_pct": -36.64
   },
   {
    "id": 24,
@@ -104,9 +104,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -4.4,
-   "value": -0.7244,
+   "value": -0.9529,
    "missing": 0,
-   "last_pct": 0.49
+   "last_pct": -1.99
   },
   {
    "id": 27,
@@ -132,9 +132,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -13.0,
-   "value": -1.3083,
+   "value": -1.1913,
    "missing": 0,
-   "last_pct": -5.84
+   "last_pct": -4.57
   }
  ],
  "closed": [
@@ -296,7 +296,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 264,
+  "scans": 266,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1356,6 +1356,14 @@
   [
    "2026-11-28T03:24:39Z",
    64.2243
+  ],
+  [
+   "2026-11-28T03:25:29Z",
+   64.2782
+  ],
+  [
+   "2026-11-28T03:26:39Z",
+   63.9904
   ]
  ],
  "log": [
@@ -1502,10 +1510,14 @@
   {
    "t": "2026-11-28T03:24:39Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα BTCBALLS [SpyDefiLive] — φούσκωσε ήδη πριν το call, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T03:26:39Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Wildfire [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T03:24:39Z",
- "next_id": 30,
+ "last_run": "2026-11-28T03:26:39Z",
+ "next_id": 31,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -1561,11 +1573,11 @@
     "GnryzbHcybzaeGCTFsgXMb7RMbYija9JwYSd1ZtpZcW9": 349.13,
     "7MXYKRRYuaxBWFySXnG3QpB9AB3imPN4z8QorsETkVFa": 346.21
    },
-   "peak_pct": 6.2,
+   "peak_pct": 27.1,
    "low_pct": 0.0,
-   "value": -0.1948,
+   "value": 1.7356,
    "missing": 0,
-   "last_pct": 6.22
+   "last_pct": 27.14
   }
  ],
  "events": [],
@@ -1598,14 +1610,15 @@
   "5JRNV7dJztArZLPtmt38CYvbypzcUsUtDu6Y26xQpump": 1795834364,
   "GXjSWDoMQkDEbhon9ALxz8chUUsVKg3x8V3NajjDpump": 1795834957,
   "8ASicxj71iDN41xyMX4ocqJ8SdzjF6RYS1AHvkddqihb": 1795835319,
-  "APmirEVL5wkbYVZ88TDdr9cwJ6WfRCWuzm4wQWyzpump": 1795836279
+  "APmirEVL5wkbYVZ88TDdr9cwJ6WfRCWuzm4wQWyzpump": 1795836279,
+  "9cmL8R2jZjKss6uYiQpQFphv6ygfirZQJEpEatKGpump": 1795836399
  },
- "last_dump_check": 1795836209,
+ "last_dump_check": 1795836329,
  "shield": {
   "taken": 7,
   "taken_pnl": -34.6421,
-  "blocked": 15,
-  "blocked_pnl": -30.0567
+  "blocked": 16,
+  "blocked_pnl": -35.2716
  },
  "shadow_closed": [
   {
@@ -1956,6 +1969,31 @@
    "pnl_pct": -95.38,
    "reason": "χάθηκε η τιμή (rug;)",
    "hold_min": 28.8
+  },
+  {
+   "id": 30,
+   "kind": "call",
+   "mint": "9cmL8R2jZjKss6uYiQpQFphv6ygfirZQJEpEatKGpump",
+   "name": "Wildfire",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T03:26:39Z",
+   "entry_market": 8.561248471e-06,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 3.7,
+   "low_pct": 0.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T03:26:39Z",
+   "exit_market": 4.438e-06,
+   "pnl": -5.2149,
+   "pnl_pct": -52.15,
+   "reason": "rug (έφυγε η ρευστότητα)",
+   "hold_min": 0.0
   }
  ]
 }
