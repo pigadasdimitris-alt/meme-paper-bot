@@ -56,9 +56,9 @@
    },
    "peak_pct": 17.5,
    "low_pct": -0.0,
-   "value": 0.7976,
+   "value": 0.8203,
    "missing": 0,
-   "last_pct": 16.97
+   "last_pct": 17.22
   },
   {
    "id": 21,
@@ -75,10 +75,10 @@
    "flags": [],
    "insiders": {},
    "peak_pct": 3.2,
-   "low_pct": -31.4,
-   "value": -3.5348,
+   "low_pct": -31.7,
+   "value": -3.698,
    "missing": 0,
-   "last_pct": -29.96
+   "last_pct": -31.73
   },
   {
    "id": 23,
@@ -103,10 +103,10 @@
     "BZPzYb1bYtsxMgsMg5d2mGdfCdWKntnEPYvyqHvnmA9j": 348.41
    },
    "peak_pct": 6.6,
-   "low_pct": -31.9,
-   "value": -3.7175,
+   "low_pct": -37.6,
+   "value": -4.241,
    "missing": 0,
-   "last_pct": -31.94
+   "last_pct": -37.61
   },
   {
    "id": 24,
@@ -132,9 +132,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -3.1,
-   "value": -1.0545,
+   "value": -1.046,
    "missing": 0,
-   "last_pct": -3.09
+   "last_pct": -3.0
   },
   {
    "id": 25,
@@ -159,10 +159,10 @@
     "J31k45bUcnfMDBpEs4r7Q5xw5eXhZSb5nDhMRw2uZBSY": 322.03
    },
    "peak_pct": 12.9,
-   "low_pct": 0.0,
-   "value": -0.7504,
+   "low_pct": -21.3,
+   "value": -2.7347,
    "missing": 0,
-   "last_pct": 0.2
+   "last_pct": -21.29
   }
  ],
  "closed": [
@@ -280,7 +280,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 230,
+  "scans": 232,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1204,6 +1204,14 @@
   [
    "2026-11-28T02:50:37Z",
    71.2025
+  ],
+  [
+   "2026-11-28T02:51:29Z",
+   70.1567
+  ],
+  [
+   "2026-11-28T02:52:44Z",
+   68.5627
   ]
  ],
  "log": [
@@ -1326,10 +1334,14 @@
   {
    "t": "2026-11-28T02:48:37Z",
    "msg": "ΑΓΟΡΑ JEFFLE [SpyDefiLive] — call @ 5.52172e-05 · σημάδια: ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T02:52:44Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα 小猫仙人 [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T02:50:37Z",
- "next_id": 26,
+ "last_run": "2026-11-28T02:52:44Z",
+ "next_id": 27,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -1358,9 +1370,39 @@
    },
    "peak_pct": 21.9,
    "low_pct": -19.9,
-   "value": -2.2678,
+   "value": -2.2056,
    "missing": 0,
-   "last_pct": -16.23
+   "last_pct": -15.56
+  },
+  {
+   "id": 26,
+   "kind": "call",
+   "mint": "5JRNV7dJztArZLPtmt38CYvbypzcUsUtDu6Y26xQpump",
+   "name": "小猫仙人",
+   "channel": "SpyDefiLive",
+   "entry_market": 8.142395256e-06,
+   "entry": 8.46809106624e-06,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T02:52:44Z",
+   "entry_ts": 1795834364,
+   "pool": "x9fwQegMgXZ7jdKkT9ryCeFbswpxVkkWhSCSW6Gwyk5",
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "FpaNtqx2zxYC635bRM37KDCVBnwEnvU3f6euj4UFEMnN": 282.92,
+    "2DNUufc1HGToseNS8wkWZvigpJ6UEpucxQ3ZnJUjBG8Q": 280.69,
+    "8RB5cwrwHrxotxFURLWKH21MjkzeA93vGtLfqBbgKEiG": 211.91,
+    "2mpYrCv8XifEaB1JsaRZwiGkKpQP6V6DpHdomnLLGud5": 177.17,
+    "BRx8TP6HsD9srJ62rcYizjAHyZ5mt3cp8wPBEZioTsym": 176.75
+   },
+   "peak_pct": 0.0,
+   "low_pct": 0.0,
+   "value": 0.0,
+   "missing": 1
   }
  ],
  "events": [],
@@ -1389,9 +1431,10 @@
   "ExizLaN54XVXpY1FLH8yXtpbHPawm7UzTcmfJJH5pump": 1795833035,
   "81TW4gTEH4aNsSaKCoBhoznx9AG8AiYoBXfvEzJkpump": 1795833517,
   "ANvsL4A6tJKAXJsPg7XVSHQA7KYmFcpW42jPuhVtpump": 1795833637,
-  "BRRktKPa8m4dMrQ1fT6fLJABQjYUqLaEhPuMHxUvpump": 1795834117
+  "BRRktKPa8m4dMrQ1fT6fLJABQjYUqLaEhPuMHxUvpump": 1795834117,
+  "5JRNV7dJztArZLPtmt38CYvbypzcUsUtDu6Y26xQpump": 1795834364
  },
- "last_dump_check": 1795834169,
+ "last_dump_check": 1795834289,
  "shield": {
   "taken": 5,
   "taken_pnl": -24.1383,
