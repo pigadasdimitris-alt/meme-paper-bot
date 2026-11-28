@@ -2,34 +2,8 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 65.49076626565918,
+ "balance": 64.90249110970535,
  "positions": [
-  {
-   "id": 32,
-   "kind": "call",
-   "mint": "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump",
-   "name": "PUMPCHAN",
-   "channel": "GemsmineEth",
-   "entry_market": 0.01751661265,
-   "entry": 0.018217277155999998,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T03:38:39Z",
-   "entry_ts": 1795837119,
-   "pool": "DDcyemq9bkyqtC93djkwaH6VaMKCjVsoCUVGV29q7teB",
-   "flags": [],
-   "insiders": {
-    "3rE14txXgGoopLowgKtLLYBEGLc5H8kpTKhjJrf4T7Y1": 874.73,
-    "5LbW58k3DkJ8PuGLGz6i65zCb1Af74T6s5PLsF1iAL7F": 811.69,
-    "Abzck9fcd3puzdRMoF7Ntbn92WcWBuKNaWYFZa6T3ngB": 734.54,
-    "2JK6bJ1vGYMqu6BWJ8WEPmmkcbVdFGEM5yD4BiXyP64X": 700.55,
-    "JiZUtGaDgPic3XM4LtXiDoZKNd2agXzHXGbWz7X36LQ": 670.8
-   },
-   "peak_pct": 10.1,
-   "low_pct": -3.5,
-   "value": -0.6515,
-   "missing": 0,
-   "last_pct": 1.28
-  },
   {
    "id": 38,
    "kind": "call",
@@ -52,9 +26,9 @@
    },
    "peak_pct": 30.6,
    "low_pct": -3.3,
-   "value": 0.942,
+   "value": 1.2986,
    "missing": 0,
-   "last_pct": 18.54
+   "last_pct": 22.4
   },
   {
    "id": 60,
@@ -78,11 +52,11 @@
     "5LjT2JLnPhYk7XbrnUVTDst2RNfgz2abF1D6zLikjK59": 211.07,
     "68NXzq573Njbikheh9FT2LLNQ7Urm1DuYoUuR7RYuWj2": 178.53
    },
-   "peak_pct": 50.6,
+   "peak_pct": 53.9,
    "low_pct": -16.5,
-   "value": 3.8993,
+   "value": 3.9731,
    "missing": 0,
-   "last_pct": 50.58
+   "last_pct": 51.38
   }
  ],
  "closed": [
@@ -407,6 +381,26 @@
    "pnl_pct": -6.94,
    "reason": "κλείδωμα κέρδους (κορυφή +69%)",
    "hold_min": 115.4
+  },
+  {
+   "id": 32,
+   "kind": "call",
+   "mint": "Fo2HAwr7ZAUM2bSZ7MWSi16e3aWGpbw5MsUDYCttpump",
+   "name": "PUMPCHAN",
+   "channel": "GemsmineEth",
+   "entry_time": "2026-11-28T03:38:39Z",
+   "entry_market": 0.01751661265,
+   "flags": [],
+   "peak_pct": 10.1,
+   "low_pct": -3.5,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T09:38:50Z",
+   "exit_market": 0.01786,
+   "pnl": -0.5883,
+   "pnl_pct": -5.88,
+   "reason": "χρόνος",
+   "hold_min": 360.2
   }
  ],
  "seen": {},
@@ -416,7 +410,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 627,
+  "scans": 629,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2928,6 +2922,14 @@
   [
    "2026-11-28T09:36:45Z",
    69.6806
+  ],
+  [
+   "2026-11-28T09:37:24Z",
+   70.3241
+  ],
+  [
+   "2026-11-28T09:38:50Z",
+   70.1742
   ]
  ],
  "log": [
@@ -3234,9 +3236,13 @@
   {
    "t": "2026-11-28T09:28:45Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα TIMOTHY [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T09:38:50Z",
+   "msg": "ΚΛΕΙΣΙΜΟ PUMPCHAN — χρόνος — -0.59$ (κορυφή +10%)"
   }
  ],
- "last_run": "2026-11-28T09:36:45Z",
+ "last_run": "2026-11-28T09:38:50Z",
  "next_id": 62,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -3266,9 +3272,9 @@
    },
    "peak_pct": 28.4,
    "low_pct": -5.2,
-   "value": 1.7755,
+   "value": 1.5681,
    "missing": 0,
-   "last_pct": 27.57
+   "last_pct": 25.32
   },
   {
    "id": 44,
@@ -3321,36 +3327,6 @@
    "value": -1.1211,
    "missing": 0,
    "last_pct": -3.81
-  },
-  {
-   "id": 61,
-   "kind": "call",
-   "mint": "sFtjvR8ydeqyYetbRZVnptA6mERhFkKvCpNyghwpump",
-   "name": "TIMOTHY",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0001427561687,
-   "entry": 0.00014846641544800001,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T09:28:45Z",
-   "entry_ts": 1795858125,
-   "pool": "9GiCsN4afytjVAaK4NRzggjvcwvpdXwJDvmdUpe75jPM",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "CekgnQ8uXndjwpM2RpSitgr46USTieTNJ3Zs6VkEm3qN": 7078.86,
-    "5cKZCG4cziVUC2V2GpmHQFhvzSEEc4qBiQ4zH9en8YVj": 6328.82,
-    "b7ir94Ea4MFDrvgLHHdKfhuvUJyRpEYpv8NiYc961vo": 4217.94,
-    "81z5et23bdypHwGeWhZv3c2Ebzt45cQVEfpVEVzMQvK4": 4217.92,
-    "DjNF3WPDiF3wSCsb2uyxCmmCiYAqGAZbLQFCuj2oXqq2": 2110.33
-   },
-   "peak_pct": 85.3,
-   "low_pct": -17.8,
-   "value": 7.1029,
-   "missing": 0,
-   "last_pct": 85.28
   }
  ],
  "events": [],
@@ -3417,12 +3393,12 @@
   "8Y24KBnY9gaNWDaxohxtEU1gxESvfwdYeGFuHJKpump": 1795857885,
   "sFtjvR8ydeqyYetbRZVnptA6mERhFkKvCpNyghwpump": 1795858125
  },
- "last_dump_check": 1795858524,
+ "last_dump_check": 1795858644,
  "shield": {
-  "taken": 15,
-  "taken_pnl": -34.5093,
-  "blocked": 39,
-  "blocked_pnl": -117.1893
+  "taken": 16,
+  "taken_pnl": -35.0976,
+  "blocked": 40,
+  "blocked_pnl": -108.7027
  },
  "shadow_closed": [
   {
@@ -4336,6 +4312,30 @@
    "pnl_pct": -97.99,
    "reason": "κλείδωμα κέρδους (κορυφή +64%)",
    "hold_min": 10.0
+  },
+  {
+   "id": 61,
+   "kind": "call",
+   "mint": "sFtjvR8ydeqyYetbRZVnptA6mERhFkKvCpNyghwpump",
+   "name": "TIMOTHY",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T09:28:45Z",
+   "entry_market": 0.0001427561687,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 100.3,
+   "low_pct": -17.8,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T09:37:24Z",
+   "exit_market": 0.0002859,
+   "pnl": 8.4866,
+   "pnl_pct": 84.87,
+   "reason": "TP +100%",
+   "hold_min": 8.7
   }
  ]
 }
