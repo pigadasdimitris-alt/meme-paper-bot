@@ -28,9 +28,9 @@
    },
    "peak_pct": 70.6,
    "low_pct": -32.9,
-   "value": 5.3895,
+   "value": 3.7825,
    "missing": 0,
-   "last_pct": 66.72
+   "last_pct": 49.31
   },
   {
    "id": 7,
@@ -54,9 +54,9 @@
    },
    "peak_pct": 27.3,
    "low_pct": -4.3,
-   "value": 0.9901,
+   "value": 1.4527,
    "missing": 0,
-   "last_pct": 19.06
+   "last_pct": 24.07
   }
  ],
  "closed": [
@@ -90,7 +90,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 130,
+  "scans": 132,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -614,6 +614,14 @@
   [
    "2026-11-28T01:10:13Z",
    101.7943
+  ],
+  [
+   "2026-11-28T01:11:08Z",
+   101.9365
+  ],
+  [
+   "2026-11-28T01:12:13Z",
+   100.6499
   ]
  ],
  "log": [
@@ -670,7 +678,7 @@
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Predictoor [SpyDefiLive] — οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
   }
  ],
- "last_run": "2026-11-28T01:10:13Z",
+ "last_run": "2026-11-28T01:12:13Z",
  "next_id": 13,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -705,35 +713,6 @@
    "last_pct": -13.09
   },
   {
-   "id": 8,
-   "kind": "call",
-   "mint": "9G9Ssh55SZEoniFjMrMefug9fBy67bUvHzWAxb5Ypump",
-   "name": "Memeball",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0002669095073,
-   "entry": 0.000277585887592,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T00:36:31Z",
-   "entry_ts": 1795826191,
-   "pool": "Br6X4CcmyiJ3Sfi5p66Arx5P1euPQrG9wGt7RknjLq83",
-   "flags": [
-    "φούσκωσε ήδη πριν το call",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "5mS4bPUgWfkmfTcRtR3QX6pcduk6nxjYoaBeCsigU2jt": 254.16,
-    "DbFbZhgqV8FNG1FczNx9eA4hDTS3RuF4EfZPUVGGyoKe": 229.58,
-    "5CfezMaJdmX1UtHyHE8Kxmi2WWEkEm3dPshbtwAQdHr8": 210.91,
-    "HnujX3LMRzTLS7WbZawazq8YZvcThsZJwpT1sAbpbbMK": 205.63,
-    "MiqaAFaRqb6JWxchfzQCfihnNPMyseghtc3e2idaAiq": 189.39
-   },
-   "peak_pct": 94.4,
-   "low_pct": 0.0,
-   "value": 7.9456,
-   "missing": 0,
-   "last_pct": 94.41
-  },
-  {
    "id": 11,
    "kind": "call",
    "mint": "AvvXpCVph4PtJ5urfhetPkdZYh8o4uW7CawUA2MK8hFT",
@@ -759,9 +738,9 @@
    },
    "peak_pct": 0.0,
    "low_pct": -21.0,
-   "value": -1.5551,
+   "value": -2.4512,
    "missing": 0,
-   "last_pct": -8.51
+   "last_pct": -18.22
   }
  ],
  "events": [],
@@ -779,12 +758,12 @@
   "AvvXpCVph4PtJ5urfhetPkdZYh8o4uW7CawUA2MK8hFT": 1795827691,
   "8pRL9Vz23KYd8vyHZqECMpyRXVt6Wbn4m6M8ZhfTpump": 1795827691
  },
- "last_dump_check": 1795828148,
+ "last_dump_check": 1795828268,
  "shield": {
   "taken": 1,
   "taken_pnl": -4.5853,
-  "blocked": 6,
-  "blocked_pnl": -16.7936
+  "blocked": 7,
+  "blocked_pnl": -7.8866
  },
  "shadow_closed": [
   {
@@ -925,6 +904,29 @@
    "pnl_pct": -47.59,
    "reason": "SL -40%",
    "hold_min": 1.7
+  },
+  {
+   "id": 8,
+   "kind": "call",
+   "mint": "9G9Ssh55SZEoniFjMrMefug9fBy67bUvHzWAxb5Ypump",
+   "name": "Memeball",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T00:36:31Z",
+   "entry_market": 0.0002669095073,
+   "flags": [
+    "φούσκωσε ήδη πριν το call",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 104.8,
+   "low_pct": 0.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T01:11:08Z",
+   "exit_market": 0.0005467,
+   "pnl": 8.907,
+   "pnl_pct": 89.07,
+   "reason": "TP +100%",
+   "hold_min": 34.6
   }
  ]
 }
