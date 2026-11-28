@@ -28,9 +28,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -28.7,
-   "value": -2.0379,
+   "value": -2.1378,
    "missing": 0,
-   "last_pct": -13.74
+   "last_pct": -14.83
   },
   {
    "id": 32,
@@ -54,9 +54,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.3617,
+   "value": -0.309,
    "missing": 0,
-   "last_pct": 4.42
+   "last_pct": 4.99
   },
   {
    "id": 38,
@@ -108,9 +108,9 @@
    },
    "peak_pct": 30.7,
    "low_pct": -17.1,
-   "value": -1.3205,
+   "value": -1.55,
    "missing": 0,
-   "last_pct": -5.97
+   "last_pct": -8.46
   },
   {
    "id": 48,
@@ -134,9 +134,9 @@
    },
    "peak_pct": 37.5,
    "low_pct": -10.0,
-   "value": 0.4195,
+   "value": -0.2064,
    "missing": 0,
-   "last_pct": 12.88
+   "last_pct": 6.1
   }
  ],
  "closed": [
@@ -406,7 +406,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 535,
+  "scans": 537,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2550,6 +2550,14 @@
   [
    "2026-11-28T08:02:35Z",
    67.1939
+  ],
+  [
+   "2026-11-28T08:03:56Z",
+   67.5043
+  ],
+  [
+   "2026-11-28T08:04:35Z",
+   66.2913
   ]
  ],
  "log": [
@@ -2814,7 +2822,7 @@
    "msg": "ΚΛΕΙΣΙΜΟ MINT — χρόνος — +2.23$ (κορυφή +38%)"
   }
  ],
- "last_run": "2026-11-28T08:02:35Z",
+ "last_run": "2026-11-28T08:04:35Z",
  "next_id": 54,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -2872,35 +2880,6 @@
    "value": -1.403,
    "missing": 0,
    "last_pct": -6.87
-  },
-  {
-   "id": 50,
-   "kind": "call",
-   "mint": "B29od4bd54VAVAqJFToRKkKJadUGK5v8pkAVb5uvpump",
-   "name": "USD1",
-   "channel": "SpyDefiLive",
-   "entry_market": 4.977243006e-05,
-   "entry": 5.17633272624e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T07:24:53Z",
-   "entry_ts": 1795850693,
-   "pool": "8nkg3GpaCjfVtEXJ3zR737DorGjEcb4fgEsCi2PDo4ca",
-   "flags": [
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 739.95,
-    "8QTxipUZyfezPskzDzP2rbWeL66L7HMpZGdFnMizsoHw": 453.88,
-    "BN55irykENTN25FAxzbjzCsg7SMo88dy5KY3qxAjgnQD": 360.34,
-    "BCyNgSB1njYWrjHubBc56UXqDqzc4ixk8UHPhGbTQ5aQ": 350.81,
-    "FVKgKJw1BkVDHhpBswJQadhy2nAdSB3wWwHtCyZ8y9RV": 326.36
-   },
-   "peak_pct": 82.5,
-   "low_pct": 0.0,
-   "value": 2.2552,
-   "missing": 0,
-   "last_pct": 32.76
   },
   {
    "id": 51,
@@ -2986,12 +2965,12 @@
   "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476,
   "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605
  },
- "last_dump_check": 1795852955,
+ "last_dump_check": 1795853075,
  "shield": {
   "taken": 12,
   "taken_pnl": -29.5451,
-  "blocked": 32,
-  "blocked_pnl": -95.8064
+  "blocked": 33,
+  "blocked_pnl": -97.2864
  },
  "shadow_closed": [
   {
@@ -3740,6 +3719,29 @@
    "pnl_pct": -47.81,
    "reason": "SL -40%",
    "hold_min": 2.9
+  },
+  {
+   "id": 50,
+   "kind": "call",
+   "mint": "B29od4bd54VAVAqJFToRKkKJadUGK5v8pkAVb5uvpump",
+   "name": "USD1",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T07:24:53Z",
+   "entry_market": 4.977243006e-05,
+   "flags": [
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 82.5,
+   "low_pct": -7.7,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T08:04:35Z",
+   "exit_market": 4.594e-05,
+   "pnl": -1.48,
+   "pnl_pct": -14.8,
+   "reason": "κλείδωμα κέρδους (κορυφή +82%)",
+   "hold_min": 39.7
   }
  ]
 }
