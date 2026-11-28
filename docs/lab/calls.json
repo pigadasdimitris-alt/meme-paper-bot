@@ -57,9 +57,9 @@
    "entry_liq": 32469,
    "peak_pct": 2.5,
    "low_pct": -39.0,
-   "value": -0.6882,
+   "value": -0.83,
    "missing": 0,
-   "last_pct": 0.88
+   "last_pct": -0.66
   },
   {
    "id": 22,
@@ -76,9 +76,9 @@
    "entry_liq": 26267,
    "peak_pct": 9.5,
    "low_pct": -9.1,
-   "value": -1.0746,
+   "value": -1.2142,
    "missing": 0,
-   "last_pct": -3.31
+   "last_pct": -4.82
   },
   {
    "id": 24,
@@ -95,9 +95,9 @@
    "entry_liq": 66309,
    "peak_pct": 45.4,
    "low_pct": -33.1,
-   "value": -1.8772,
+   "value": -1.4218,
    "missing": 0,
-   "last_pct": -12.0
+   "last_pct": -7.07
   },
   {
    "id": 27,
@@ -114,9 +114,9 @@
    "entry_liq": 322919,
    "peak_pct": 0.1,
    "low_pct": -3.3,
-   "value": -0.8844,
+   "value": -0.8582,
    "missing": 0,
-   "last_pct": -1.25
+   "last_pct": -0.96
   },
   {
    "id": 31,
@@ -150,11 +150,11 @@
    "entry_ts": 1795842095,
    "delay_min": 1.4,
    "entry_liq": 30090,
-   "peak_pct": 3.0,
+   "peak_pct": 3.2,
    "low_pct": 0.0,
-   "value": -0.488,
+   "value": -0.4718,
    "missing": 0,
-   "last_pct": 3.05
+   "last_pct": 3.22
   }
  ],
  "closed": [
@@ -598,7 +598,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 363,
+  "scans": 365,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2054,6 +2054,14 @@
   [
    "2026-11-28T05:04:01Z",
    89.5798
+  ],
+  [
+   "2026-11-28T05:05:24Z",
+   89.4341
+  ],
+  [
+   "2026-11-28T05:06:23Z",
+   89.7962
   ]
  ],
  "log": [
@@ -2352,9 +2360,21 @@
   {
    "t": "2026-11-28T05:03:01Z",
    "msg": "ΚΛΕΙΣΙΜΟ Frogger [SpyDefiLive] — TP +100% — +9.33$ (κορυφή +109%)"
+  },
+  {
+   "t": "2026-11-28T05:05:24Z",
+   "msg": "ΝΕΟ ΚΑΝΑΛΙ uranusX100 — 6 calls στη σελίδα, τελευταίο ποστ 2026-11-28T02:38:38Z"
+  },
+  {
+   "t": "2026-11-28T05:05:24Z",
+   "msg": "ΝΕΟ ΚΑΝΑΛΙ EarlyBirdTG — 3 calls στη σελίδα, τελευταίο ποστ 2026-11-28T03:44:30Z"
+  },
+  {
+   "t": "2026-11-28T05:05:24Z",
+   "msg": "ΝΕΟ ΚΑΝΑΛΙ mewgambles — 10 calls στη σελίδα, τελευταίο ποστ 2026-11-28T02:44:06Z"
   }
  ],
- "last_run": "2026-11-28T05:04:01Z",
+ "last_run": "2026-11-28T05:06:23Z",
  "next_id": 33,
  "epoch": "2026-11-28-calls",
  "mode": "calls",
@@ -2380,9 +2400,9 @@
    "last_id": 38130
   },
   "SpyDefiLive": {
-   "last_post": "2026-11-28T05:00:11Z",
-   "last_id": 45325,
-   "posts": 49,
+   "last_post": "2026-11-28T05:05:22Z",
+   "last_id": 45326,
+   "posts": 50,
    "calls": 46,
    "pnl": -0.7314,
    "trades": 23,
@@ -2467,16 +2487,29 @@
    "last_id": 6249
   },
   "CryptoLord100xCalls": {
-   "last_post": "2026-11-28T03:01:50Z",
-   "last_id": 16000
+   "last_post": "2026-11-28T05:05:15Z",
+   "last_id": 16001,
+   "posts": 1
+  },
+  "uranusX100": {
+   "last_post": "2026-11-28T02:38:38Z",
+   "last_id": 8365
+  },
+  "EarlyBirdTG": {
+   "last_post": "2026-11-28T03:44:30Z",
+   "last_id": 2767
+  },
+  "mewgambles": {
+   "last_post": "2026-11-28T02:44:06Z",
+   "last_id": 8278
   }
  },
- "last_fetch": 1795842241,
+ "last_fetch": 1795842383,
  "candidates": {
   "Telegram": {
    "from": "shockedcalls",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 1907,
+   "seen": 1929,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 20,
    "calls": 0,
@@ -2485,7 +2518,7 @@
   "fearcalls": {
    "from": "shockedcalls",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 177,
+   "seen": 178,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 20,
    "calls": 7,
@@ -2494,7 +2527,7 @@
   "legeeeeend": {
    "from": "legends_call",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 177,
+   "seen": 178,
    "probed": "2026-11-27T23:00:16Z",
    "msgs": 0,
    "calls": 0,
@@ -2521,7 +2554,7 @@
   "SpyDefiLive": {
    "from": "pyrotradingjournal",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 297,
+   "seen": 302,
    "probed": "2026-11-28T00:01:16Z",
    "msgs": 20,
    "calls": 16,
@@ -2561,7 +2594,7 @@
   "BIuntz_capital": {
    "from": "SIGNALCALLS",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 177,
+   "seen": 178,
    "probed": "2026-11-27T23:31:15Z",
    "msgs": 0,
    "calls": 0,
@@ -2570,7 +2603,7 @@
   "SelbyArc": {
    "from": "SIGNALCALLS",
    "first": "2026-11-27T23:00:16Z",
-   "seen": 177,
+   "seen": 178,
    "probed": "2026-11-27T23:31:15Z",
    "msgs": 0,
    "calls": 0,
@@ -2613,7 +2646,7 @@
   "SpyDefiLiveArc": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 146,
+   "seen": 147,
    "probed": "2026-11-28T00:31:28Z",
    "msgs": 20,
    "calls": 8,
@@ -2627,7 +2660,7 @@
   "GemsmineEth": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 235,
+   "seen": 237,
    "probed": "2026-11-28T01:03:08Z",
    "msgs": 20,
    "calls": 20,
@@ -2647,7 +2680,7 @@
   "SpyDefi": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 324,
+   "seen": 327,
    "probed": "2026-11-28T01:33:08Z",
    "msgs": 20,
    "calls": 0,
@@ -2656,7 +2689,7 @@
   "SpyDefiLiveBSC": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 146,
+   "seen": 147,
    "probed": "2026-11-28T01:33:08Z",
    "msgs": 20,
    "calls": 2,
@@ -2665,7 +2698,7 @@
   "spacemancallz": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 209,
+   "seen": 210,
    "probed": "2026-11-28T01:33:08Z",
    "msgs": 20,
    "calls": 0,
@@ -2679,7 +2712,7 @@
   "MitchGemsGambles": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 130
+   "seen": 131
   },
   "mackcalls": {
    "from": "SpyDefiLive",
@@ -2689,12 +2722,12 @@
   "MENACalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 115
+   "seen": 116
   },
   "SpyDefiLiveRH": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 146,
+   "seen": 147,
    "probed": "2026-11-28T02:03:08Z",
    "msgs": 20,
    "calls": 3,
@@ -2704,7 +2737,7 @@
   "InfinityGainCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 225,
+   "seen": 226,
    "probed": "2026-11-28T03:03:29Z",
    "msgs": 20,
    "calls": 8,
@@ -2719,7 +2752,7 @@
   "SpyDefiLiveSol": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:03:16Z",
-   "seen": 146,
+   "seen": 147,
    "probed": "2026-11-28T02:03:08Z",
    "msgs": 20,
    "calls": 20,
@@ -2729,7 +2762,7 @@
   "casgems": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:06:15Z",
-   "seen": 201,
+   "seen": 203,
    "probed": "2026-11-28T02:03:08Z",
    "msgs": 20,
    "calls": 15,
@@ -2744,7 +2777,7 @@
   "maniacapes": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T00:08:21Z",
-   "seen": 224,
+   "seen": 225,
    "probed": "2026-11-28T02:33:29Z",
    "msgs": 20,
    "calls": 6,
@@ -2764,7 +2797,7 @@
   "spydefi": {
    "from": "Doraemon_Call",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 488,
+   "seen": 495,
    "probed": "2026-11-28T01:03:08Z",
    "msgs": 20,
    "calls": 0,
@@ -2773,7 +2806,7 @@
   "Doraemon_VP": {
    "from": "Doraemon_Call",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133,
+   "seen": 134,
    "probed": "2026-11-28T04:03:29Z",
    "msgs": 0,
    "calls": 0,
@@ -2782,7 +2815,7 @@
   "TIREDDORAEMON": {
    "from": "Doraemon_Call",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133,
+   "seen": 134,
    "probed": "2026-11-28T04:03:29Z",
    "msgs": 0,
    "calls": 0,
@@ -2791,7 +2824,7 @@
   "hormos_xyz": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133,
+   "seen": 134,
    "probed": "2026-11-28T04:03:29Z",
    "msgs": 0,
    "calls": 0,
@@ -2800,7 +2833,7 @@
   "WatcherGuru": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 251,
+   "seen": 254,
    "probed": "2026-11-28T03:33:29Z",
    "msgs": 17,
    "calls": 0,
@@ -2809,7 +2842,7 @@
   "MallowETH": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133,
+   "seen": 134,
    "probed": "2026-11-28T04:34:11Z",
    "msgs": 0,
    "calls": 0,
@@ -2818,7 +2851,7 @@
   "basedMELLOW": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133,
+   "seen": 134,
    "probed": "2026-11-28T04:34:11Z",
    "msgs": 0,
    "calls": 0,
@@ -2827,17 +2860,17 @@
   "EntryWojak": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133
+   "seen": 134
   },
   "LumixPad": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133
+   "seen": 134
   },
   "lumixpad": {
    "from": "Marshmellow100xCalls",
    "first": "2026-11-28T00:32:28Z",
-   "seen": 133
+   "seen": 134
   },
   "madcatsCalls": {
    "from": "SpyDefiLive",
@@ -2872,7 +2905,7 @@
   "maestro": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "memeballfun": {
    "from": "GemsmineEth",
@@ -2882,27 +2915,27 @@
   "Mike1crypto": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "GemfinderGemsmine": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "Gemsminechat": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "mechaworld1": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "MineGems": {
    "from": "GemsmineEth",
    "first": "2026-11-28T01:04:08Z",
-   "seen": 119
+   "seen": 120
   },
   "CHINAGEMOFCCCN": {
    "from": "SpyDefiLive",
@@ -2926,67 +2959,72 @@
   "EarlyBirdTG": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 141
+   "seen": 143,
+   "probed": "2026-11-28T05:05:24Z",
+   "msgs": 20,
+   "calls": 3,
+   "last_post": "2026-11-28T03:44:30Z",
+   "added": true
   },
   "GigaBeastCall_ETH": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "affucalls": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "bgbcncall": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 33
+   "seen": 35
   },
   "Kulture_Kall": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "dailyapeinside": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "Gamblewifrome": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "cryptoyeezuscalls": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "ThomasSafuCall": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "HiroOrdalPlay": {
    "from": "SpyDefiLiveRH",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "cooldoggta": {
    "from": "casgems",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "cas_eth1": {
    "from": "casgems",
    "first": "2026-11-28T02:04:08Z",
-   "seen": 89
+   "seen": 90
   },
   "Freedomisreal69": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T02:06:08Z",
-   "seen": 234,
+   "seen": 235,
    "probed": "2026-11-28T03:33:29Z",
    "msgs": 20,
    "calls": 12,
@@ -2996,12 +3034,12 @@
   "mandyport": {
    "from": "GemsmineEth",
    "first": "2026-11-28T02:06:08Z",
-   "seen": 88
+   "seen": 89
   },
   "CryptoLord100xCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T02:30:29Z",
-   "seen": 145,
+   "seen": 147,
    "probed": "2026-11-28T04:34:11Z",
    "msgs": 19,
    "calls": 12,
@@ -3011,122 +3049,132 @@
   "maniacdegenapes": {
    "from": "maniacapes",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "FRISCOMEX420415": {
    "from": "SMOKERSCLUB420415",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "YoSoyEtna": {
    "from": "SMOKERSCLUB420415",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "NeronWakeUp": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "percolator_port": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "elysiumbozo": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "madcatCalls": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "MadcatsCalls67": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "collector1agent": {
    "from": "madcatsCalls",
    "first": "2026-11-28T02:34:29Z",
-   "seen": 74
+   "seen": 75
   },
   "uranusX100": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T02:40:29Z",
-   "seen": 142
+   "seen": 143,
+   "probed": "2026-11-28T05:05:24Z",
+   "msgs": 18,
+   "calls": 6,
+   "last_post": "2026-11-28T02:38:38Z",
+   "added": true
   },
   "mewgambles": {
    "from": "SpyDefiLiveSol",
    "first": "2026-11-28T02:44:29Z",
-   "seen": 137
+   "seen": 139,
+   "probed": "2026-11-28T05:05:24Z",
+   "msgs": 20,
+   "calls": 10,
+   "last_post": "2026-11-28T02:44:06Z",
+   "added": true
   },
   "MaybachGambleCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T02:48:29Z",
-   "seen": 134
+   "seen": 136
   },
   "reapergamble": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T02:52:29Z",
-   "seen": 130
+   "seen": 132
   },
   "BrownGemsCalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T03:02:29Z",
-   "seen": 120
+   "seen": 122
   },
   "CuFSeveen": {
    "from": "InfinityGainCalls",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "InfinityGainGambles": {
    "from": "InfinityGainCalls",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "MarketInsiderIG": {
    "from": "AnimeGems",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "crypt0maniac94": {
    "from": "AnimeGems",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "ANIMEGEMSS": {
    "from": "AnimeGems",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "floki_santa_sol": {
    "from": "AnimeGems",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "PainBnb": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "TrustWallet": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "pain_caller": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "TCryptochicks": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "solprice2028": {
    "from": "Akatsuki_Calls_x1000",
@@ -3136,74 +3184,154 @@
   "dawndottrade": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "akatsuki_finance": {
    "from": "Akatsuki_Calls_x1000",
    "first": "2026-11-28T03:04:29Z",
-   "seen": 59
+   "seen": 60
   },
   "EtherHunt_DjournaL": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T03:08:29Z",
-   "seen": 114
+   "seen": 116
   },
   "NewListingsFeed": {
    "from": "Freedomisreal69",
    "first": "2026-11-28T03:34:29Z",
-   "seen": 44
+   "seen": 45
   },
   "CostaXpert": {
    "from": "Freedomisreal69",
    "first": "2026-11-28T03:34:29Z",
-   "seen": 44
+   "seen": 45
   },
   "ratwizardx": {
    "from": "CryptoLord100xCalls",
    "first": "2026-11-28T04:35:11Z",
-   "seen": 14
+   "seen": 15
   },
   "CryptoLordCL": {
    "from": "CryptoLord100xCalls",
    "first": "2026-11-28T04:35:11Z",
-   "seen": 14
+   "seen": 15
   },
   "XMEN_BNB": {
    "from": "CryptoLord100xCalls",
    "first": "2026-11-28T04:35:11Z",
-   "seen": 14
+   "seen": 15
   },
   "cz_binance": {
    "from": "CryptoLord100xCalls",
    "first": "2026-11-28T04:35:11Z",
-   "seen": 14
+   "seen": 15
   },
   "CryptoLord100x": {
    "from": "CryptoLord100xCalls",
    "first": "2026-11-28T04:35:11Z",
-   "seen": 14
+   "seen": 15
   },
   "QUEENVLAD": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T04:51:11Z",
-   "seen": 14
+   "seen": 16
   },
   "topgcalls": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T04:51:11Z",
-   "seen": 14
+   "seen": 16
   },
   "ZizzlesHizzle": {
    "from": "SpyDefiLive",
    "first": "2026-11-28T05:01:35Z",
-   "seen": 4
+   "seen": 6
+  },
+  "MaestroMarketer": {
+   "from": "uranusX100",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "Ouranosu": {
+   "from": "uranusX100",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "Kimo_Maestro": {
+   "from": "uranusX100",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "MaestroSupport": {
+   "from": "uranusX100",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "ICannot_Enough": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "degenApe22": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "Lengoapp": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "tarebuild": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "WATT_App": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "halbrookmarket": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "elonmusk": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "Montra10Index": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "Usecowl_xyz": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "near_intents": {
+   "from": "EarlyBirdTG",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "smugglers": {
+   "from": "mewgambles",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
+  },
+  "notmewtwo": {
+   "from": "mewgambles",
+   "first": "2026-11-28T05:06:23Z",
+   "seen": 1
   }
  },
  "retired": [
   "pyrotradingjournal",
   "dexpumps"
  ],
- "last_probe": 1795840451,
+ "last_probe": 1795842324,
  "active": [
   "SpyDefiLive",
   "Doraemon_Call",
@@ -3220,7 +3348,10 @@
   "AnimeGems",
   "Akatsuki_Calls_x1000",
   "Freedomisreal69",
-  "CryptoLord100xCalls"
+  "CryptoLord100xCalls",
+  "uranusX100",
+  "EarlyBirdTG",
+  "mewgambles"
  ],
  "traded": {
   "B2HU7PEkoKmhkMhfZa5tFN3YJdwLeLq6Fg85saoo111": 1795824375,
