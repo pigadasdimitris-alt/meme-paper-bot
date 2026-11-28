@@ -2,36 +2,8 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 68.22084045092106,
+ "balance": 70.45492758633766,
  "positions": [
-  {
-   "id": 19,
-   "kind": "call",
-   "mint": "1PPQkxYy2wUvKkUXMnDkiDrqx5Hfp2nbDju11cvHeFW",
-   "name": "MINT",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.005307994035,
-   "entry": 0.0055203137964,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T01:50:12Z",
-   "entry_ts": 1795830612,
-   "pool": "6bYRiDPHX1ouhkzU1RxCZfnA44XZ32mfTguV2PSwY6kr",
-   "flags": [
-    "λίγα πορτοφόλια μάζεψαν πριν το call"
-   ],
-   "insiders": {
-    "FMhESz8WCDZbG9QcTpNV93f8ErgRygdF24TNmqegV4ft": 4452.85,
-    "GLKykFZB4MM56omvMine7e84SRD5yS982pe4LybmLMKQ": 1984.22,
-    "ChJFJcYsiK349D615MGKYpQqxHNqPgNEUmET9W4sAvHo": 1117.98,
-    "3XDQLzmKw1Qd2DA2NoXUqWi5maH5YDnGcTEC7vfNDcWu": 1077.01,
-    "AWkk8EtSdm19buX1S6D2XxSjf1FBXq6j9wgkTtSGzKY5": 983.09
-   },
-   "peak_pct": 37.7,
-   "low_pct": -0.0,
-   "value": 2.2341,
-   "missing": 0,
-   "last_pct": 32.54
-  },
   {
    "id": 24,
    "kind": "call",
@@ -56,9 +28,9 @@
    },
    "peak_pct": 6.2,
    "low_pct": -28.7,
-   "value": -2.72,
+   "value": -2.8554,
    "missing": 0,
-   "last_pct": -21.13
+   "last_pct": -22.6
   },
   {
    "id": 32,
@@ -82,9 +54,9 @@
    },
    "peak_pct": 8.3,
    "low_pct": -3.5,
-   "value": -0.3669,
+   "value": -0.4038,
    "missing": 0,
-   "last_pct": 4.36
+   "last_pct": 3.96
   },
   {
    "id": 38,
@@ -108,9 +80,9 @@
    },
    "peak_pct": 15.9,
    "low_pct": -3.3,
-   "value": 0.2449,
+   "value": 0.0342,
    "missing": 0,
-   "last_pct": 10.99
+   "last_pct": 8.7
   },
   {
    "id": 41,
@@ -135,10 +107,10 @@
     "71pAfN1nJhcLaezSRYvwdsNFE9PnY9hNfcxB4nZ1gdAp": 141.95
    },
    "peak_pct": 30.7,
-   "low_pct": -2.4,
-   "value": -0.6718,
+   "low_pct": -4.1,
+   "value": -1.1506,
    "missing": 0,
-   "last_pct": 1.06
+   "last_pct": -4.13
   },
   {
    "id": 48,
@@ -162,9 +134,9 @@
    },
    "peak_pct": 37.5,
    "low_pct": -10.0,
-   "value": -0.8538,
+   "value": -0.6121,
    "missing": 0,
-   "last_pct": -0.92
+   "last_pct": 1.7
   }
  ],
  "closed": [
@@ -403,6 +375,28 @@
    "pnl_pct": 0.7,
    "reason": "κλείδωμα κέρδους (κορυφή +54%)",
    "hold_min": 306.7
+  },
+  {
+   "id": 19,
+   "kind": "call",
+   "mint": "1PPQkxYy2wUvKkUXMnDkiDrqx5Hfp2nbDju11cvHeFW",
+   "name": "MINT",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T01:50:12Z",
+   "entry_market": 0.005307994035,
+   "flags": [
+    "λίγα πορτοφόλια μάζεψαν πριν το call"
+   ],
+   "peak_pct": 37.7,
+   "low_pct": -0.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T07:50:56Z",
+   "exit_market": 0.007035,
+   "pnl": 2.2341,
+   "pnl_pct": 22.34,
+   "reason": "χρόνος",
+   "hold_min": 360.7
   }
  ],
  "seen": {},
@@ -412,7 +406,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 521,
+  "scans": 523,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -2500,6 +2494,14 @@
   [
    "2026-11-28T07:48:56Z",
    66.0873
+  ],
+  [
+   "2026-11-28T07:49:36Z",
+   66.2752
+  ],
+  [
+   "2026-11-28T07:50:56Z",
+   65.4672
   ]
  ],
  "log": [
@@ -2758,9 +2760,13 @@
   {
    "t": "2026-11-28T07:40:05Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα WLFI [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool"
+  },
+  {
+   "t": "2026-11-28T07:50:56Z",
+   "msg": "ΚΛΕΙΣΙΜΟ MINT — χρόνος — +2.23$ (κορυφή +38%)"
   }
  ],
- "last_run": "2026-11-28T07:48:56Z",
+ "last_run": "2026-11-28T07:50:56Z",
  "next_id": 54,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -2790,9 +2796,9 @@
    },
    "peak_pct": 18.7,
    "low_pct": -5.2,
-   "value": 0.9553,
+   "value": 0.7385,
    "missing": 0,
-   "last_pct": 18.68
+   "last_pct": 16.33
   },
   {
    "id": 44,
@@ -2844,9 +2850,9 @@
    },
    "peak_pct": 82.5,
    "low_pct": 0.0,
-   "value": 2.3312,
+   "value": 1.3631,
    "missing": 0,
-   "last_pct": 33.59
+   "last_pct": 23.1
   },
   {
    "id": 51,
@@ -2932,10 +2938,10 @@
   "eVoH6GA8VhsSh2kqFB3Wvx2Czvn2RuAXKTThB3Wpump": 1795851476,
   "9PSqdPVEBsA8QXQs8cb2gMXWziUATUsetkwqbB4rcAb1": 1795851605
  },
- "last_dump_check": 1795852136,
+ "last_dump_check": 1795852256,
  "shield": {
-  "taken": 11,
-  "taken_pnl": -31.7792,
+  "taken": 12,
+  "taken_pnl": -29.5451,
   "blocked": 32,
   "blocked_pnl": -95.8064
  },
