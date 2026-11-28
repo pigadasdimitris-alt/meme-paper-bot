@@ -2,7 +2,7 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 65.35798126259591,
+ "balance": 66.18308019450389,
  "positions": [
   {
    "id": 1,
@@ -75,10 +75,10 @@
    "flags": [],
    "insiders": {},
    "peak_pct": 3.2,
-   "low_pct": -37.4,
-   "value": -3.9937,
+   "low_pct": -38.6,
+   "value": -4.3353,
    "missing": 0,
-   "last_pct": -34.93
+   "last_pct": -38.63
   },
   {
    "id": 24,
@@ -103,38 +103,10 @@
     "7AKyDp9625jT7EmxAoYwH1EGQvriU2EzqGNz1MNXGiJe": 213.49
    },
    "peak_pct": 6.2,
-   "low_pct": -4.4,
-   "value": -1.0714,
+   "low_pct": -4.8,
+   "value": -1.2153,
    "missing": 0,
-   "last_pct": -3.27
-  },
-  {
-   "id": 27,
-   "kind": "call",
-   "mint": "GXjSWDoMQkDEbhon9ALxz8chUUsVKg3x8V3NajjDpump",
-   "name": "MoonBoy",
-   "channel": "SpyDefiLive",
-   "entry_market": 0.0004733444038,
-   "entry": 0.000492278179952,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T03:02:37Z",
-   "entry_ts": 1795834957,
-   "pool": "DkNJBoh2KngPNumX5BdEakmpX2fYPNu57xZFn6C2dRE1",
-   "flags": [
-    "οι πρώτοι αγοραστές πουλάνε ήδη"
-   ],
-   "insiders": {
-    "7JCe3GHwkEr3feHgtLXnmuJ1yB3A7coSeyynxTBgdG8k": 1199.75,
-    "4oHYGSNhgdry4oTEqyGiG2SGGhhEs4rsQ7RvrLx364xA": 751.36,
-    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 463.63,
-    "BkbtvEGSyCqChwzwA9KJFWdLd4RwW9Ps78WUgpQ1Qrun": 452.06,
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 412.51
-   },
-   "peak_pct": 25.1,
-   "low_pct": -13.0,
-   "value": 1.5466,
-   "missing": 0,
-   "last_pct": 25.09
+   "last_pct": -4.83
   }
  ],
  "closed": [
@@ -287,6 +259,28 @@
    "pnl_pct": -52.41,
    "reason": "SL -40%",
    "hold_min": 10.0
+  },
+  {
+   "id": 27,
+   "kind": "call",
+   "mint": "GXjSWDoMQkDEbhon9ALxz8chUUsVKg3x8V3NajjDpump",
+   "name": "MoonBoy",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T03:02:37Z",
+   "entry_market": 0.0004733444038,
+   "flags": [
+    "οι πρώτοι αγοραστές πουλάνε ήδη"
+   ],
+   "peak_pct": 25.1,
+   "low_pct": -13.0,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T03:31:29Z",
+   "exit_market": 0.0005551,
+   "pnl": 0.8251,
+   "pnl_pct": 8.25,
+   "reason": "dump: οι insiders πούλησαν 66%",
+   "hold_min": 28.9
   }
  ],
  "seen": {},
@@ -296,7 +290,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 270,
+  "scans": 272,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -1380,6 +1374,14 @@
   [
    "2026-11-28T03:30:39Z",
    66.9105
+  ],
+  [
+   "2026-11-28T03:31:29Z",
+   66.1278
+  ],
+  [
+   "2026-11-28T03:32:39Z",
+   65.7035
   ]
  ],
  "log": [
@@ -1530,10 +1532,18 @@
   {
    "t": "2026-11-28T03:26:39Z",
    "msg": "ΑΣΠΙΔΑ: δεν αγόρασα Wildfire [SpyDefiLive] — φούσκωσε ήδη πριν το call, οι πρώτοι αγοραστές πουλάνε ήδη, ρηχό pool, ολοκαίνουριο pool"
+  },
+  {
+   "t": "2026-11-28T03:31:29Z",
+   "msg": "ΚΛΕΙΣΙΜΟ MoonBoy — dump: οι insiders πούλησαν 66% — +0.83$ (κορυφή +25%)"
+  },
+  {
+   "t": "2026-11-28T03:32:39Z",
+   "msg": "ΑΣΠΙΔΑ: δεν αγόρασα DCTY [SpyDefiLive] — οι πρώτοι αγοραστές πουλάνε ήδη, ολοκαίνουριο pool"
   }
  ],
- "last_run": "2026-11-28T03:30:39Z",
- "next_id": 31,
+ "last_run": "2026-11-28T03:32:39Z",
+ "next_id": 32,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
  "shadow": [
@@ -1591,9 +1601,38 @@
    },
    "peak_pct": 81.7,
    "low_pct": 0.0,
-   "value": 6.7742,
+   "value": 1.9548,
    "missing": 0,
-   "last_pct": 81.72
+   "last_pct": 29.51
+  },
+  {
+   "id": 31,
+   "kind": "call",
+   "mint": "FKzLbmXpyk3qxY4j3CbxqwjdtbCWb1HZZttok9AD5dio",
+   "name": "DCTY",
+   "channel": "SpyDefiLive",
+   "entry_market": 4.367712657e-05,
+   "entry": 4.54242116328e-05,
+   "notional": 10.0,
+   "entry_time": "2026-11-28T03:32:39Z",
+   "entry_ts": 1795836759,
+   "pool": "H6J2GvGqyNGvej6xTcmLzdVmeEHttwZJszJssF1wiuD7",
+   "flags": [
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ολοκαίνουριο pool"
+   ],
+   "insiders": {
+    "55msLm128tQdXLXCXLxd756H9SaCo7wPpdetEioe7D8d": 353.36,
+    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 311.19,
+    "72tAZjqymv4J2KHDPd3rzFkPL78tj556K32BJgBmBu5D": 292.12,
+    "4BMB6mPAi7Adq1hxckqaSgggwdtJM1Fss9tzyQ6ypEPD": 280.44,
+    "FfW5e8gKJfgaZPog6DiJoW6Kif6Fb23CokWprRhHVjV1": 162.87
+   },
+   "peak_pct": 6.0,
+   "low_pct": 0.0,
+   "value": -0.217,
+   "missing": 0,
+   "last_pct": 5.98
   }
  ],
  "events": [],
@@ -1627,12 +1666,13 @@
   "GXjSWDoMQkDEbhon9ALxz8chUUsVKg3x8V3NajjDpump": 1795834957,
   "8ASicxj71iDN41xyMX4ocqJ8SdzjF6RYS1AHvkddqihb": 1795835319,
   "APmirEVL5wkbYVZ88TDdr9cwJ6WfRCWuzm4wQWyzpump": 1795836279,
-  "9cmL8R2jZjKss6uYiQpQFphv6ygfirZQJEpEatKGpump": 1795836399
+  "9cmL8R2jZjKss6uYiQpQFphv6ygfirZQJEpEatKGpump": 1795836399,
+  "FKzLbmXpyk3qxY4j3CbxqwjdtbCWb1HZZttok9AD5dio": 1795836759
  },
- "last_dump_check": 1795836569,
+ "last_dump_check": 1795836689,
  "shield": {
-  "taken": 7,
-  "taken_pnl": -34.6421,
+  "taken": 8,
+  "taken_pnl": -33.817,
   "blocked": 16,
   "blocked_pnl": -35.2716
  },
