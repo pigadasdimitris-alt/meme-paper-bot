@@ -2,37 +2,8 @@
  "version": 1,
  "started_at": "2026-11-27T23:00:15Z",
  "start_balance": 100.0,
- "balance": 65.47914323977085,
- "positions": [
-  {
-   "id": 65,
-   "kind": "call",
-   "mint": "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump",
-   "name": "Mojave",
-   "channel": "SpyDefiLiveSol",
-   "entry_market": 3.175996808e-05,
-   "entry": 3.30303668032e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T10:17:10Z",
-   "entry_ts": 1795861030,
-   "pool": "ARMqz5KMqEcJV18c8JCjVmWVkBTrrpNLiuAchKwAaRiH",
-   "flags": [
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 346.22,
-    "7e8LpuucxJW5DRBsXDyrq1XXgcHGMFGiKDLo6v2qDUcq": 238.13,
-    "2xk8YBpvrYSMRqSdRFk8oxTs3h3P5ds8C6WuY83gtnFp": 208.95,
-    "4JXUHGuc8dDAV35xgMUvAjgQGxC5yRHbAHRaDGvbnPaL": 184.2,
-    "HANcjmXUgZ5as9nUFcKC7ang9hwJcMYE7fCF5LrXZf4j": 180.5
-   },
-   "peak_pct": 51.2,
-   "low_pct": -11.3,
-   "value": 0.8119,
-   "missing": 0,
-   "last_pct": 17.13
-  }
- ],
+ "balance": 63.48922685695816,
+ "positions": [],
  "closed": [
   {
    "id": 3,
@@ -439,6 +410,28 @@
    "pnl_pct": 4.51,
    "reason": "dump: οι insiders πούλησαν 53%",
    "hold_min": 34.4
+  },
+  {
+   "id": 65,
+   "kind": "call",
+   "mint": "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump",
+   "name": "Mojave",
+   "channel": "SpyDefiLiveSol",
+   "entry_time": "2026-11-28T10:17:10Z",
+   "entry_market": 3.175996808e-05,
+   "flags": [
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 51.2,
+   "low_pct": -13.2,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T10:25:11Z",
+   "exit_market": 2.756e-05,
+   "pnl": -1.9899,
+   "pnl_pct": -19.9,
+   "reason": "κλείδωμα κέρδους (κορυφή +51%)",
+   "hold_min": 8.0
   }
  ],
  "seen": {},
@@ -448,7 +441,7 @@
   "entries": 0
  },
  "stats": {
-  "scans": 674,
+  "scans": 676,
   "pools_checked": 0,
   "rejects": {}
  },
@@ -3148,6 +3141,14 @@
   [
    "2026-11-28T10:23:10Z",
    66.291
+  ],
+  [
+   "2026-11-28T10:23:44Z",
+   65.7126
+  ],
+  [
+   "2026-11-28T10:25:11Z",
+   63.4892
   ]
  ],
  "log": [
@@ -3486,9 +3487,13 @@
   {
    "t": "2026-11-28T10:19:10Z",
    "msg": "ΚΛΕΙΣΙΜΟ Santa — dump: οι insiders πούλησαν 53% — +0.45$ (κορυφή +16%)"
+  },
+  {
+   "t": "2026-11-28T10:25:11Z",
+   "msg": "ΚΛΕΙΣΙΜΟ Mojave — κλείδωμα κέρδους (κορυφή +51%) — -1.99$ (κορυφή +51%)"
   }
  ],
- "last_run": "2026-11-28T10:23:10Z",
+ "last_run": "2026-11-28T10:25:11Z",
  "next_id": 66,
  "epoch": "2026-11-28-pump",
  "mode": "pump",
@@ -3573,36 +3578,6 @@
    "value": -1.2111,
    "missing": 0,
    "last_pct": -4.79
-  },
-  {
-   "id": 64,
-   "kind": "call",
-   "mint": "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump",
-   "name": "SMOOTH",
-   "channel": "SpyDefiLive",
-   "entry_market": 2.001329411e-05,
-   "entry": 2.0813825874399998e-05,
-   "notional": 10.0,
-   "entry_time": "2026-11-28T10:09:16Z",
-   "entry_ts": 1795860556,
-   "pool": "UU9w42ydRVmpsAqoNmNHa8oPDoaJ8x3VPJgLHjzArKC",
-   "flags": [
-    "οι πρώτοι αγοραστές πουλάνε ήδη",
-    "ρηχό pool",
-    "ολοκαίνουριο pool"
-   ],
-   "insiders": {
-    "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51": 403.62,
-    "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT": 188.67,
-    "ssssssA47RhvLY4jkMQFZBTjiSoL5gUr4b8QbnB5thY": 165.76,
-    "sssssv2ivFNk1ogpBnEkcijSHzvib5vKfhiJMhRT2NT": 159.29,
-    "9jxDVo5BikjZdLBSthrQeLHUjSyo5BU6Nb7sPeEXim17": 140.62
-   },
-   "peak_pct": 3.4,
-   "low_pct": -35.6,
-   "value": -3.2522,
-   "missing": 0,
-   "last_pct": -26.9
   }
  ],
  "events": [],
@@ -3673,12 +3648,12 @@
   "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump": 1795860556,
   "4newt1R5fGEoCKdf9XBgiR6B43iacmnVAR2d4Wt8pump": 1795861030
  },
- "last_dump_check": 1795861390,
+ "last_dump_check": 1795861511,
  "shield": {
-  "taken": 19,
-  "taken_pnl": -34.5209,
-  "blocked": 41,
-  "blocked_pnl": -113.3062
+  "taken": 20,
+  "taken_pnl": -36.5108,
+  "blocked": 42,
+  "blocked_pnl": -118.574
  },
  "shadow_closed": [
   {
@@ -4639,6 +4614,30 @@
    "pnl_pct": -46.03,
    "reason": "SL -40%",
    "hold_min": 18.4
+  },
+  {
+   "id": 64,
+   "kind": "call",
+   "mint": "2n5tTb5UXKABFXYRxDEjtDpWFh5ZFk7oRcNLDML5pump",
+   "name": "SMOOTH",
+   "channel": "SpyDefiLive",
+   "entry_time": "2026-11-28T10:09:16Z",
+   "entry_market": 2.001329411e-05,
+   "flags": [
+    "οι πρώτοι αγοραστές πουλάνε ήδη",
+    "ρηχό pool",
+    "ολοκαίνουριο pool"
+   ],
+   "peak_pct": 3.4,
+   "low_pct": -48.7,
+   "sec_after": null,
+   "path": null,
+   "exit_time": "2026-11-28T10:25:11Z",
+   "exit_market": 1.026e-05,
+   "pnl": -5.2678,
+   "pnl_pct": -52.68,
+   "reason": "SL -40%",
+   "hold_min": 15.9
   }
  ]
 }
